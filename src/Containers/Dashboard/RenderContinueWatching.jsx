@@ -13,7 +13,7 @@ import { MediaCardWrap } from './Styles';
 const RenderContinueWatching = () => (
   <Query
     query={CONTINUE_WATCHING}
-    no-cache
+    pollInterval={500}
   >
 
     {({ loading, error, data }) => {
