@@ -13,12 +13,14 @@ import { MediaCardWrap } from './Styles';
 const RenderContinueWatching = () => (
   <Query
     query={CONTINUE_WATCHING}
-    no-cache
+    fetchPolicy="cache-and-network"
   >
 
-    {({ loading, error, data }) => {
-      if (loading) return <Loading />;
+    {({
+      loading, error, data,
+    }) => {
       if (error) return `Error! ${error.message}`;
+      if (loading) return <Loading />;
 
       if (data.upNext.length === 0) {
         return (
@@ -29,7 +31,10 @@ const RenderContinueWatching = () => (
       }
 
       const continueWatching = data.upNext.map((un) => {
+        if (un.name.length === 0) return false;
+
         const posterPath = un.posterPath || un.season.series.posterPath;
+
         return (
           <MediaCardWrap key={un.uuid}>
             <MediaCard showText {...un} posterPath={posterPath} />

@@ -68,7 +68,7 @@ export const MediaName = styled.h1`
   float:left;
   width:100%;
   margin:0 0 1.5rem;
-  line-height:2.6rem;
+  line-height:4rem;
   padding-right: 5rem;
 
   ${media.mobile`

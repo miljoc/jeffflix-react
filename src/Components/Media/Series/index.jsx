@@ -30,7 +30,7 @@ const Series = (props) => {
     children,
   } = props;
 
-  const releaseYear = firstAirDate.split('-')[0];
+  const releaseDate = `(${firstAirDate.split('-')[0]})`;
 
   return (
     <MediaFullWrap>
@@ -43,11 +43,7 @@ const Series = (props) => {
         <MediaListHeader data={seasons} uuid={uuid} type="series" />
         <MediaName>
           {name}
-          <MediaRelease>
-            (
-            {releaseYear}
-            )
-          </MediaRelease>
+          <MediaRelease>{releaseDate}</MediaRelease>
         </MediaName>
         {overview.length > 0 && <MediaDescription overview={overview} />}
         <SubTitle>Seasons</SubTitle>

@@ -9,12 +9,12 @@ const RECENTLY_ADDED = gql`
         name
         year
         posterPath
-        
+
         playState {
           finished
           playtime
         }
-        
+
         files {
           totalDuration
         }
@@ -24,7 +24,7 @@ const RECENTLY_ADDED = gql`
         uuid
         name
         episodeNumber
-        
+
         season {
           seasonNumber
           series {
@@ -32,12 +32,12 @@ const RECENTLY_ADDED = gql`
             posterPath
           }
         }
-        
+
         playState {
           finished
           playtime
         }
-        
+
         files {
           totalDuration
         }
