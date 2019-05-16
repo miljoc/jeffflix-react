@@ -10,7 +10,7 @@ import fragmentMatcher from './fragmentMatcher';
 const cookies = new Cookies();
 
 const httpLink = createHttpLink({
-  uri: `${getBaseUrl()}/m/query`,
+  uri: `${getBaseUrl()}/olaris/m/query`,
 });
 
 const authLink = setContext((_, { headers }) => {

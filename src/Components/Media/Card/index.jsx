@@ -106,7 +106,7 @@ class MediaCard extends Component {
 
     const showPlayStatus = type === 'Movie' || type === 'Episode';
     const bgImage = posterPath || stillPath
-      ? `${getBaseUrl()}/m/images/tmdb/w342/${posterPath || stillPath}`
+      ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath || stillPath}`
       : placeholder;
 
     let length;

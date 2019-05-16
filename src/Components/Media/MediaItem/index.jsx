@@ -151,7 +151,7 @@ class MediaItem extends Component {
 
     return (
       <MediaFullWrap>
-        <MediaBackground bgimg={`${getBaseUrl()}/m/images/tmdb/w342/${background}`} />
+        <MediaBackground bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`} />
         <Breadcrumbs props={this.props} />
         <MediaFull>
           <MediaLeftCol>
