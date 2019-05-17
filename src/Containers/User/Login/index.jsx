@@ -68,22 +68,15 @@ class Login extends Component {
       if (isMounted) {
         this.setState({
           [e.target.name]: e.target.value,
-        }, () => {
-          this.validateForm();
         });
       }
     }
 
-    validateForm = () => {
-      const { username, password } = this.state;
-      this.setState({ validForm: (username.length > 3 && password.length > 3) });
-    }
 
     render() {
       const {
         error,
         success,
-        validForm,
         redirectToDashboard,
       } = this.state;
       const { location } = this.props;
@@ -96,7 +89,6 @@ class Login extends Component {
         handleLogin: this.handleLogin,
         handleChange: this.handleChange,
         error,
-        validForm,
       };
 
       return (

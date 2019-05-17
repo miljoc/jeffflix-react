@@ -13,7 +13,6 @@ const RegisterForm = ({
   error,
   handleChange,
   handleRegister,
-  validForm,
   initialSetup,
   inviteCode,
 }) => {
@@ -36,9 +35,9 @@ const RegisterForm = ({
           && (
             <Input
               type="text"
-              value={(inviteCode || undefined)}
-              name="invite_code"
-              autocomplete="invite_code"
+              value={inviteCode}
+              name="inviteCode"
+              autocomplete="inviteCode"
               placeholder="Enter Invite Code"
               handleChange={handleChange}
               uniqueCode
@@ -47,7 +46,7 @@ const RegisterForm = ({
         }
         <Input type="text" name="username" autocomplete="new-username" placeholder="Username" required handleChange={handleChange} />
         <Input type="password" name="password" autocomplete="new-password" placeholder="Password" required handleChange={handleChange} />
-        <Button handleSubmit={handleRegister} value="Create Account" disabled={!validForm} />
+        <Button handleSubmit={handleRegister} value="Create Account" />
 
         {!initialSetup && <FormLink to="/login" strapline="Have An Account?" value="Log In" setup={false} />}
       </FormWrap>
@@ -60,7 +59,6 @@ RegisterForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleRegister: PropTypes.func.isRequired,
   initialSetup: PropTypes.bool.isRequired,
-  validForm: PropTypes.bool.isRequired,
   inviteCode: PropTypes.string,
 };
 

@@ -16,7 +16,6 @@ class Register extends Component {
       username: '',
       password: '',
       inviteCode: '',
-      validForm: false,
       initialSetup: true,
       registeredSuccessful: false,
     }
@@ -26,8 +25,9 @@ class Register extends Component {
 
       if (Auth.isAuthenticated) this.setState({ redirectToDashboard: true });
 
+
       this.setState({
-        inviteCode: getUrlParameter('invite_code'),
+        inviteCode: (getUrlParameter('inviteCode') ? getUrlParameter('inviteCode') : ''),
         initialSetup,
       });
     }
@@ -35,21 +35,14 @@ class Register extends Component {
     handleChange = ({ target: { name, value } }) => {
       this.setState({
         [name]: value,
-      }, () => {
-        this.validateForm();
       });
-    }
-
-    validateForm = () => {
-      const { username, password } = this.state;
-      this.setState({ validForm: (username.length > 3 && password.length > 3) });
     }
 
     formError = (message) => {
       const { alert } = this.props;
 
       this.setState({ error: true }, () => {
-        alert.error(`There was a problem with your request: ${message}`);
+        alert.error(`There is a problem: ${message}`);
       });
     }
 
@@ -57,31 +50,35 @@ class Register extends Component {
       const {
         username,
         password,
-        invite_code: inviteCode,
-        validForm,
+        inviteCode,
+        initialSetup,
       } = this.state;
 
-      if (validForm) {
-        let registerInfo = {
-          username,
-          password,
+      let registerInfo = {
+        username,
+        password,
+      };
+
+      if (!initialSetup) {
+        registerInfo = {
+          ...registerInfo,
+          code: inviteCode,
         };
 
-        if (inviteCode) {
-          registerInfo = {
-            ...registerInfo,
-            code: inviteCode,
-          };
-        }
-
-        CREATE_USER(registerInfo).then(() => {
-          this.setState({ registeredSuccessful: true });
-        }).catch((error) => {
-          this.formError(error.response.data.message);
-        });
-      } else {
-        this.formError('Please recheck your form');
+        if (inviteCode.length === 0) return this.formError('Enter valid invite code');
       }
+
+      if (username.length < 3) return this.formError('Username should be more than 3 characters');
+      if (password.length < 3) return this.formError('Password should be more than 3 characters');
+
+      CREATE_USER(registerInfo)
+        .then(() => {
+          this.setState({ registeredSuccessful: true });
+          return true;
+        })
+        .catch(error => this.formError('Invalid Invite Code'));
+
+      return false;
     }
 
     render() {
@@ -91,7 +88,6 @@ class Register extends Component {
         error,
         inviteCode,
         initialSetup,
-        validForm,
         registeredSuccessful,
       } = this.state;
 
@@ -106,7 +102,6 @@ class Register extends Component {
         error,
         inviteCode,
         initialSetup,
-        validForm,
       };
 
       return (
