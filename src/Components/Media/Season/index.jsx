@@ -37,9 +37,7 @@ const Season = (props) => {
   return (
     <MediaFullWrap>
       <Breadcrumbs props={props} />
-      <MediaBackground
-        bgimg={`${getBaseUrl()}/m/images/tmdb/w342/${posterPath}`}
-      />
+      <MediaBackground bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`} />
       <MediaLeftCol>
         <Media size="large" {...props} hover={false} />
       </MediaLeftCol>
