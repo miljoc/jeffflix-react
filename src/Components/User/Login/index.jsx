@@ -32,11 +32,6 @@ LoginForm.propTypes = {
   error: PropTypes.bool.isRequired,
   handleChange: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  validForm: PropTypes.bool,
-};
-
-LoginForm.defaultProps = {
-  validForm: false,
 };
 
 export default LoginForm;

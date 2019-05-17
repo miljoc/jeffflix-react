@@ -25,7 +25,7 @@ const RenderContinueWatching = () => (
       if (data.upNext.length === 0) {
         return (
           <NoResults alignLeft>
-            Nothing here? Why not start watching something?
+            {'Nothing here? Why not start watching something?'}
           </NoResults>
         );
       }

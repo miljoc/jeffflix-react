@@ -40,7 +40,7 @@ class RenderRecentMovies extends Component {
           if (movies.length === 0) {
             return (
               <NoResults alignLeft>
-                You currently have no Movies.
+                {'You currently have no Movies.'}
                 <button type="button" onClick={() => this.toggleModal()}>Add a Movies folder</button>
               </NoResults>
             );

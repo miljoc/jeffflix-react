@@ -18,7 +18,6 @@
        "no-console": "warn",
        "no-shadow": "off",
        "jsx-a11y/media-has-caption": "off",
-       "react/no-unused-prop-types": "off",
        "no-confusing-arrow": "off",
        "linebreak-style": "off",
        "no-bitwise": [
