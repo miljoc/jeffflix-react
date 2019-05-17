@@ -28,7 +28,7 @@ class RenderRecentEpisodes extends Component {
     return (
       <Query
         query={RECENTLY_ADDED}
-        no-cache
+        fetchPolicy="cache-and-network"
       >
 
         {({ loading, error, data }) => {

@@ -32,7 +32,7 @@ const Season = (props) => {
     series,
   } = props;
 
-  const releaseYear = airDate.split('-')[0];
+  const releaseDate = `(${(airDate.split('-')[0])})`;
 
   return (
     <MediaFullWrap>
@@ -44,24 +44,16 @@ const Season = (props) => {
       <MediaRightCol>
         <MediaListHeader data={episodes} type="season" uuid={uuid} />
         <MediaNameLink to={generateMediaUrl('series', series.uuid)}>
-          { series.name }
+          {series.name}
         </MediaNameLink>
         <SeasonNumber>
-          { name }
-          <MediaRelease>
-            (
-            {(releaseYear)}
-            )
-          </MediaRelease>
+          {name}
+          <MediaRelease>{releaseDate}</MediaRelease>
         </SeasonNumber>
         {overview.length > 0 && <MediaDescription overview={overview} />}
-        <SubTitle>
-          Episodes
-        </SubTitle>
+        <SubTitle>Episodes</SubTitle>
 
-        <EpisodesWrap>
-          { children }
-        </EpisodesWrap>
+        <EpisodesWrap>{children}</EpisodesWrap>
       </MediaRightCol>
     </MediaFullWrap>
   );
@@ -69,10 +61,12 @@ const Season = (props) => {
 
 Season.propTypes = {
   name: PropTypes.string.isRequired,
-  episodes: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired,
-  })).isRequired,
+  episodes: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      uuid: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
 
 export default Season;

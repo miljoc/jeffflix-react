@@ -28,12 +28,13 @@ class RenderRecentMovies extends Component {
     return (
       <Query
         query={RECENTLY_ADDED}
-        no-cache
+        fetchPolicy="cache-and-network"
       >
 
         {({ loading, error, data }) => {
           if (loading) return <Loading />;
           if (error) return `Error! ${error.message}`;
+
           const movies = data.recentlyAdded.filter(m => m.type === 'Movie');
 
           if (movies.length === 0) {
