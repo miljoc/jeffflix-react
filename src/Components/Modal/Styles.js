@@ -23,6 +23,7 @@ export const Modal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 `;
 
 export const ModalWrap = styled.div`

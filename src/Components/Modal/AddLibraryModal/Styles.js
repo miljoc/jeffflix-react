@@ -54,12 +54,13 @@ export const LibraryItemWrap = styled.article`
   width:100%;
   margin:0 0 1rem;
   display:flex;
+  position: relative;
+  background: rgba(0,0,0,.2);
 `;
 
 export const LibraryItemFilePath = styled.span`
-  padding:0 1.5rem;
-  line-height:5rem;
-  background: rgba(0,0,0,.2);
+  padding: 1.3rem 1.5rem;
+  line-height:1.8;
   border-radius:.2rem;
   color:#737382;
   display:block;
@@ -67,24 +68,27 @@ export const LibraryItemFilePath = styled.span`
   font-size:1.4rem;
   font-weight:600;
   flex:1;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
   max-width: calc(100% - 5rem);
+  word-break: break-all;
+  word-break: break-word;
 `;
 
 export const LibraryItemDelete = styled(FontAwesomeIcon)`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
   float:right;
   color:${props => props.theme.alerts.error};
   font-size: 2rem;
   height: 5rem;
   width: 5rem !important;
-  cursor:pointer;
+  cursor: pointer;
   padding: 1.65rem;
-  background: rgba(0,0,0, .5);
-  transition:.2s all;
+  opacity: 0.5;
+  transition: .2s opacity;
 
   &:hover {
-    background:rgba(0,0,0, .2);
+    opacity: 1;
   }
 `;
