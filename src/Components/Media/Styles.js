@@ -68,8 +68,9 @@ export const MediaName = styled.h1`
   float:left;
   width:100%;
   margin:0 0 1.5rem;
-  line-height:4rem;
+  line-height:1.4;
   padding-right: 5rem;
+  transform: translateY(-0.5re);
 
   ${media.mobile`
     margin:0 0 2rem;
@@ -91,7 +92,7 @@ export const MediaNameLink = styled(NavLink)`
   width:100%;
   margin:0 0 1.5rem;
   line-height:2.6rem;
-  padding-right: 5rem;
+  padding-right: 6rem;
   font-weight:600;
 
   &:hover {
@@ -123,7 +124,7 @@ export const SeasonNumber = styled.h3`
   span {
     float:none !important;
     width:auto !important;
-    margin-left: 1rem !important;
+    margin-left: 0 !important;
   }
 
   ${media.tablet`
@@ -153,12 +154,13 @@ export const MediaRelease = styled.span`
   font-weight:400;
   float:left;
   width:100%;
+  margin-left: 0;
 
-  ${media.large`
+  ${media.tablet`
     font-size:1.6rem;
-    margin-left:1rem;
     float:none;
     width:auto;
+    margin-left: 1rem;
   `}
 `;
 
