@@ -4,8 +4,7 @@ import { Query } from 'react-apollo';
 import { orderBy } from 'lodash';
 import FETCH_SERIES_LIST from 'Queries/fetchSeriesList';
 
-import { showModal } from 'Redux/Actions/modalActions';
-import { LIBRARY_MODAL } from 'Redux/Constants/modalTypes';
+import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
 
 import Loading from 'Components/Loading';
 import MediaCard from 'Components/Media/Card';

@@ -1,4 +1,4 @@
-import { SHOW_NAV, HIDE_NAV } from '../Constants/actionTypes';
+import { SHOW_NAV, HIDE_NAV } from '../Actions/navigationActions';
 
 const initialState = {
   hidden: false,

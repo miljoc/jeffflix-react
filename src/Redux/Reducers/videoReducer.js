@@ -1,5 +1,5 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
-import { VIDEO_OPEN, VIDEO_CLOSE } from '../Constants/videoTypes';
+import { VIDEO_OPEN, VIDEO_CLOSE } from '../Actions/videoActions';
 
 const initialState = {
   playing: false,

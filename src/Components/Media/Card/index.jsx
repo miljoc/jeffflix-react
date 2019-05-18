@@ -2,20 +2,18 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import { withRouter } from 'react-router-dom';
+import { getBaseUrl, generateMediaUrl } from 'Helpers';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import LazyLoad from 'react-lazyload';
+
+import { showModal, RESUME_MODAL } from 'Redux/Actions/modalActions';
+
 import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { getBaseUrl, generateMediaUrl } from 'Helpers';
-
-import { showModal } from 'Redux/Actions/modalActions';
-import { RESUME_MODAL } from 'Redux/Constants/modalTypes';
-
 import MediaInfo from './MediaInfo';
 import MediaName from './MediaName';
 
 import placeholder from './placeholder.png';
-
 import {
   CardPoster,
   CardWrap,
@@ -112,7 +110,7 @@ class MediaCard extends Component {
     let length;
     if (typeof files == 'undefined' || !(files instanceof Array)) {
       length = 0;
-    } else {
+    } else if (files[0]) {
       length = files[0].totalDuration;
     }
 

@@ -14,7 +14,6 @@ class Login extends Component {
       isMounted: false,
       username: '',
       password: '',
-      validForm: false,
     }
 
     componentWillMount() {
@@ -43,23 +42,22 @@ class Login extends Component {
     }
 
     handleLogin = () => {
-      const { username, password, validForm } = this.state;
-      if (validForm) {
-        AUTH_REQUEST(username, password).then(() => {
+      const { username, password } = this.state;
+
+      AUTH_REQUEST(username, password)
+        .then(() => {
           this.setState({ success: true });
           setTimeout(() => {
             this.setState({ redirectToDashboard: true });
           }, 750);
-        }).catch((error) => {
+        })
+        .catch((error) => {
           if (error.response === undefined) {
             this.formError(error.message);
           } else {
             this.formError(error.response.data.message);
           }
         });
-      } else {
-        this.formError('Invalid username or password');
-      }
     }
 
     handleChange = (e) => {
@@ -74,11 +72,7 @@ class Login extends Component {
 
 
     render() {
-      const {
-        error,
-        success,
-        redirectToDashboard,
-      } = this.state;
+      const { error, success, redirectToDashboard } = this.state;
       const { location } = this.props;
 
       const { from } = location.state || { from: { pathname: '/dashboard' } };

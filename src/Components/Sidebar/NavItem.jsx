@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import { showModal } from 'Redux/Actions/modalActions';
-import { LIBRARY_MODAL } from 'Redux/Constants/modalTypes';
+import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
 
 import {
   NavItemWrap,

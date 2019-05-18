@@ -2,8 +2,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import jwtDecode from 'jwt-decode';
-import history from 'getHistory';
 import { getBaseUrl } from 'Helpers';
+import history from '../getHistory';
 import client from '../index';
 
 const cookies = new Cookies();

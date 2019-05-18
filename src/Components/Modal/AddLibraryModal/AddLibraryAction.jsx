@@ -9,33 +9,56 @@ export default class AddLibraryAction extends Component {
     super(props);
 
     this.state = {
-      filePath: '',
       disabled: true,
     };
   }
 
-  handleChange = (e) => {
-    const valid = e.target.value.length > 0;
+  handleChange = (val) => {
+    const { updateFilePath } = this.props;
+    const valid = val.length > 0;
+
+    updateFilePath(val);
 
     this.setState({
-      filePath: (valid ? e.target.value : ''),
       disabled: !valid,
     });
   }
 
+  handleSubmit = () => {
+    const { createLibrary } = this.props;
+
+    createLibrary();
+  }
+
   render() {
-    const { filePath, disabled } = this.state;
-    const { addLibrary } = this.props;
+    const { disabled } = this.state;
+    const { filePath } = this.props;
 
     return (
       <AddLibraryWrap>
-        <AddLibraryInput autoFocus placeholder="Enter Filepath" type="text" onChange={e => this.handleChange(e)} />
-        <SubmitLibrary disabled={disabled} icon={faPlus} onClick={() => addLibrary(filePath)} />
+        <AddLibraryInput
+          autoFocus
+          value={filePath}
+          placeholder="Enter Filepath"
+          type="text"
+          onChange={e => this.handleChange(e.target.value)}
+        />
+        <SubmitLibrary
+          disabled={disabled}
+          icon={faPlus}
+          onClick={() => this.handleSubmit()}
+        />
       </AddLibraryWrap>
     );
   }
 }
 
 AddLibraryAction.propTypes = {
-  addLibrary: PropTypes.func.isRequired,
+  createLibrary: PropTypes.func.isRequired,
+  updateFilePath: PropTypes.func.isRequired,
+  filePath: PropTypes.string,
+};
+
+AddLibraryAction.defaultProps = {
+  filePath: '',
 };

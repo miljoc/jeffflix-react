@@ -9,7 +9,7 @@ import {
   LIBRARY_MODAL,
   RESUME_MODAL,
   WARNING_MODAL,
-} from 'Redux/Constants/modalTypes';
+} from 'Redux/Actions/modalActions';
 
 const MODAL_COMPONENTS = {
   [LIBRARY_MODAL]: AddLibraryModal,

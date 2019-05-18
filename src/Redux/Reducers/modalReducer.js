@@ -1,5 +1,5 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
-import { SHOW_MODAL, HIDE_MODAL } from '../Constants/actionTypes';
+import { SHOW_MODAL, HIDE_MODAL } from '../Actions/modalActions';
 
 const initialState = {
   type: null,

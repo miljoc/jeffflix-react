@@ -24,8 +24,8 @@ export const AlertInlineWrap = styled.span`
   padding:0 1.5rem;
   border-radius:.3rem;
   text-align:center;
-  font-weight:600;
-  margin:0 0 2rem;
+  font-weight:bold;
+  margin:0 0 1rem;
   text-transform:capitalize;
 `;
 

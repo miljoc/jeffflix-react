@@ -6,6 +6,7 @@ import modal from './modalReducer';
 import navigation from './navigationReducer';
 import historyLocation from './historyReducer';
 import video from './videoReducer';
+import library from './libraryReducer';
 
 const responsiveBreakpoints = {
   extraSmall: 500,
@@ -21,4 +22,5 @@ export default history => combineReducers({
   navigation,
   historyLocation,
   video,
+  library,
 });

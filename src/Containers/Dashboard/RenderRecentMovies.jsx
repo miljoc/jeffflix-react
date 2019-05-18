@@ -4,8 +4,7 @@ import { Query } from 'react-apollo';
 
 import RECENTLY_ADDED from 'Queries/fetchRecentlyAdded';
 
-import { showModal } from 'Redux/Actions/modalActions';
-import { LIBRARY_MODAL } from 'Redux/Constants/modalTypes';
+import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
 
 import Carousel from 'Components/Carousel';
 import Loading from 'Components/Loading';

@@ -1,7 +1,5 @@
-import {
-  VIDEO_OPEN,
-  VIDEO_CLOSE,
-} from '../Constants/videoTypes';
+export const VIDEO_OPEN = 'VIDEO_OPEN';
+export const VIDEO_CLOSE = 'VIDEO_CLOSE';
 
 export const showVideo = () => ({
   type: VIDEO_OPEN,

@@ -1,7 +1,5 @@
-import {
-  SHOW_NAV,
-  HIDE_NAV,
-} from '../Constants/actionTypes';
+export const SHOW_NAV = 'SHOW_NAV';
+export const HIDE_NAV = 'HIDE_NAV';
 
 export const showNavigation = () => ({
   type: SHOW_NAV,
