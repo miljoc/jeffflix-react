@@ -38,11 +38,11 @@ class Register extends Component {
       });
     }
 
-    formError = (message) => {
+    formError = (err) => {
       const { alert } = this.props;
 
       this.setState({ error: true }, () => {
-        alert.error(`There is a problem: ${message}`);
+        alert.error(`There is a problem: ${err}`);
       });
     }
 
@@ -64,19 +64,16 @@ class Register extends Component {
           ...registerInfo,
           code: inviteCode,
         };
-
-        if (inviteCode.length === 0) return this.formError('Enter valid invite code');
       }
-
-      if (username.length < 3) return this.formError('Username should be more than 3 characters');
-      if (password.length < 3) return this.formError('Password should be more than 3 characters');
 
       CREATE_USER(registerInfo)
         .then(() => {
           this.setState({ registeredSuccessful: true });
           return true;
         })
-        .catch(error => this.formError('Invalid Invite Code'));
+        .catch((err) => {
+          this.formError(err.response.data.message);
+        });
 
       return false;
     }

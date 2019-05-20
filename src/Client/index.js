@@ -17,14 +17,16 @@ const httpLink = new HttpLink({
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
-  const token = cookies.get('jwt');
+  if (document.cookie.indexOf('jwt') >= 0) {
+    const token = cookies.get('jwt');
 
-  operation.setContext(({ headers = {} }) => ({
-    headers: {
-      ...headers,
-      authorization: token.jwt ? `Bearer ${token.jwt}` : '',
-    },
-  }));
+    operation.setContext(({ headers = {} }) => ({
+      headers: {
+        ...headers,
+        authorization: token.jwt ? `Bearer ${token.jwt}` : '',
+      },
+    }));
+  }
 
   return forward(operation);
 });
