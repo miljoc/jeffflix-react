@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { ADD_LIBRARY } from 'Mutations/manageLibraries';
 import { FetchLibraryList, FETCH_LIBRARIES } from 'Queries/fetchLibraries';
 import {
-  addLibrary, addLibrarySuccess, addLibraryFailure, clearLibraryError,
+  addLibrary, addLibrarySuccess, addLibraryFailure, clearLibraryError, setLibraryStatus,
 } from 'Redux/Actions/libraryActions';
 import { hideModal } from 'Redux/Actions/modalActions';
 
@@ -81,7 +81,14 @@ class AddLibraryModal extends Component {
 
   createLibrary = async (kind, filePath) => {
     const {
-      type, alert, mutate, addLibrary, addLibrarySuccess, addLibraryFailure,
+      type,
+      alert,
+      mutate,
+      importing,
+      addLibrary,
+      addLibrarySuccess,
+      addLibraryFailure,
+      setLibraryStatus,
     } = this.props;
 
     const variables = {
@@ -104,6 +111,7 @@ class AddLibraryModal extends Component {
           this.clearError();
         } else {
           addLibrarySuccess();
+          setLibraryStatus([...importing, type]);
           this.setState({ filePath: '' });
           alert.success('Library Added');
         }
@@ -152,6 +160,7 @@ AddLibraryModal.propTypes = {
   errorMessage: PropTypes.string,
   error: PropTypes.bool.isRequired,
   clearLibraryError: PropTypes.func.isRequired,
+  importing: PropTypes.shape([]).isRequired,
 };
 
 AddLibraryModal.defaultProps = {
@@ -165,6 +174,7 @@ const mapStateToProps = (state) => {
     loading: library.loading,
     error: library.error,
     errorMessage: library.errorMessage,
+    importing: library.importing,
   };
 };
 
@@ -174,6 +184,7 @@ const mapDispatchToProps = dispatch => ({
   addLibrarySuccess: () => dispatch(addLibrarySuccess()),
   addLibraryFailure: props => dispatch(addLibraryFailure(props)),
   clearLibraryError: () => dispatch(clearLibraryError()),
+  setLibraryStatus: importing => dispatch(setLibraryStatus(importing)),
 });
 
 export default compose(

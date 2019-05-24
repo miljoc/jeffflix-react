@@ -5,6 +5,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
 
+import Importing from './Importing';
+
 import {
   NavItemWrap,
   NavItemHeading,
@@ -36,6 +38,7 @@ class NavItem extends Component {
       if (types.indexOf(link.id) > -1) {
         return (
           <NavItemLink onClick={e => this.handleClick(e, link.id)} to={link.to} key={link.id}>
+            <Importing name={link.id} />
             {link.name}
             <AddFolder id={`add-${link.id}`} icon={faPlus}>+</AddFolder>
           </NavItemLink>

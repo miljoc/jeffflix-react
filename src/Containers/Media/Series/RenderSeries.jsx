@@ -14,6 +14,7 @@ const RenderSeries = ({ uuid }) => (
   <Query
     query={FETCH_SERIES}
     variables={{ uuid }}
+    pollInterval={500}
   >
 
     {({ loading, error, data }) => {

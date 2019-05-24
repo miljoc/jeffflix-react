@@ -14,6 +14,7 @@ const RenderSeason = ({ uuid }) => (
   <Query
     query={FETCH_SEASON}
     variables={{ uuid }}
+    pollInterval={500}
   >
 
     {({ loading, error, data }) => {

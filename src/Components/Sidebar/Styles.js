@@ -103,3 +103,19 @@ export const NavItemLink = styled(NavLink)`
     }
   }
 `;
+
+export const LoadingWrap = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+
+  svg {
+    top: 0;
+    left: 0;
+  }
+`;

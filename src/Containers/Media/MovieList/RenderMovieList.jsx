@@ -26,7 +26,7 @@ class RenderMovieList extends Component {
     return (
       <Query
         query={FETCH_MOVIES}
-        pollInterval={5000}
+        pollInterval={500}
       >
 
         {({ loading, error, data }) => {
