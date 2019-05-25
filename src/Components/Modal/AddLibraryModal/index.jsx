@@ -160,7 +160,9 @@ AddLibraryModal.propTypes = {
   errorMessage: PropTypes.string,
   error: PropTypes.bool.isRequired,
   clearLibraryError: PropTypes.func.isRequired,
-  importing: PropTypes.shape([]).isRequired,
+  importing: PropTypes.arrayOf(
+    PropTypes.shape({}),
+  ).isRequired,
 };
 
 AddLibraryModal.defaultProps = {

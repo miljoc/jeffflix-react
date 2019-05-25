@@ -75,7 +75,9 @@ const Importing = ({ name, dispatch, importing }) => (
 
 Importing.propTypes = {
   name: PropTypes.string.isRequired,
-  importing: PropTypes.bool.isRequired,
+  importing: PropTypes.arrayOf(
+    PropTypes.shape({}),
+  ).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

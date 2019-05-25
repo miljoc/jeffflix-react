@@ -6,25 +6,25 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const LoadingSpinner = styled(FontAwesomeIcon)`
     color: ${props => props.theme.primary};
-    font-size: ${props => props.size};
+    font-size: ${props => props.fsize};
     position: ${(props => (props.relative ? 'relative' : 'absolute'))};
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
 `;
 
-const Loading = ({ relative, size }) => (
-  <LoadingSpinner icon={faSpinner} spin relative={relative ? 1 : 0} size={size} />
+const Loading = ({ relative, fsize }) => (
+  <LoadingSpinner icon={faSpinner} spin relative={relative ? 1 : 0} fsize={fsize} />
 );
 
 Loading.propTypes = {
   relative: PropTypes.bool,
-  size: PropTypes.string,
+  fsize: PropTypes.string,
 };
 
 Loading.defaultProps = {
   relative: false,
-  size: '1.8rem',
+  fsize: '1.8rem',
 };
 
 export default Loading;
