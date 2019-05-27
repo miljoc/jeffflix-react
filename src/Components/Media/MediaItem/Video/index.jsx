@@ -134,22 +134,22 @@ class Video extends Component {
   };
 
   render() {
-    const { source, playState } = this.props;
-    const mediaInfo = new chrome.cast.media.MediaInfo(source.src, source.type);
-    const request = new chrome.cast.media.LoadRequest(mediaInfo);
-    request.currentTime = playState.playtime;
-    let currentMediaSession;
+    // const { source, playState } = this.props;
+    // const mediaInfo = new chrome.cast.media.MediaInfo(source.src, source.type);
+    // const request = new chrome.cast.media.LoadRequest(mediaInfo);
+    // request.currentTime = playState.playtime;
+    // let currentMediaSession;
 
-    function onMediaDiscovered(how, mediaSession) {
-      console.log("new media session ID:" + mediaSession.mediaSessionId);
-      currentMediaSession = mediaSession;
-    }
+    // function onMediaDiscovered(how, mediaSession) {
+    //   console.log("new media session ID:" + mediaSession.mediaSessionId);
+    //   currentMediaSession = mediaSession;
+    // }
 
-    function onMediaError(e) {
-      console.log("media error");
-    }
+    // function onMediaError(e) {
+    //   console.log("media error");
+    // }
 
-    cast.session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError);
+    // cast.session.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError);
 
     return (
       <Fragment>

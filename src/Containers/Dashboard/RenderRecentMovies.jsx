@@ -27,7 +27,7 @@ class RenderRecentMovies extends Component {
     return (
       <Query
         query={RECENTLY_ADDED}
-        fetchPolicy="cache-and-network"
+        fetchPolicy="network-only"
       >
 
         {({ loading, error, data }) => {
