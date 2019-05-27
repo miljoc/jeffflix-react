@@ -13,7 +13,7 @@ import { MediaCardWrap } from './Styles';
 const RenderContinueWatching = () => (
   <Query
     query={CONTINUE_WATCHING}
-    fetchPolicy="cache-and-network"
+    fetchPolicy="network-only"
   >
 
     {({
