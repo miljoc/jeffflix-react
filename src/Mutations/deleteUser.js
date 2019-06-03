@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-const DELETE_USER = gql` 
+const DELETE_USER = gql`
     mutation deleteUser($id: Int!) {
         deleteUser(id: $id) {
             user {
