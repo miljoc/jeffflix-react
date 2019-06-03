@@ -25,6 +25,5 @@ export default (history) =>
         historyLocation,
         video,
         library,
-        auth,
-        cast
+        auth
     });
