@@ -31,7 +31,7 @@ const authMiddleware = new ApolloLink((operation, forward) => {
     return forward(operation);
 });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ networkError }) => {
     if (networkError && networkError.statusCode === 401) {
         Auth.logout();
     }
