@@ -9,13 +9,14 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Logout from './Logout';
 import NavToggle from './NavToggle';
 import Search from './Search';
+import Cast from './Cast';
 
 import { HeaderWrap, BackButton, BackIcon } from './Styles';
 
 class Header extends Component {
   state = {
     value: '',
-  }
+  };
 
   updateSearch = (value) => {
     this.setState({
@@ -25,23 +26,18 @@ class Header extends Component {
 
   render() {
     const { value } = this.state;
-    const {
-      history,
-      previousLocation,
-      currentLocation,
-    } = this.props;
+    const { history, previousLocation, currentLocation } = this.props;
 
     return (
       <HeaderWrap>
         <NavToggle />
-        { previousLocation !== null && currentLocation !== '/dashboard'
-          && (
-            <BackButton onClick={() => history.goBack()}>
-              <BackIcon icon={faArrowLeft} />
-            </BackButton>
-          )
-        }
+        {previousLocation !== null && currentLocation !== '/dashboard' && (
+          <BackButton onClick={() => history.goBack()}>
+            <BackIcon icon={faArrowLeft} />
+          </BackButton>
+        )}
 
+        <Cast />
         <Search value={value} updateSearch={this.updateSearch} />
         <Logout />
       </HeaderWrap>
@@ -72,5 +68,8 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, null),
+  connect(
+    mapStateToProps,
+    null,
+  ),
 )(Header);

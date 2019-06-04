@@ -7,6 +7,7 @@ import navigation from './navigationReducer';
 import historyLocation from './historyReducer';
 import video from './videoReducer';
 import library from './libraryReducer';
+import cast from './castReducer';
 
 const responsiveBreakpoints = {
   extraSmall: 500,
@@ -23,4 +24,5 @@ export default history => combineReducers({
   historyLocation,
   video,
   library,
+  cast,
 });
