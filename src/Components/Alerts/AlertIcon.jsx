@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faExclamationCircle,
     faCheckCircle,
-    faQuestionCircle
+    faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 const AlertIcon = (type) => {
@@ -40,7 +40,7 @@ const AlertIcon = (type) => {
 };
 
 AlertIcon.propTypes = {
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
 };
 
 export default AlertIcon;

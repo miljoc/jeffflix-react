@@ -13,5 +13,5 @@ const ModalClose = ({ onClick }) => (
 export default ModalClose;
 
 ModalClose.propTypes = {
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
 };

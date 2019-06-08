@@ -38,52 +38,52 @@ const Carousel = (props) => {
             {
                 breakpoint: 9999,
                 settings: {
-                    slidesToShow: 10
-                }
+                    slidesToShow: 10,
+                },
             },
             {
                 breakpoint: 2200,
                 settings: {
-                    slidesToShow: 8
-                }
+                    slidesToShow: 8,
+                },
             },
             {
                 breakpoint: 1800,
                 settings: {
-                    slidesToShow: 7
-                }
+                    slidesToShow: 7,
+                },
             },
             {
                 breakpoint: 1600,
                 settings: {
-                    slidesToShow: 6
-                }
+                    slidesToShow: 6,
+                },
             },
             {
                 breakpoint: 1400,
                 settings: {
-                    slidesToShow: 5
-                }
+                    slidesToShow: 5,
+                },
             },
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 4
-                }
+                    slidesToShow: 4,
+                },
             },
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 4
-                }
+                    slidesToShow: 4,
+                },
             },
             {
                 breakpoint: 500,
                 settings: {
-                    slidesToShow: 2
-                }
-            }
-        ]
+                    slidesToShow: 2,
+                },
+            },
+        ],
     };
 
     const { children } = props;
@@ -93,22 +93,22 @@ const Carousel = (props) => {
 
 RenderNextArrow.propTypes = {
     onClick: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 RenderNextArrow.defaultProps = {
     onClick: null,
-    className: null
+    className: null,
 };
 
 RenderPrevArrow.propTypes = {
     onClick: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
 };
 
 RenderPrevArrow.defaultProps = {
     onClick: null,
-    className: null
+    className: null,
 };
 
 export default Carousel;

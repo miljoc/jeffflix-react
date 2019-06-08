@@ -25,9 +25,9 @@ const BreadcrumbList = ({ items }) => {
 BreadcrumbList.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
-            name: PropTypes.string.isRequired
-        })
-    ).isRequired
+            name: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
 };
 
 export default BreadcrumbList;

@@ -24,7 +24,7 @@ const FetchLibraryList = ({ kind }) => (
             if (error) return `Error! ${error.message}`;
 
             const filteredLibrary = data.libraries.filter(
-                (l) => l.kind === kind
+                (l) => l.kind === kind,
             );
 
             if (filteredLibrary.length === 0) {
@@ -41,7 +41,7 @@ const FetchLibraryList = ({ kind }) => (
 );
 
 FetchLibraryList.propTypes = {
-    kind: PropTypes.number.isRequired
+    kind: PropTypes.number.isRequired,
 };
 
 export { FetchLibraryList, FETCH_LIBRARIES };

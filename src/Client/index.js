@@ -13,7 +13,7 @@ import fragmentMatcher from './fragmentMatcher';
 const cookies = new Cookies();
 
 const httpLink = new HttpLink({
-    uri: `${getBaseUrl()}/olaris/m/query`
+    uri: `${getBaseUrl()}/olaris/m/query`,
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -23,8 +23,8 @@ const authMiddleware = new ApolloLink((operation, forward) => {
         operation.setContext(({ headers = {} }) => ({
             headers: {
                 ...headers,
-                authorization: token.jwt ? `Bearer ${token.jwt}` : ''
-            }
+                authorization: token.jwt ? `Bearer ${token.jwt}` : '',
+            },
         }));
     }
 
@@ -43,12 +43,12 @@ const errorLink = onError(({ networkError }) => {
 
 const cache = new InMemoryCache({
     fragmentMatcher,
-    dataIdFromObject: (object) => object.uuid || null
+    dataIdFromObject: (object) => object.uuid || null,
 });
 
 const client = new ApolloClient({
     cache,
-    link: from([errorLink, authMiddleware, httpLink])
+    link: from([errorLink, authMiddleware, httpLink]),
 });
 
 export default client;

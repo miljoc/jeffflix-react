@@ -4,7 +4,7 @@ import { InputWrap, TextInput } from '../Styles';
 
 export default class Input extends Component {
     state = {
-        isFocused: false
+        isFocused: false,
     };
 
     handleFocus = () => {
@@ -24,7 +24,7 @@ export default class Input extends Component {
             uniqueCode,
             autocomplete,
             value,
-            required
+            required,
         } = this.props;
 
         const { isFocused } = this.state;
@@ -38,7 +38,7 @@ export default class Input extends Component {
             onChange: handleChange,
             onFocus: this.handleFocus,
             onBlur: this.handleBlur,
-            required
+            required,
         };
 
         return (
@@ -55,9 +55,9 @@ Input.propTypes = {
     placeholder: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired,
     uniqueCode: PropTypes.bool,
-    autocomplete: PropTypes.string.isRequired
+    autocomplete: PropTypes.string.isRequired,
 };
 
 Input.defaultProps = {
-    uniqueCode: false
+    uniqueCode: false,
 };

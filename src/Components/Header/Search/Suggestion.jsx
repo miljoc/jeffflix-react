@@ -29,8 +29,8 @@ renderSuggestion.propTypes = {
         poster_path: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         year: PropTypes.string,
-        first_air_date: PropTypes.string
-    }).isRequired
+        first_air_date: PropTypes.string,
+    }).isRequired,
 };
 
 export default renderSuggestion;

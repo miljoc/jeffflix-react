@@ -4,6 +4,6 @@ export const setAuthToken = (data, token) => ({
     type: SET_AUTH_TOKEN,
     payload: {
         data,
-        token
-    }
+        token,
+    },
 });

@@ -12,7 +12,7 @@ const Title = ({ heading, sub }) => (
 
 Title.propTypes = {
     heading: PropTypes.string.isRequired,
-    sub: PropTypes.string.isRequired
+    sub: PropTypes.string.isRequired,
 };
 
 export default Title;

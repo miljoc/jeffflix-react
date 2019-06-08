@@ -13,7 +13,7 @@ class SearchInput extends Component {
 
         this.state = {
             hasFocus: false,
-            value: ''
+            value: '',
         };
     }
 
@@ -94,11 +94,11 @@ SearchInput.propTypes = {
     loading: PropTypes.bool.isRequired,
     toggleFocus: PropTypes.func.isRequired,
     hasSuggestions: PropTypes.bool.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
 };
 
 SearchInput.defaultProps = {
-    value: ''
+    value: '',
 };
 
 export default withRouter(SearchInput);

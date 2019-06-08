@@ -20,7 +20,7 @@ class NavItem extends Component {
 
             showModal(LIBRARY_MODAL, {
                 title: `Add ${type} folder`,
-                type
+                type,
             });
         }
     };
@@ -70,16 +70,16 @@ NavItem.propTypes = {
         PropTypes.shape({
             name: PropTypes.string.isRequired,
             id: PropTypes.string.isRequired,
-            to: PropTypes.string.isRequired
-        })
-    ).isRequired
+            to: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    showModal: (type, props) => dispatch(showModal(type, props))
+    showModal: (type, props) => dispatch(showModal(type, props)),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(NavItem);

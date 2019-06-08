@@ -11,7 +11,7 @@ const CreateInvite = (props) => {
 };
 
 CreateInvite.propTypes = {
-    generateInvite: PropTypes.func.isRequired
+    generateInvite: PropTypes.func.isRequired,
 };
 
 export default CreateInvite;

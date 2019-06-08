@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
     hideNavigation,
-    showNavigation
+    showNavigation,
 } from 'Redux/Actions/navigationActions';
 
 import { NavButton, NavIcon, ContentOverlay, HideNavIcon } from './Styles';
@@ -58,13 +58,13 @@ const mapStateToProps = (state) => {
     const { navigation, browser } = state;
     return {
         navHidden: navigation.hidden,
-        browser
+        browser,
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
     hideNavigation: () => dispatch(hideNavigation()),
-    showNavigation: () => dispatch(showNavigation())
+    showNavigation: () => dispatch(showNavigation()),
 });
 
 NavToggle.propTypes = {
@@ -73,12 +73,12 @@ NavToggle.propTypes = {
     hideNavigation: PropTypes.func.isRequired,
     browser: PropTypes.shape({
         lessThan: PropTypes.shape({
-            large: PropTypes.bool.isRequired
-        }).isRequired
-    }).isRequired
+            large: PropTypes.bool.isRequired,
+        }).isRequired,
+    }).isRequired,
 };
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(NavToggle);

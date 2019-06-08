@@ -9,7 +9,7 @@ import {
     ModalWrap,
     ModalBody,
     ModalHeader,
-    ModalHeading
+    ModalHeading,
 } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
 
@@ -52,14 +52,14 @@ WarningModal.propTypes = {
     message: PropTypes.string.isRequired,
     confirm: PropTypes.func.isRequired,
     cancel: PropTypes.func.isRequired,
-    hideModal: PropTypes.func.isRequired
+    hideModal: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    hideModal: () => dispatch(hideModal())
+    hideModal: () => dispatch(hideModal()),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(WarningModal);

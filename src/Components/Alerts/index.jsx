@@ -10,7 +10,7 @@ const AlertOptions = {
     position: 'bottom right',
     timeout: 5000,
     transition: 'fade',
-    offset: '30'
+    offset: '30',
 };
 
 const AlertTemplate = ({ message, options, close }) => (
@@ -26,16 +26,16 @@ AlertTemplate.propTypes = {
     message: PropTypes.string.isRequired,
     options: PropTypes.shape({
         type: PropTypes.string,
-        timeout: PropTypes.number
+        timeout: PropTypes.number,
     }),
-    close: PropTypes.func.isRequired
+    close: PropTypes.func.isRequired,
 };
 
 AlertTemplate.defaultProps = {
     options: PropTypes.shape({
         type: 'info',
-        timeout: 5000
-    })
+        timeout: 5000,
+    }),
 };
 
 export { AlertTemplate, AlertOptions, AlertInline };

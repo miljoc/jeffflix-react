@@ -18,7 +18,7 @@ class RenderMovieList extends Component {
 
         showModal(LIBRARY_MODAL, {
             title: 'Add Movie Library',
-            type: 'movies'
+            type: 'movies',
         });
     };
 
@@ -55,10 +55,10 @@ class RenderMovieList extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showModal: (type, props) => dispatch(showModal(type, props))
+    showModal: (type, props) => dispatch(showModal(type, props)),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(RenderMovieList);

@@ -9,10 +9,10 @@ export const showModal = (type, props) => ({
     type: SHOW_MODAL,
     payload: {
         type,
-        props
-    }
+        props,
+    },
 });
 
 export const hideModal = () => ({
-    type: HIDE_MODAL
+    type: HIDE_MODAL,
 });

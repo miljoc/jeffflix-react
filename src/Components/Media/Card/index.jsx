@@ -20,19 +20,19 @@ import {
     CardPopup,
     PosterWrap,
     PopupLink,
-    PopupIcon
+    PopupIcon,
 } from './Styles';
 
 class MediaCard extends Component {
     state = {
-        url: ''
+        url: '',
     };
 
     componentDidMount() {
         const { type, uuid } = this.props;
 
         this.setState({
-            url: generateMediaUrl(type, uuid)
+            url: generateMediaUrl(type, uuid),
         });
     }
 
@@ -46,7 +46,7 @@ class MediaCard extends Component {
             url,
             history,
             playMedia,
-            playState
+            playState,
         });
     };
 
@@ -71,7 +71,7 @@ class MediaCard extends Component {
             } else {
                 history.push({
                     pathname: url,
-                    state: { autoplay: true }
+                    state: { autoplay: true },
                 });
             }
         } else {
@@ -91,7 +91,7 @@ class MediaCard extends Component {
             stillPath,
             type,
             files,
-            hover
+            hover,
         } = this.props;
         const { url } = this.state;
 
@@ -158,7 +158,7 @@ const requiredPropsCheck = (props, componentName) => {
     const { posterPath, stillPath } = props;
     if (!posterPath && !stillPath) {
         return new Error(
-            `One of 'posterPath' or 'stillPath' is required by '${componentName}' component.`
+            `One of 'posterPath' or 'stillPath' is required by '${componentName}' component.`,
         );
     }
 
@@ -166,7 +166,7 @@ const requiredPropsCheck = (props, componentName) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    showModal: (type, props) => dispatch(showModal(type, props))
+    showModal: (type, props) => dispatch(showModal(type, props)),
 });
 
 MediaCard.propTypes = {
@@ -178,13 +178,13 @@ MediaCard.propTypes = {
     uuid: PropTypes.string.isRequired,
     files: PropTypes.arrayOf(
         PropTypes.shape({
-            totalDuration: PropTypes.number
-        })
+            totalDuration: PropTypes.number,
+        }),
     ),
     history: ReactRouterPropTypes.history.isRequired,
     hover: PropTypes.bool,
     wide: PropTypes.bool,
-    showText: PropTypes.bool
+    showText: PropTypes.bool,
 };
 
 MediaCard.defaultProps = {
@@ -196,15 +196,15 @@ MediaCard.defaultProps = {
     showText: false,
     files: [
         {
-            totalDuration: 0
-        }
-    ]
+            totalDuration: 0,
+        },
+    ],
 };
 
 export default compose(
     connect(
         null,
-        mapDispatchToProps
+        mapDispatchToProps,
     ),
-    withRouter
+    withRouter,
 )(MediaCard);

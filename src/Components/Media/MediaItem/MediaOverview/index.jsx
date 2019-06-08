@@ -13,7 +13,7 @@ const MediaOverview = (props) => {
         files,
         fileChange,
         playMedia,
-        resumeMedia
+        resumeMedia,
     } = props;
 
     const { type, uuid, playState } = mediaInfo;

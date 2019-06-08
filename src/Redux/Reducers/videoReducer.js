@@ -2,7 +2,7 @@ import { LOCATION_CHANGE } from 'connected-react-router';
 import { VIDEO_OPEN, VIDEO_CLOSE } from '../Actions/videoActions';
 
 const initialState = {
-    playing: false
+    playing: false,
 };
 
 const video = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const video = (state = initialState, action) => {
         case VIDEO_OPEN:
             return {
                 ...state,
-                playing: true
+                playing: true,
             };
         case VIDEO_CLOSE:
             return initialState;

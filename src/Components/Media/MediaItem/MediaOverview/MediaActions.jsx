@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo';
 import UPDATE_PLAYSTATE from 'Mutations/updatePlaystate';
 import {
     updatePlayStateEpisode,
-    updatePlayStateMovie
+    updatePlayStateMovie,
 } from 'Components/Media/Actions/updatePlayState';
 
 import { MediaActionsWrap } from '../Styles';
@@ -52,10 +52,10 @@ MediaActions.propTypes = {
     mutate: PropTypes.func.isRequired,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
-        playtime: PropTypes.number
+        playtime: PropTypes.number,
     }).isRequired,
     type: PropTypes.string.isRequired,
-    playMedia: PropTypes.func.isRequired
+    playMedia: PropTypes.func.isRequired,
 };
 
 export default (MediaActions = graphql(UPDATE_PLAYSTATE)(MediaActions));

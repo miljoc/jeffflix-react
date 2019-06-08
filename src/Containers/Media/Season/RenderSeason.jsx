@@ -19,7 +19,7 @@ const RenderSeason = ({ uuid }) => (
             const episodeList = orderBy(
                 data.season.episodes,
                 ['episodeNumber'],
-                ['asc']
+                ['asc'],
             ).map((s) => (
                 <LibraryListItemWide key={s.uuid}>
                     <MediaCard {...s} wide showText />

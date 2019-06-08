@@ -13,7 +13,7 @@ const MediaDropdown = ({ uuid }) => (
 );
 
 MediaDropdown.propTypes = {
-    uuid: PropTypes.string.isRequired
+    uuid: PropTypes.string.isRequired,
 };
 
 export default MediaDropdown;
