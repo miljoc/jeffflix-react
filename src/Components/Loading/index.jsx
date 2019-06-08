@@ -24,12 +24,12 @@ const Loading = ({ relative, fsize }) => (
 
 Loading.propTypes = {
     relative: PropTypes.bool,
-    fsize: PropTypes.string
+    fsize: PropTypes.string,
 };
 
 Loading.defaultProps = {
     relative: false,
-    fsize: '1.8rem'
+    fsize: '1.8rem',
 };
 
 export default Loading;

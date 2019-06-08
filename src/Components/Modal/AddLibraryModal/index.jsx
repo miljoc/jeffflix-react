@@ -12,7 +12,7 @@ import {
     addLibrarySuccess,
     addLibraryFailure,
     clearLibraryError,
-    setLibraryStatus
+    setLibraryStatus,
 } from 'Redux/Actions/libraryActions';
 import { hideModal } from 'Redux/Actions/modalActions';
 
@@ -22,7 +22,7 @@ import {
     ModalWrap,
     ModalHeader,
     ModalHeading,
-    ModalBody
+    ModalBody,
 } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
 import AddLibraryAction from './AddLibraryAction';
@@ -38,7 +38,7 @@ class AddLibraryModal extends Component {
             loading: props.loading,
             kind: 0,
             isMounted: true,
-            filePath: ''
+            filePath: '',
         };
     }
 
@@ -49,7 +49,7 @@ class AddLibraryModal extends Component {
                 nextProps.errorMessage !== prevState.errorMessage &&
                 nextProps.errorMessage,
             loading:
-                nextProps.loading !== prevState.loading && nextProps.loading
+                nextProps.loading !== prevState.loading && nextProps.loading,
         };
     }
 
@@ -57,7 +57,7 @@ class AddLibraryModal extends Component {
         const { type } = this.props;
 
         this.setState({
-            kind: type === 'movies' ? 0 : 1
+            kind: type === 'movies' ? 0 : 1,
         });
     }
 
@@ -99,20 +99,20 @@ class AddLibraryModal extends Component {
             addLibrary,
             addLibrarySuccess,
             addLibraryFailure,
-            setLibraryStatus
+            setLibraryStatus,
         } = this.props;
 
         const variables = {
             name: type,
             kind,
-            filePath
+            filePath,
         };
 
         addLibrary();
 
         mutate({
             variables,
-            refetchQueries: [{ query: FETCH_LIBRARIES }]
+            refetchQueries: [{ query: FETCH_LIBRARIES }],
         })
             .then((res) => {
                 const { error } = res.data.createLibrary;
@@ -175,11 +175,11 @@ AddLibraryModal.propTypes = {
     errorMessage: PropTypes.string,
     error: PropTypes.bool.isRequired,
     clearLibraryError: PropTypes.func.isRequired,
-    importing: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+    importing: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 AddLibraryModal.defaultProps = {
-    errorMessage: ''
+    errorMessage: '',
 };
 
 const mapStateToProps = (state) => {
@@ -189,7 +189,7 @@ const mapStateToProps = (state) => {
         loading: library.loading,
         error: library.error,
         errorMessage: library.errorMessage,
-        importing: library.importing
+        importing: library.importing,
     };
 };
 
@@ -199,14 +199,14 @@ const mapDispatchToProps = (dispatch) => ({
     addLibrarySuccess: () => dispatch(addLibrarySuccess()),
     addLibraryFailure: (props) => dispatch(addLibraryFailure(props)),
     clearLibraryError: () => dispatch(clearLibraryError()),
-    setLibraryStatus: (importing) => dispatch(setLibraryStatus(importing))
+    setLibraryStatus: (importing) => dispatch(setLibraryStatus(importing)),
 });
 
 export default compose(
     connect(
         mapStateToProps,
-        mapDispatchToProps
+        mapDispatchToProps,
     ),
     graphql(ADD_LIBRARY),
-    withAlert
+    withAlert,
 )(AddLibraryModal);

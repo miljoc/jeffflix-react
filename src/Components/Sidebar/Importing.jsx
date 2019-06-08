@@ -47,7 +47,7 @@ const Importing = ({ name, dispatch, importing }) => (
 
             if (data.libraries) {
                 const filteredLibrary = data.libraries.filter(
-                    (l) => l.kind === kind
+                    (l) => l.kind === kind,
                 );
                 let isImporting = false;
                 if (filteredLibrary.length === 0) return false;
@@ -84,18 +84,18 @@ const Importing = ({ name, dispatch, importing }) => (
 Importing.propTypes = {
     name: PropTypes.string.isRequired,
     importing: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
     const { library } = state;
 
     return {
-        importing: library.importing
+        importing: library.importing,
     };
 };
 
 export default connect(
     mapStateToProps,
-    null
+    null,
 )(Importing);

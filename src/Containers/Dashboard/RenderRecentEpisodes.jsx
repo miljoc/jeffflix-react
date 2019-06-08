@@ -18,7 +18,7 @@ class RenderRecentEpisodes extends Component {
 
         showModal(LIBRARY_MODAL, {
             title: 'Add TV Series folder',
-            type: 'series'
+            type: 'series',
         });
     };
 
@@ -30,7 +30,7 @@ class RenderRecentEpisodes extends Component {
                     if (error) return `Error! ${error.message}`;
 
                     const episodes = data.recentlyAdded.filter(
-                        (m) => m.type === 'Episode'
+                        (m) => m.type === 'Episode',
                     );
 
                     if (episodes.length === 0) {
@@ -69,10 +69,10 @@ class RenderRecentEpisodes extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showModal: (type, props) => dispatch(showModal(type, props))
+    showModal: (type, props) => dispatch(showModal(type, props)),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(RenderRecentEpisodes);

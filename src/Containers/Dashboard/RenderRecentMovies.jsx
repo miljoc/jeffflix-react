@@ -19,7 +19,7 @@ class RenderRecentMovies extends Component {
 
         showModal(LIBRARY_MODAL, {
             title: 'Add Movies folder',
-            type: 'movies'
+            type: 'movies',
         });
     };
 
@@ -31,7 +31,7 @@ class RenderRecentMovies extends Component {
                     if (error) return `Error! ${error.message}`;
 
                     const movies = data.recentlyAdded.filter(
-                        (m) => m.type === 'Movie'
+                        (m) => m.type === 'Movie',
                     );
 
                     if (movies.length === 0) {
@@ -62,10 +62,10 @@ class RenderRecentMovies extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showModal: (type, props) => dispatch(showModal(type, props))
+    showModal: (type, props) => dispatch(showModal(type, props)),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(RenderRecentMovies);
