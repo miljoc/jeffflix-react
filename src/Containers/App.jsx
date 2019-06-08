@@ -6,30 +6,32 @@ import Header from 'Components/Header';
 import Sidebar from 'Components/Sidebar';
 import Routes from 'Routes';
 import ModalContainer from 'Containers/ModalContainer';
+import CastPlayer from 'Components/CastPlayer';
 
 import { AppWrap } from './Styles';
 
 const App = () => {
-  checkAuth();
+    checkAuth();
 
-  const LoggedIn = () => (
-    <Fragment>
-      <Sidebar />
-      <ContentWrap>
+    const LoggedIn = () => (
         <Fragment>
-          <Header />
-          <Routes />
+            <Sidebar />
+            <ContentWrap>
+                <Fragment>
+                    <Header />
+                    <Routes />
+                </Fragment>
+            </ContentWrap>
+            <ModalContainer />
+            <CastPlayer />
         </Fragment>
-      </ContentWrap>
-      <ModalContainer />
-    </Fragment>
-  );
+    );
 
-  return (
-    <AppWrap authed={Auth.isAuthenticated}>
-      {(Auth.isAuthenticated ? <LoggedIn /> : <Routes />)}
-    </AppWrap>
-  );
+    return (
+        <AppWrap authed={Auth.isAuthenticated}>
+            {Auth.isAuthenticated ? <LoggedIn /> : <Routes />}
+        </AppWrap>
+    );
 };
 
 export default App;

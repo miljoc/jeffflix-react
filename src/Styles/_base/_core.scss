@@ -1,33 +1,44 @@
-html, body {
-    font-size:62.5%;
+html,
+body {
+    font-size: 62.5%;
 }
 
 body {
-    margin:0;
-    background:#262737;
+    background: #262737;
     font-size: 1.6rem;
+    margin: 0;
     overflow: hidden;
 }
 
 * {
+    box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    box-sizing: border-box;
 }
 
-input, textarea, button, body {
-    font-family: 'Open Sans', sans-serif;
+input,
+textarea,
+button,
+body {
+    font-family: "Open Sans", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Muli", sans-serif;
     font-weight: 800;
-    font-family: 'Muli', sans-serif;
 }
 
-a, button {
-    cursor:pointer;
-    text-decoration:none;
+a,
+button {
+    cursor: pointer;
+    text-decoration: none;
+
     &:focus {
-        outline:none;
+        outline: none;
     }
 }

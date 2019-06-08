@@ -1,17 +1,10 @@
 @import '../node_modules/@silvermine/videojs-chromecast/dist/silvermine-videojs-chromecast.css',
-        '../node_modules/videojs-http-source-selector/dist/videojs-http-source-selector.css',
-        '../node_modules/videojs-overlay/dist/videojs-overlay.css',
-        '../node_modules/video.js/dist/video-js.css',
-        '_base/variables',
-        '_mixins/mixins',
-        '_mixins/functions';
+    '../node_modules/videojs-http-source-selector/dist/videojs-http-source-selector.css',
+    '../node_modules/videojs-overlay/dist/videojs-overlay.css',
+    '../node_modules/video.js/dist/video-js.css', '_base/variables',
+    '_mixins/mixins', '_mixins/functions';
 
-@import '_base/reset',
-        '_base/fonts',
-        '_base/core';
+@import '_base/reset', '_base/fonts', '_base/core';
 
-@import '_components/search',
-        '_components/video',
-        '_components/slider',
-        '_components/tooltip',
-        '_components/modal';
+@import '_components/search', '_components/video', '_components/slider',
+    '_components/tooltip', '_components/cast', '_components/modal';

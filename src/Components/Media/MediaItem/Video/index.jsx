@@ -12,119 +12,120 @@ import Player from './Player';
 import { VideoWrap, CloseVideo } from '../Styles';
 
 class VideoController extends Component {
-  componentDidMount() {
-    document.addEventListener('keydown', this.escapeClose, false);
-  }
+    constructor() {
+        super();
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.escapeClose, false);
-  }
-
-  checkCastState = () => {
-    if (typeof cast !== 'undefined') {
-      const context = cast.framework.CastContext.getInstance();
-      if (context.getCastState() === 'CONNECTED') return true;
+        this.state = {
+            message: {},
+            request: null,
+        };
     }
 
-    return;
-  };
+    componentDidMount() {
+        document.addEventListener('keydown', this.escapeClose, false);
+        this.setCastData();
+    }
 
-  escapeClose = e => e.key === 'Escape' && this.props.closePlayer();
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.escapeClose, false);
+    }
 
-  render() {
-    const {
-      source,
-      mimeType,
-      files,
-      name,
-      selectedFile,
-      resume,
-      playState,
-      uuid,
-      type,
-      closePlayer,
-      dispatch,
-      auth,
-    } = this.props;
+    escapeClose = (e) => e.key === 'Escape' && this.props.closePlayer();
 
-    const videoCodec = files[selectedFile.value].streams
-      .filter(s => s.streamType === 'video')
-      .map(s => s.codecMime)[0];
+    setCastData = () => {
+        const { source, name, playState, uuid, dispatch, auth } = this.props;
 
-    const videoSource = {
-      src: source,
-      type: mimeType,
+        const sourceData = {
+            source,
+            name,
+            playState,
+        };
+
+        dispatch(setSourceData(sourceData));
+
+        const message = { ...auth, uuid };
+
+        this.setState({
+            message,
+        });
     };
-    const transmuxed = canPlayCodec(videoCodec);
 
-    if (this.checkCastState() && source.length !== 0) {
-      const sourceData = {
-        source,
-        name,
-        playState,
-      };
+    castSession = (castSession, source, mimeType) => {
+        const { message } = this.state;
+        const { playState } = this.props;
+        const namespace = 'urn:x-cast:com.auth';
 
-      dispatch(setSourceData(sourceData));
+        const mediaInfo = new chrome.cast.media.MediaInfo(source, mimeType);
+        const request = new chrome.cast.media.LoadRequest(mediaInfo);
+        request.currentTime = playState.playtime;
+        const onLoadSuccess = () => console.log('Casting');
+        const onLoadError = () => console.log('Failure');
 
-      const onSuccess = () => console.log('success');
-      const onFailure = () => console.log('failure');
-      const namespace = 'urn:x-cast:com.auth';
-      const message = { ...auth, uuid };
-      const mediaInfo = new chrome.cast.media.MediaInfo(videoSource.src, videoSource.type);
-      const request = new chrome.cast.media.LoadRequest(mediaInfo);
-      request.currentTime = playState.playtime;
+        castSession.sendMessage(namespace, message);
+        castSession.loadMedia(request).then(onLoadSuccess, onLoadError);
+    };
 
-      function onMediaDiscovered(mediaSession) {
-        console.log('new media session ID:' + mediaSession.mediaSessionId);
-      }
+    render() {
+        const {
+            source,
+            files,
+            selectedFile,
+            resume,
+            playState,
+            uuid,
+            type,
+            closePlayer,
+            dispatch,
+            mimeType,
+            isCasting,
+        } = this.props;
 
-      function onMediaError(e) {
-        console.log('media error');
-      }
+        const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+        const videoCodec = files[selectedFile.value].streams
+            .filter((s) => s.streamType === 'video')
+            .map((s) => s.codecMime)[0];
+        const transmuxed = canPlayCodec(videoCodec);
 
-      const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+        if (source.length > 0 && !isCasting) {
+            return (
+                <Fragment>
+                    <VideoWrap>
+                        <CloseVideo icon={faTimes} onClick={closePlayer} />
+                        <Player
+                            source={source}
+                            mimeType={mimeType}
+                            transmuxed={transmuxed}
+                            resume={resume}
+                            playState={playState}
+                            uuid={uuid}
+                            length={selectedFile.totalDuration}
+                            type={type}
+                            dispatch={dispatch}
+                        />
+                    </VideoWrap>
+                </Fragment>
+            );
+        } else if (isCasting && source.length > 0) {
+            this.castSession(castSession, source, mimeType);
 
-      // Send Media Data & Auth
-      castSession.sendMessage(namespace, message, onSuccess, onFailure);
-      castSession.loadMedia(request, onMediaDiscovered.bind(this, 'loadMedia'), onMediaError);
-
-      return null;
+            return null;
+        } else {
+            return null;
+        }
     }
-
-    if (source.length !== 0) {
-      return (
-        <Fragment>
-          <VideoWrap>
-            <CloseVideo icon={faTimes} onClick={closePlayer} />
-            <Player
-              source={videoSource}
-              transmuxed={transmuxed}
-              resume={resume}
-              playState={playState}
-              uuid={uuid}
-              length={selectedFile.totalDuration}
-              type={type}
-              dispatch={dispatch}
-            />
-          </VideoWrap>
-        </Fragment>
-      );
-    } else {
-      return null;
-    }
-  }
 }
 
 VideoController.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => {
-  const { cast } = state;
+const mapStateToProps = (state) => {
+    const { cast } = state;
 
-  return {
-    auth: cast.auth,
-  };
+    return {
+        auth: cast.auth,
+        isCasting: cast.connected,
+    };
 };
 
 export default connect(mapStateToProps)(VideoController);

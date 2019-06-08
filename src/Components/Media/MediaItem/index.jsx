@@ -17,128 +17,130 @@ import MediaOverview from './MediaOverview';
 import VideoController from './Video';
 
 import { MediaFull } from './Styles';
-import {
-  MediaFullWrap, MediaLeftCol, MediaRightCol, MediaBackground,
-} from '../Styles';
+import { MediaFullWrap, MediaLeftCol, MediaRightCol, MediaBackground } from '../Styles';
 
 class MediaItem extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      source: '',
-      resume: false,
-      files: [],
-      selectedFile: {},
-      mimeType: '',
-    };
-  }
-
-  componentWillMount() {
-    const { files } = this.props;
-    const fileList = generateFileList(files);
-
-    this.setState({
-      files: fileList,
-      selectedFile: fileList[0],
-    });
-  }
-
-  componentDidMount() {
-    const { location } = this.props;
-    const resume = location.state !== undefined ? location.state.resume : false;
-
-    if (location.state && location.state.autoplay === true) this.playMedia(resume);
-  }
-
-  fileChange = selectedFile => this.setState({ selectedFile });
-
-  closePlayer = () => {
-    const { dispatch, isPlaying } = this.props;
-
-    if (isPlaying) {
-      this.setState({ source: '' });
-      dispatch(hideVideo());
+        this.state = {
+            source: '',
+            resume: false,
+            files: [],
+            selectedFile: {},
+            mimeType: '',
+        };
     }
-  };
 
-  playMedia = (resume) => {
-    const { files, mutate } = this.props;
-    const { selectedFile } = this.state;
+    componentWillMount() {
+        const { files } = this.props;
+        const fileList = generateFileList(files);
 
-    mutate({
-      variables: { uuid: files[selectedFile.value].uuid },
-    })
-      .then(({ data }) => {
-        fetch(getBaseUrl() + data.createStreamingTicket.metadataPath)
-          .then(response => response.json())
-          .then(response => getVideoSource(isIOS, data, response))
-          .then((response) => {
-            this.setState({
-              source: response.source,
-              mimeType: response.mimeType,
-              resume,
-            });
-          })
-          .catch(err => err);
-      })
-      .catch(err => err);
-  };
+        this.setState({
+            files: fileList,
+            selectedFile: fileList[0],
+        });
+    }
 
-  render() {
-    const {
-      posterPath, season, type, uuid, playState,
-    } = this.props;
-    const { files, selectedFile } = this.state;
-    const background = posterPath || season.series.posterPath;
+    componentDidMount() {
+        const { location } = this.props;
+        const resume = location.state !== undefined ? location.state.resume : false;
 
-    const mediaInfo = {
-      ...this.props,
-      playState,
+        if (location.state && location.state.autoplay === true) this.playMedia(resume);
+    }
+
+    fileChange = (selectedFile) => this.setState({ selectedFile });
+
+    closePlayer = () => {
+        const { dispatch, isPlaying } = this.props;
+
+        if (isPlaying) {
+            this.setState({ source: '' });
+            dispatch(hideVideo());
+        }
     };
 
-    return (
-      <MediaFullWrap>
-        <MediaBackground bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`} />
-        <Breadcrumbs props={this.props} />
-        <MediaFull>
-          <MediaLeftCol>
-            <MediaCard
-              size={type === 'Episode' ? 'largeWide' : 'large'}
-              playMedia={this.playMedia}
-              internalCard
-              text
-              {...mediaInfo}
-            />
-          </MediaLeftCol>
-          <MediaRightCol>
-            <MediaDropdown uuid={uuid} />
-            <MediaOverview
-              mediaInfo={mediaInfo}
-              selectedFile={selectedFile}
-              files={files}
-              fileChange={this.fileChange}
-              playMedia={this.playMedia}
-            />
-          </MediaRightCol>
-        </MediaFull>
+    playMedia = (resume) => {
+        const { files, mutate } = this.props;
+        const { selectedFile } = this.state;
 
-        <VideoController {...this.props} {...this.state} closePlayer={() => this.closePlayer()} />
-      </MediaFullWrap>
-    );
-  }
+        mutate({
+            variables: { uuid: files[selectedFile.value].uuid },
+        })
+            .then(({ data }) => {
+                fetch(getBaseUrl() + data.createStreamingTicket.metadataPath)
+                    .then((response) => response.json())
+                    .then((response) => getVideoSource(isIOS, data, response))
+                    .then((response) => {
+                        this.setState({
+                            source: response.source,
+                            mimeType: response.mimeType,
+                            resume,
+                        });
+                    })
+                    .catch((err) => err);
+            })
+            .catch((err) => err);
+    };
+
+    render() {
+        const { posterPath, season, type, uuid, playState } = this.props;
+        const { files, selectedFile } = this.state;
+        const background = posterPath || season.series.posterPath;
+
+        const mediaInfo = {
+            ...this.props,
+            playState,
+        };
+
+        return (
+            <MediaFullWrap>
+                <MediaBackground
+                    bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`}
+                />
+                <Breadcrumbs props={this.props} />
+                <MediaFull>
+                    <MediaLeftCol>
+                        <MediaCard
+                            size={type === 'Episode' ? 'largeWide' : 'large'}
+                            playMedia={this.playMedia}
+                            internalCard
+                            text
+                            {...mediaInfo}
+                        />
+                    </MediaLeftCol>
+                    <MediaRightCol>
+                        <MediaDropdown uuid={uuid} />
+                        <MediaOverview
+                            mediaInfo={mediaInfo}
+                            selectedFile={selectedFile}
+                            files={files}
+                            fileChange={this.fileChange}
+                            playMedia={this.playMedia}
+                        />
+                    </MediaRightCol>
+                </MediaFull>
+
+                <VideoController
+                    {...this.props}
+                    {...this.state}
+                    closePlayer={() => this.closePlayer()}
+                />
+            </MediaFullWrap>
+        );
+    }
 }
 
 const mapStateToProps = (state) => {
-  const { video } = state;
+    const { video } = state;
 
-  return {
-    isPlaying: video.playing,
-  };
+    return {
+        isPlaying: video.playing,
+    };
 };
 
 export default compose(
-  withRouter,
-  graphql(REQUEST_STREAM),
-  connect(mapStateToProps),
+    withRouter,
+    graphql(REQUEST_STREAM),
+    connect(mapStateToProps),
 )(MediaItem);
