@@ -4,15 +4,15 @@
  */
 
 const getBaseUrl = () => {
-  let path;
+    let path;
 
-  if (typeof window !== 'undefined') {
-    path = `${window.location.protocol}//${window.location.host}`;
-  } else {
-    return false;
-  }
+    if (typeof window !== 'undefined') {
+        path = `${window.location.protocol}//${window.location.host}`;
+    } else {
+        return false;
+    }
 
-  return path;
+    return path;
 };
 
 export default getBaseUrl;

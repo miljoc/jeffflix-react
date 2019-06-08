@@ -4,10 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#262737">
-
-    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
     <link rel="shortcut icon" href="favicon.ico">
     <title>Olaris Media Server</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+
+    <script>
+      window['__onGCastApiAvailable'] = function(isAvailable) {
+        if (isAvailable) {
+          initializeCastApi();
+        }
+      };
+
+      initializeCastApi = function() {
+        cast.framework.CastContext.getInstance().setOptions({
+          receiverApplicationId: 'EA238E27',
+          autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+        });
+      };
+    </script>
+
   </head>
   <body>
     <noscript>
