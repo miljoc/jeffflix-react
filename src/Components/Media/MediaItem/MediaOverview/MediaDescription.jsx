@@ -7,7 +7,7 @@ class MediaDescription extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: true
+            visible: true,
         };
     }
 
@@ -21,7 +21,7 @@ class MediaDescription extends Component {
         const { visible } = this.state;
 
         this.setState({
-            visible: !visible
+            visible: !visible,
         });
     };
 
@@ -66,7 +66,7 @@ class MediaDescription extends Component {
 }
 
 MediaDescription.propTypes = {
-    overview: PropTypes.string.isRequired
+    overview: PropTypes.string.isRequired,
 };
 
 export default MediaDescription;

@@ -9,11 +9,11 @@ const AlertInline = ({ type, children }) => (
 
 AlertInline.propTypes = {
     type: PropTypes.oneOf(['info', 'success', 'error']),
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
 };
 
 AlertInline.defaultProps = {
-    type: 'info'
+    type: 'info',
 };
 
 export default AlertInline;

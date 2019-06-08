@@ -7,14 +7,14 @@ const renderSectionTitle = (section) => <Title>{section.title}</Title>;
 
 renderSectionTitle.propTypes = {
     section: PropTypes.shape({
-        title: PropTypes.string
-    })
+        title: PropTypes.string,
+    }),
 };
 
 renderSectionTitle.defaultProps = {
     section: {
-        title: 'Media'
-    }
+        title: 'Media',
+    },
 };
 
 export default renderSectionTitle;

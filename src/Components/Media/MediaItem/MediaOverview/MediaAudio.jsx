@@ -20,8 +20,8 @@ const MediaAudio = ({ selectedFile }) => {
 
 MediaAudio.propTypes = {
     selectedFile: PropTypes.shape({
-        streams: PropTypes.array.isRequired
-    }).isRequired
+        streams: PropTypes.array.isRequired,
+    }).isRequired,
 };
 
 export default MediaAudio;

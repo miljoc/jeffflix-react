@@ -4,8 +4,8 @@ const {
     CONSTANTS: {
         FORBIDDEN = 'Forbidden',
         UNAUTHORIZED = 'Unauthorized!',
-        NOT_ALLOWED = 'Not allowed'
-    } = {}
+        NOT_ALLOWED = 'Not allowed',
+    } = {},
 } = APP;
 
 const SERVER_MESSAGES = { FORBIDDEN, UNAUTHORIZED, NOT_ALLOWED };

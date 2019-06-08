@@ -42,20 +42,20 @@ MediaName.propTypes = {
     year: PropTypes.string,
     episodeNumber: PropTypes.number,
     season: PropTypes.shape({
-        seasonNumber: PropTypes.number
+        seasonNumber: PropTypes.number,
     }),
     episodes: PropTypes.arrayOf(
         PropTypes.shape({
-            uuid: PropTypes.string
-        })
-    )
+            uuid: PropTypes.string,
+        }),
+    ),
 };
 
 MediaName.defaultProps = {
     episodes: [],
     season: {},
     episodeNumber: null,
-    year: null
+    year: null,
 };
 
 export default MediaName;

@@ -26,7 +26,7 @@ const FetchSearchResults = ({ value }) => (
 );
 
 FetchSearchResults.propTypes = {
-    value: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
 };
 
 export default FetchSearchResults;

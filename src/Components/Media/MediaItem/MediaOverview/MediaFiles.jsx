@@ -8,7 +8,7 @@ import {
     MediaInfo,
     DropdownIcon,
     FileName,
-    MediaInfoSubhead
+    MediaInfoSubhead,
 } from '../Styles';
 
 // eslint-disable-next-line
@@ -46,14 +46,14 @@ const MediaFiles = ({ files, selectedFile, fileChange }) => (
 
 MediaFiles.propTypes = {
     selectedFile: PropTypes.shape({
-        label: PropTypes.string.isRequired
+        label: PropTypes.string.isRequired,
     }).isRequired,
     files: PropTypes.arrayOf(
         PropTypes.shape({
-            label: PropTypes.string.isRequired
-        })
+            label: PropTypes.string.isRequired,
+        }),
     ).isRequired,
-    fileChange: PropTypes.func.isRequired
+    fileChange: PropTypes.func.isRequired,
 };
 
 export default MediaFiles;

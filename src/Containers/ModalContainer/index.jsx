@@ -8,13 +8,13 @@ import WarningModal from 'Components/Modal/WarningModal';
 import {
     LIBRARY_MODAL,
     RESUME_MODAL,
-    WARNING_MODAL
+    WARNING_MODAL,
 } from 'Redux/Actions/modalActions';
 
 const MODAL_COMPONENTS = {
     [LIBRARY_MODAL]: AddLibraryModal,
     [RESUME_MODAL]: ResumeMediaModal,
-    [WARNING_MODAL]: WarningModal
+    [WARNING_MODAL]: WarningModal,
 };
 
 const ModalContainer = ({ type, props }) => {
@@ -29,7 +29,7 @@ const ModalContainer = ({ type, props }) => {
 
 const mapStateToProps = (state) => ({
     type: state.modal.type,
-    props: state.modal.props
+    props: state.modal.props,
 });
 
 export default connect(mapStateToProps)(ModalContainer);

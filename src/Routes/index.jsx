@@ -35,14 +35,14 @@ import PrivateRoute from './Helper/PrivateRoute';
 class Routes extends Component {
     state = {
         initialSetup: false,
-        loading: true
+        loading: true,
     };
 
     componentWillMount() {
         isInitialSetup().then((res) => {
             this.setState({
                 initialSetup: res.data,
-                loading: false
+                loading: false,
             });
         });
     }

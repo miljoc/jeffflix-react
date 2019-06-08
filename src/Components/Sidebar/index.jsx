@@ -28,15 +28,15 @@ const Sidebar = (props) => {
 
 const mapStateToProps = (state) => ({
     navHidden: state.navigation.hidden,
-    videoOpen: state.video.playing
+    videoOpen: state.video.playing,
 });
 
 Sidebar.propTypes = {
     navHidden: PropTypes.bool.isRequired,
-    videoOpen: PropTypes.bool.isRequired
+    videoOpen: PropTypes.bool.isRequired,
 };
 
 export default connect(
     mapStateToProps,
-    null
+    null,
 )(Sidebar);

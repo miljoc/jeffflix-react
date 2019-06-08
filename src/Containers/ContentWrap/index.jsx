@@ -14,16 +14,16 @@ const ContentWrap = ({ children, navHidden }) => (
 const mapStateToProps = (state) => {
     const { navigation } = state;
     return {
-        navHidden: navigation.hidden
+        navHidden: navigation.hidden,
     };
 };
 
 ContentWrap.propTypes = {
     navHidden: PropTypes.bool.isRequired,
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
 };
 
 export default connect(
     mapStateToProps,
-    null
+    null,
 )(ContentWrap);

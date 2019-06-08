@@ -10,7 +10,7 @@ import { DELETE_LIBRARY } from 'Mutations/manageLibraries';
 import {
     LibraryItemWrap,
     LibraryItemFilePath,
-    LibraryItemDelete
+    LibraryItemDelete,
 } from './Styles';
 
 class LibraryItem extends Component {
@@ -19,7 +19,7 @@ class LibraryItem extends Component {
 
         this.state = {
             error: false,
-            errorMessage: ''
+            errorMessage: '',
         };
     }
 
@@ -28,7 +28,7 @@ class LibraryItem extends Component {
 
         mutate({
             variables: { id },
-            refetchQueries: [{ query: FETCH_LIBRARIES }]
+            refetchQueries: [{ query: FETCH_LIBRARIES }],
         })
             .then((res) => {
                 const { error } = res.data.deleteLibrary;
@@ -36,14 +36,14 @@ class LibraryItem extends Component {
                 if (error) {
                     this.setState({
                         error: true,
-                        errorMessage: error.message
+                        errorMessage: error.message,
                     });
                 }
             })
             .catch((error) => {
                 this.setState({
                     error: true,
-                    errorMessage: error.message
+                    errorMessage: error.message,
                 });
             });
     };
@@ -70,7 +70,7 @@ class LibraryItem extends Component {
 LibraryItem.propTypes = {
     filePath: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-    mutate: PropTypes.func.isRequired
+    mutate: PropTypes.func.isRequired,
 };
 
 export default (LibraryItem = graphql(DELETE_LIBRARY)(LibraryItem));

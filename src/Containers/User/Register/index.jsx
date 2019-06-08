@@ -17,7 +17,7 @@ class Register extends Component {
         password: '',
         inviteCode: '',
         initialSetup: true,
-        registeredSuccessful: false
+        registeredSuccessful: false,
     };
 
     componentWillMount() {
@@ -29,13 +29,13 @@ class Register extends Component {
             inviteCode: getUrlParameter('inviteCode')
                 ? getUrlParameter('inviteCode')
                 : '',
-            initialSetup
+            initialSetup,
         });
     }
 
     handleChange = ({ target: { name, value } }) => {
         this.setState({
-            [name]: value
+            [name]: value,
         });
     };
 
@@ -52,13 +52,13 @@ class Register extends Component {
 
         let registerInfo = {
             username,
-            password
+            password,
         };
 
         if (!initialSetup) {
             registerInfo = {
                 ...registerInfo,
-                code: inviteCode
+                code: inviteCode,
             };
         }
 
@@ -81,7 +81,7 @@ class Register extends Component {
             error,
             inviteCode,
             initialSetup,
-            registeredSuccessful
+            registeredSuccessful,
         } = this.state;
 
         if (registeredSuccessful)
@@ -99,7 +99,7 @@ class Register extends Component {
             handleChange: this.handleChange,
             error,
             inviteCode,
-            initialSetup
+            initialSetup,
         };
 
         return (

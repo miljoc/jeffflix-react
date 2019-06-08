@@ -11,7 +11,7 @@ const ForgotPassword = ({ to, value }) => (
 
 ForgotPassword.propTypes = {
     value: PropTypes.string.isRequired,
-    to: PropTypes.string.isRequired
+    to: PropTypes.string.isRequired,
 };
 
 export default ForgotPassword;

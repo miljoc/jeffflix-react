@@ -8,12 +8,12 @@ const LogoIcon = ({ alt, height }) => (
 
 LogoIcon.propTypes = {
     alt: PropTypes.string,
-    height: PropTypes.string
+    height: PropTypes.string,
 };
 
 LogoIcon.defaultProps = {
     alt: 'Olaris',
-    height: '150'
+    height: '150',
 };
 
 export default LogoIcon;

@@ -14,146 +14,146 @@ const Box = BoxMaker(MediaPropertiesItem);
 const MediaProperties = [
     {
         name: 'error',
-        updater: 'error'
+        updater: 'error',
     },
     {
-        name: 'src'
+        name: 'src',
     },
     {
-        name: 'currentSrc'
+        name: 'currentSrc',
     },
     {
         name: 'crossOrigin',
         getter(player) {
             return player.tech_.el_.crossorigin;
-        }
+        },
     },
     {
         name: 'networkState',
-        updater: ''
+        updater: '',
     },
     {
-        name: 'preload'
+        name: 'preload',
     },
     {
         name: 'buffered',
-        updater: 'progress'
+        updater: 'progress',
     },
     {
         name: 'readyState',
-        updater: ''
+        updater: '',
     },
     {
         name: 'seeking',
-        updater: ''
+        updater: '',
     },
     {
         name: 'currentTime',
-        updater: 'timeupdate'
+        updater: 'timeupdate',
     },
     {
         name: 'duration',
-        updater: 'durationchange'
+        updater: 'durationchange',
     },
     {
         name: 'paused',
-        updater: ['pause', 'play', 'playing']
+        updater: ['pause', 'play', 'playing'],
     },
     {
         name: 'defaultPlaybackRate',
         getter(player) {
             return player.tech_.el_.defaultPlaybackRate;
-        }
+        },
     },
     {
         name: 'playbackRate',
-        updater: 'ratechange'
+        updater: 'ratechange',
     },
     {
         name: 'played',
         getter(player) {
             return player.tech_.el_.played;
         },
-        updater: 'timeupdate'
+        updater: 'timeupdate',
     },
     {
         name: 'seekable',
-        updater: 'progress'
+        updater: 'progress',
     },
     {
         name: 'ended',
-        updater: ['ended', 'play']
+        updater: ['ended', 'play'],
     },
     {
-        name: 'autoplay'
+        name: 'autoplay',
     },
     {
-        name: 'loop'
+        name: 'loop',
     },
     {
-        name: 'controls'
+        name: 'controls',
     },
     {
         name: 'volume',
-        updater: 'volumechange'
+        updater: 'volumechange',
     },
     {
         name: 'muted',
-        updater: 'volumechange'
+        updater: 'volumechange',
     },
     {
         name: 'audioTracks',
         getter(player) {
             const at = player.audioTracks && player.audioTracks();
             return { length: at ? at.length : 0 };
-        }
+        },
     },
     {
         name: 'videoTracks',
         getter(player) {
             const vt = player.videoTracks && player.videoTracks();
             return { length: vt ? vt.length : 0 };
-        }
+        },
     },
     {
         name: 'textTracks',
         getter(player) {
             const tt = player.textTracks();
             return { length: tt ? tt.length : 0 };
-        }
+        },
     },
     {
         name: 'width',
-        updater: 'resize'
+        updater: 'resize',
     },
     {
         name: 'height',
-        updater: 'resize'
+        updater: 'resize',
     },
     {},
     {
         name: 'currentWidth',
-        updater: 'resize'
+        updater: 'resize',
     },
     {
         name: 'currentHeight',
-        updater: 'resize'
+        updater: 'resize',
     },
     {
         name: 'videoWidth',
-        updater: 'progress'
+        updater: 'progress',
     },
     {
         name: 'videoHeight',
-        updater: 'progress'
+        updater: 'progress',
     },
     {
-        name: 'poster'
+        name: 'poster',
     },
     {
         name: 'readyState',
-        updater: 'loadeddaata'
-    }
+        updater: 'loadeddaata',
+    },
 ];
 
 const VjsButton = videojs.getComponent('Button');
@@ -195,10 +195,10 @@ class ShowDebugOverlayButton extends VjsButton {
                 data={MediaProperties}
                 player={this.player_}
             />,
-            fragment
+            fragment,
         );
         this.player_.overlay({
-            content: fragment
+            content: fragment,
         });
         // NOTE: This is an ugly hack because otherwise the overlay will only show after firing
         // the next play event, i.e. after a pause-play cycle.

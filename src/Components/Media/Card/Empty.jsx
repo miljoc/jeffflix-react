@@ -6,9 +6,9 @@ import { media } from 'Styles/Utils';
 const EmptyArticle = styled.div`
   flex: 1 0 auto;
   width: ${(props) =>
-        props.wide ? props.theme.wideCard.width : 'calc(50% - 3rem)'};
+      props.wide ? props.theme.wideCard.width : 'calc(50% - 3rem)'};
   max-width: ${(props) =>
-        props.wide ? props.theme.wideCard.maxWidth : 'calc(50% - 3rem)'};
+      props.wide ? props.theme.wideCard.maxWidth : 'calc(50% - 3rem)'};
   margin: 0 1.5rem;
 
 
@@ -48,12 +48,12 @@ const EmptyArticles = ({ length, wide }) => {
 
 EmptyArticles.propTypes = {
     length: PropTypes.number,
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
 };
 
 EmptyArticles.defaultProps = {
     length: 20,
-    wide: false
+    wide: false,
 };
 
 export default EmptyArticles;
