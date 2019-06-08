@@ -63,7 +63,7 @@ const requiredPropsCheck = (props, propName, componentName) => {
     const { year, airDate } = props;
     if (!year && !airDate) {
         return new Error(
-            `One of 'year' or 'airDate' is required by '${componentName}' component.`
+            `One of 'year' or 'airDate' is required by '${componentName}' component.`,
         );
     }
 
@@ -75,18 +75,18 @@ MediaInfo.propTypes = {
     overview: PropTypes.string.isRequired,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
-        playtime: PropTypes.number
+        playtime: PropTypes.number,
     }).isRequired,
     selectedFile: PropTypes.shape({
-        totalDuration: PropTypes.number
+        totalDuration: PropTypes.number,
     }).isRequired,
     year: requiredPropsCheck,
-    airDate: requiredPropsCheck
+    airDate: requiredPropsCheck,
 };
 
 MediaInfo.defaultProps = {
     year: null,
-    airDate: null
+    airDate: null,
 };
 
 export default MediaInfo;

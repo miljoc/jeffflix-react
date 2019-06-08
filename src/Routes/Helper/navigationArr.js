@@ -7,19 +7,19 @@ const navigationArr = [
             {
                 name: 'Dashboard',
                 to: '/dashboard',
-                id: 'dashboard'
+                id: 'dashboard',
             },
             {
                 name: 'Movies',
                 to: '/movies',
-                id: 'movies'
+                id: 'movies',
             },
             {
                 name: 'TV Shows',
                 to: '/series',
-                id: 'series'
-            }
-        ]
+                id: 'series',
+            },
+        ],
     },
     {
         name: 'Settings',
@@ -29,10 +29,10 @@ const navigationArr = [
             {
                 name: 'Users',
                 to: '/users',
-                id: 'users'
-            }
-        ]
-    }
+                id: 'users',
+            },
+        ],
+    },
 ];
 
 export default navigationArr;

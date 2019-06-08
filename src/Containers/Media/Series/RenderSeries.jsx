@@ -20,7 +20,7 @@ const RenderSeries = ({ uuid }) => (
             const seasonList = orderBy(
                 series.seasons,
                 ['seasonNumber'],
-                ['asc']
+                ['asc'],
             ).map((s) => (
                 <LibraryListItem key={s.uuid}>
                     <MediaCard {...s} showText />

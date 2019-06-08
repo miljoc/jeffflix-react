@@ -3,7 +3,7 @@ import { SHOW_MODAL, HIDE_MODAL } from '../Actions/modalActions';
 
 const initialState = {
     type: null,
-    props: {}
+    props: {},
 };
 
 const modal = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const modal = (state = initialState, action) => {
             return {
                 ...state,
                 type: action.payload.type,
-                props: action.payload.props
+                props: action.payload.props,
             };
         case HIDE_MODAL:
             return initialState;

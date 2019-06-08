@@ -15,38 +15,13 @@ import { HeaderWrap, BackButton, BackIcon } from './Styles';
 
 class Header extends Component {
     state = {
-        value: ''
+        value: '',
     };
 
     updateSearch = (value) => {
         this.setState({
-            value
+            value,
         });
-    };
-
-    startCast = () => {
-        const sessionRequest = new chrome.cast.SessionRequest('EA238E27');
-        const onSuccess = () => console.log('success');
-        const onFailure = () => console.log('failure');
-        const message = { jwt: 'token' };
-        const namespace = 'urn:x-cast:com.jtw';
-
-        chrome.cast.requestSession(
-            function onRequestSessionSuccess(session) {
-                console.log('Session success', session);
-                cast.session = session;
-                cast.session.sendMessage(
-                    namespace,
-                    message,
-                    onSuccess,
-                    onFailure
-                );
-            },
-            function onLaunchError(er) {
-                console.log('onLaunchError', er);
-            },
-            sessionRequest
-        );
     };
 
     render() {
@@ -62,7 +37,6 @@ class Header extends Component {
                     </BackButton>
                 )}
 
-                <span onClick={() => this.startCast()}>Cast</span>
                 <Search value={value} updateSearch={this.updateSearch} />
                 <Logout />
             </HeaderWrap>
@@ -72,22 +46,22 @@ class Header extends Component {
 
 Header.propTypes = {
     history: PropTypes.shape({
-        goBack: PropTypes.func.isRequired
+        goBack: PropTypes.func.isRequired,
     }).isRequired,
     previousLocation: PropTypes.string,
-    currentLocation: PropTypes.string
+    currentLocation: PropTypes.string,
 };
 
 Header.defaultProps = {
     previousLocation: '',
-    currentLocation: ''
+    currentLocation: '',
 };
 
 const mapStateToProps = (state) => {
     const { historyLocation } = state;
     return {
         previousLocation: historyLocation.previousLocation,
-        currentLocation: historyLocation.currentLocation
+        currentLocation: historyLocation.currentLocation,
     };
 };
 
@@ -95,6 +69,6 @@ export default compose(
     withRouter,
     connect(
         mapStateToProps,
-        null
-    )
+        null,
+    ),
 )(Header);

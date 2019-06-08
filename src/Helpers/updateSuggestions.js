@@ -10,12 +10,12 @@ const updateSuggestions = (arr) => {
     const updatedSuggestions = [
         {
             title: 'Movies',
-            suggestions: []
+            suggestions: [],
         },
         {
             title: 'Series',
-            suggestions: []
-        }
+            suggestions: [],
+        },
     ];
 
     arr.forEach((sug) => {

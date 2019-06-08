@@ -13,7 +13,7 @@ class Login extends Component {
         error: false,
         isMounted: false,
         username: '',
-        password: ''
+        password: '',
     };
 
     componentWillMount() {
@@ -27,7 +27,7 @@ class Login extends Component {
         if (history.location.state) {
             if (history.location.state.registered === true)
                 alert.success(
-                    'Account Successfully Created, login with your details above'
+                    'Account Successfully Created, login with your details above',
                 );
         }
     }
@@ -68,7 +68,7 @@ class Login extends Component {
 
         if (isMounted) {
             this.setState({
-                [e.target.name]: e.target.value
+                [e.target.name]: e.target.value,
             });
         }
     };
@@ -84,7 +84,7 @@ class Login extends Component {
         const LoginProps = {
             handleLogin: this.handleLogin,
             handleChange: this.handleChange,
-            error
+            error,
         };
 
         return (

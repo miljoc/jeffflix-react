@@ -7,7 +7,7 @@ class DropdownMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: false,
         };
     }
 
@@ -58,10 +58,10 @@ class DropdownMenu extends Component {
 
 DropdownMenu.propTypes = {
     icon: PropTypes.shape({
-        iconName: PropTypes.string.isRequired
+        iconName: PropTypes.string.isRequired,
     }).isRequired,
     children: PropTypes.node.isRequired,
-    className: PropTypes.string.isRequired
+    className: PropTypes.string.isRequired,
 };
 
 export default DropdownMenu;

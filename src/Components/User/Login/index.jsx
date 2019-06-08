@@ -44,7 +44,7 @@ const LoginForm = ({ error, handleChange, handleLogin }) => (
 LoginForm.propTypes = {
     error: PropTypes.bool.isRequired,
     handleChange: PropTypes.func.isRequired,
-    handleLogin: PropTypes.func.isRequired
+    handleLogin: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

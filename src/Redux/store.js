@@ -14,7 +14,7 @@ export const store = createStore(
     composeEnhancers(
         compose(
             responsiveStoreEnhancer,
-            applyMiddleware(routerMiddleware(history))
-        )
-    )
+            applyMiddleware(routerMiddleware(history)),
+        ),
+    ),
 );

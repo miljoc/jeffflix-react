@@ -16,7 +16,7 @@ import 'videojs-http-source-selector';
 import UPDATE_PLAYSTATE from 'Mutations/updatePlaystate';
 import {
     updatePlayStateEpisode,
-    updatePlayStateMovie
+    updatePlayStateMovie,
 } from 'Components/Media/Actions/updatePlayState';
 
 chromecast(videojs);
@@ -24,7 +24,7 @@ chromecast(videojs);
 class Video extends Component {
     t = throttle(
         () => this.playStateMutation(Math.floor(this.player.currentTime())),
-        2000
+        2000,
     );
 
     componentDidMount() {
@@ -47,21 +47,21 @@ class Video extends Component {
             techOrder: ['chromecast', 'html5'],
             plugins: {
                 chromecast: {
-                    receiverAppID: '3CCE45F7'
+                    receiverAppID: '3CCE45F7',
                 },
                 httpSourceSelector: {
-                    showAutoItem: true
-                }
+                    showAutoItem: true,
+                },
             },
 
             controls: true,
             html5: {
                 hls: {
                     enableLowInitialPlaylist: true,
-                    smoothQualityChange: true
+                    smoothQualityChange: true,
                 },
-                nativeAudioTracks: false
-            }
+                nativeAudioTracks: false,
+            },
         };
         if (transmuxed) {
             // If transmuxed, all non-transmuxed representations are manually disabled in the
@@ -79,7 +79,7 @@ class Video extends Component {
                 this.chromecast();
                 this.qualityLevels();
                 this.httpSourceSelector();
-            }
+            },
         );
 
         this.player.on('timeupdate', () => {
@@ -176,7 +176,7 @@ Video.propTypes = {
     type: PropTypes.string.isRequired,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
-        playtime: PropTypes.number
+        playtime: PropTypes.number,
     }).isRequired,
     resume: PropTypes.bool,
     // TODO(Leon Handreke): This is an ugly hack. We'd like to change our
@@ -184,11 +184,11 @@ Video.propTypes = {
     // However, we don't have a way to detect this from this.player.representations()
     // because videojs/http-streaming doesn't pass through any metadata.
     // To avoid forking for now, do this.
-    transmuxed: PropTypes.bool.isRequired
+    transmuxed: PropTypes.bool.isRequired,
 };
 
 Video.defaultProps = {
-    resume: false
+    resume: false,
 };
 
 export default (Video = graphql(UPDATE_PLAYSTATE)(Video));

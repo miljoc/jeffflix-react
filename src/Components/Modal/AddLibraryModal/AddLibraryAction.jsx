@@ -9,7 +9,7 @@ export default class AddLibraryAction extends Component {
         super(props);
 
         this.state = {
-            disabled: true
+            disabled: true,
         };
     }
 
@@ -20,7 +20,7 @@ export default class AddLibraryAction extends Component {
         updateFilePath(val);
 
         this.setState({
-            disabled: !valid
+            disabled: !valid,
         });
     };
 
@@ -56,9 +56,9 @@ export default class AddLibraryAction extends Component {
 AddLibraryAction.propTypes = {
     createLibrary: PropTypes.func.isRequired,
     updateFilePath: PropTypes.func.isRequired,
-    filePath: PropTypes.string
+    filePath: PropTypes.string,
 };
 
 AddLibraryAction.defaultProps = {
-    filePath: ''
+    filePath: '',
 };

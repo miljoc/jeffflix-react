@@ -11,13 +11,13 @@ import { showModal } from 'Redux/Actions/modalActions';
 import UPDATE_PLAYSTATE from 'Mutations/updatePlaystate';
 import {
     updatePlayStateSeries,
-    updatePlayStateSeason
+    updatePlayStateSeason,
 } from 'Components/Media/Actions/updatePlayState';
 
 import {
     faPlay,
     faRandom,
-    faCheckCircle as faCheckCircleSolid
+    faCheckCircle as faCheckCircleSolid,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { Header, HeaderIconWrap, HeaderIcon } from './Styles';
@@ -27,7 +27,7 @@ class MediaListHeader extends Component {
         episodes: [],
         nextEpisode: {},
         randomEpisode: {},
-        finished: false
+        finished: false,
     };
 
     componentWillMount = () => {
@@ -56,7 +56,7 @@ class MediaListHeader extends Component {
         this.setState({
             episodes,
             nextEpisode,
-            randomEpisode: episodes[randomize]
+            randomEpisode: episodes[randomize],
         });
     };
 
@@ -78,8 +78,8 @@ class MediaListHeader extends Component {
             pathname: generateMediaUrl('episode', uuid),
             state: {
                 resume,
-                autoplay: true
-            }
+                autoplay: true,
+            },
         });
     };
 
@@ -110,7 +110,7 @@ class MediaListHeader extends Component {
         });
 
         this.setState({
-            finished: !finished
+            finished: !finished,
         });
     };
 
@@ -159,20 +159,20 @@ MediaListHeader.propTypes = {
         PropTypes.shape({
             playState: PropTypes.shape({
                 finished: PropTypes.bool.isRequired,
-                playtime: PropTypes.number.isRequired
-            })
-        })
+                playtime: PropTypes.number.isRequired,
+            }),
+        }),
     ).isRequired,
     history: PropTypes.shape({
-        push: PropTypes.func.isRequired
+        push: PropTypes.func.isRequired,
     }).isRequired,
     type: PropTypes.string.isRequired,
     mutate: PropTypes.func.isRequired,
-    uuid: PropTypes.string.isRequired
+    uuid: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    showModal: (type, props) => dispatch(showModal(type, props))
+    showModal: (type, props) => dispatch(showModal(type, props)),
 });
 
 export default compose(
@@ -180,6 +180,6 @@ export default compose(
     graphql(UPDATE_PLAYSTATE),
     connect(
         null,
-        mapDispatchToProps
-    )
+        mapDispatchToProps,
+    ),
 )(MediaListHeader);

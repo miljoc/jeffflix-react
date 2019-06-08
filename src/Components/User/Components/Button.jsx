@@ -8,7 +8,7 @@ export default class Button extends Component {
         super(props);
 
         this.state = {
-            throttle: false
+            throttle: false,
         };
     }
 
@@ -51,5 +51,5 @@ export default class Button extends Component {
 
 Button.propTypes = {
     value: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
 };

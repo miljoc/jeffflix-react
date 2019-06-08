@@ -10,7 +10,7 @@ const cookies = new Cookies();
 
 const propTypes = {
     username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired
+    password: PropTypes.string.isRequired,
 };
 
 export const Auth = {
@@ -28,7 +28,7 @@ export const Auth = {
 
         cookies.remove('jwt', { path: '/' });
         client.resetStore();
-    }
+    },
 };
 
 export const checkAuth = () => {
@@ -49,7 +49,7 @@ export const AUTH_REQUEST = (username, password) => {
 
     const data = {
         username,
-        password
+        password,
     };
 
     return axios.post(url, data).then((response) => {

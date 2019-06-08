@@ -5,7 +5,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 const renderThumb = ({ style, ...props }) => {
     const thumbStyle = {
         background: '#191a28',
-        borderRadius: '2px'
+        borderRadius: '2px',
     };
 
     return <div style={{ ...style, ...thumbStyle }} {...props} />;
@@ -17,7 +17,7 @@ const renderTrack = ({ style, ...props }) => {
         right: '.5rem',
         top: '0',
         padding: '.5rem 0',
-        height: '100%'
+        height: '100%',
     };
 
     return <div style={{ ...style, ...trackStyle }} {...props} />;
@@ -36,7 +36,7 @@ const Scroll = ({ children }) => (
 );
 
 Scroll.propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
 };
 
 export default Scroll;

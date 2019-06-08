@@ -15,7 +15,7 @@ const FormLink = ({ strapline, to, value }) => (
 FormLink.propTypes = {
     strapline: PropTypes.string.isRequired,
     to: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired
+    value: PropTypes.string.isRequired,
 };
 
 export default FormLink;

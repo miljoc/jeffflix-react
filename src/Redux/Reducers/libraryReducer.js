@@ -3,14 +3,14 @@ import {
     ADD_LIBRARY_SUCCESS,
     ADD_LIBRARY_FAILURE,
     CLEAR_LIBRARY_ERROR,
-    LIBRARY_STATUS
+    LIBRARY_STATUS,
 } from '../Actions/libraryActions';
 
 const initialState = {
     importing: [],
     loading: false,
     error: false,
-    errorMessage: ''
+    errorMessage: '',
 };
 
 const library = (state = initialState, { payload, type }) => {
@@ -20,24 +20,24 @@ const library = (state = initialState, { payload, type }) => {
         case ADD_LIBRARY:
             return {
                 ...state,
-                loading: true
+                loading: true,
             };
         case ADD_LIBRARY_SUCCESS:
             return {
                 ...state,
-                loading: false
+                loading: false,
             };
         case ADD_LIBRARY_FAILURE:
             return {
                 ...state,
                 loading: false,
                 error: true,
-                errorMessage: payload.err
+                errorMessage: payload.err,
             };
         case LIBRARY_STATUS:
             return {
                 ...state,
-                importing: payload.importing
+                importing: payload.importing,
             };
         default:
             return state;

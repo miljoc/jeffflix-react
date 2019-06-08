@@ -16,7 +16,7 @@ import {
     MediaRelease,
     SeasonNumber,
     SubTitle,
-    MediaBackground
+    MediaBackground,
 } from '../Styles';
 import EpisodesWrap from './Styles';
 
@@ -29,7 +29,7 @@ const Season = (props) => {
         overview,
         children,
         episodes,
-        series
+        series,
     } = props;
 
     const releaseDate = `(${airDate.split('-')[0]})`;
@@ -68,9 +68,9 @@ Season.propTypes = {
     episodes: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
-            uuid: PropTypes.string.isRequired
-        })
-    ).isRequired
+            uuid: PropTypes.string.isRequired,
+        }),
+    ).isRequired,
 };
 
 export default Season;

@@ -24,7 +24,7 @@ class Search extends Component {
             suggestions: [],
             loading: false,
             hasFocus: false,
-            isUnmounting: false
+            isUnmounting: false,
         };
 
         this.debouncedLoadSuggestions = debounce(this.loadSuggestions, 500);
@@ -49,7 +49,7 @@ class Search extends Component {
         this.setState({
             suggestions:
                 typeof data === 'undefined' ? [] : updateSuggestions(suggest),
-            loading: false
+            loading: false,
         });
     };
 
@@ -64,7 +64,7 @@ class Search extends Component {
 
     onSuggestionsClearRequested = () => {
         this.setState({
-            suggestions: []
+            suggestions: [],
         });
     };
 
@@ -78,7 +78,7 @@ class Search extends Component {
 
     unmountComponent = () => {
         this.setState({
-            isUnmounting: true
+            isUnmounting: true,
         });
     };
 
@@ -91,7 +91,7 @@ class Search extends Component {
         const inputProps = {
             placeholder: 'Search Your Media...',
             value,
-            onChange: this.onChange
+            onChange: this.onChange,
         };
 
         const renderInputComponent = (props) => (
@@ -133,20 +133,20 @@ Search.propTypes = {
             PropTypes.shape({
                 name: PropTypes.string,
                 poster_path: PropTypes.string,
-                uuid: PropTypes.string
-            })
+                uuid: PropTypes.string,
+            }),
         ),
-        variables: PropTypes.object
-    })
+        variables: PropTypes.object,
+    }),
 };
 
 Search.defaultProps = {
-    data: {}
+    data: {},
 };
 
 export default (Search = withRouter(
     graphql(FETCH_SUGGESTIONS, {
         skip: (props) => !(props.value.trim().length > 3),
-        options: (props) => ({ variables: { name: props.value } })
-    })(Search)
+        options: (props) => ({ variables: { name: props.value } }),
+    })(Search),
 ));

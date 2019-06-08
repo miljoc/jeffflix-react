@@ -21,7 +21,7 @@ const timeRangesToString = (tr) => {
 
     for (let i = 0; i < tr.length; i++) {
         arr.push(
-            '[' + tr.start(i).toFixed(2) + ', ' + tr.end(i).toFixed(2) + ']'
+            '[' + tr.start(i).toFixed(2) + ', ' + tr.end(i).toFixed(2) + ']',
         );
     }
 
@@ -43,7 +43,7 @@ export default class extends React.Component {
         super(props);
 
         this.state = {
-            value: this.getItemState()
+            value: this.getItemState(),
         };
     }
 

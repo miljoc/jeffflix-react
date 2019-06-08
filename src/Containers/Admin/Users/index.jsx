@@ -17,7 +17,7 @@ class Users extends Component {
         const { mutate } = this.props;
 
         mutate({
-            refetchQueries: [{ query: FETCH_INVITES }]
+            refetchQueries: [{ query: FETCH_INVITES }],
         }).catch((err) => err);
     };
 
@@ -42,7 +42,7 @@ class Users extends Component {
 }
 
 Users.propTypes = {
-    mutate: PropTypes.func.isRequired
+    mutate: PropTypes.func.isRequired,
 };
 
 export default (Users = graphql(CREATE_USER_INVITE)(Users));

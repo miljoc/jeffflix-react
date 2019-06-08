@@ -24,8 +24,8 @@ const InviteItem = ({ code, alert }) => {
 InviteItem.propTypes = {
     code: PropTypes.string.isRequired,
     alert: PropTypes.shape({
-        show: PropTypes.func.isRequired
-    }).isRequired
+        show: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default withAlert(InviteItem);

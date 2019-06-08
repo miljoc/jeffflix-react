@@ -7,28 +7,28 @@ export const CLEAR_LIBRARY_ERROR = 'CLEAR_LIBRARY_ERROR';
 export const addLibrary = (filePath) => ({
     type: ADD_LIBRARY,
     payload: {
-        filePath
-    }
+        filePath,
+    },
 });
 
 export const addLibrarySuccess = () => ({
-    type: ADD_LIBRARY_SUCCESS
+    type: ADD_LIBRARY_SUCCESS,
 });
 
 export const addLibraryFailure = (err) => ({
     type: ADD_LIBRARY_FAILURE,
     payload: {
-        err
-    }
+        err,
+    },
 });
 
 export const clearLibraryError = () => ({
-    type: CLEAR_LIBRARY_ERROR
+    type: CLEAR_LIBRARY_ERROR,
 });
 
 export const setLibraryStatus = (importing) => ({
     type: LIBRARY_STATUS,
     payload: {
-        importing
-    }
+        importing,
+    },
 });

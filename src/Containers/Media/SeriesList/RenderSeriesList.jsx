@@ -18,7 +18,7 @@ class RenderSeriesList extends Component {
 
         showModal(LIBRARY_MODAL, {
             title: 'Add Series Library',
-            type: 'series'
+            type: 'series',
         });
     };
 
@@ -35,7 +35,7 @@ class RenderSeriesList extends Component {
                                 <LibraryListItem key={s.uuid}>
                                     <MediaCard {...s} />
                                 </LibraryListItem>
-                            )
+                            ),
                         );
                     }
 
@@ -57,10 +57,10 @@ class RenderSeriesList extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    showModal: (type, props) => dispatch(showModal(type, props))
+    showModal: (type, props) => dispatch(showModal(type, props)),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(RenderSeriesList);

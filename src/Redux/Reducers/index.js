@@ -13,7 +13,7 @@ const responsiveBreakpoints = {
     extraSmall: 500,
     small: 768,
     medium: 1023,
-    large: 1280
+    large: 1280,
 };
 
 export default (history) =>
@@ -25,5 +25,5 @@ export default (history) =>
         historyLocation,
         video,
         library,
-        auth
+        auth,
     });

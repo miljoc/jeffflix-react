@@ -11,7 +11,7 @@ import {
     ModalWrap,
     ModalBody,
     ModalHeader,
-    ModalHeading
+    ModalHeading,
 } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
 import ResumeOption from './Styles';
@@ -32,7 +32,7 @@ class ResumeModal extends Component {
         } else {
             history.push({
                 pathname: url,
-                state: { resume, autoplay }
+                state: { resume, autoplay },
             });
         }
     };
@@ -57,7 +57,7 @@ class ResumeModal extends Component {
                         >
                             {playState &&
                                 `Resume video from ${convertToMinutesSeconds(
-                                    playState.playtime
+                                    playState.playtime,
                                 )}`}
                         </ResumeOption>
                         <ResumeOption
@@ -81,8 +81,8 @@ ResumeModal.propTypes = {
     title: PropTypes.string,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
-        playtime: PropTypes.number
-    })
+        playtime: PropTypes.number,
+    }),
 };
 
 ResumeModal.defaultProps = {
@@ -92,15 +92,15 @@ ResumeModal.defaultProps = {
     title: 'Resume Media',
     playState: {
         finished: false,
-        playtime: 0
-    }
+        playtime: 0,
+    },
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    hideModal: () => dispatch(hideModal())
+    hideModal: () => dispatch(hideModal()),
 });
 
 export default connect(
     null,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(ResumeModal);

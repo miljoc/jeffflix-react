@@ -11,7 +11,7 @@ class RefreshMetadata extends Component {
         super(props);
         this.state = {
             label: 'Refresh Metadata',
-            disabled: false
+            disabled: false,
         };
     }
 
@@ -19,12 +19,12 @@ class RefreshMetadata extends Component {
         const { uuid, mutate, alert } = this.props;
 
         mutate({
-            variables: { uuid }
+            variables: { uuid },
         })
             .then(() => {
                 this.setState({
                     label: 'Refreshing',
-                    disabled: true
+                    disabled: true,
                 });
 
                 alert.success('Refreshing Metadata, this may take a while');
@@ -51,11 +51,11 @@ RefreshMetadata.propTypes = {
     uuid: PropTypes.string.isRequired,
     mutate: PropTypes.func.isRequired,
     alert: PropTypes.shape({
-        show: PropTypes.func.isRequired
-    }).isRequired
+        show: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 export default compose(
     withAlert,
-    graphql(REFRESH_METADATA)
+    graphql(REFRESH_METADATA),
 )(RefreshMetadata);

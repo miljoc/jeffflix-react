@@ -21,7 +21,7 @@ import {
     MediaFullWrap,
     MediaLeftCol,
     MediaRightCol,
-    MediaBackground
+    MediaBackground,
 } from '../Styles';
 
 class MediaItem extends Component {
@@ -33,7 +33,7 @@ class MediaItem extends Component {
             resume: false,
             files: [],
             selectedFile: {},
-            mimeType: ''
+            mimeType: '',
         };
     }
 
@@ -43,7 +43,7 @@ class MediaItem extends Component {
 
         this.setState({
             files: fileList,
-            selectedFile: fileList[0]
+            selectedFile: fileList[0],
         });
     }
 
@@ -65,7 +65,7 @@ class MediaItem extends Component {
 
     fileChange = (selectedFile) => {
         this.setState({
-            selectedFile
+            selectedFile,
         });
     };
 
@@ -75,7 +75,7 @@ class MediaItem extends Component {
         dispatch(hideVideo());
 
         this.setState({
-            source: ''
+            source: '',
         });
     };
 
@@ -88,14 +88,14 @@ class MediaItem extends Component {
         this.setState({ resume });
 
         mutate({
-            variables: { uuid: files[selectedFile.value].uuid }
+            variables: { uuid: files[selectedFile.value].uuid },
         })
             .then(({ data }) => {
                 fetch(getBaseUrl() + data.createStreamingTicket.metadataPath)
                     .then((response) => response.json())
                     .then((response) => {
                         const playableCodecs = response.checkCodecs.filter(
-                            canPlayCodec
+                            canPlayCodec,
                         );
 
                         const streamPath = isIOS
@@ -108,12 +108,13 @@ class MediaItem extends Component {
 
                         const queryParams = playableCodecs
                             .map(
-                                (c) => `playableCodecs=${encodeURIComponent(c)}`
+                                (c) =>
+                                    `playableCodecs=${encodeURIComponent(c)}`,
                             )
                             .join('&');
                         this.setState({
                             source: `${getBaseUrl()}${streamPath}?${queryParams}`,
-                            mimeType
+                            mimeType,
                         });
                     })
                     .catch((err) => err);
@@ -132,13 +133,13 @@ class MediaItem extends Component {
 
         const videoSource = {
             src: source,
-            type: mimeType
+            type: mimeType,
         };
         const transmuxed = canPlayCodec(videoCodec);
 
         const mediaInfo = {
             ...this.props,
-            playState
+            playState,
         };
 
         return (
@@ -191,5 +192,5 @@ class MediaItem extends Component {
 export default compose(
     withRouter,
     graphql(REQUEST_STREAM),
-    connect()
+    connect(),
 )(MediaItem);

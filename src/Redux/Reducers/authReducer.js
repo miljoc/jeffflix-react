@@ -2,7 +2,7 @@ import { SET_AUTH_TOKEN } from '../Actions/authActions';
 
 const initialState = {
     token: '',
-    data: {}
+    data: {},
 };
 
 const auth = (state = initialState, { payload, type }) => {
@@ -11,7 +11,7 @@ const auth = (state = initialState, { payload, type }) => {
             return {
                 ...state,
                 token: payload.token.jwt,
-                data: payload.data
+                data: payload.data,
             };
         default:
             return state;

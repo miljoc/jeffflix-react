@@ -14,7 +14,7 @@ const RegisterForm = ({
     handleChange,
     handleRegister,
     initialSetup,
-    inviteCode
+    inviteCode,
 }) => {
     const heading = initialSetup ? 'Welcome To Olaris' : 'Olaris';
     const title = initialSetup
@@ -77,11 +77,11 @@ RegisterForm.propTypes = {
     handleChange: PropTypes.func.isRequired,
     handleRegister: PropTypes.func.isRequired,
     initialSetup: PropTypes.bool.isRequired,
-    inviteCode: PropTypes.string
+    inviteCode: PropTypes.string,
 };
 
 RegisterForm.defaultProps = {
-    inviteCode: ''
+    inviteCode: '',
 };
 
 export default RegisterForm;

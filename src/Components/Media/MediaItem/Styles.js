@@ -124,7 +124,7 @@ export const SelectStyle = {
         ...base,
         flex: 1,
         width: '100%',
-        float: 'left'
+        float: 'left',
     }),
     option: (base, { isDisabled, isFocused, isSelected }) => ({
         ...base,
@@ -132,7 +132,7 @@ export const SelectStyle = {
         backgroundColor: '#191927 !important',
         transition: '.2s all',
         color: isSelected || isFocused ? '#FF9B3D' : '#FFF',
-        opacity: isDisabled ? 0.2 : 1
+        opacity: isDisabled ? 0.2 : 1,
     }),
     control: () => ({
         width: 'auto',
@@ -140,7 +140,7 @@ export const SelectStyle = {
         cursor: 'pointer',
         color: '#FF9B3D',
         position: 'relative',
-        float: 'left'
+        float: 'left',
     }),
     menu: (base) => ({
         ...base,
@@ -148,7 +148,7 @@ export const SelectStyle = {
         borderRadius: '0',
         overflow: 'hidden',
         cursor: 'pointer',
-        animation: `${`.4s ${aFadeIn} alternate`}`
+        animation: `${`.4s ${aFadeIn} alternate`}`,
     }),
     menuList: (base) => ({
         ...base,
@@ -161,7 +161,7 @@ export const SelectStyle = {
         wordBreak: 'break-all',
         overflow: 'hidden',
         lineHeight: '2rem',
-        border: 'none'
+        border: 'none',
     }),
     valueContainer: () => ({
         fontWeight: 600,
@@ -170,17 +170,17 @@ export const SelectStyle = {
         padding: 0,
         height: '2rem',
         float: 'left',
-        display: 'inline-block'
+        display: 'inline-block',
     }),
     dropdownIndicator: (base) => ({
         ...base,
         padding: 0,
         marginLeft: '1rem',
         color: '#FF9B3D',
-        height: '1.6rem'
+        height: '1.6rem',
     }),
     indicatorSeparator: () => ({
-        display: 'none'
+        display: 'none',
     }),
     singleValue: () => ({
         color: '#FFF',
@@ -188,8 +188,8 @@ export const SelectStyle = {
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-all',
         overflow: 'hidden',
-        height: '2rem'
-    })
+        height: '2rem',
+    }),
 };
 
 // Media Info
@@ -219,7 +219,7 @@ export const MediaDetails = styled.ul`
 
         &:nth-child(2) {
             color: ${(props) =>
-        props.watched ? props.theme.secondary : props.theme.primary};
+                props.watched ? props.theme.secondary : props.theme.primary};
         }
     }
 `;

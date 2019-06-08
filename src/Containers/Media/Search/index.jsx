@@ -14,7 +14,7 @@ const Search = ({ match }) => (
 );
 
 Search.propTypes = {
-    match: ReactRouterPropTypes.match.isRequired
+    match: ReactRouterPropTypes.match.isRequired,
 };
 
 export default Search;

@@ -12,7 +12,7 @@ export default class MediaInfo extends Component {
             playState,
             showPlayStatus,
             unwatchedEpisodesCount,
-            size
+            size,
         } = this.props;
 
         const watchStatus = () => {
@@ -24,7 +24,7 @@ export default class MediaInfo extends Component {
                             <PlayState
                                 percent={this.playPosition(
                                     length,
-                                    playState.playtime
+                                    playState.playtime,
                                 )}
                             />
                         )}
@@ -56,8 +56,8 @@ MediaInfo.propTypes = {
     size: PropTypes.string,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
-        playtime: PropTypes.number
-    })
+        playtime: PropTypes.number,
+    }),
 };
 
 MediaInfo.defaultProps = {
@@ -66,6 +66,6 @@ MediaInfo.defaultProps = {
     size: 'small',
     playState: {
         finished: false,
-        playtime: 0
-    }
+        playtime: 0,
+    },
 };

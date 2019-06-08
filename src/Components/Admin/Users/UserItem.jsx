@@ -9,18 +9,18 @@ import { UserListItem, DeleteUser } from './Styles';
 
 class UserItem extends Component {
     state = {
-        deleted: false
+        deleted: false,
     };
 
     deleteUser = (id) => {
         const { mutate } = this.props;
 
         mutate({
-            variables: { id }
+            variables: { id },
         })
             .then(() => {
                 this.setState({
-                    deleted: true
+                    deleted: true,
                 });
             })
             .catch((err) => err);
@@ -50,11 +50,11 @@ class UserItem extends Component {
 UserItem.propTypes = {
     username: PropTypes.string.isRequired,
     id: PropTypes.number,
-    mutate: PropTypes.func.isRequired
+    mutate: PropTypes.func.isRequired,
 };
 
 UserItem.defaultProps = {
-    id: ''
+    id: '',
 };
 
 export default (UserItem = graphql(DELETE_USER)(UserItem));

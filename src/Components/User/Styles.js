@@ -63,7 +63,7 @@ export const InputWrap = styled.div`
 
     &:after {
         background: ${(props) =>
-        props.error ? props.theme.alerts.error : props.theme.light};
+            props.error ? props.theme.alerts.error : props.theme.light};
     }
 
     &:before {

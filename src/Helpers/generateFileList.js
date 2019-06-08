@@ -13,7 +13,7 @@ const generateFileList = (files) => {
             label: f.fileName,
             filePath: f.filePath,
             totalDuration: f.totalDuration,
-            streams: f.streams
+            streams: f.streams,
         };
 
         arr.push(file);

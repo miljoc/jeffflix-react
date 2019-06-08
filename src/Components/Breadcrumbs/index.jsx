@@ -12,10 +12,10 @@ const Breadcrumbs = ({ props }) => {
                 { name: 'TV Shows', url: '/series' },
                 {
                     name: season.series.name,
-                    url: `/series/${season.series.uuid}`
+                    url: `/series/${season.series.uuid}`,
                 },
                 { name: season.name, url: `/season/${season.uuid}` },
-                { name }
+                { name },
             ];
 
             return <BreadcrumbList items={items} />;
@@ -26,7 +26,7 @@ const Breadcrumbs = ({ props }) => {
             const items = [
                 { name: 'TV Shows', url: '/series' },
                 { name: series.name, url: `/series/${series.uuid}` },
-                { name }
+                { name },
             ];
 
             return <BreadcrumbList items={items} />;
