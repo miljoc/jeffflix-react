@@ -5,7 +5,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import { scrolled, CONTENT_SCROLL, SIDEBAR_SCROLL } from 'Redux/Actions/viewportActions';
 
-import throttle from 'Helpers/throttle';
+import { throttle } from 'lodash';
 
 const renderThumb = ({ style, ...props }) => {
     const thumbStyle = {

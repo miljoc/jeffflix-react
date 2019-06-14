@@ -48,14 +48,15 @@ class RenderMovieList extends Component {
                                     updateQuery: (prev, { fetchMoreResult }) => {
                                         if (!fetchMoreResult) return prev;
 
-                                        return Object.assign({}, prev, {
+                                        return {
+                                            ...prev,
                                             movies: [
                                                 ...prev.movies,
                                                 ...fetchMoreResult.movies.filter(item => (
                                                     !prev.movies.some(prevItem => prevItem.uuid === item.uuid)
                                                 ))
                                             ]
-                                        });
+                                        };
                                     }
                                 })}
                             >

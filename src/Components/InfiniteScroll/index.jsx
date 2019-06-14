@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class InfiniteScroll extends Component {
     shouldComponentUpdate(nextProps) {
         const { viewport: nextViewport } = nextProps;
-        const { viewport: prevViewport, id} = this.props;
+        const { viewport: prevViewport, id } = this.props;
 
         if (nextViewport[id].scrollTop !== prevViewport[id].scrollTop) {
             return true;

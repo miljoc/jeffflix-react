@@ -48,14 +48,15 @@ class RenderSeriesList extends Component {
                                     updateQuery: (prev, { fetchMoreResult }) => {
                                         if (!fetchMoreResult) return prev;
 
-                                        return Object.assign({}, prev, {
+                                        return {
+                                            ...prev,
                                             series: [
                                                 ...prev.series,
                                                 ...fetchMoreResult.series.filter(item => (
                                                     !prev.series.some(prevItem => prevItem.uuid === item.uuid)
                                                 ))
                                             ]
-                                        });
+                                        };
                                     }
                                 })}
                             >
