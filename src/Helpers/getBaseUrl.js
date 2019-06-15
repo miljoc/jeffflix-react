@@ -6,7 +6,7 @@ const getBaseUrl = () => {
     let path;
 
     if (process && process.env && process.env.REACT_APP_GRAPHQL_URL) {
-        path = process.env.REACT_APP_API_URL;
+        path = process.env.REACT_APP_GRAPHQL_URL;
     } else if (typeof window !== 'undefined') {
         path = `${window.location.protocol}//${window.location.host}`;
     } else {
