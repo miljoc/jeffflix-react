@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactToolTip from 'react-tooltip';
+
 import { convertToMinutes } from 'Helpers';
 
+import { faExclamation } from '@fortawesome/free-solid-svg-icons';
+
 import MediaDescription from './MediaDescription';
-import { MediaInfoWrap, MediaDetails } from '../Styles';
+import { MediaInfoWrap, MediaDetails, LibraryUnhealthy } from '../Styles';
 import { MediaName, MediaRelease } from '../../Styles';
 
 const MediaInfo = (props) => {
@@ -40,16 +44,35 @@ const MediaInfo = (props) => {
         return convertToMinutes(selectedFile.totalDuration);
     };
 
+    const renderHealth = () => {
+        if (!selectedFile.healthy) {
+            return (
+                <li
+                    className="warning"
+                    data-tip="This file is on an unhealthy library, playback may be broken."
+                >
+                    <LibraryUnhealthy icon={faExclamation} />
+                    Warning
+                </li>
+            );
+        }
+
+        return false;
+    };
+
     const releaseDate = `(${year || airDate})`;
 
     return (
         <MediaInfoWrap>
+            <ReactToolTip effect="solid" place="bottom" className="tooltip" />
+
             <MediaName>
                 {name}
                 <MediaRelease>{releaseDate}</MediaRelease>
             </MediaName>
 
             <MediaDetails unwatched={playState.finished}>
+                {renderHealth()}
                 <li>{renderTotalD()}</li>
                 <li>{renderPlayState()}</li>
                 <li>{renderResolution()}</li>
@@ -62,9 +85,7 @@ const MediaInfo = (props) => {
 const requiredPropsCheck = (props, propName, componentName) => {
     const { year, airDate } = props;
     if (!year && !airDate) {
-        return new Error(
-            `One of 'year' or 'airDate' is required by '${componentName}' component.`,
-        );
+        return new Error(`One of 'year' or 'airDate' is required by '${componentName}' component.`);
     }
 
     return null;

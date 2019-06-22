@@ -7,13 +7,7 @@ export default class MediaInfo extends Component {
     playPosition = (length, playtime) => playtime * (100 / length);
 
     mediaState = () => {
-        const {
-            length,
-            playState,
-            showPlayStatus,
-            unwatchedEpisodesCount,
-            size,
-        } = this.props;
+        const { length, playState, showPlayStatus, unwatchedEpisodesCount, size } = this.props;
 
         const watchStatus = () => {
             if (showPlayStatus) {
@@ -21,21 +15,14 @@ export default class MediaInfo extends Component {
                     <Fragment>
                         {!playState.finished && <Unwatched />}
                         {!playState.finished && playState.playtime > 0 && (
-                            <PlayState
-                                percent={this.playPosition(
-                                    length,
-                                    playState.playtime,
-                                )}
-                            />
+                            <PlayState percent={this.playPosition(length, playState.playtime)} />
                         )}
                     </Fragment>
                 );
             }
 
             if (unwatchedEpisodesCount > 0 && size !== 'large') {
-                return (
-                    <UnwatchedCount>{unwatchedEpisodesCount}</UnwatchedCount>
-                );
+                return <UnwatchedCount>{unwatchedEpisodesCount}</UnwatchedCount>;
             }
 
             return false;

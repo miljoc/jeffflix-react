@@ -35,10 +35,12 @@ class Header extends Component {
                         <BackIcon icon={faArrowLeft} />
                     </BackButton>
                 )}
-
-                <google-cast-launcher />
                 <Search value={value} updateSearch={this.updateSearch} />
-                <Logout />
+
+                <div className="right-menu">
+                    <google-cast-launcher />
+                    <Logout />
+                </div>
             </HeaderWrap>
         );
     }

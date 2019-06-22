@@ -24,8 +24,19 @@ export const HeaderWrap = styled.header`
     padding: 3rem 0.5rem 0;
     display: flex;
 
-    button:last-child {
+    .right-menu {
         margin-left: auto;
+    }
+
+    google-cast-launcher {
+        float: left;
+        background: none;
+        border: none;
+        width: 5rem;
+        height: 5rem;
+        padding: 1.3rem;
+        cursor: pointer;
+        transform: translateY(-0.1rem);
     }
 
     ${media.desktop`

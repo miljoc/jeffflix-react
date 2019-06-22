@@ -4,74 +4,37 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import PlayerControls from './controls';
-import { setCastStatus, setCastPlayingStatus } from 'Redux/Actions/castActions';
+import { castStatusCheck } from './castActions';
+import { convertToHMS } from 'Helpers';
 
 import { CastPlayerWrap } from './Styles';
 
 class CastPlayer extends Component {
     componentDidMount() {
-        setTimeout(() => {
-            this.castReciever();
-            this.checkStatus();
-        }, 200);
+        this.checkStatus();
     }
 
     checkStatus = () => {
-        const { setCastStatus, setCastPlayingStatus } = this.props;
-        const castContext = cast.framework.CastContext.getInstance();
+        const { isCasting, isPlaying } = this.props;
 
-        if (castContext.getCastState() === 'CONNECTED') {
-            setCastStatus(true);
-
-            if (castContext.getCurrentSession().getMediaSession()) {
-                setCastPlayingStatus(true);
-            }
-        }
-    };
-
-    castReciever = () => {
-        if (typeof cast === 'undefined') return false;
-
-        const { setCastStatus, setCastPlayingStatus, isPlaying } = this.props;
-
-        const framework = cast.framework;
-        const eventType = framework.RemotePlayerEventType;
-        const playerController = new framework.RemotePlayerController(
-            new framework.RemotePlayer(),
-        );
-
-        playerController.addEventListener(eventType.IS_CONNECTED_CHANGED, function(e) {
-            setCastStatus(e.value);
-        });
-
-        playerController.addEventListener(eventType.IS_MEDIA_LOADED_CHANGED, function(e) {
-            setCastPlayingStatus(e.value);
-        });
-
-        playerController.addEventListener(eventType.DURATION_CHANGED, function(e) {
-            if (!isPlaying) setCastPlayingStatus(true);
-        });
+        setTimeout(() => {
+            castStatusCheck(isCasting, isPlaying);
+        }, 1000);
     };
 
     render() {
-        const { isCasting, isPlaying } = this.props;
+        const { isCasting, isPlaying, metadata, playstate } = this.props;
 
         if (isCasting && isPlaying) {
             return (
                 <CastPlayerWrap>
-                    <button onClick={() => PlayerControls.playOrPause()}>
-                        Play / Pause
-                    </button>
-                    <button onClick={() => PlayerControls.muteOrUnmute()}>
-                        Mute / Unmute
-                    </button>
+                    <p>Currently Playing: {metadata.name}</p>
+                    <p>
+                        {convertToHMS(playstate.playtime)}/{convertToHMS(playstate.total)}
+                    </p>
+                    <button onClick={() => PlayerControls.playOrPause()}>Play / Pause</button>
+                    <button onClick={() => PlayerControls.muteOrUnmute()}>Mute / Unmute</button>
                     <button onClick={() => PlayerControls.stop()}>Stop</button>
-                </CastPlayerWrap>
-            );
-        } else if (isCasting && !isPlaying) {
-            return (
-                <CastPlayerWrap>
-                    <p>Select Media To Play</p>
                 </CastPlayerWrap>
             );
         }
@@ -81,8 +44,6 @@ class CastPlayer extends Component {
 }
 
 CastPlayer.propTypes = {
-    setCastStatus: PropTypes.func.isRequired,
-    setCastPlayingStatus: PropTypes.func.isRequired,
     isCasting: PropTypes.bool.isRequired,
     isPlaying: PropTypes.bool.isRequired,
 };
@@ -93,15 +54,12 @@ const mapStateToProps = (state) => {
     return {
         isCasting: cast.connected,
         isPlaying: cast.playing,
+        metadata: cast.metadata,
+        playstate: cast.playstate,
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    setCastStatus: (status) => dispatch(setCastStatus(status)),
-    setCastPlayingStatus: (status) => dispatch(setCastPlayingStatus(status)),
-});
-
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    null,
 )(CastPlayer);

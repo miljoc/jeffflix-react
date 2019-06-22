@@ -24,23 +24,18 @@ class RenderRecentEpisodes extends Component {
 
     render() {
         return (
-            <Query query={RECENTLY_ADDED} fetchPolicy="network-only">
+            <Query query={RECENTLY_ADDED} fetchPolicy="cache-and-network">
                 {({ loading, error, data }) => {
                     if (loading) return <Loading />;
                     if (error) return `Error! ${error.message}`;
 
-                    const episodes = data.recentlyAdded.filter(
-                        (m) => m.type === 'Episode',
-                    );
+                    const episodes = data.recentlyAdded.filter((m) => m.type === 'Episode');
 
                     if (episodes.length === 0) {
                         return (
                             <NoResults alignLeft>
                                 {'You currently have no Series.'}
-                                <button
-                                    type="button"
-                                    onClick={() => this.toggleModal()}
-                                >
+                                <button type="button" onClick={() => this.toggleModal()}>
                                     Add a Series folder
                                 </button>
                             </NoResults>
@@ -48,15 +43,11 @@ class RenderRecentEpisodes extends Component {
                     }
 
                     const RecentlyAddedEpisodes = episodes.map((ra) => {
-                        const { posterPath } = ra.season.series;
+                        const { posterPath } = ra.season;
 
                         return (
                             <MediaCardWrap key={ra.uuid}>
-                                <MediaCard
-                                    showText
-                                    {...ra}
-                                    posterPath={posterPath}
-                                />
+                                <MediaCard showText {...ra} posterPath={posterPath} />
                             </MediaCardWrap>
                         );
                     });

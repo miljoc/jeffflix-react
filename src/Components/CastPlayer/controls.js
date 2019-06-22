@@ -1,10 +1,8 @@
 let playerController;
 
 setTimeout(() => {
-    playerController = new cast.framework.RemotePlayerController(
-        new cast.framework.RemotePlayer(),
-    );
-}, 500);
+    playerController = new cast.framework.RemotePlayerController(new cast.framework.RemotePlayer());
+}, 1000);
 
 const PlayerControls = {
     playOrPause() {

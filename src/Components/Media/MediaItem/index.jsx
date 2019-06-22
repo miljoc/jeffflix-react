@@ -26,7 +26,7 @@ class MediaItem extends Component {
         this.state = {
             source: '',
             resume: false,
-            files: [],
+            fileList: [],
             selectedFile: {},
             mimeType: '',
         };
@@ -37,7 +37,7 @@ class MediaItem extends Component {
         const fileList = generateFileList(files);
 
         this.setState({
-            files: fileList,
+            fileList,
             selectedFile: fileList[0],
         });
     }
@@ -84,13 +84,12 @@ class MediaItem extends Component {
     };
 
     render() {
-        const { posterPath, season, type, uuid, playState } = this.props;
-        const { files, selectedFile } = this.state;
+        const { posterPath, season, type, uuid } = this.props;
+        const { selectedFile, fileList } = this.state;
         const background = posterPath || season.series.posterPath;
 
         const mediaInfo = {
             ...this.props,
-            playState,
         };
 
         return (
@@ -114,7 +113,7 @@ class MediaItem extends Component {
                         <MediaOverview
                             mediaInfo={mediaInfo}
                             selectedFile={selectedFile}
-                            files={files}
+                            files={fileList}
                             fileChange={this.fileChange}
                             playMedia={this.playMedia}
                         />

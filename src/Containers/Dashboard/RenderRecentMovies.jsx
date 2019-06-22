@@ -25,23 +25,18 @@ class RenderRecentMovies extends Component {
 
     render() {
         return (
-            <Query query={RECENTLY_ADDED} fetchPolicy="network-only">
+            <Query query={RECENTLY_ADDED} fetchPolicy="cache-and-network">
                 {({ loading, error, data }) => {
                     if (loading) return <Loading />;
                     if (error) return `Error! ${error.message}`;
 
-                    const movies = data.recentlyAdded.filter(
-                        (m) => m.type === 'Movie',
-                    );
+                    const movies = data.recentlyAdded.filter((m) => m.type === 'Movie');
 
                     if (movies.length === 0) {
                         return (
                             <NoResults alignLeft>
                                 {'You currently have no Movies.'}
-                                <button
-                                    type="button"
-                                    onClick={() => this.toggleModal()}
-                                >
+                                <button type="button" onClick={() => this.toggleModal()}>
                                     Add a Movies folder
                                 </button>
                             </NoResults>

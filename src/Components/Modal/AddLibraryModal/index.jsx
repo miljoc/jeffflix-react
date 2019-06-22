@@ -38,7 +38,6 @@ class AddLibraryModal extends Component {
             loading: props.loading,
             kind: 0,
             isMounted: true,
-            filePath: '',
         };
     }
 
@@ -56,12 +55,14 @@ class AddLibraryModal extends Component {
     componentDidMount() {
         const { type } = this.props;
 
+        document.addEventListener('keydown', this.escapeClose, false);
         this.setState({
             kind: type === 'movies' ? 0 : 1,
         });
     }
 
     componentWillUnmount() {
+        document.removeEventListener('keydown', this.escapeClose, false);
         this.setState({ isMounted: false });
         clearTimeout(this.timeout);
     }
@@ -72,9 +73,7 @@ class AddLibraryModal extends Component {
         hideModal();
     };
 
-    modalClick = (e) => {
-        if (e.target.id === 'modal-container') this.closeModal();
-    };
+    escapeClose = (e) => e.key === 'Escape' && this.closeModal();
 
     clearError = () => {
         const { isMounted } = this.state;
@@ -83,14 +82,11 @@ class AddLibraryModal extends Component {
         this.timeout = setTimeout(() => {
             if (isMounted) clearLibraryError();
             this.timeout = null;
-        }, 2000);
+        }, 5000);
     };
 
-    updateFilePath = (filePath) => {
-        this.setState({ filePath });
-    };
-
-    createLibrary = async (kind, filePath) => {
+    createLibrary = async ({ backend, filePath, rcloneName }) => {
+        const { kind } = this.state;
         const {
             type,
             alert,
@@ -102,11 +98,18 @@ class AddLibraryModal extends Component {
             setLibraryStatus,
         } = this.props;
 
-        const variables = {
+        let variables = {
             name: type,
             kind,
             filePath,
+            backend,
         };
+
+        if (rcloneName)
+            variables = {
+                ...variables,
+                rcloneName,
+            };
 
         addLibrary();
 
@@ -121,9 +124,9 @@ class AddLibraryModal extends Component {
                     addLibraryFailure(error.message);
                     this.clearError();
                 } else {
+                    this.closeModal();
                     addLibrarySuccess();
                     setLibraryStatus([...importing, type]);
-                    this.setState({ filePath: '' });
                     alert.success('Library Added');
                 }
             })
@@ -135,10 +138,10 @@ class AddLibraryModal extends Component {
 
     render() {
         const { title } = this.props;
-        const { error, errorMessage, kind, filePath } = this.state;
+        const { error, errorMessage, kind } = this.state;
 
         return (
-            <Modal id="modal-container" onClick={(e) => this.modalClick(e)}>
+            <Modal>
                 <ModalWrap>
                     <ModalHeader>
                         <ModalHeading>
@@ -154,11 +157,7 @@ class AddLibraryModal extends Component {
                         )}
                         <FetchLibraryList kind={kind} />
                         <AddLibraryAction
-                            createLibrary={() =>
-                                this.createLibrary(kind, filePath)
-                            }
-                            updateFilePath={this.updateFilePath}
-                            filePath={filePath}
+                            createLibrary={(props) => this.createLibrary(props)}
                         />
                     </ModalBody>
                 </ModalWrap>

@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { setSourceData } from 'Redux/Actions/castActions';
-import { canPlayCodec } from 'Helpers';
+import { canPlayCodec, getBaseUrl } from 'Helpers';
+import { castEventListeners } from 'Components/CastPlayer/castActions';
+import { setCastPlayingStatus } from 'Redux/Actions/castActions';
 
 import Player from './Player';
 
@@ -33,15 +34,7 @@ class VideoController extends Component {
     escapeClose = (e) => e.key === 'Escape' && this.props.closePlayer();
 
     setCastData = () => {
-        const { source, name, playState, uuid, dispatch, auth } = this.props;
-
-        const sourceData = {
-            source,
-            name,
-            playState,
-        };
-
-        dispatch(setSourceData(sourceData));
+        const { uuid, auth } = this.props;
 
         const message = { ...auth, uuid };
 
@@ -52,14 +45,25 @@ class VideoController extends Component {
 
     castSession = (castSession, source, mimeType) => {
         const { message } = this.state;
-        const { playState } = this.props;
+        const { playState, name, posterPath, overview, selectedFile, uuid, resume } = this.props;
         const namespace = 'urn:x-cast:com.auth';
 
         const mediaInfo = new chrome.cast.media.MediaInfo(source, mimeType);
+        mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
+        mediaInfo.metadata.name = name;
+        mediaInfo.metadata.overview = overview;
+        mediaInfo.metadata.uuid = uuid;
+        mediaInfo.metadata.image = `${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`;
+        mediaInfo.metadata.totalDuration = selectedFile.totalDuration;
+
         const request = new chrome.cast.media.LoadRequest(mediaInfo);
-        request.currentTime = playState.playtime;
-        const onLoadSuccess = () => console.log('Casting');
-        const onLoadError = () => console.log('Failure');
+        if (resume) request.currentTime = playState.playtime;
+
+        const onLoadSuccess = () => {
+            setCastPlayingStatus(true);
+            castEventListeners();
+        };
+        const onLoadError = (e) => console.log(e);
 
         castSession.sendMessage(namespace, message);
         castSession.loadMedia(request).then(onLoadSuccess, onLoadError);
@@ -117,6 +121,7 @@ class VideoController extends Component {
 
 VideoController.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    isCasting: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -128,4 +133,11 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(VideoController);
+const mapDispatchToProps = (dispatch) => ({
+    setCastPlayingStatus: (status) => dispatch(setCastPlayingStatus(status)),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(VideoController);
