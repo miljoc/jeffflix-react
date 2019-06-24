@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { canPlayCodec, getBaseUrl } from 'Helpers';
-import { castEventListeners } from 'Components/CastPlayer/castActions';
+import { castStatusCheck } from 'Components/CastPlayer/castActions';
 import { setCastPlayingStatus } from 'Redux/Actions/castActions';
 
 import Player from './Player';
@@ -60,8 +60,8 @@ class VideoController extends Component {
         if (resume) request.currentTime = playState.playtime;
 
         const onLoadSuccess = () => {
+            castStatusCheck();
             setCastPlayingStatus(true);
-            castEventListeners();
         };
         const onLoadError = (e) => console.log(e);
 
