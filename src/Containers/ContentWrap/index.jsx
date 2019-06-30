@@ -7,12 +7,15 @@ import Content from './Styles';
 
 const ContentWrap = ({ children, navHidden }) => (
     <Content navHidden={navHidden}>
-        <Scroll navHidden={navHidden} id="content">{children}</Scroll>
+        <Scroll navHidden={navHidden} id="content">
+            {children}
+        </Scroll>
     </Content>
 );
 
 const mapStateToProps = (state) => {
     const { navigation } = state;
+
     return {
         navHidden: navigation.hidden,
     };

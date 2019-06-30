@@ -9,10 +9,10 @@ import Navigation from './Navigation';
 import { SidebarWrap, DashboardLink } from './Styles';
 
 const Sidebar = (props) => {
-    const { navHidden, videoOpen } = props;
+    const { navHidden, videoOpen, castPlaying } = props;
 
     return (
-        <SidebarWrap navHidden={navHidden} videoOpen={videoOpen}>
+        <SidebarWrap navHidden={navHidden} videoOpen={videoOpen} castPlaying={castPlaying}>
             <Scroll id="sidebar">
                 <Fragment>
                     <DashboardLink to="/">
@@ -29,11 +29,13 @@ const Sidebar = (props) => {
 const mapStateToProps = (state) => ({
     navHidden: state.navigation.hidden,
     videoOpen: state.video.playing,
+    castPlaying: state.cast.playing,
 });
 
 Sidebar.propTypes = {
     navHidden: PropTypes.bool.isRequired,
     videoOpen: PropTypes.bool.isRequired,
+    castPlaying: PropTypes.bool.isRequired,
 };
 
 export default connect(

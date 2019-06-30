@@ -47,8 +47,7 @@ class Search extends Component {
         const suggest = typeof data === 'undefined' ? [] : data.search;
 
         this.setState({
-            suggestions:
-                typeof data === 'undefined' ? [] : updateSuggestions(suggest),
+            suggestions: typeof data === 'undefined' ? [] : updateSuggestions(suggest),
             loading: false,
         });
     };
@@ -85,8 +84,7 @@ class Search extends Component {
     render() {
         const { value, suggestions, loading, hasFocus } = this.state;
 
-        const checkSuggestions =
-            typeof suggestions === 'undefined' ? [] : suggestions;
+        const checkSuggestions = typeof suggestions === 'undefined' ? [] : suggestions;
 
         const inputProps = {
             placeholder: 'Search Your Media...',

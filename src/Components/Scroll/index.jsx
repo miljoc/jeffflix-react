@@ -18,7 +18,7 @@ const renderThumb = ({ style, ...props }) => {
 
 const renderTrack = ({ style, ...props }) => {
     const trackStyle = {
-        width: '.8rem',
+        width: '1rem',
         right: '.5rem',
         top: '0',
         padding: '.5rem 0',
@@ -53,9 +53,8 @@ class Scroll extends Component {
 
         return (
             <Scrollbars
-                autoHeight
                 autoHide
-                autoHeightMin="100vh"
+                autoHeightMin="100%"
                 renderThumbVertical={renderThumb}
                 renderTrackVertical={renderTrack}
                 onScrollFrame={this.handleScroll}
@@ -76,4 +75,7 @@ const mapDispatchToProps = (dispatch) => ({
     scrolled: (type, props) => dispatch(scrolled(type, props)),
 });
 
-export default connect(null, mapDispatchToProps)(Scroll);
+export default connect(
+    null,
+    mapDispatchToProps,
+)(Scroll);

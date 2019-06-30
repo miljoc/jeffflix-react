@@ -120,11 +120,7 @@ class MediaListHeader extends Component {
 
         return (
             <Header>
-                <ReactToolTip
-                    effect="solid"
-                    place="bottom"
-                    className="tooltip"
-                />
+                <ReactToolTip effect="solid" place="bottom" className="tooltip" />
                 <HeaderIconWrap
                     onClick={this.playSeries}
                     data-tip={`Play ${type === 'series' ? 'Series' : 'Season'}`}
@@ -132,22 +128,15 @@ class MediaListHeader extends Component {
                     <HeaderIcon icon={faPlay} />
                 </HeaderIconWrap>
 
-                <HeaderIconWrap
-                    onClick={this.playRandomEpisode}
-                    data-tip="Play Random Episode"
-                >
+                <HeaderIconWrap onClick={this.playRandomEpisode} data-tip="Play Random Episode">
                     <HeaderIcon icon={faRandom} />
                 </HeaderIconWrap>
 
                 <HeaderIconWrap
                     onClick={this.markAsWatched}
-                    data-tip={`Mark ${
-                        type === 'series' ? 'Series' : 'Season'
-                    } As Watched`}
+                    data-tip={`Mark ${type === 'series' ? 'Series' : 'Season'} As Watched`}
                 >
-                    <HeaderIcon
-                        icon={finished ? faCheckCircleSolid : faCheckCircle}
-                    />
+                    <HeaderIcon icon={finished ? faCheckCircleSolid : faCheckCircle} />
                 </HeaderIconWrap>
             </Header>
         );

@@ -1,45 +1,43 @@
-/* eslint-disable */
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Script from 'react-load-script';
 
-import PlayerControls from './controls';
+import CastControls from './CastControls';
 import { castStatusCheck } from './castActions';
-import { convertToHMS } from 'Helpers';
-
-import { CastPlayerWrap } from './Styles';
 
 class CastPlayer extends Component {
-    componentDidMount() {
-        this.checkStatus();
-    }
-
-    checkStatus = () => {
+    handleScriptLoad = () => {
         const { isCasting, isPlaying } = this.props;
 
-        setTimeout(() => {
-            castStatusCheck(isCasting, isPlaying);
-        }, 1000);
+        const initializeCastApi = () => {
+            cast.framework.CastContext.getInstance().setOptions({
+                receiverApplicationId: 'EA238E27',
+                autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
+            });
+        };
+
+        // eslint-disable-next-line
+        window['__onGCastApiAvailable'] = (isAvailable) => {
+            if (isAvailable) {
+                initializeCastApi();
+                castStatusCheck(isCasting, isPlaying);
+            }
+        };
     };
 
     render() {
-        const { isCasting, isPlaying, metadata, playstate } = this.props;
+        const { isCasting, isPlaying } = this.props;
 
-        if (isCasting && isPlaying) {
-            return (
-                <CastPlayerWrap>
-                    <p>Currently Playing: {metadata.name}</p>
-                    <p>
-                        {convertToHMS(playstate.playtime)}/{convertToHMS(playstate.total)}
-                    </p>
-                    <button onClick={() => PlayerControls.playOrPause()}>Play / Pause</button>
-                    <button onClick={() => PlayerControls.muteOrUnmute()}>Mute / Unmute</button>
-                    <button onClick={() => PlayerControls.stop()}>Stop</button>
-                </CastPlayerWrap>
-            );
-        }
-
-        return null;
+        return (
+            <Fragment>
+                <Script
+                    url="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
+                    onLoad={() => this.handleScriptLoad()}
+                />
+                {isCasting && isPlaying && <CastControls {...this.props} />}
+            </Fragment>
+        );
     }
 }
 

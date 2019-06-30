@@ -3,8 +3,8 @@ import { media } from 'Styles/Utils';
 
 export const AppWrap = styled.main`
     display: flex;
-    height: 100vh;
-    min-height: -webkit-fill-available;
+    height: ${(props) =>
+        props.castPlaying ? `calc(100vh - ${props.theme.layout.player})` : '100vh'};
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: ${(props) => (props.authed ? 'initial' : 'center')};

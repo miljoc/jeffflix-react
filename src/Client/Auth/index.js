@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 import jwtDecode from 'jwt-decode';
 import { getBaseUrl } from 'Helpers';
-import { store } from 'Redux/store';
+import { store, history } from 'Redux/store';
 
 import { setAuthData } from 'Redux/Actions/castActions';
 import client from '../index';
-import history from '../getHistory';
 
 const cookies = new Cookies();
 

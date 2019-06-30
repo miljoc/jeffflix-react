@@ -3,16 +3,16 @@ import { media } from 'Styles/Utils';
 
 export const List = styled.ul`
     width: 100%;
-    background: ${(props) => props.theme.sidebar};
+    background: ${(props) => props.theme.dark};
     margin: 0 0 2rem;
     overflow: hidden;
     position: relative;
     border-radius: 0.3rem;
 
     ${media.desktop`
-    width:55%;
-    margin:0 0 3rem;
-  `}
+        width:55%;
+        margin:0 0 3rem;
+    `}
 
     &:last-child {
         margin: 0;

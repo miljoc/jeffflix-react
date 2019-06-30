@@ -14,14 +14,7 @@ import MediaInfo from './MediaInfo';
 import MediaName from './MediaName';
 
 import placeholder from './placeholder.png';
-import {
-    CardPoster,
-    CardWrap,
-    CardPopup,
-    PosterWrap,
-    PopupLink,
-    PopupIcon,
-} from './Styles';
+import { CardPoster, CardWrap, CardPopup, PosterWrap, PopupLink, PopupIcon } from './Styles';
 
 class MediaCard extends Component {
     state = {
@@ -56,10 +49,7 @@ class MediaCard extends Component {
         if (!hover) return false;
 
         if (showPlayStatus) {
-            if (
-                (e.target.tagName === 'DIV' || e.target.tagName === 'H3') &&
-                !internalCard
-            ) {
+            if ((e.target.tagName === 'DIV' || e.target.tagName === 'H3') && !internalCard) {
                 history.push(url);
                 return true;
             }
@@ -97,9 +87,8 @@ class MediaCard extends Component {
 
         const showPlayStatus = type === 'Movie' || type === 'Episode';
         const bgImage =
-            posterPath || stillPath
-                ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath ||
-                      stillPath}`
+            stillPath || posterPath
+                ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${stillPath || posterPath}`
                 : placeholder;
 
         let length;
@@ -111,11 +100,7 @@ class MediaCard extends Component {
 
         return (
             <Fragment>
-                <CardWrap
-                    onClick={(e) =>
-                        this.cardClick(e, url, history, showPlayStatus)
-                    }
-                >
+                <CardWrap onClick={(e) => this.cardClick(e, url, history, showPlayStatus)}>
                     <PosterWrap>
                         <LazyLoad
                             height={type === 'Episode' ? 125 : 230}
@@ -123,11 +108,7 @@ class MediaCard extends Component {
                             overflow
                             resize
                         >
-                            <CardPoster
-                                hover={hover}
-                                wide={wide}
-                                bgimg={bgImage}
-                            >
+                            <CardPoster hover={hover} wide={wide} bgimg={bgImage}>
                                 <MediaInfo
                                     {...this.props}
                                     length={length}
@@ -138,11 +119,7 @@ class MediaCard extends Component {
                         {hover && (
                             <CardPopup>
                                 <PopupLink>
-                                    <PopupIcon
-                                        icon={
-                                            showPlayStatus ? faPlay : faSearch
-                                        }
-                                    />
+                                    <PopupIcon icon={showPlayStatus ? faPlay : faSearch} />
                                 </PopupLink>
                             </CardPopup>
                         )}

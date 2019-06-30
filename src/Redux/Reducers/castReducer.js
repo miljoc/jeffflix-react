@@ -12,7 +12,13 @@ const initialState = {
     playing: false,
     auth: {},
     metadata: {},
-    playstate: {},
+    playstate: {
+        paused: false,
+        muted: false,
+        playtime: 0,
+        total: 0,
+        volume: 1,
+    },
 };
 
 const cast = (state = initialState, { payload, type }) => {
@@ -40,6 +46,7 @@ const cast = (state = initialState, { payload, type }) => {
             return {
                 ...state,
                 playstate: {
+                    ...state.playstate,
                     ...payload.playstate,
                 },
             };

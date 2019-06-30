@@ -123,6 +123,7 @@ class MediaItem extends Component {
                 <VideoController
                     {...this.props}
                     {...this.state}
+                    background={background}
                     closePlayer={() => this.closePlayer()}
                 />
             </MediaFullWrap>

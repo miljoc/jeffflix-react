@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { canPlayCodec, getBaseUrl } from 'Helpers';
-import { castStatusCheck } from 'Components/CastPlayer/castActions';
 import { setCastPlayingStatus } from 'Redux/Actions/castActions';
 
 import Player from './Player';
@@ -43,26 +42,38 @@ class VideoController extends Component {
         });
     };
 
-    castSession = (castSession, source, mimeType) => {
+    castMedia = (source, mimeType) => {
         const { message } = this.state;
-        const { playState, name, posterPath, overview, selectedFile, uuid, resume } = this.props;
+        const {
+            playState,
+            name,
+            season,
+            background,
+            overview,
+            selectedFile,
+            uuid,
+            resume,
+        } = this.props;
+
+        const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
         const namespace = 'urn:x-cast:com.auth';
 
         const mediaInfo = new chrome.cast.media.MediaInfo(source, mimeType);
         mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
         mediaInfo.metadata.name = name;
+        if (season) mediaInfo.metadata.series = season.series.name;
         mediaInfo.metadata.overview = overview;
         mediaInfo.metadata.uuid = uuid;
-        mediaInfo.metadata.image = `${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`;
+        mediaInfo.metadata.image = `${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`;
         mediaInfo.metadata.totalDuration = selectedFile.totalDuration;
 
         const request = new chrome.cast.media.LoadRequest(mediaInfo);
         if (resume) request.currentTime = playState.playtime;
 
         const onLoadSuccess = () => {
-            castStatusCheck();
             setCastPlayingStatus(true);
         };
+
         const onLoadError = (e) => console.log(e);
 
         castSession.sendMessage(namespace, message);
@@ -84,7 +95,6 @@ class VideoController extends Component {
             isCasting,
         } = this.props;
 
-        const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
         const videoCodec = files[selectedFile.value].streams
             .filter((s) => s.streamType === 'video')
             .map((s) => s.codecMime)[0];
@@ -110,7 +120,7 @@ class VideoController extends Component {
                 </Fragment>
             );
         } else if (isCasting && source.length > 0) {
-            this.castSession(castSession, source, mimeType);
+            this.castMedia(source, mimeType);
 
             return null;
         } else {

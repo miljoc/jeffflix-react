@@ -42,5 +42,5 @@ export const Hint = styled.span`
     padding: 0.5rem;
     font-weight: bold;
     color: #ffffff;
-    background: ${(props) => props.theme.sidebar};
+    background: ${(props) => props.theme.dark};
 `;

@@ -50,9 +50,7 @@ class SearchInput extends Component {
         ) {
             unmount();
 
-            setTimeout(() => {
-                history.push(`/search/${value}`);
-            }, 500);
+            history.push(`/search/${value}`);
         }
     };
 
@@ -60,8 +58,7 @@ class SearchInput extends Component {
         const { hasFocus } = this.state;
         const { loading, hasSuggestions, value, inputProps } = this.props;
 
-        const noResults =
-            !hasSuggestions && hasFocus && !loading && value.length > 3;
+        const noResults = !hasSuggestions && hasFocus && !loading && value.length > 3;
 
         return (
             <InputWrap hasFocus={hasFocus}>

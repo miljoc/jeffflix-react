@@ -15,7 +15,8 @@
         "jasmine": true
     },
     "globals": {
-        "cast": "writable"
+        "cast": "writable",
+        "chrome": "writable"
     },
     "rules": {
         "no-class-assign": "off",
