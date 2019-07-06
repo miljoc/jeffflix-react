@@ -83,10 +83,12 @@ export default class CastControls extends Component {
                 </CastingControls>
 
                 <CastingVolumne>
-                    <SubtitleToggle
-                        icon={faClosedCaptioning}
-                        onClick={() => this.toggleSubtitles()}
-                    />
+                    {metadata.tracks && metadata.tracks.length > 1 && (
+                        <SubtitleToggle
+                            icon={faClosedCaptioning}
+                            onClick={() => this.toggleSubtitles()}
+                        />
+                    )}
                     <MuteUnmute
                         muteUnmute={() => PlayerControls.muteOrUnmute()}
                         isMuted={playstate.muted}

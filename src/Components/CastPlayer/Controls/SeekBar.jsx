@@ -57,13 +57,9 @@ class SeekBar extends Component {
         this.setState({ isSeeking: false });
     };
 
-    isNumber = (val) => !Number.isNaN(parseFloat(val));
-
     render() {
         const { playstate } = this.props;
         const { direction, isEnabled, value } = this.state;
-
-        if (!this.isNumber(value)) this.setState({ value: 0 });
 
         return (
             <SeekBarWrap>
