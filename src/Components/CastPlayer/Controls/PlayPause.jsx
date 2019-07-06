@@ -15,8 +15,12 @@ const PlayPause = ({ isPaused, playPause }) => (
 );
 
 PlayPause.propTypes = {
-    isPaused: PropTypes.bool.isRequired,
+    isPaused: PropTypes.bool,
     playPause: PropTypes.func.isRequired,
+};
+
+PlayPause.defaultProps = {
+    isPaused: false,
 };
 
 export default PlayPause;

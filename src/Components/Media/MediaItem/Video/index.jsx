@@ -1,11 +1,11 @@
-/* eslint-disable */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { canPlayCodec, getBaseUrl } from 'Helpers';
+import { canPlayCodec } from 'Helpers';
 import { setCastPlayingStatus } from 'Redux/Actions/castActions';
+import CastVideo from './CastVideo';
 
 import Player from './Player';
 
@@ -17,7 +17,6 @@ class VideoController extends Component {
 
         this.state = {
             message: {},
-            request: null,
         };
     }
 
@@ -30,7 +29,11 @@ class VideoController extends Component {
         document.removeEventListener('keydown', this.escapeClose, false);
     }
 
-    escapeClose = (e) => e.key === 'Escape' && this.props.closePlayer();
+    escapeClose = (e) => {
+        const { closePlayer } = this.props;
+
+        if (e.key === 'Escape') closePlayer();
+    };
 
     setCastData = () => {
         const { uuid, auth } = this.props;
@@ -44,40 +47,17 @@ class VideoController extends Component {
 
     castMedia = (source, mimeType) => {
         const { message } = this.state;
-        const {
-            playState,
-            name,
-            season,
-            background,
-            overview,
-            selectedFile,
-            uuid,
-            resume,
-        } = this.props;
 
-        const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-        const namespace = 'urn:x-cast:com.auth';
-
-        const mediaInfo = new chrome.cast.media.MediaInfo(source, mimeType);
-        mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
-        mediaInfo.metadata.name = name;
-        if (season) mediaInfo.metadata.series = season.series.name;
-        mediaInfo.metadata.overview = overview;
-        mediaInfo.metadata.uuid = uuid;
-        mediaInfo.metadata.image = `${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`;
-        mediaInfo.metadata.totalDuration = selectedFile.totalDuration;
-
-        const request = new chrome.cast.media.LoadRequest(mediaInfo);
-        if (resume) request.currentTime = playState.playtime;
-
-        const onLoadSuccess = () => {
-            setCastPlayingStatus(true);
+        const data = {
+            ...this.props,
+            message,
+            source,
+            mimeType,
         };
 
-        const onLoadError = (e) => console.log(e);
-
-        castSession.sendMessage(namespace, message);
-        castSession.loadMedia(request).then(onLoadSuccess, onLoadError);
+        CastVideo(data)
+            .then(() => setCastPlayingStatus(true))
+            .catch(() => false);
     };
 
     render() {
@@ -87,11 +67,11 @@ class VideoController extends Component {
             selectedFile,
             resume,
             playState,
-            uuid,
             type,
+            mimeType,
+            uuid,
             closePlayer,
             dispatch,
-            mimeType,
             isCasting,
         } = this.props;
 
@@ -119,19 +99,40 @@ class VideoController extends Component {
                     </VideoWrap>
                 </Fragment>
             );
-        } else if (isCasting && source.length > 0) {
+        }
+
+        if (source.length > 0 && isCasting) {
             this.castMedia(source, mimeType);
+            closePlayer();
 
             return null;
-        } else {
-            return null;
         }
+
+        return null;
     }
 }
 
 VideoController.propTypes = {
     dispatch: PropTypes.func.isRequired,
     isCasting: PropTypes.bool.isRequired,
+    closePlayer: PropTypes.func.isRequired,
+    source: PropTypes.string.isRequired,
+    files: PropTypes.arrayOf(
+        PropTypes.shape({
+            fileName: PropTypes.string,
+        }),
+    ).isRequired,
+    selectedFile: PropTypes.shape({}).isRequired,
+    uuid: PropTypes.string.isRequired,
+    auth: PropTypes.shape({}).isRequired,
+    resume: PropTypes.bool,
+    playState: PropTypes.shape({}).isRequired,
+    type: PropTypes.string.isRequired,
+    mimeType: PropTypes.string.isRequired,
+};
+
+VideoController.defaultProps = {
+    resume: false,
 };
 
 const mapStateToProps = (state) => {

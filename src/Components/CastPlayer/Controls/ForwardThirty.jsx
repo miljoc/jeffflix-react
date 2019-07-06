@@ -11,6 +11,15 @@ const ForwardThirty = ({ seek, playstate }) => (
 
 ForwardThirty.propTypes = {
     seek: PropTypes.func.isRequired,
+    playstate: PropTypes.shape({
+        playtime: PropTypes.number,
+    }),
+};
+
+ForwardThirty.defaultProps = {
+    playstate: {
+        playtime: 0,
+    },
 };
 
 export default ForwardThirty;

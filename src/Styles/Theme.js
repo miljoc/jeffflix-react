@@ -34,6 +34,7 @@ const Theme = {
         sidebar: '27.4rem',
         search: '30rem',
         player: '9rem',
+        playerMobile: '18rem',
     },
     fonts: {
         opensans: '"Open Sans", sans-serif',

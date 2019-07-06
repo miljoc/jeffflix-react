@@ -11,6 +11,15 @@ const BackThirty = ({ seek, playstate }) => (
 
 BackThirty.propTypes = {
     seek: PropTypes.func.isRequired,
+    playstate: PropTypes.shape({
+        playtime: PropTypes.number,
+    }),
+};
+
+BackThirty.defaultProps = {
+    playstate: {
+        playtime: 0,
+    },
 };
 
 export default BackThirty;

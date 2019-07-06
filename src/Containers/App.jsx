@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { Auth, checkAuth } from 'Client/Auth';
 
@@ -14,7 +12,7 @@ import CastPlayer from 'Components/CastPlayer';
 
 import { AppWrap } from './Styles';
 
-const App = ({ castPlaying }) => {
+const App = () => {
     checkAuth();
 
     const LoggedIn = () => (
@@ -32,7 +30,7 @@ const App = ({ castPlaying }) => {
     );
 
     return (
-        <AppWrap authed={Auth.isAuthenticated} castPlaying={castPlaying}>
+        <AppWrap authed={Auth.isAuthenticated}>
             {Auth.isAuthenticated ? (
                 <LoggedIn />
             ) : (
@@ -44,16 +42,5 @@ const App = ({ castPlaying }) => {
         </AppWrap>
     );
 };
-const mapStateToProps = (state) => {
-    const { cast } = state;
 
-    return {
-        castPlaying: cast.playing,
-    };
-};
-
-App.propTypes = {
-    castPlaying: PropTypes.bool.isRequired,
-};
-
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(App);

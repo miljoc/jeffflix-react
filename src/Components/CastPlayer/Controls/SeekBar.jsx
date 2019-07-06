@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { FormattedTime } from 'react-player-controls';
 
 import { setCastPlaystate } from 'Redux/Actions/castActions';
@@ -56,9 +57,13 @@ class SeekBar extends Component {
         this.setState({ isSeeking: false });
     };
 
+    isNumber = (val) => !Number.isNaN(parseFloat(val));
+
     render() {
         const { playstate } = this.props;
         const { direction, isEnabled, value } = this.state;
+
+        if (!this.isNumber(value)) this.setState({ value: 0 });
 
         return (
             <SeekBarWrap>
@@ -79,6 +84,27 @@ class SeekBar extends Component {
         );
     }
 }
+
+SeekBar.propTypes = {
+    playstate: PropTypes.shape({
+        playtime: PropTypes.number,
+        total: PropTypes.number,
+        volume: PropTypes.number,
+    }),
+    setCastPlaystate: PropTypes.func.isRequired,
+    seek: PropTypes.func.isRequired,
+    playPause: PropTypes.func.isRequired,
+    isPaused: PropTypes.bool,
+};
+
+SeekBar.defaultProps = {
+    isPaused: false,
+    playstate: {
+        playtime: 0,
+        total: 0,
+        volume: 1,
+    },
+};
 
 const mapDispatchToProps = (dispatch) => ({
     setCastPlaystate: (playstate) => dispatch(setCastPlaystate(playstate)),

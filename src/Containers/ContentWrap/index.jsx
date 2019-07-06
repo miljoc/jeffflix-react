@@ -5,8 +5,8 @@ import Scroll from 'Components/Scroll';
 
 import Content from './Styles';
 
-const ContentWrap = ({ children, navHidden }) => (
-    <Content navHidden={navHidden}>
+const ContentWrap = ({ children, navHidden, isCasting }) => (
+    <Content navHidden={navHidden} isCasting={isCasting}>
         <Scroll navHidden={navHidden} id="content">
             {children}
         </Scroll>
@@ -14,14 +14,16 @@ const ContentWrap = ({ children, navHidden }) => (
 );
 
 const mapStateToProps = (state) => {
-    const { navigation } = state;
+    const { navigation, cast } = state;
 
     return {
         navHidden: navigation.hidden,
+        isCasting: cast.playing,
     };
 };
 
 ContentWrap.propTypes = {
+    isCasting: PropTypes.bool.isRequired,
     navHidden: PropTypes.bool.isRequired,
     children: PropTypes.element.isRequired,
 };

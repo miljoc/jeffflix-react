@@ -8,7 +8,7 @@ import { castStatusCheck } from './castActions';
 
 class CastPlayer extends Component {
     handleScriptLoad = () => {
-        const { isCasting, isPlaying } = this.props;
+        const { isCasting, castPlaying } = this.props;
 
         const initializeCastApi = () => {
             cast.framework.CastContext.getInstance().setOptions({
@@ -21,13 +21,13 @@ class CastPlayer extends Component {
         window['__onGCastApiAvailable'] = (isAvailable) => {
             if (isAvailable) {
                 initializeCastApi();
-                castStatusCheck(isCasting, isPlaying);
+                castStatusCheck(isCasting, castPlaying);
             }
         };
     };
 
     render() {
-        const { isCasting, isPlaying } = this.props;
+        const { isCasting, castPlaying } = this.props;
 
         return (
             <Fragment>
@@ -35,7 +35,7 @@ class CastPlayer extends Component {
                     url="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
                     onLoad={() => this.handleScriptLoad()}
                 />
-                {isCasting && isPlaying && <CastControls {...this.props} />}
+                {isCasting && castPlaying && <CastControls {...this.props} />}
             </Fragment>
         );
     }
@@ -43,7 +43,7 @@ class CastPlayer extends Component {
 
 CastPlayer.propTypes = {
     isCasting: PropTypes.bool.isRequired,
-    isPlaying: PropTypes.bool.isRequired,
+    castPlaying: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -51,7 +51,7 @@ const mapStateToProps = (state) => {
 
     return {
         isCasting: cast.connected,
-        isPlaying: cast.playing,
+        castPlaying: cast.playing,
         metadata: cast.metadata,
         playstate: cast.playstate,
     };

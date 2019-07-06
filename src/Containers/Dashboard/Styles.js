@@ -4,7 +4,7 @@ import { media } from 'Styles/Utils';
 export const DashboardWrap = styled.section`
     width: 100%;
     float: left;
-    padding: 3rem 0.5rem;
+    padding: 3rem 1rem;
 
     section:last-child {
         margin: 0;

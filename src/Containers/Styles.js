@@ -3,8 +3,7 @@ import { media } from 'Styles/Utils';
 
 export const AppWrap = styled.main`
     display: flex;
-    height: ${(props) =>
-        props.castPlaying ? `calc(100vh - ${props.theme.layout.player})` : '100vh'};
+    height: 100vh;
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: ${(props) => (props.authed ? 'initial' : 'center')};
@@ -17,8 +16,8 @@ export const InnerContent = styled.section`
     padding: 2rem;
 
     ${media.desktop`
-    padding: 5rem;
-  `}
+        padding: 5rem;
+    `}
 `;
 
 export const PageHeading = styled.h1`

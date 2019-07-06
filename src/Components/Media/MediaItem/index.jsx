@@ -26,35 +26,53 @@ class MediaItem extends Component {
         this.state = {
             source: '',
             resume: false,
+            autoplay: false,
             fileList: [],
             selectedFile: {},
+            streams: [],
             mimeType: '',
         };
     }
 
     componentWillMount() {
-        const { files } = this.props;
+        const { files, location } = this.props;
+        const { state } = location;
+
         const fileList = generateFileList(files);
+        const resume = state !== undefined ? state.resume : false;
+        const autoplay = state && state.autoplay ? state.autoplay : false;
 
         this.setState({
+            resume,
+            autoplay,
             fileList,
             selectedFile: fileList[0],
         });
     }
 
     componentDidMount() {
-        const { location } = this.props;
-        const resume = location.state !== undefined ? location.state.resume : false;
+        const { autoplay, resume } = this.state;
 
-        if (location.state && location.state.autoplay === true) this.playMedia(resume);
+        if (autoplay) this.playMedia(resume);
+
+        this.setState({
+            mounted: true,
+        });
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            mounted: false,
+        });
     }
 
     fileChange = (selectedFile) => this.setState({ selectedFile });
 
     closePlayer = () => {
+        const { mounted } = this.state;
         const { dispatch, isPlaying } = this.props;
 
-        if (isPlaying) {
+        if (isPlaying && mounted) {
             this.setState({ source: '' });
             dispatch(hideVideo());
         }
@@ -68,6 +86,12 @@ class MediaItem extends Component {
             variables: { uuid: files[selectedFile.value].uuid },
         })
             .then(({ data }) => {
+                const { streams } = data.createStreamingTicket;
+                this.setState({ streams });
+
+                return data;
+            })
+            .then((data) => {
                 fetch(getBaseUrl() + data.createStreamingTicket.metadataPath)
                     .then((response) => response.json())
                     .then((response) => getVideoSource(isIOS, data, response))

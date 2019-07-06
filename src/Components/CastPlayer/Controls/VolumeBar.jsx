@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FormattedTime } from 'react-player-controls';
+import PropTypes from 'prop-types';
 
 import { setCastPlaystate } from 'Redux/Actions/castActions';
 
 import { SeekBarWrap, SeekBarSlider, SliderHandle, SliderBar } from './Styles';
 
-class VolumnBar extends Component {
+class VolumeBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,7 +57,7 @@ class VolumnBar extends Component {
     };
 
     render() {
-        const { playstate, isMuted } = this.props;
+        const { isMuted } = this.props;
         const { direction, isEnabled, value } = this.state;
 
         return (
@@ -76,6 +76,22 @@ class VolumnBar extends Component {
     }
 }
 
+VolumeBar.propTypes = {
+    playstate: PropTypes.shape({
+        volume: PropTypes.number,
+    }),
+    setCastPlaystate: PropTypes.func.isRequired,
+    setVolume: PropTypes.func.isRequired,
+    isMuted: PropTypes.bool,
+};
+
+VolumeBar.defaultProps = {
+    playstate: {
+        volume: 1,
+    },
+    isMuted: false,
+};
+
 const mapDispatchToProps = (dispatch) => ({
     setCastPlaystate: (playstate) => dispatch(setCastPlaystate(playstate)),
 });
@@ -83,4 +99,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     null,
     mapDispatchToProps,
-)(VolumnBar);
+)(VolumeBar);

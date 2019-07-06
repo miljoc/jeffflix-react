@@ -7,6 +7,13 @@ const REQUEST_STREAM = gql`
                 hasError
                 message
             }
+            streams {
+                language
+                title
+                streamType
+                streamID
+                streamURL
+            }
             metadataPath
             dashStreamingPath
             hlsStreamingPath

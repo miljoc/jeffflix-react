@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
 import { withRouter } from 'react-router-dom';
 import { getBaseUrl, generateMediaUrl } from 'Helpers';
 import PropTypes from 'prop-types';
@@ -167,10 +166,9 @@ MediaCard.defaultProps = {
     ],
 };
 
-export default compose(
+export default (MediaCard = withRouter(
     connect(
         null,
         mapDispatchToProps,
-    ),
-    withRouter,
-)(MediaCard);
+    )(MediaCard),
+));

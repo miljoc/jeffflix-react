@@ -15,8 +15,12 @@ const MuteUnmute = ({ isMuted, muteUnmute }) => (
 );
 
 MuteUnmute.propTypes = {
-    isMuted: PropTypes.bool.isRequired,
+    isMuted: PropTypes.bool,
     muteUnmute: PropTypes.func.isRequired,
+};
+
+MuteUnmute.defaultProps = {
+    isMuted: false,
 };
 
 export default MuteUnmute;

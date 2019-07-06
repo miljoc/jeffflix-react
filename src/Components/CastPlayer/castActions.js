@@ -58,7 +58,14 @@ export const castEventListeners = () => {
             const mediaInfo = media.media;
 
             if (mediaInfo.metadata) {
-                store.dispatch(setSourceData(mediaInfo.metadata));
+                const hasTracks = mediaInfo.tracks && mediaInfo.tracks.length > 0;
+
+                const data = {
+                    ...mediaInfo.metadata,
+                    tracks: hasTracks ? mediaInfo.tracks : [],
+                };
+
+                store.dispatch(setSourceData(data));
                 totalDuration = mediaInfo.metadata.totalDuration;
             }
         }
@@ -107,6 +114,22 @@ export const PlayerControls = {
     },
     stop() {
         remotePlayerController.stop();
+    },
+    setTrack(trackID) {
+        const activeTrackIds = [trackID];
+        const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+        const media = castSession.getMediaSession();
+
+        let tracksInfoRequest = new chrome.cast.media.EditTracksInfoRequest(activeTrackIds);
+
+        const success = () => true;
+        const failure = () => false;
+
+        if (trackID === 9999) {
+            tracksInfoRequest = new chrome.cast.media.EditTracksInfoRequest([]);
+        }
+
+        media.editTracksInfo(tracksInfoRequest, success, failure);
     },
     seek(time) {
         store.dispatch(

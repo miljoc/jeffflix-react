@@ -11,7 +11,7 @@ const fadeInLeft = keyframes`
     opacity:1;
     left: ${(props) => props.theme.layout.sidebar};
     ${media.desktop`
-      left:0;
+        left:0;
     `}
    }
 `;
@@ -21,7 +21,7 @@ export const HeaderWrap = styled.header`
     float: left;
     width: 100%;
     z-index: 5;
-    padding: 3rem 0.5rem 0;
+    padding: 2rem 1rem 0;
     display: flex;
 
     .right-menu {
@@ -40,11 +40,11 @@ export const HeaderWrap = styled.header`
     }
 
     ${media.desktop`
-      padding:4rem 2rem 0;
+        padding:4rem 2rem 0;
     `}
 
     ${media.large`
-      padding:4rem 3rem 0;
+        padding:4rem 3rem 0;
     `}
 `;
 
@@ -66,8 +66,8 @@ export const HideNavIcon = styled(FontAwesomeIcon)`
     transition: 0.2s all;
     width: 5rem !Important;
     height: 5rem;
-    margin: 3rem 0.5rem;
-    padding: 1.75rem;
+    margin: 1.7rem 1rem;
+    padding: 1.5rem;
     cursor: pointer;
 `;
 
@@ -114,6 +114,6 @@ export const ContentOverlay = styled.div`
     transition: 0.2s all;
 
     ${media.desktop`
-      left: 0;
+        left: 0;
     `}
 `;
