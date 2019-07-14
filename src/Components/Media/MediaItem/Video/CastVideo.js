@@ -37,6 +37,7 @@ const CastVideo = ({
     source,
     mimeType,
     streams,
+    type,
 }) => {
     return new Promise((resolve, reject) => {
         const castSession = cast.framework.CastContext.getInstance().getCurrentSession();
@@ -46,13 +47,19 @@ const CastVideo = ({
         const mediaInfo = new chrome.cast.media.MediaInfo(source, mimeType);
 
         // Set generic metadata
-        mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
-
-        mediaInfo.metadata.name = name;
+        if (type === 'Episode') {
+            mediaInfo.metadata = new chrome.cast.media.GenericMediaMetadata();
+            mediaInfo.metadata.subtitle = season.series.name;
+        } else {
+            mediaInfo.metadata = new chrome.cast.media.MovieMediaMetadata();
+        }
+        const img = new chrome.cast.Image(
+            `${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`,
+        );
+        mediaInfo.metadata.title = name;
         mediaInfo.metadata.overview = overview;
-        if (season) mediaInfo.metadata.series = season.series.name;
         mediaInfo.metadata.uuid = uuid;
-        mediaInfo.metadata.image = `${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`;
+        mediaInfo.metadata.images = [img];
         mediaInfo.metadata.totalDuration = selectedFile.totalDuration;
 
         // Generate Subtitles

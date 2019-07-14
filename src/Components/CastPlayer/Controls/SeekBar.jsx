@@ -24,9 +24,13 @@ class SeekBar extends Component {
 
         if (isSeeking) return {};
 
-        return {
-            value: playtime === 0 ? 0 : (100 * playtime) / total / 100,
-        };
+        if (typeof playtime !== 'undefined') {
+            return {
+                value: playtime === 0 ? 0 : (100 * playtime) / total / 100,
+            };
+        }
+
+        return {};
     }
 
     seeking = (value) => {

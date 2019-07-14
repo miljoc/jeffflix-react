@@ -51,8 +51,6 @@ export const castEventListeners = () => {
         const context = cast.framework.CastContext.getInstance();
         const castSession = context.getCurrentSession();
 
-        store.dispatch(setCastPlayingStatus(e.value));
-
         if (castSession && castSession.getMediaSession() && castSession.getMediaSession().media) {
             const media = castSession.getMediaSession();
             const mediaInfo = media.media;
@@ -65,6 +63,7 @@ export const castEventListeners = () => {
                     tracks: hasTracks ? mediaInfo.tracks : [],
                 };
 
+                store.dispatch(setCastPlayingStatus(e.value));
                 store.dispatch(setSourceData(data));
                 totalDuration = mediaInfo.metadata.totalDuration;
             }

@@ -96,6 +96,7 @@ class MediaItem extends Component {
                     .then((response) => response.json())
                     .then((response) => getVideoSource(isIOS, data, response))
                     .then((response) => {
+                        // TODO: Set source in redux
                         this.setState({
                             source: response.source,
                             mimeType: response.mimeType,
@@ -108,7 +109,7 @@ class MediaItem extends Component {
     };
 
     render() {
-        const { posterPath, season, type, uuid } = this.props;
+        const { posterPath, season, type, uuid, isConnected } = this.props;
         const { selectedFile, fileList } = this.state;
         const background = posterPath || season.series.posterPath;
 
@@ -140,6 +141,7 @@ class MediaItem extends Component {
                             files={fileList}
                             fileChange={this.fileChange}
                             playMedia={this.playMedia}
+                            isConnected={isConnected}
                         />
                     </MediaRightCol>
                 </MediaFull>
@@ -156,10 +158,11 @@ class MediaItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { video } = state;
+    const { video, cast } = state;
 
     return {
         isPlaying: video.playing,
+        isConnected: cast.connected,
     };
 };
 

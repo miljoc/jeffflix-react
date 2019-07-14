@@ -8,14 +8,23 @@ const aRotate = keyframes`${rotateIn}`;
 const aHeadShake = keyframes`${headShake}`;
 
 const aFadeInUp = keyframes`
-  0% {
-    opacity:0;
-    transform: translateY(1rem);
-  }
-  100% {
-    opacity:1;
-    transform: translateY(0);
-  }
+    0% {
+        opacity:0;
+        transform: translateY(1rem);
+    }
+    100% {
+        opacity:1;
+        transform: translateY(0);
+    }
 `;
 
-export { aFadeIn, aZoomIn, aFadeOut, aRotate, aHeadShake, aFadeInUp };
+const aRotateTranslate = keyframes`
+    from {
+        transform: rotate(0deg) translateX(-50%) translateY(-50%);
+    }
+    to {
+        transform: rotate(360deg) translateX(-50%) translateY(-50%);
+    }
+`;
+
+export { aFadeIn, aZoomIn, aFadeOut, aRotate, aHeadShake, aFadeInUp, aRotateTranslate };

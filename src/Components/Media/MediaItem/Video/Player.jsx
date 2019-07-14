@@ -4,7 +4,6 @@ import { throttle } from 'lodash';
 import { graphql } from 'react-apollo';
 import videojs from 'video.js';
 import '@videojs/http-streaming';
-import chromecast from '@silvermine/videojs-chromecast';
 import './DebugOverlay';
 
 // NOTE(Leon Handreke): Ideally this should be imported from videojs-http-source-selector because
@@ -20,23 +19,11 @@ import {
     updatePlayStateMovie,
 } from 'Components/Media/Actions/updatePlayState';
 
-chromecast(videojs);
-
 class Player extends Component {
-    t = throttle(
-        () => this.playStateMutation(Math.floor(this.player.currentTime())),
-        2000,
-    );
+    t = throttle(() => this.playStateMutation(Math.floor(this.player.currentTime())), 2000);
 
     componentDidMount() {
-        const {
-            resume,
-            playState,
-            source,
-            mimeType,
-            transmuxed,
-            dispatch,
-        } = this.props;
+        const { resume, playState, source, mimeType, transmuxed, dispatch } = this.props;
 
         const videoSource = {
             src: source,
@@ -59,11 +46,8 @@ class Player extends Component {
         const videoJsOptions = {
             sources: [videoSource],
             autoplay: true,
-            techOrder: ['chromecast', 'html5'],
+            techOrder: ['html5'],
             plugins: {
-                chromecast: {
-                    receiverAppID: '3CCE45F7',
-                },
                 httpSourceSelector: {
                     showAutoItem: true,
                 },
@@ -86,16 +70,11 @@ class Player extends Component {
             // Choose the transmuxed (= highest-bandwidth) version initially.
             videoJsOptions.html5.hls.bandwidth = 1e12;
         }
-        this.player = videojs(
-            this.videoNode,
-            videoJsOptions,
-            function onPlayerReady() {
-                this.debugOverlay();
-                this.chromecast();
-                this.qualityLevels();
-                this.httpSourceSelector();
-            },
-        );
+        this.player = videojs(this.videoNode, videoJsOptions, function onPlayerReady() {
+            this.debugOverlay();
+            this.qualityLevels();
+            this.httpSourceSelector();
+        });
 
         this.player.on('timeupdate', () => {
             this.t();

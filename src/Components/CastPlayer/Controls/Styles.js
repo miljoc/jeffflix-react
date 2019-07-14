@@ -7,7 +7,7 @@ export const PlayerButton = styled.button`
     background: none;
     border: none;
     width: 5rem;
-    height: 2.5rem;
+    height: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,7 +16,7 @@ export const PlayerButton = styled.button`
 
     &:hover {
         opacity: 1;
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
 `;
 
@@ -29,7 +29,7 @@ export const PlayerIcon = styled(FontAwesomeIcon)`
 export const PlayerButtonSmall = styled.button`
     background: none;
     border: none;
-    width: 3rem;
+    width: rem;
     height: 3rem;
     display: flex;
     align-items: center;

@@ -6,8 +6,7 @@ export const CastPlayerWrap = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
-    background: ${(props) => props.theme.dark};
-    border-top: 1px solid ${(props) => props.theme.sidebar};
+    background: #1a1d2a;
     width: 100%;
     z-index: 98;
     height: ${(props) => props.theme.layout.playerMobile};
@@ -35,8 +34,7 @@ export const CastingInfo = styled.div`
         left: 1rem;
         width: 12rem;
         padding: 1rem;
-        background: ${(props) => props.theme.dark};
-        border: 1px solid ${(props) => props.theme.sidebar};
+        background: #1a1d2a;
         display: none;
 
         ${media.tablet`
@@ -86,7 +84,7 @@ export const CastingControls = styled.div`
     `}
 `;
 
-export const CastingVolumne = styled.div`
+export const CastingVolume = styled.div`
     margin-left: auto;
     width: 100%;
     display: flex;

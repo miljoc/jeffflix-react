@@ -27,7 +27,7 @@ class CastPlayer extends Component {
     };
 
     render() {
-        const { isCasting, castPlaying } = this.props;
+        const { isCasting } = this.props;
 
         return (
             <Fragment>
@@ -35,7 +35,7 @@ class CastPlayer extends Component {
                     url="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
                     onLoad={() => this.handleScriptLoad()}
                 />
-                {isCasting && castPlaying && <CastControls {...this.props} />}
+                {isCasting && <CastControls {...this.props} />}
             </Fragment>
         );
     }
@@ -43,7 +43,7 @@ class CastPlayer extends Component {
 
 CastPlayer.propTypes = {
     isCasting: PropTypes.bool.isRequired,
-    castPlaying: PropTypes.bool.isRequired,
+    castSending: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -52,6 +52,7 @@ const mapStateToProps = (state) => {
     return {
         isCasting: cast.connected,
         castPlaying: cast.playing,
+        castSending: cast.sending,
         metadata: cast.metadata,
         playstate: cast.playstate,
     };
