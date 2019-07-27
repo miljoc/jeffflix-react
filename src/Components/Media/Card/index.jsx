@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { getBaseUrl, generateMediaUrl } from 'Helpers';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import LazyLoad from 'react-lazyload';
 
 import { showModal, RESUME_MODAL } from 'Redux/Actions/modalActions';
 
@@ -13,7 +12,7 @@ import MediaInfo from './MediaInfo';
 import MediaName from './MediaName';
 
 import placeholder from './placeholder.png';
-import { CardPoster, CardWrap, CardPopup, PosterWrap, PopupLink, PopupIcon } from './Styles';
+import { CardPoster, CardWrap, CardPopup, PosterWrap, PopupLink, PopupIcon, Lazy } from './Styles';
 
 class MediaCard extends Component {
     state = {
@@ -101,12 +100,7 @@ class MediaCard extends Component {
             <Fragment>
                 <CardWrap onClick={(e) => this.cardClick(e, url, history, showPlayStatus)}>
                     <PosterWrap>
-                        <LazyLoad
-                            height={type === 'Episode' ? 125 : 230}
-                            debounce={100}
-                            overflow
-                            resize
-                        >
+                        <Lazy wide={wide} height={0} debounce={100} overflow resize>
                             <CardPoster hover={hover} wide={wide} bgimg={bgImage}>
                                 <MediaInfo
                                     {...this.props}
@@ -114,7 +108,7 @@ class MediaCard extends Component {
                                     showPlayStatus={showPlayStatus}
                                 />
                             </CardPoster>
-                        </LazyLoad>
+                        </Lazy>
                         {hover && (
                             <CardPopup>
                                 <PopupLink>

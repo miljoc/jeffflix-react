@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { aFadeIn } from 'Styles/Animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
+import LazyLoad from 'react-lazyload';
 
 import placeholder from './placeholder.png';
 
@@ -23,17 +24,28 @@ export const PosterWrap = styled.div`
     overflow: hidden;
 `;
 
+export const Lazy = styled(LazyLoad)`
+    padding-top: ${(props) => (props.wide ? '16rem' : props.theme.card.paddingTop)};
+
+    ${media.tablet`
+        padding-top: ${(props) => (props.wide ? '13rem' : props.theme.card.paddingTop)};
+    `}
+
+    ${media.desktop`
+        padding-top: ${(props) =>
+            props.wide ? props.theme.wideCard.paddingTop : props.theme.card.paddingTop};
+    `}
+`;
+
 export const CardPoster = styled.span`
     width: 100%;
     float: left;
     padding: 0.2rem;
-    background-image: url(${(props) =>
-        props.bgimg ? props.bgimg : placeholder});
+    background-image: url(${(props) => (props.bgimg ? props.bgimg : placeholder)});
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    padding-top: ${(props) =>
-        props.wide ? '16rem' : props.theme.card.paddingTop};
+    padding-top: ${(props) => (props.wide ? '16rem' : props.theme.card.paddingTop)};
     position: relative;
     z-index: 1;
     opacity: 0;
@@ -44,22 +56,17 @@ export const CardPoster = styled.span`
 
     ${PosterWrap}:hover & {
         filter: ${(props) =>
-            props.hover
-                ? 'grayscale(25%) saturate(75%)'
-                : 'grayscale(0) saturate(125%)'};
+            props.hover ? 'grayscale(25%) saturate(75%)' : 'grayscale(0) saturate(125%)'};
     }
 
     ${media.tablet`
-    padding-top: ${(props) =>
-        props.wide ? '13rem' : props.theme.card.paddingTop};
-  `}
+        padding-top: ${(props) => (props.wide ? '13rem' : props.theme.card.paddingTop)};
+    `}
 
     ${media.desktop`
-    padding-top: ${(props) =>
-        props.wide
-            ? props.theme.wideCard.paddingTop
-            : props.theme.card.paddingTop};
-  `}
+        padding-top: ${(props) =>
+            props.wide ? props.theme.wideCard.paddingTop : props.theme.card.paddingTop};
+    `}
 `;
 
 export const CardTitle = styled.h3`
