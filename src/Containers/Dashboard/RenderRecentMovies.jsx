@@ -30,18 +30,13 @@ class RenderRecentMovies extends Component {
                     if (loading) return <Loading />;
                     if (error) return `Error! ${error.message}`;
 
-                    const movies = data.recentlyAdded.filter(
-                        (m) => m.type === 'Movie',
-                    );
+                    const movies = data.recentlyAdded.filter((m) => m.type === 'Movie');
 
                     if (movies.length === 0) {
                         return (
                             <NoResults alignLeft>
                                 {'You currently have no Movies.'}
-                                <button
-                                    type="button"
-                                    onClick={() => this.toggleModal()}
-                                >
+                                <button type="button" onClick={() => this.toggleModal()}>
                                     Add a Movies folder
                                 </button>
                             </NoResults>

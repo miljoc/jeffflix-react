@@ -7,7 +7,7 @@ import navigation from './navigationReducer';
 import historyLocation from './historyReducer';
 import video from './videoReducer';
 import library from './libraryReducer';
-import auth from './authReducer';
+import cast from './castReducer';
 import viewport from './viewportReducer';
 
 const responsiveBreakpoints = {
@@ -20,20 +20,17 @@ const responsiveBreakpoints = {
 export default (history) =>
     combineReducers({
         router: connectRouter(history),
-        browser: createResponsiveStateReducer(
-            responsiveBreakpoints,
-            {
-                extraFields: () => ({
-                    width: window.innerWidth,
-                    height: window.innerHeight
-                })
-            },
-        ),
+        browser: createResponsiveStateReducer(responsiveBreakpoints, {
+            extraFields: () => ({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            }),
+        }),
         modal,
         navigation,
         historyLocation,
         video,
         library,
-        auth,
+        cast,
         viewport,
     });

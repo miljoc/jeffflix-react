@@ -10,16 +10,12 @@ const LoadingSpinner = styled(FontAwesomeIcon)`
     position: ${(props) => (props.relative ? 'relative' : 'absolute')};
     top: 50%;
     left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    margin-top: -${(props) => props.fsize.replace('rem', '') / 2}rem;
+    margin-left: -${(props) => props.fsize.replace('rem', '') / 2}rem;
 `;
 
 const Loading = ({ relative, fsize }) => (
-    <LoadingSpinner
-        icon={faSpinner}
-        spin
-        relative={relative ? 1 : 0}
-        fsize={fsize}
-    />
+    <LoadingSpinner icon={faSpinner} spin relative={relative ? 1 : 0} fsize={fsize} />
 );
 
 Loading.propTypes = {

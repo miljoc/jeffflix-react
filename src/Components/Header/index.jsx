@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from 'react';
 import { compose } from 'lodash/fp';
 import { connect } from 'react-redux';
@@ -36,9 +35,12 @@ class Header extends Component {
                         <BackIcon icon={faArrowLeft} />
                     </BackButton>
                 )}
-
                 <Search value={value} updateSearch={this.updateSearch} />
-                <Logout />
+
+                <div className="right-menu">
+                    <google-cast-launcher />
+                    <Logout />
+                </div>
             </HeaderWrap>
         );
     }
@@ -59,6 +61,7 @@ Header.defaultProps = {
 
 const mapStateToProps = (state) => {
     const { historyLocation } = state;
+
     return {
         previousLocation: historyLocation.previousLocation,
         currentLocation: historyLocation.currentLocation,
@@ -67,8 +70,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    connect(
-        mapStateToProps,
-        null,
-    ),
+    connect(mapStateToProps),
 )(Header);

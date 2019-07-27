@@ -85,9 +85,7 @@ const MediaInfo = (props) => {
 const requiredPropsCheck = (props, propName, componentName) => {
     const { year, airDate } = props;
     if (!year && !airDate) {
-        return new Error(
-            `One of 'year' or 'airDate' is required by '${componentName}' component.`,
-        );
+        return new Error(`One of 'year' or 'airDate' is required by '${componentName}' component.`);
     }
 
     return null;

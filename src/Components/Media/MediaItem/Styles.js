@@ -218,8 +218,7 @@ export const MediaDetails = styled.ul`
         }
 
         &:nth-child(2) {
-            color: ${(props) =>
-                props.watched ? props.theme.secondary : props.theme.primary};
+            color: ${(props) => (props.watched ? props.theme.secondary : props.theme.primary)};
         }
 
         &.warning {
@@ -252,7 +251,7 @@ export const MediaActionsWrap = styled.div`
         font-size: 1.4rem;
         color: #fff;
         font-weight: 600;
-        background: ${(props) => props.theme.sidebar};
+        background: ${(props) => props.theme.dark};
         transition: 0.2s all;
         cursor: pointer;
 

@@ -34,8 +34,8 @@ const FETCH_EPISODE = gql`
                     healthy
                 }
                 streams {
-                    codecMime
                     streamType
+                    codecMime
                     resolution
                     bitRate
                     language

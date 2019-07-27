@@ -14,6 +14,7 @@ const MediaOverview = (props) => {
         fileChange,
         playMedia,
         resumeMedia,
+        isConnected,
     } = props;
 
     const { type, uuid, playState } = mediaInfo;
@@ -21,11 +22,7 @@ const MediaOverview = (props) => {
     return (
         <Fragment>
             <MediaInfo {...mediaInfo} selectedFile={selectedFile} />
-            <MediaFiles
-                files={files}
-                selectedFile={selectedFile}
-                fileChange={fileChange}
-            />
+            <MediaFiles files={files} selectedFile={selectedFile} fileChange={fileChange} />
             <MediaSubtitles selectedFile={selectedFile} />
             <MediaAudio selectedFile={selectedFile} />
             <MediaActions
@@ -34,6 +31,7 @@ const MediaOverview = (props) => {
                 playState={playState}
                 playMedia={playMedia}
                 resumeMedia={resumeMedia}
+                isConnected={isConnected}
             />
         </Fragment>
     );

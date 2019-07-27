@@ -41,31 +41,37 @@ class RenderMovieList extends Component {
                             <InfiniteScroll
                                 id="content"
                                 threshold={500}
-                                onLoadMore={() => fetchMore({
-                                    variables: {
-                                        offset: data.movies.length
-                                    },
-                                    updateQuery: (prev, { fetchMoreResult }) => {
-                                        if (!fetchMoreResult) return prev;
+                                onLoadMore={() =>
+                                    fetchMore({
+                                        variables: {
+                                            offset: data.movies.length,
+                                        },
+                                        updateQuery: (prev, { fetchMoreResult }) => {
+                                            if (!fetchMoreResult) return prev;
 
-                                        return {
-                                            ...prev,
-                                            movies: [
-                                                ...prev.movies,
-                                                ...fetchMoreResult.movies.filter(item => (
-                                                    !prev.movies.some(prevItem => prevItem.uuid === item.uuid)
-                                                ))
-                                            ]
-                                        };
-                                    }
-                                })}
+                                            return {
+                                                ...prev,
+                                                movies: [
+                                                    ...prev.movies,
+                                                    ...fetchMoreResult.movies.filter(
+                                                        (item) =>
+                                                            !prev.movies.some(
+                                                                (prevItem) =>
+                                                                    prevItem.uuid === item.uuid,
+                                                            ),
+                                                    ),
+                                                ],
+                                            };
+                                        },
+                                    })
+                                }
                             >
                                 {() => {
                                     return orderBy(data.movies, ['name'], ['asc']).map((m) => (
                                         <LibraryListItem key={m.uuid}>
                                             <MediaCard {...m} />
                                         </LibraryListItem>
-                                    ))
+                                    ));
                                 }}
                             </InfiniteScroll>
                         );
@@ -74,17 +80,14 @@ class RenderMovieList extends Component {
                     return (
                         <NoResults>
                             You currently have no Movies.
-                            <button
-                                type="button"
-                                onClick={() => this.toggleModal()}
-                            >
+                            <button type="button" onClick={() => this.toggleModal()}>
                                 Add a Movies folder
                             </button>
                         </NoResults>
                     );
                 }}
             </Query>
-        )
+        );
     }
 }
 

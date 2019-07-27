@@ -29,18 +29,13 @@ class RenderRecentEpisodes extends Component {
                     if (loading) return <Loading />;
                     if (error) return `Error! ${error.message}`;
 
-                    const episodes = data.recentlyAdded.filter(
-                        (m) => m.type === 'Episode',
-                    );
+                    const episodes = data.recentlyAdded.filter((m) => m.type === 'Episode');
 
                     if (episodes.length === 0) {
                         return (
                             <NoResults alignLeft>
                                 {'You currently have no Series.'}
-                                <button
-                                    type="button"
-                                    onClick={() => this.toggleModal()}
-                                >
+                                <button type="button" onClick={() => this.toggleModal()}>
                                     Add a Series folder
                                 </button>
                             </NoResults>
@@ -52,11 +47,7 @@ class RenderRecentEpisodes extends Component {
 
                         return (
                             <MediaCardWrap key={ra.uuid}>
-                                <MediaCard
-                                    showText
-                                    {...ra}
-                                    posterPath={posterPath}
-                                />
+                                <MediaCard showText {...ra} posterPath={posterPath} />
                             </MediaCardWrap>
                         );
                     });

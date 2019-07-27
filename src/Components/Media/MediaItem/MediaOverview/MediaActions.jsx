@@ -21,6 +21,21 @@ class MediaActions extends Component {
         }
     };
 
+    playText = () => {
+        const { isConnected, playState } = this.props;
+        const resume = playState.playtime > 0;
+
+        if (isConnected) {
+            return 'Cast';
+        }
+
+        if (resume) {
+            return 'Play From Start';
+        }
+
+        return 'Play';
+    };
+
     render() {
         const { playState, playMedia } = this.props;
         const resume = playState.playtime > 0;
@@ -28,7 +43,7 @@ class MediaActions extends Component {
         return (
             <MediaActionsWrap>
                 <button type="button" onClick={() => playMedia(false)}>
-                    {resume ? 'Play From Start' : 'Play'}
+                    {this.playText()}
                 </button>
 
                 {resume && (
@@ -38,9 +53,7 @@ class MediaActions extends Component {
                 )}
 
                 <button type="button" onClick={() => this.toggleWatchedState()}>
-                    {playState.finished
-                        ? 'Mark As Unwatched'
-                        : 'Mark As Watched'}
+                    {playState.finished ? 'Mark As Unwatched' : 'Mark As Watched'}
                 </button>
             </MediaActionsWrap>
         );
@@ -54,6 +67,7 @@ MediaActions.propTypes = {
         finished: PropTypes.bool,
         playtime: PropTypes.number,
     }).isRequired,
+    isConnected: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     playMedia: PropTypes.func.isRequired,
 };

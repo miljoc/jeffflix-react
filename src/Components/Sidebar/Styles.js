@@ -8,12 +8,11 @@ export const SidebarWrap = styled.nav`
   position: fixed;
   top 0;
   left: 0;
-  height: 100vh;
-  background:${(props) =>
-      props.theme.background && transparentize(0.5, props.theme.background)};
+  height: ${(props) =>
+      props.castPlaying ? `calc(100vh - ${props.theme.layout.player})` : '100vh'};
+  background:${(props) => props.theme.sidebar && transparentize(0.5, props.theme.sidebar)};
   transition:.2s transform;
-  transform: translateX(${(props) =>
-      props.navHidden ? `-${props.theme.layout.sidebar}` : '0'});
+  transform: translateX(${(props) => (props.navHidden ? `-${props.theme.layout.sidebar}` : '0')});
   z-index: ${(props) => (props.videoOpen ? 4 : 5)};
 `;
 

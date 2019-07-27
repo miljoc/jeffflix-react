@@ -23,18 +23,22 @@ const SingleSelect = ({
     value,
     placeholder,
     name,
-}) => (
-    <Select
-        placeholder={placeholder}
-        value={value}
-        options={options}
-        onChange={onChange}
-        components={{ DropdownIndicator }}
-        styles={SelectStyle}
-        name={name}
-        isSearchable={searchable}
-    />
-);
+    menuPlacement,
+}) => {
+    return (
+        <Select
+            placeholder={placeholder}
+            value={value}
+            options={options}
+            onChange={onChange}
+            components={{ DropdownIndicator }}
+            styles={SelectStyle}
+            name={name}
+            isSearchable={searchable}
+            menuPlacement={menuPlacement}
+        />
+    );
+};
 
 const allowNull = (wrappedPropTypes) => {
     return (props, propName, ...rest) => {
@@ -48,15 +52,14 @@ SingleSelect.propTypes = {
     searchable: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
     name: PropTypes.string,
+    menuPlacement: PropTypes.string,
     value: allowNull(
         PropTypes.shape({
-            value: PropTypes.string,
             label: PropTypes.string,
         }),
     ),
     options: PropTypes.arrayOf(
         PropTypes.shape({
-            value: PropTypes.string.isRequired,
             label: PropTypes.string.isRequired,
         }),
     ).isRequired,
@@ -67,6 +70,7 @@ SingleSelect.defaultProps = {
     value: null,
     placeholder: null,
     name: '',
+    menuPlacement: 'bottom',
 };
 
 export default SingleSelect;

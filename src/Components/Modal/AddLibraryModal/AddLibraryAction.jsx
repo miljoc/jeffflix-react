@@ -88,13 +88,9 @@ class AddLibraryAction extends Component {
     render() {
         const { disabled, type, filepath, remotes, remote } = this.state;
         let remotesPlaceholder = 'Select Remote Path';
-        const libraryTypes = [
-            { value: '0', label: 'Local' },
-            { value: '1', label: 'Rclone' },
-        ];
+        const libraryTypes = [{ value: '0', label: 'Local' }, { value: '1', label: 'Rclone' }];
 
-        if (remotes.length === 0)
-            remotesPlaceholder = 'No Rclone Remotes Found...';
+        if (remotes.length === 0) remotesPlaceholder = 'No Rclone Remotes Found...';
 
         return (
             <AddLibraryWrap>

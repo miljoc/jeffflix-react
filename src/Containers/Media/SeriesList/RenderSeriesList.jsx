@@ -41,43 +41,46 @@ class RenderSeriesList extends Component {
                             <InfiniteScroll
                                 id="content"
                                 threshold={500}
-                                onLoadMore={() => fetchMore({
-                                    variables: {
-                                        offset: data.series.length
-                                    },
-                                    updateQuery: (prev, { fetchMoreResult }) => {
-                                        if (!fetchMoreResult) return prev;
+                                onLoadMore={() =>
+                                    fetchMore({
+                                        variables: {
+                                            offset: data.series.length,
+                                        },
+                                        updateQuery: (prev, { fetchMoreResult }) => {
+                                            if (!fetchMoreResult) return prev;
 
-                                        return {
-                                            ...prev,
-                                            series: [
-                                                ...prev.series,
-                                                ...fetchMoreResult.series.filter(item => (
-                                                    !prev.series.some(prevItem => prevItem.uuid === item.uuid)
-                                                ))
-                                            ]
-                                        };
-                                    }
-                                })}
+                                            return {
+                                                ...prev,
+                                                series: [
+                                                    ...prev.series,
+                                                    ...fetchMoreResult.series.filter(
+                                                        (item) =>
+                                                            !prev.series.some(
+                                                                (prevItem) =>
+                                                                    prevItem.uuid === item.uuid,
+                                                            ),
+                                                    ),
+                                                ],
+                                            };
+                                        },
+                                    })
+                                }
                             >
                                 {() => {
                                     return orderBy(data.series, ['name'], ['asc']).map((s) => (
                                         <LibraryListItem key={s.uuid}>
                                             <MediaCard {...s} />
                                         </LibraryListItem>
-                                    ))
+                                    ));
                                 }}
                             </InfiniteScroll>
-                        )
+                        );
                     }
 
                     return (
                         <NoResults>
                             You currently have no Series.
-                            <button
-                                type="button"
-                                onClick={() => this.toggleModal()}
-                            >
+                            <button type="button" onClick={() => this.toggleModal()}>
                                 Add a Series folder
                             </button>
                         </NoResults>

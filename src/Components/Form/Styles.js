@@ -52,9 +52,9 @@ export const SelectStyle = {
             color: '#FF9B3D',
         },
     }),
-    control: (base, { isFocused }) => ({
+    control: (base, { menuIsOpen }) => ({
         width: '100%',
-        background: isFocused ? '#0e0f18' : 'rgba(0,0,0,0.2)',
+        background: menuIsOpen ? '#0e0f18' : 'rgba(0,0,0,0.2)',
         cursor: 'pointer',
         color: '#FF9B3D',
         position: 'relative',
@@ -92,6 +92,7 @@ export const SelectStyle = {
         overflow: 'hidden',
         lineHeight: '2rem',
         border: 'none',
+        textTransform: 'capitalize',
     }),
     valueContainer: (base) => ({
         ...base,
@@ -104,7 +105,7 @@ export const SelectStyle = {
         display: 'inline-block',
         padding: '0',
     }),
-    dropdownIndicator: (base, { isFocused }) => ({
+    dropdownIndicator: (base) => ({
         ...base,
         padding: 0,
         marginLeft: '1rem',
@@ -117,7 +118,6 @@ export const SelectStyle = {
         display: 'flex',
         justifyContent: 'center',
         transition: '0.2s all',
-        transform: isFocused ? 'rotate(180deg)' : 'rotate(0)',
     }),
     indicatorSeparator: () => ({
         display: 'none',

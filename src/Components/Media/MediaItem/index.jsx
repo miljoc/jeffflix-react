@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import { compose } from 'lodash/fp';
-import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { isIOS } from 'react-device-detect';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
-import { canPlayCodec, getBaseUrl, generateFileList } from 'Helpers';
-import { showVideo, hideVideo } from 'Redux/Actions/videoActions';
 
 import REQUEST_STREAM from 'Mutations/requestStream';
+import { generateFileList, getBaseUrl } from 'Helpers';
+import { hideVideo } from 'Redux/Actions/videoActions';
+
 import Breadcrumbs from 'Components/Breadcrumbs';
 import MediaCard from 'Components/Media/Card';
+import getVideoSource from './Video/getVideoSource';
 import MediaDropdown from './MediaDropdown';
 import MediaOverview from './MediaOverview';
-import Video from './Video';
+import VideoController from './Video';
 
-import { VideoWrap, MediaFull, CloseVideo } from './Styles';
-import {
-    MediaFullWrap,
-    MediaLeftCol,
-    MediaRightCol,
-    MediaBackground,
-} from '../Styles';
+import { MediaFull } from './Styles';
+import { MediaFullWrap, MediaLeftCol, MediaRightCol, MediaBackground } from '../Styles';
 
 class MediaItem extends Component {
     constructor(props) {
@@ -31,90 +26,81 @@ class MediaItem extends Component {
         this.state = {
             source: '',
             resume: false,
+            autoplay: false,
             fileList: [],
             selectedFile: {},
+            streams: [],
             mimeType: '',
         };
     }
 
     componentWillMount() {
-        const { files } = this.props;
+        const { files, location } = this.props;
+        const { state } = location;
+
         const fileList = generateFileList(files);
+        const resume = state !== undefined ? state.resume : false;
+        const autoplay = state && state.autoplay ? state.autoplay : false;
 
         this.setState({
+            resume,
+            autoplay,
             fileList,
             selectedFile: fileList[0],
         });
     }
 
     componentDidMount() {
-        const { location } = this.props;
-        const resume =
-            location.state !== undefined ? location.state.resume : false;
+        const { autoplay, resume } = this.state;
 
-        if (location.state && location.state.autoplay === true)
-            this.playMedia(resume);
-        document.addEventListener('keydown', this.escapeClose, false);
+        if (autoplay) this.playMedia(resume);
+
+        this.setState({
+            mounted: true,
+        });
     }
 
     componentWillUnmount() {
-        document.removeEventListener('keydown', this.escapeClose, false);
+        this.setState({
+            mounted: false,
+        });
     }
 
-    escapeClose = (e) => e.key === 'Escape' && this.closeMedia();
+    fileChange = (selectedFile) => this.setState({ selectedFile });
 
-    fileChange = (selectedFile) => {
-        this.setState({
-            selectedFile,
-        });
-    };
+    closePlayer = () => {
+        const { mounted } = this.state;
+        const { dispatch, isPlaying } = this.props;
 
-    closeMedia = () => {
-        const { dispatch } = this.props;
-
-        dispatch(hideVideo());
-
-        this.setState({
-            source: '',
-        });
+        if (isPlaying && mounted) {
+            this.setState({ source: '' });
+            dispatch(hideVideo());
+        }
     };
 
     playMedia = (resume) => {
-        const { mutate, files, dispatch } = this.props;
+        const { files, mutate } = this.props;
         const { selectedFile } = this.state;
-
-        dispatch(showVideo());
-
-        this.setState({ resume });
 
         mutate({
             variables: { uuid: files[selectedFile.value].uuid },
         })
             .then(({ data }) => {
+                const { streams } = data.createStreamingTicket;
+                this.setState({ streams });
+
+                return data;
+            })
+            .then((data) => {
                 fetch(getBaseUrl() + data.createStreamingTicket.metadataPath)
                     .then((response) => response.json())
+                    .then((response) => getVideoSource(isIOS, data, response))
                     .then((response) => {
-                        const playableCodecs = response.checkCodecs.filter(
-                            canPlayCodec,
-                        );
-
-                        const streamPath = isIOS
-                            ? data.createStreamingTicket.hlsStreamingPath
-                            : data.createStreamingTicket.dashStreamingPath;
-
-                        const mimeType = isIOS
-                            ? 'application/x-mpegURL'
-                            : 'application/dash+xml';
-
-                        const queryParams = playableCodecs
-                            .map(
-                                (c) =>
-                                    `playableCodecs=${encodeURIComponent(c)}`,
-                            )
-                            .join('&');
+                        // TODO: Set source in redux
                         this.setState({
-                            source: `${getBaseUrl()}${streamPath}?${queryParams}`,
-                            mimeType,
+                            source: response.source,
+                            mimeType: response.mimeType,
+                            resume,
                         });
                     })
                     .catch((err) => err);
@@ -123,19 +109,9 @@ class MediaItem extends Component {
     };
 
     render() {
-        const { posterPath, season, type, uuid, playState } = this.props;
-        const { source, mimeType, fileList, selectedFile, resume } = this.state;
+        const { posterPath, season, type, uuid, isConnected } = this.props;
+        const { selectedFile, fileList } = this.state;
         const background = posterPath || season.series.posterPath;
-
-        const videoCodec = fileList[selectedFile.value].streams
-            .filter((s) => s.streamType === 'video')
-            .map((s) => s.codecMime)[0];
-
-        const videoSource = {
-            src: source,
-            type: mimeType,
-        };
-        const transmuxed = canPlayCodec(videoCodec);
 
         const mediaInfo = {
             ...this.props,
@@ -165,31 +141,33 @@ class MediaItem extends Component {
                             files={fileList}
                             fileChange={this.fileChange}
                             playMedia={this.playMedia}
+                            isConnected={isConnected}
                         />
                     </MediaRightCol>
                 </MediaFull>
 
-                {source !== '' ? (
-                    <VideoWrap>
-                        <CloseVideo icon={faTimes} onClick={this.closeMedia} />
-                        <Video
-                            source={videoSource}
-                            transmuxed={transmuxed}
-                            resume={resume}
-                            playState={playState}
-                            uuid={uuid}
-                            length={selectedFile.totalDuration}
-                            type={type}
-                        />
-                    </VideoWrap>
-                ) : null}
+                <VideoController
+                    {...this.props}
+                    {...this.state}
+                    background={background}
+                    closePlayer={() => this.closePlayer()}
+                />
             </MediaFullWrap>
         );
     }
 }
 
+const mapStateToProps = (state) => {
+    const { video, cast } = state;
+
+    return {
+        isPlaying: video.playing,
+        isConnected: cast.connected,
+    };
+};
+
 export default compose(
     withRouter,
     graphql(REQUEST_STREAM),
-    connect(),
+    connect(mapStateToProps),
 )(MediaItem);

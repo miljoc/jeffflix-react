@@ -14,6 +14,10 @@
         "node": true,
         "jasmine": true
     },
+    "globals": {
+        "cast": "writable",
+        "chrome": "writable"
+    },
     "rules": {
         "no-class-assign": "off",
         "no-console": "warn",
