@@ -27,11 +27,11 @@ class VideoController extends Component {
     }
 
     componentDidUpdate() {
-        const { source, mimeType, isCasting, setCastSendingStatus } = this.props;
+        const { castsource, mimeType, isCasting, setCastSendingStatus } = this.props;
 
-        if (source.length > 0 && isCasting) {
+        if (castsource.length > 0 && isCasting) {
             setCastSendingStatus(true);
-            this.castMedia(source, mimeType);
+            this.castMedia(castsource, mimeType);
         }
     }
 
@@ -119,6 +119,7 @@ VideoController.propTypes = {
     isCasting: PropTypes.bool.isRequired,
     closePlayer: PropTypes.func.isRequired,
     source: PropTypes.string.isRequired,
+    castsource: PropTypes.string.isRequired,
     files: PropTypes.arrayOf(
         PropTypes.shape({
             fileName: PropTypes.string,
