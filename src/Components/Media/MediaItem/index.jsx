@@ -25,6 +25,7 @@ class MediaItem extends Component {
 
         this.state = {
             source: '',
+            castsource: '',
             resume: false,
             autoplay: false,
             fileList: [],
@@ -79,7 +80,7 @@ class MediaItem extends Component {
     };
 
     playMedia = (resume) => {
-        const { files, mutate } = this.props;
+        const { files, mutate, isConnected } = this.props;
         const { selectedFile } = this.state;
 
         mutate({
@@ -96,12 +97,16 @@ class MediaItem extends Component {
                     .then((response) => response.json())
                     .then((response) => getVideoSource(isIOS, data, response))
                     .then((response) => {
-                        // TODO: Set source in redux
                         this.setState({
-                            source: response.source,
                             mimeType: response.mimeType,
                             resume,
                         });
+
+                        if (isConnected) {
+                            this.setState({ castsource: response.source });
+                        } else {
+                            this.setState({ source: response.source });
+                        }
                     })
                     .catch((err) => err);
             })
