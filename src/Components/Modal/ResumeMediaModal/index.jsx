@@ -6,21 +6,15 @@ import { convertToMinutesSeconds } from 'Helpers';
 
 import { hideModal } from 'Redux/Actions/modalActions';
 
-import {
-    Modal,
-    ModalWrap,
-    ModalBody,
-    ModalHeader,
-    ModalHeading,
-} from 'Components/Modal/Styles';
+import { Modal, ModalWrap, ModalBody, ModalHeader, ModalHeading } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
 import ResumeOption from './Styles';
 
 class ResumeModal extends Component {
     closeModal = () => {
-        const { hideModal } = this.props;
+        const { hModal } = this.props;
 
-        hideModal();
+        hModal();
     };
 
     handlePlayRequest = (resume, autoplay) => {
@@ -56,9 +50,7 @@ class ResumeModal extends Component {
                             onClick={() => this.handlePlayRequest(true, true)}
                         >
                             {playState &&
-                                `Resume video from ${convertToMinutesSeconds(
-                                    playState.playtime,
-                                )}`}
+                                `Resume video from ${convertToMinutesSeconds(playState.playtime)}`}
                         </ResumeOption>
                         <ResumeOption
                             type="submit"
@@ -77,7 +69,7 @@ ResumeModal.propTypes = {
     url: PropTypes.string,
     playMedia: PropTypes.func,
     history: ReactRouterPropTypes.history,
-    hideModal: PropTypes.func.isRequired,
+    hModal: PropTypes.func.isRequired,
     title: PropTypes.string,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
@@ -97,7 +89,7 @@ ResumeModal.defaultProps = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    hideModal: () => dispatch(hideModal()),
+    hModal: () => dispatch(hideModal()),
 });
 
 export default connect(
