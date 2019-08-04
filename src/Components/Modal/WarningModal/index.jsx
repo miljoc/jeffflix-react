@@ -4,20 +4,14 @@ import PropTypes from 'prop-types';
 
 import { hideModal } from 'Redux/Actions/modalActions';
 
-import {
-    Modal,
-    ModalWrap,
-    ModalBody,
-    ModalHeader,
-    ModalHeading,
-} from 'Components/Modal/Styles';
+import { Modal, ModalWrap, ModalBody, ModalHeader, ModalHeading } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
 
 class WarningModal extends Component {
     closeModal = () => {
-        const { hideModal } = this.props;
+        const { hModal } = this.props;
 
-        hideModal();
+        hModal();
     };
 
     render() {
@@ -52,11 +46,11 @@ WarningModal.propTypes = {
     message: PropTypes.string.isRequired,
     confirm: PropTypes.func.isRequired,
     cancel: PropTypes.func.isRequired,
-    hideModal: PropTypes.func.isRequired,
+    hModal: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    hideModal: () => dispatch(hideModal()),
+    hModal: () => dispatch(hideModal()),
 });
 
 export default connect(
