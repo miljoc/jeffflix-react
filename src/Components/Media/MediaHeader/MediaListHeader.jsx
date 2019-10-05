@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { compose } from 'lodash/fp';
-import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import ReactToolTip from 'react-tooltip';
@@ -8,18 +7,11 @@ import PropTypes from 'prop-types';
 
 import { compileEpisodes, generateMediaUrl } from 'Helpers';
 import { showModal } from 'Redux/Actions/modalActions';
-import UPDATE_PLAYSTATE from 'Mutations/updatePlaystate';
-import {
-    updatePlayStateSeries,
-    updatePlayStateSeason,
-} from 'Components/Media/Actions/updatePlayState';
 
-import {
-    faPlay,
-    faRandom,
-    faCheckCircle as faCheckCircleSolid,
-} from '@fortawesome/free-solid-svg-icons';
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { faPlay, faRandom } from '@fortawesome/free-solid-svg-icons';
+import EditMediaData from './EditMediaData';
+import MarkWatched from './MarkWatched';
+
 import { Header, HeaderIconWrap, HeaderIcon } from './Styles';
 
 class MediaListHeader extends Component {
@@ -34,21 +26,21 @@ class MediaListHeader extends Component {
         this.updateEpisodeList();
     };
 
-    componentDidMount = () => {
-        this.finished();
-    };
-
     updateEpisodeList = () => {
         const { data, type } = this.props;
+
         const episodes = type === 'series' ? compileEpisodes(data) : data;
         const randomize = Math.floor(Math.random() * (episodes.length + 1));
 
-        let nextEpisode;
+        let nextEpisode = episodes[0];
+        let finished = true;
 
         for (let i = 0; i < episodes.length; i += 1) {
             const el = episodes[i];
+
             if (!el.playState.finished) {
                 nextEpisode = el;
+                finished = false;
                 break;
             }
         }
@@ -56,19 +48,9 @@ class MediaListHeader extends Component {
         this.setState({
             episodes,
             nextEpisode,
+            finished,
             randomEpisode: episodes[randomize],
         });
-    };
-
-    finished = () => {
-        const { episodes } = this.state;
-        let fin = true;
-
-        episodes.forEach((episode) => {
-            if (!episode.playState.finished) fin = false;
-        });
-
-        this.setState({ finished: fin });
     };
 
     playEpisode = (uuid, resume) => {
@@ -90,33 +72,13 @@ class MediaListHeader extends Component {
         this.playEpisode(nextEpisode.uuid, resume);
     };
 
-    playRandomEpisode = () => {
-        const { randomEpisode } = this.state;
-        const resume = randomEpisode.playState.playtime > 0;
-
-        this.playEpisode(randomEpisode.uuid, resume);
-    };
-
-    markAsWatched = () => {
-        const { episodes, finished } = this.state;
-        const { mutate, uuid, type } = this.props;
-
-        episodes.forEach((episode) => {
-            if (type === 'series') {
-                updatePlayStateSeries(mutate, uuid, episode.uuid, !finished);
-            } else {
-                updatePlayStateSeason(mutate, uuid, episode.uuid, !finished);
-            }
-        });
-
-        this.setState({
-            finished: !finished,
-        });
-    };
-
     render() {
-        const { finished } = this.state;
-        const { type } = this.props;
+        const { finished, randomEpisode, episodes } = this.state;
+        const { type, name, uuid } = this.props;
+
+        const playState = {
+            finished,
+        };
 
         return (
             <Header>
@@ -128,16 +90,15 @@ class MediaListHeader extends Component {
                     <HeaderIcon icon={faPlay} />
                 </HeaderIconWrap>
 
-                <HeaderIconWrap onClick={this.playRandomEpisode} data-tip="Play Random Episode">
+                <HeaderIconWrap
+                    onClick={() => this.playEpisode(randomEpisode.uuid, false)}
+                    data-tip="Play Random Episode"
+                >
                     <HeaderIcon icon={faRandom} />
                 </HeaderIconWrap>
 
-                <HeaderIconWrap
-                    onClick={this.markAsWatched}
-                    data-tip={`Mark ${type === 'series' ? 'Series' : 'Season'} As Watched`}
-                >
-                    <HeaderIcon icon={finished ? faCheckCircleSolid : faCheckCircle} />
-                </HeaderIconWrap>
+                <MarkWatched type={type} uuid={uuid} playState={playState} episodes={episodes} />
+                {type === 'series' && <EditMediaData name={name} type={type} />}
             </Header>
         );
     }
@@ -156,8 +117,12 @@ MediaListHeader.propTypes = {
         push: PropTypes.func.isRequired,
     }).isRequired,
     type: PropTypes.string.isRequired,
-    mutate: PropTypes.func.isRequired,
     uuid: PropTypes.string.isRequired,
+    name: PropTypes.string,
+};
+
+MediaListHeader.defaultProps = {
+    name: '',
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -166,7 +131,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
     withRouter,
-    graphql(UPDATE_PLAYSTATE),
     connect(
         null,
         mapDispatchToProps,
