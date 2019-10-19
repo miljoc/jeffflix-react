@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react';
+/* eslint react/jsx-props-no-spreading: ["off"] */
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getBaseUrl, generateMediaUrl } from 'Helpers';
@@ -15,9 +16,13 @@ import placeholder from './placeholder.png';
 import { CardPoster, CardWrap, CardPopup, PosterWrap, PopupLink, PopupIcon, Lazy } from './Styles';
 
 class MediaCard extends Component {
-    state = {
-        url: '',
-    };
+    constructor() {
+        super();
+
+        this.state = {
+            url: '',
+        };
+    }
 
     componentDidMount() {
         const { type, uuid } = this.props;
@@ -70,17 +75,7 @@ class MediaCard extends Component {
     };
 
     render() {
-        const {
-            wide,
-            showText,
-            history,
-            name,
-            posterPath,
-            stillPath,
-            type,
-            files,
-            hover,
-        } = this.props;
+        const { wide, showText, history, name, posterPath, stillPath, type, files, hover } = this.props;
         const { url } = this.state;
 
         const showPlayStatus = type === 'Movie' || type === 'Episode';
@@ -97,16 +92,12 @@ class MediaCard extends Component {
         }
 
         return (
-            <Fragment>
+            <>
                 <CardWrap onClick={(e) => this.cardClick(e, url, history, showPlayStatus)}>
                     <PosterWrap>
                         <Lazy wide={wide} height={0} debounce={100} overflow resize>
                             <CardPoster hover={hover} wide={wide} bgimg={bgImage}>
-                                <MediaInfo
-                                    {...this.props}
-                                    length={length}
-                                    showPlayStatus={showPlayStatus}
-                                />
+                                <MediaInfo {...this.props} length={length} showPlayStatus={showPlayStatus} />
                             </CardPoster>
                         </Lazy>
                         {hover && (
@@ -119,7 +110,7 @@ class MediaCard extends Component {
                     </PosterWrap>
                     {showText && <MediaName name={name} {...this.props} />}
                 </CardWrap>
-            </Fragment>
+            </>
         );
     }
 }
@@ -129,18 +120,24 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 MediaCard.propTypes = {
+    playMedia: PropTypes.func,
     name: PropTypes.string.isRequired,
     airDate: PropTypes.string,
     posterPath: PropTypes.string,
     stillPath: PropTypes.string,
     type: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired,
+    uuid: PropTypes.string,
     loadModal: PropTypes.func.isRequired,
     files: PropTypes.arrayOf(
         PropTypes.shape({
             totalDuration: PropTypes.number,
         }),
     ),
+    playState: PropTypes.shape({
+        playtime: PropTypes.number,
+        finished: PropTypes.bool,
+    }),
+    internalCard: PropTypes.bool,
     history: ReactRouterPropTypes.history.isRequired,
     hover: PropTypes.bool,
     wide: PropTypes.bool,
@@ -153,7 +150,11 @@ MediaCard.defaultProps = {
     posterPath: null,
     stillPath: null,
     wide: false,
+    playMedia: false,
     showText: false,
+    internalCard: false,
+    playState: null,
+    uuid: '',
     files: [
         {
             totalDuration: 0,
