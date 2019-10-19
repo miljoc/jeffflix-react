@@ -1,55 +1,32 @@
-import React, { Component } from 'react';
-import { withAlert } from 'react-alert';
-import { Redirect } from 'react-router';
-import { getUrlParameter } from 'Helpers';
-
+import React, { useState, useReducer, useEffect } from 'react';
 import { Auth } from 'Client/Auth';
+import { useAlert } from 'react-alert';
+import { Redirect, useLocation } from 'react-router';
+import { getUrlParameter, isInitialSetup } from 'Helpers';
+
 import CREATE_USER from 'Mutations/createUser';
-import RegisterForm from 'Components/User/Register';
+import RegisterForm from 'Components/User/RegisterForm';
+import { initialState, reducer } from './reducer';
 
-import UserFormWrap from '../Styles';
+import * as S from '../Styles';
 
-class Register extends Component {
-    state = {
-        error: false,
-        redirectToDashboard: false,
-        username: '',
-        password: '',
-        inviteCode: '',
-        initialSetup: true,
-        registeredSuccessful: false,
+const Register = () => {
+    const [initialSetup, setInitialSetup] = useState(false);
+    const [formState, dispatch] = useReducer(reducer, initialState);
+
+    const alert = useAlert();
+    const { from } = useLocation().state || { from: { pathname: '/dashboard' } };
+    const { success, error, username, password, inviteCode: code } = formState;
+
+    const onChange = (name, value) => dispatch({ type: 'UPDATE_FORM', payload: { name, value } });
+
+    const onError = (message) => {
+        alert.error(`There was a problem with your request: ${message}`);
+
+        dispatch({ type: 'ERROR' });
     };
 
-    componentWillMount() {
-        const { initialSetup } = this.props;
-
-        if (Auth.isAuthenticated) this.setState({ redirectToDashboard: true });
-
-        this.setState({
-            inviteCode: getUrlParameter('inviteCode')
-                ? getUrlParameter('inviteCode')
-                : '',
-            initialSetup,
-        });
-    }
-
-    handleChange = ({ target: { name, value } }) => {
-        this.setState({
-            [name]: value,
-        });
-    };
-
-    formError = (err) => {
-        const { alert } = this.props;
-
-        this.setState({ error: true }, () => {
-            alert.error(`There is a problem: ${err}`);
-        });
-    };
-
-    handleRegister = () => {
-        const { username, password, inviteCode, initialSetup } = this.state;
-
+    const onSubmit = () => {
         let registerInfo = {
             username,
             password,
@@ -58,56 +35,43 @@ class Register extends Component {
         if (!initialSetup) {
             registerInfo = {
                 ...registerInfo,
-                code: inviteCode,
+                code,
             };
         }
 
         CREATE_USER(registerInfo)
-            .then(() => {
-                this.setState({ registeredSuccessful: true });
-                return true;
-            })
-            .catch((err) => {
-                this.formError(err.response.data.message);
-            });
-
-        return false;
+            .then(() => dispatch({ type: 'SUCCESS' }))
+            .catch((err) => onError(err.response.data.message));
     };
 
-    render() {
-        const { location } = this.props;
-        const {
-            redirectToDashboard,
-            error,
-            inviteCode,
-            initialSetup,
-            registeredSuccessful,
-        } = this.state;
+    useEffect(() => {
+        setInitialSetup(isInitialSetup);
 
-        if (registeredSuccessful)
-            return (
-                <Redirect
-                    to={{ pathname: '/login', state: { registered: true } }}
-                />
-            );
+        dispatch({
+            type: 'UPDATE_FORM',
+            payload: {
+                name: 'inviteCode',
+                value: getUrlParameter('inviteCode') ? getUrlParameter('inviteCode') : '',
+            },
+        });
+    }, []);
 
-        const { from } = location.state || { from: { pathname: '/dashboard' } };
-        if (redirectToDashboard) return <Redirect to={from} />;
+    if (Auth.isAuthenticated) return <Redirect to={from} />;
+    if (success) return <Redirect to={{ pathname: '/login', state: { registered: true } }} />;
 
-        const RegisterProps = {
-            handleRegister: this.handleRegister,
-            handleChange: this.handleChange,
-            error,
-            inviteCode,
-            initialSetup,
-        };
+    return (
+        <S.UserFormWrap>
+            <RegisterForm
+                onSubmit={onSubmit}
+                error={error}
+                inviteCode={code}
+                onChange={({ target: { name, value } }) => onChange(name, value)}
+                initialSetup={initialSetup}
+                username={username}
+                password={password}
+            />
+        </S.UserFormWrap>
+    );
+};
 
-        return (
-            <UserFormWrap>
-                <RegisterForm {...RegisterProps} />
-            </UserFormWrap>
-        );
-    }
-}
-
-export default withAlert(Register);
+export default Register;

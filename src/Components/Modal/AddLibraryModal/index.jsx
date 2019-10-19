@@ -7,12 +7,7 @@ import PropTypes from 'prop-types';
 
 import { ADD_LIBRARY } from 'Mutations/manageLibraries';
 import FETCH_LIBRARIES from 'Queries/fetchLibraries';
-import {
-    addLibrary,
-    addLibrarySuccess,
-    addLibraryFailure,
-    clearLibraryError,
-} from 'Redux/Actions/libraryActions';
+import { addLibrary, addLibrarySuccess, addLibraryFailure, clearLibraryError } from 'Redux/Actions/libraryActions';
 import { hideModal } from 'Redux/Actions/modalActions';
 
 import LibraryList from 'Components/Libraries/LibraryList';
@@ -81,7 +76,7 @@ class AddLibraryModal extends Component {
 
     createLibrary = async ({ backend, filePath, rcloneName }) => {
         const { kind } = this.state;
-        const { type, alert, mutate, aLibrary, aLibrarySucess, aLibraryFailure } = this.props;
+        const { type, alert, mutate, aLibrary, aLibrarySuccess, aLibraryFailure } = this.props;
 
         let variables = {
             name: type,
@@ -110,8 +105,8 @@ class AddLibraryModal extends Component {
                     this.clearError();
                 } else {
                     this.closeModal();
-                    aLibrarySucess();
                     alert.success('Library Added');
+                    aLibrarySuccess();
                 }
             })
             .catch((error) => {
@@ -152,6 +147,13 @@ AddLibraryModal.propTypes = {
     errorMessage: PropTypes.string,
     error: PropTypes.bool.isRequired,
     cLibraryError: PropTypes.func.isRequired,
+    mutate: PropTypes.func.isRequired,
+    aLibrary: PropTypes.func.isRequired,
+    aLibrarySuccess: PropTypes.func.isRequired,
+    aLibraryFailure: PropTypes.func.isRequired,
+    alert: PropTypes.shape({
+        success: PropTypes.func.isRequired,
+    }).isRequired,
 };
 
 AddLibraryModal.defaultProps = {
@@ -178,10 +180,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default compose(
+    withAlert(),
     connect(
         mapStateToProps,
         mapDispatchToProps,
     ),
     graphql(ADD_LIBRARY),
-    withAlert,
 )(AddLibraryModal);

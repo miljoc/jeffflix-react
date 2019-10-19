@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-import { placeholder } from 'polished';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { aFadeIn } from 'Styles/Animations';
+
+const animation = (props) =>
+    css`
+        ${aFadeIn} 0.2 infinite alternate;
+    `;
 
 export const Input = styled.input`
     padding: 0 6.5rem 0 1.5rem;
@@ -17,7 +21,6 @@ export const Input = styled.input`
     font-size: 1.5rem;
     background: rgba(0, 0, 0, 0.2);
     margin: 0 0 1rem;
-    ${placeholder({ color: 'rgba(255,255,255,.1)' })}
 
     &:focus {
         outline: none;
@@ -74,7 +77,7 @@ export const SelectStyle = {
         borderRadius: '0',
         overflow: 'hidden',
         cursor: 'pointer',
-        animation: `${`.4s ${aFadeIn} alternate`}`,
+        animation: animation,
         margin: '0',
         width: '100%',
         boxShadow: 'none',

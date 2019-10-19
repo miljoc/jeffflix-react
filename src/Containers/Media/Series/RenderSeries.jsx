@@ -1,6 +1,8 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import PropTypes from 'prop-types';
+import { useQuery } from '@apollo/react-hooks';
 import { orderBy } from 'lodash';
+
 import FETCH_SERIES from 'Queries/fetchSeries';
 
 import Empty from 'Components/Media/Card/Empty';
@@ -8,29 +10,65 @@ import Loading from 'Components/Loading';
 import Series from 'Components/Media/Series';
 import MediaCard from 'Components/Media/Card';
 
-import { LibraryListItem } from '../Styles';
+import * as S from '../Styles';
 
-const RenderSeries = ({ uuid }) => (
-    <Query query={FETCH_SERIES} variables={{ uuid }} pollInterval={5000}>
-        {({ loading, error, data }) => {
-            if (loading) return <Loading />;
-            if (error) return `Error! ${error.message}`;
-            const series = { ...data.series[0] };
+const RenderSeries = ({ uuid }) => {
+    const { loading, error, data } = useQuery(FETCH_SERIES, {
+        variables: { uuid },
+    });
 
-            const seasonList = orderBy(series.seasons, ['seasonNumber'], ['asc']).map((s) => (
-                <LibraryListItem key={s.uuid}>
-                    <MediaCard {...s} showText />
-                </LibraryListItem>
-            ));
+    if (loading) return <Loading />;
+    if (error) return `Error! ${error.message}`;
 
-            return (
-                <Series {...series}>
-                    {seasonList}
-                    <Empty />
-                </Series>
-            );
-        }}
-    </Query>
-);
+    const { name, posterPath, firstAirDate, overview, seasons, type } = data.series[0];
+
+    const seasonList = orderBy(seasons, ['seasonNumber'], ['asc']).map((item) => {
+        const {
+            posterPath: sPosterPath,
+            type: sType,
+            name: sName,
+            playState,
+            files,
+            uuid: sUuid,
+            unwatchedEpisodesCount,
+            episodes,
+        } = item;
+
+        return (
+            <S.LibraryListItemWide key={sUuid}>
+                <MediaCard
+                    files={files}
+                    name={sName}
+                    playState={playState}
+                    posterPath={sPosterPath}
+                    type={sType}
+                    uuid={sUuid}
+                    episodes={episodes}
+                    unwatchedEpisodesCount={unwatchedEpisodesCount}
+                    showText
+                />
+            </S.LibraryListItemWide>
+        );
+    });
+
+    return (
+        <Series
+            name={name}
+            firstAirDate={firstAirDate}
+            overview={overview}
+            uuid={uuid}
+            posterPath={posterPath}
+            type={type}
+            seasons={seasons}
+        >
+            {seasonList}
+            <Empty wide />
+        </Series>
+    );
+};
+
+RenderSeries.propTypes = {
+    uuid: PropTypes.string.isRequired,
+};
 
 export default RenderSeries;

@@ -4,22 +4,18 @@ import { connect } from 'react-redux';
 import AddLibraryModal from 'Components/Modal/AddLibraryModal';
 import ResumeMediaModal from 'Components/Modal/ResumeMediaModal';
 import WarningModal from 'Components/Modal/WarningModal';
-import EditMediaModal from 'Components/Modal/EditMediaModal';
+import FixMismatchModal from 'Components/Modal/FixMismatchModal';
 
-import {
-    LIBRARY_MODAL,
-    RESUME_MODAL,
-    WARNING_MODAL,
-    EDITMEDIA_MODAL,
-} from 'Redux/Actions/modalActions';
+import { LIBRARY_MODAL, RESUME_MODAL, WARNING_MODAL, FIX_MISMATCH_MODAL } from 'Redux/Actions/modalActions';
 
 const MODAL_COMPONENTS = {
     [LIBRARY_MODAL]: AddLibraryModal,
     [RESUME_MODAL]: ResumeMediaModal,
     [WARNING_MODAL]: WarningModal,
-    [EDITMEDIA_MODAL]: EditMediaModal,
+    [FIX_MISMATCH_MODAL]: FixMismatchModal,
 };
 
+// eslint-disable-next-line
 const ModalContainer = ({ type, props }) => {
     if (!type) {
         return null;
@@ -27,6 +23,7 @@ const ModalContainer = ({ type, props }) => {
 
     const Modal = MODAL_COMPONENTS[type];
 
+    // eslint-disable-next-line
     return <Modal {...props} />;
 };
 

@@ -9,18 +9,21 @@ import { compileEpisodes, generateMediaUrl } from 'Helpers';
 import { showModal } from 'Redux/Actions/modalActions';
 
 import { faPlay, faRandom } from '@fortawesome/free-solid-svg-icons';
-import EditMediaData from './EditMediaData';
+import MediaMismatch from './MediaMismatch';
 import MarkWatched from './MarkWatched';
 
-import { Header, HeaderIconWrap, HeaderIcon } from './Styles';
+import * as S from './Styles';
 
 class MediaListHeader extends Component {
-    state = {
-        episodes: [],
-        nextEpisode: {},
-        randomEpisode: {},
-        finished: false,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            episodes: [],
+            nextEpisode: {},
+            randomEpisode: {},
+            finished: false,
+        };
+    }
 
     componentWillMount = () => {
         this.updateEpisodeList();
@@ -81,25 +84,25 @@ class MediaListHeader extends Component {
         };
 
         return (
-            <Header>
+            <S.Header>
                 <ReactToolTip effect="solid" place="bottom" className="tooltip" />
-                <HeaderIconWrap
+                <S.HeaderIconWrap
                     onClick={this.playSeries}
                     data-tip={`Play ${type === 'series' ? 'Series' : 'Season'}`}
                 >
-                    <HeaderIcon icon={faPlay} />
-                </HeaderIconWrap>
+                    <S.HeaderIcon icon={faPlay} />
+                </S.HeaderIconWrap>
 
-                <HeaderIconWrap
+                <S.HeaderIconWrap
                     onClick={() => this.playEpisode(randomEpisode.uuid, false)}
                     data-tip="Play Random Episode"
                 >
-                    <HeaderIcon icon={faRandom} />
-                </HeaderIconWrap>
+                    <S.HeaderIcon icon={faRandom} />
+                </S.HeaderIconWrap>
 
                 <MarkWatched type={type} uuid={uuid} playState={playState} episodes={episodes} />
-                {type === 'series' && <EditMediaData name={name} type={type} />}
-            </Header>
+                {type === 'series' && <MediaMismatch name={name} type={type} />}
+            </S.Header>
         );
     }
 }
