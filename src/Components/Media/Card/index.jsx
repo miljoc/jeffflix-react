@@ -120,7 +120,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 MediaCard.propTypes = {
-    playMedia: PropTypes.func,
+    playMedia: PropTypes.bool,
     name: PropTypes.string.isRequired,
     airDate: PropTypes.string,
     posterPath: PropTypes.string,

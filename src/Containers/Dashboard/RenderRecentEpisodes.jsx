@@ -32,8 +32,8 @@ const RenderRecentEpisodes = ({ sModal }) => {
     const RecentlyAddedEpisodes = episodes.map((item) => {
         if (item.name.length === 0) return false;
 
-        const { files, name, playState, type, uuid, season } = item;
-        const { posterPath } = season;
+        const { files, name, playState, type, uuid, season, episodeNumber } = item;
+        const { posterPath, seasonNumber } = season;
 
         return (
             <MediaCardWrap key={uuid}>
@@ -41,6 +41,8 @@ const RenderRecentEpisodes = ({ sModal }) => {
                     showText
                     files={files}
                     name={name}
+                    seasonNumber={seasonNumber}
+                    episodeNumber={episodeNumber}
                     playState={playState}
                     posterPath={posterPath}
                     type={type}

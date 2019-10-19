@@ -23,14 +23,14 @@ const RenderSeason = ({ uuid }) => {
     const { name, posterPath, airDate, overview, episodes, series, type } = data.season;
 
     const episodeList = orderBy(data.season.episodes, ['episodeNumber'], ['asc']).map((item) => {
-        const { stillPath, type: etype, name: ename, playState, files, uuid: euuid } = item;
-
+        const { stillPath, type: etype, name: ename, playState, files, uuid: euuid, episodeNumber } = item;
         return (
             <S.LibraryListItemWide key={euuid}>
                 <MediaCard
                     files={files}
                     name={ename}
                     playState={playState}
+                    episodeNumber={episodeNumber}
                     posterPath={stillPath}
                     type={etype}
                     uuid={euuid}
