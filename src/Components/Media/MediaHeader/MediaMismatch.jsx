@@ -7,9 +7,10 @@ import { showModal, FIX_MISMATCH_MODAL } from 'Redux/Actions/modalActions';
 
 import { HeaderIconWrap, HeaderIcon } from './Styles';
 
-const FixMismatch = ({ sModal, name, file, type }) => {
+const FixMismatch = ({ uuid, sModal, name, file, type }) => {
     const toggleModal = () => {
         sModal(FIX_MISMATCH_MODAL, {
+            uuid,
             name,
             file,
             type,
@@ -26,6 +27,7 @@ const FixMismatch = ({ sModal, name, file, type }) => {
 FixMismatch.propTypes = {
     sModal: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
+    uuid: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     file: PropTypes.string,
 };

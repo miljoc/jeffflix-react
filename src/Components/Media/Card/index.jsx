@@ -120,7 +120,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 MediaCard.propTypes = {
-    playMedia: PropTypes.bool,
+    playMedia: PropTypes.func,
     name: PropTypes.string.isRequired,
     airDate: PropTypes.string,
     posterPath: PropTypes.string,
@@ -149,10 +149,10 @@ MediaCard.defaultProps = {
     hover: true,
     posterPath: null,
     stillPath: null,
-    wide: false,
-    playMedia: false,
-    showText: false,
-    internalCard: false,
+    wide: null,
+    playMedia: null,
+    showText: null,
+    internalCard: null,
     playState: null,
     uuid: '',
     files: [

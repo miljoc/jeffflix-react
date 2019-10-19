@@ -14,12 +14,11 @@ const RenderMovie = ({ uuid }) => {
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
 
-    const { posterPath, airDate, season, type, name, playState, files, overview } = data.movies[0];
+    const { posterPath, season, type, name, playState, files, overview, year } = data.movies[0];
 
     return (
         <MediaItem
             uuid={uuid}
-            airDate={airDate}
             posterPath={posterPath}
             season={season}
             type={type}
@@ -27,6 +26,7 @@ const RenderMovie = ({ uuid }) => {
             playState={playState}
             files={files}
             overview={overview}
+            year={year}
         />
     );
 };

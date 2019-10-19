@@ -1,32 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { throttle } from 'lodash';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import { scrolled, CONTENT_SCROLL, SIDEBAR_SCROLL } from 'Redux/Actions/viewportActions';
 
-import { throttle } from 'lodash';
-
-const renderThumb = ({ style }) => {
-    const thumbStyle = {
-        background: '#191a28',
-        borderRadius: '2px',
-    };
-
-    return <div style={{ ...style, ...thumbStyle }} />;
-};
-
-const renderTrack = ({ style }) => {
-    const trackStyle = {
-        width: '1rem',
-        right: '.5rem',
-        top: '0',
-        padding: '.5rem 0',
-        height: '100%',
-    };
-
-    return <div style={{ ...style, ...trackStyle }} />;
-};
+import * as S from './Styles';
 
 class Scroll extends Component {
     constructor(props) {
@@ -55,8 +35,8 @@ class Scroll extends Component {
             <Scrollbars
                 autoHide
                 autoHeightMin="100%"
-                renderThumbVertical={renderThumb}
-                renderTrackVertical={renderTrack}
+                renderThumbVertical={S.renderThumb}
+                renderTrackVertical={S.renderTrack}
                 onScrollFrame={this.handleScroll}
             >
                 {children}
@@ -69,14 +49,6 @@ Scroll.propTypes = {
     children: PropTypes.element.isRequired,
     id: PropTypes.string.isRequired,
     scrollFinished: PropTypes.func.isRequired,
-};
-
-renderTrack.propTypes = {
-    style: PropTypes.shape({}).isRequired,
-};
-
-renderThumb.propTypes = {
-    style: PropTypes.shape({}).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
