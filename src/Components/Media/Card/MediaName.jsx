@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { CardTitle, CardInfo } from './Styles';
 
-const MediaName = ({ episodes, type, year, name, episodeNumber, season }) => {
+const MediaName = ({ episodes, type, year, name, episodeNumber, seasonNumber }) => {
     const info = () => {
         let infoValue;
 
@@ -12,11 +12,7 @@ const MediaName = ({ episodes, type, year, name, episodeNumber, season }) => {
                 infoValue = `${episodes.length} Episodes`;
                 break;
             case 'Episode':
-                infoValue = `${
-                    season && season.seasonNumber
-                        ? `S${season.seasonNumber}  E${episodeNumber}`
-                        : `Episode ${episodeNumber}`
-                }`;
+                infoValue = `${seasonNumber ? `S${seasonNumber}  E${episodeNumber}` : `Episode ${episodeNumber}`}`;
                 break;
             case 'Movie':
                 infoValue = year;
@@ -41,9 +37,7 @@ MediaName.propTypes = {
     type: PropTypes.string.isRequired,
     year: PropTypes.string,
     episodeNumber: PropTypes.number,
-    season: PropTypes.shape({
-        seasonNumber: PropTypes.number,
-    }),
+    seasonNumber: PropTypes.number,
     episodes: PropTypes.arrayOf(
         PropTypes.shape({
             uuid: PropTypes.string,
@@ -53,7 +47,7 @@ MediaName.propTypes = {
 
 MediaName.defaultProps = {
     episodes: [],
-    season: {},
+    seasonNumber: null,
     episodeNumber: null,
     year: null,
 };
