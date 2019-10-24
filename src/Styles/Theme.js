@@ -13,7 +13,7 @@ const Theme = {
     darken: {
         primary: darken(0.2, '#FF9B3D'),
         dark: darken(0.1, '#262737'),
-        background: darken(0.1, '#111d2e'),
+        background: darken(0.1, '#191a28'),
     },
     lighten: {
         dark: lighten(0.2, '#262737'),

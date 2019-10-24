@@ -85,7 +85,7 @@ class MediaListHeader extends Component {
 
         return (
             <S.Header>
-                <ReactToolTip effect="solid" place="bottom" className="tooltip" />
+                <ReactToolTip effect="solid" place="left" className="tooltip" />
                 <S.HeaderIconWrap
                     onClick={this.playSeries}
                     data-tip={`Play ${type === 'series' ? 'Series' : 'Season'}`}
@@ -101,7 +101,7 @@ class MediaListHeader extends Component {
                 </S.HeaderIconWrap>
 
                 <MarkWatched type={type} uuid={uuid} playState={playState} episodes={episodes} />
-                {type === 'series' && <MediaMismatch name={name} type={type} />}
+                {type === 'series' && <MediaMismatch uuid={uuid} name={name} type={type} />}
             </S.Header>
         );
     }

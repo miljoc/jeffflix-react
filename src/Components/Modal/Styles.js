@@ -75,6 +75,12 @@ export const ModalHeader = styled.header`
         color: #fffc;
         line-height: 1.8;
         margin-top: 0.5rem;
+        opacity: 0.6;
+
+        span {
+            color: #fff;
+            font-weight: bold;
+        }
     }
 `;
 
@@ -89,4 +95,6 @@ export const ModalBody = styled.div`
     float: left;
     width: 100%;
     padding: 2rem;
+    min-height: 7.5rem;
+    position: relative;
 `;

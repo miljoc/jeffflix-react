@@ -107,7 +107,20 @@ class MediaItem extends Component {
     };
 
     render() {
-        const { posterPath, season, type, wide, uuid, name, isConnected, playState, files, dispatch } = this.props;
+        const {
+            posterPath,
+            season,
+            type,
+            wide,
+            uuid,
+            name,
+            isConnected,
+            playState,
+            airDate,
+            year,
+            files,
+            dispatch,
+        } = this.props;
         const { selectedFile, fileList, source, mimeType, resume, castsource } = this.state;
         const background = posterPath || season.series.posterPath;
 
@@ -137,7 +150,7 @@ class MediaItem extends Component {
                     <MediaRightCol>
                         <MediaItemHeader
                             type={type}
-                            file={files[0].filePath}
+                            file={selectedFile.filePath}
                             uuid={uuid}
                             name={name}
                             playMedia={this.playMedia}
@@ -150,6 +163,7 @@ class MediaItem extends Component {
                             files={fileList}
                             fileChange={this.fileChange}
                             isConnected={isConnected}
+                            release={year || airDate}
                         />
                     </MediaRightCol>
                 </MediaFull>
@@ -172,6 +186,15 @@ class MediaItem extends Component {
     }
 }
 
+const requiredPropsCheck = (props, propName, componentName) => {
+    const { year, airDate } = props;
+    if (!year && !airDate) {
+        return new Error(`One of 'year' or 'airDate' is required by '${componentName}' component.`);
+    }
+
+    return null;
+};
+
 MediaItem.propTypes = {
     name: PropTypes.string.isRequired,
     isConnected: PropTypes.bool.isRequired,
@@ -179,6 +202,8 @@ MediaItem.propTypes = {
     dispatch: PropTypes.func.isRequired,
     mutate: PropTypes.func.isRequired,
     wide: PropTypes.bool,
+    year: requiredPropsCheck,
+    airDate: requiredPropsCheck,
     files: PropTypes.arrayOf(
         PropTypes.shape({
             fileName: PropTypes.string,
@@ -204,10 +229,12 @@ MediaItem.propTypes = {
 };
 
 MediaItem.defaultProps = {
-    resume: false,
-    posterPath: false,
-    isPlaying: false,
-    wide: false,
+    resume: null,
+    posterPath: null,
+    isPlaying: null,
+    wide: null,
+    year: null,
+    airDate: null,
     season: {},
     location: {},
 };

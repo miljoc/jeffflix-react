@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactToolTip from 'react-tooltip';
 
 import { convertToMinutes } from 'Helpers';
 
@@ -11,7 +10,7 @@ import { MediaInfoWrap, MediaDetails, LibraryUnhealthy } from '../Styles';
 import { MediaName, MediaRelease } from '../../Styles';
 
 const MediaInfo = (props) => {
-    const { name, year, airDate, playState, selectedFile, overview } = props;
+    const { name, release, playState, selectedFile, overview } = props;
 
     const renderPlayState = () => {
         let renderedState;
@@ -57,15 +56,11 @@ const MediaInfo = (props) => {
         return false;
     };
 
-    const releaseDate = `(${year || airDate})`;
-
     return (
         <MediaInfoWrap>
-            <ReactToolTip effect="solid" place="bottom" className="tooltip" />
-
             <MediaName>
                 {name}
-                <MediaRelease>{releaseDate}</MediaRelease>
+                <MediaRelease>{release}</MediaRelease>
             </MediaName>
 
             <MediaDetails unwatched={playState.finished}>
@@ -79,18 +74,10 @@ const MediaInfo = (props) => {
     );
 };
 
-const requiredPropsCheck = (props, propName, componentName) => {
-    const { year, airDate } = props;
-    if (!year && !airDate) {
-        return new Error(`One of 'year' or 'airDate' is required by '${componentName}' component.`);
-    }
-
-    return null;
-};
-
 MediaInfo.propTypes = {
     name: PropTypes.string.isRequired,
     overview: PropTypes.string.isRequired,
+    release: PropTypes.string.isRequired,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
         playtime: PropTypes.number,
@@ -100,13 +87,6 @@ MediaInfo.propTypes = {
         healthy: PropTypes.bool,
         streams: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     }).isRequired,
-    year: requiredPropsCheck,
-    airDate: requiredPropsCheck,
-};
-
-MediaInfo.defaultProps = {
-    year: null,
-    airDate: null,
 };
 
 export default MediaInfo;

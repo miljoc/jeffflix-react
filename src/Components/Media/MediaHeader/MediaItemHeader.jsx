@@ -14,20 +14,21 @@ import MediaMismatch from './MediaMismatch';
 
 import { Header } from './Styles';
 
-const MediaItemHeader = ({ name, type, uuid, playMedia, playState, isConnected, file }) => (
+const MediaItemHeader = ({ name, type, uuid, playMedia, playState, file, isConnected }) => (
     <Header>
-        <ReactToolTip effect="solid" place="bottom" className="tooltip" />
+        <ReactToolTip effect="solid" place="left" className="tooltip" />
 
         <PlayMedia type={type} isConnected={isConnected} playMedia={playMedia} playState={playState} />
         <MarkWatched playState={playState} type={type} uuid={uuid} />
         <RefreshMetadata uuid={uuid} />
-        {type === 'Movie' && <MediaMismatch name={name} type={type} file={file} />}
+        {type === 'Movie' && <MediaMismatch uuid={uuid} name={name} type={type} file={file} />}
     </Header>
 );
 
 MediaItemHeader.propTypes = {
     uuid: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    file: PropTypes.string,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
         playtime: PropTypes.number,
@@ -35,7 +36,6 @@ MediaItemHeader.propTypes = {
     isConnected: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     playMedia: PropTypes.func.isRequired,
-    file: PropTypes.string,
 };
 
 MediaItemHeader.defaultProps = {
