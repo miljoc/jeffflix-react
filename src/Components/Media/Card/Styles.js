@@ -21,7 +21,11 @@ export const CardWrap = styled.article`
 export const PosterWrap = styled.div`
     display: block;
     position: relative;
-    background: #191e30;
+    background-color: #191e30;
+    background-image: url(${placeholder});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
     float: left;
     width: 100%;
