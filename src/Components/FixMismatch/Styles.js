@@ -12,13 +12,12 @@ export const Button = styled.button`
     position: absolute;
     top: 0;
     right: 0;
-    height: 4rem;
-    margin: 0.5rem;
+    height: 5rem;
     border: none;
     padding: 0 1.5rem;
-    background: #191a2a;
+    background: #0c0d16;
     color: #fff;
-    border-radius: 0.3rem;
+    border-radius: 0.3rem 0 0 0.3rem;
     transition: 0.2s background;
 
     :hover {
@@ -26,7 +25,7 @@ export const Button = styled.button`
     }
 
     :disabled {
-        opacity: 0.6;
+        opacity: 0.8;
         color: rgba(255, 255, 255, 0.2);
 
         :hover {
