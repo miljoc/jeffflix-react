@@ -15,7 +15,7 @@
 }
 
 .slick-list {
-    display: block;
+    display: flex;
     margin: 0;
     overflow: hidden;
     padding: 0;
@@ -41,14 +41,14 @@
 }
 
 .slick-track {
-    display: block;
+    display: flex;
     left: 0;
     position: relative;
     top: 0;
 
     &:before,
     &:after {
-        content: "";
+        content: '';
         display: table;
     }
 
@@ -62,13 +62,12 @@
 }
 
 .slick-slide {
-
     display: none;
     float: left;
     height: 100%;
     min-height: 1px;
 
-    [dir="rtl"] & {
+    [dir='rtl'] & {
         float: right;
     }
 

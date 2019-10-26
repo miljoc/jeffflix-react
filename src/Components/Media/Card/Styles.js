@@ -6,7 +6,11 @@ import LazyLoad from 'react-lazyload';
 
 import placeholder from './placeholder.png';
 
-/* eslint no-confusing-arrow: ["off"] */
+export const Placeholder = styled.img`
+    float: left;
+    width: 100%;
+`;
+
 export const CardWrap = styled.article`
     width: 100%;
     position: relative;
@@ -17,7 +21,7 @@ export const CardWrap = styled.article`
 export const PosterWrap = styled.div`
     display: block;
     position: relative;
-    background: #00000025;
+    background: #191e30;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
     float: left;
     width: 100%;

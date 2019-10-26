@@ -21,14 +21,17 @@ const MediaItemHeader = ({ name, type, uuid, playMedia, playState, file, isConne
         <PlayMedia type={type} isConnected={isConnected} playMedia={playMedia} playState={playState} />
         <MarkWatched playState={playState} type={type} uuid={uuid} />
         <RefreshMetadata uuid={uuid} />
-        {type === 'Movie' && <MediaMismatch uuid={uuid} name={name} type={type} file={file} />}
+        {type === 'Movie' && <MediaMismatch uuid={file.uuid} name={name} type={type} file={file.filePath} />}
     </Header>
 );
 
 MediaItemHeader.propTypes = {
     uuid: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    file: PropTypes.string,
+    file: PropTypes.shape({
+        uuid: PropTypes.string.isRequired,
+        filePath: PropTypes.string.isRequired,
+    }),
     playState: PropTypes.shape({
         finished: PropTypes.bool,
         playtime: PropTypes.number,

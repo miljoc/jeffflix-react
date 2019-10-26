@@ -150,7 +150,7 @@ class MediaItem extends Component {
                     <MediaRightCol>
                         <MediaItemHeader
                             type={type}
-                            file={selectedFile.filePath}
+                            file={selectedFile}
                             uuid={uuid}
                             name={name}
                             playMedia={this.playMedia}
