@@ -11,8 +11,7 @@ import MediaList from './MediaList';
 import * as S from './Styles';
 
 const FixMismatch = ({ uuid, type, name }) => {
-    const [searchVal, setSearchVal] = useState(name);
-
+    const [searchVal, setSearchVal] = useState('');
     const { loading, error, data, refetch, networkStatus } = useQuery(
         (type === 'movie' && SEARCH_MOVIES) || SEARCH_SERIES,
         {
@@ -33,10 +32,11 @@ const FixMismatch = ({ uuid, type, name }) => {
                     name={name}
                     value={searchVal}
                     placeholder="Enter Search Term"
+                    autoFocus
                     onChange={(e) => setSearchVal(e.target.value)}
                 />
                 <S.Button
-                    type="button"
+                    type="submit"
                     onClick={() => refetch({ query: searchVal })}
                     disabled={searchVal.length <= 1 || loading}
                 >

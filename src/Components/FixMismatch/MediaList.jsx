@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
+import { Redirect } from 'react-router';
 
 import { UPDATE_MOVIE, UPDATE_SERIES } from 'Mutations/fixMismatch';
 import { hideModal } from 'Redux/Actions/modalActions';
@@ -22,7 +23,9 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type }) => {
 
     if (data) {
         hModal();
-        alert.success('Successfully updated media mismatch');
+        alert.success('Successfully fixed mismatch');
+
+        return <Redirect to={{ pathname: `/${type === 'movie' ? 'movies' : 'series'}` }} />;
     }
 
     const mutationHandler = (item) => {
