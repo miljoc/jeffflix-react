@@ -13,7 +13,7 @@ const RenderUsers = () => {
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
 
-    return data.users.map((u) => <UserInvite key={u.id} username={u.id} />);
+    return data.users.map((u) => <UserInvite key={u.id} username={u.username} id={u.id} />);
 };
 
 export default RenderUsers;
