@@ -54,7 +54,7 @@ UserItem.propTypes = {
 };
 
 UserItem.defaultProps = {
-    id: '',
+    id: null,
 };
 
 export default graphql(DELETE_USER)(UserItem);
