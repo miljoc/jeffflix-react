@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
+import { forceCheck } from 'react-lazyload';
 
 import { ArrowPrev, ArrowNext } from './Arrows';
 
@@ -10,12 +11,12 @@ const Carousel = (props) => {
     return (
         <Slider
             infinite={false}
-            lazyLoad
             speed="500"
             slidesToShow="6"
-            slidesToScroll="1"
+            slidesToScroll="6"
             nextArrow={<ArrowNext />}
             prevArrow={<ArrowPrev />}
+            afterChange={() => forceCheck()}
             responsive={[
                 {
                     breakpoint: 9999,

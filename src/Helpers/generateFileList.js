@@ -15,6 +15,7 @@ const generateFileList = (files) => {
             totalDuration: f.totalDuration,
             streams: f.streams,
             healthy: f.library.healthy,
+            uuid: f.uuid,
         };
 
         arr.push(file);

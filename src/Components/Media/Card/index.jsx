@@ -12,7 +12,7 @@ import { faPlay, faSearch } from '@fortawesome/free-solid-svg-icons';
 import MediaInfo from './MediaInfo';
 import MediaName from './MediaName';
 
-import placeholder from './placeholder.png';
+import { Placeholder, placeholder } from './Placeholder';
 import { CardPoster, CardWrap, CardPopup, PosterWrap, PopupLink, PopupIcon, Lazy } from './Styles';
 
 class MediaCard extends Component {
@@ -95,7 +95,7 @@ class MediaCard extends Component {
             <>
                 <CardWrap onClick={(e) => this.cardClick(e, url, history, showPlayStatus)}>
                     <PosterWrap>
-                        <Lazy wide={wide} height={0} debounce={100} overflow resize>
+                        <Lazy wide={wide} height={0} debounce={100} placeholder={<Placeholder />} overflow resize>
                             <CardPoster hover={hover} wide={wide} bgimg={bgImage}>
                                 <MediaInfo {...this.props} length={length} showPlayStatus={showPlayStatus} />
                             </CardPoster>

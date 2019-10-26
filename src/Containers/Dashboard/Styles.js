@@ -42,7 +42,6 @@ export const CarouselWrap = styled.section`
     }
 
     .slick-slide {
-        opacity: 0.5;
         transition: 0.2s all;
     }
 
