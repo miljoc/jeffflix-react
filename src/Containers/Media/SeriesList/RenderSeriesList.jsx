@@ -17,8 +17,8 @@ import * as S from '../Styles';
 const RenderSeriesList = ({ sModal }) => {
     const toggleModal = () => {
         sModal(LIBRARY_MODAL, {
-            title: 'Add Movies Library',
-            type: 'movies',
+            title: 'Add TV Series folder',
+            type: 'series',
         });
     };
 
