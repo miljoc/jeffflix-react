@@ -1,19 +1,26 @@
+// @flow
 import React from 'react';
-import { useQuery } from 'react-apollo';
 
-import FETCH_INVITES from 'Queries/fetchInvites';
-import Loading from 'Components/Loading';
 import InviteItem from 'Components/Admin/Users/InviteItem';
 
-const RenderInvites = () => {
-    const { loading, error, data } = useQuery(FETCH_INVITES);
+import * as S from './Styles';
 
-    if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+type Invite = {
+    code: number,
+};
+type Props = {
+    invites: Array<Object<Invite>>,
+};
 
-    const invites = data.invites.filter((i) => i.user === null);
+const RenderInvites = ({ invites }: Props) => {
+    const renderedInvites = invites.map((i) => <InviteItem key={i.code} code={i.code} />);
 
-    return invites.map((i) => <InviteItem key={i.code} code={i.code} />);
+    return (
+        <S.List>
+            <S.ListHeading>Invites</S.ListHeading>
+            {renderedInvites}
+        </S.List>
+    );
 };
 
 export default RenderInvites;
