@@ -5,22 +5,15 @@ import InviteItem from 'Components/Admin/Users/InviteItem';
 
 import * as S from './Styles';
 
-type Invite = {
-    code: number,
-};
 type Props = {
-    invites: Array<Object<Invite>>,
+    invites: Array<Object>,
 };
 
-const RenderInvites = ({ invites }: Props) => {
-    const renderedInvites = invites.map((i) => <InviteItem key={i.code} code={i.code} />);
-
-    return (
-        <S.List>
-            <S.ListHeading>Invites</S.ListHeading>
-            {renderedInvites}
-        </S.List>
-    );
-};
+const RenderInvites = ({ invites }: Props) => (
+    <S.List>
+        <S.ListHeading>Invites</S.ListHeading>
+        {invites.map((i) => <InviteItem key={i.code} code={i.code} />)}
+    </S.List>
+);
 
 export default RenderInvites;
