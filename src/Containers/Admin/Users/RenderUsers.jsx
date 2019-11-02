@@ -16,12 +16,10 @@ const RenderUsers = () => {
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
 
-    const users = data.users.map((u) => <UserInvite key={u.id} username={u.username} id={u.id} admin={u.admin} />);
-
     return (
         <S.List>
             <S.ListHeading>Userlist</S.ListHeading>
-            {users}
+            {data.users.map((u) => <UserInvite key={u.id} username={u.username} id={u.id} admin={u.admin} />)}
         </S.List>
     );
 };
