@@ -43,7 +43,7 @@ const Login = () => {
     };
 
     useEffect(() => {
-        setInitialSetup(isInitialSetup);
+        setInitialSetup(isInitialSetup());
 
         if (history.location.state && history.location.state.registered) {
             alert.success('Account Successfully Created, login with your details above');
