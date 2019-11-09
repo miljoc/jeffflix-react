@@ -1,5 +1,5 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 import { orderBy } from 'lodash';
@@ -14,7 +14,11 @@ import MediaCard from 'Components/Media/Card';
 import { NoResults } from 'Containers/Styles';
 import * as S from '../Styles';
 
-const RenderSeriesList = ({ sModal }) => {
+type Props = {
+    sModal: Function,
+};
+
+const RenderSeriesList = ({ sModal }: Props) => {
     const toggleModal = () => {
         sModal(LIBRARY_MODAL, {
             title: 'Add TV Series folder',
@@ -87,10 +91,6 @@ const RenderSeriesList = ({ sModal }) => {
             </button>
         </NoResults>
     );
-};
-
-RenderSeriesList.propTypes = {
-    sModal: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

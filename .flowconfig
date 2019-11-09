@@ -8,9 +8,8 @@
 .*/.public/.*
 .*/scripts/.*
 
+
 [include]
-.*/src/.*
-.*/test/.*
 
 [libs]
 flow-typed
@@ -18,7 +17,6 @@ flow-typed
 [lints]
 
 [options]
-all=true
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=src
 
