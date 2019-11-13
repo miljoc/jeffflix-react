@@ -68,9 +68,7 @@ export default class CastControls extends Component {
 
                     <CastingControls>
                         <BackThirty seek={(val) => PlayerControls.seek(val)} playstate={playstate} />
-
                         <PlayPause playPause={() => PlayerControls.playOrPause()} isPaused={playstate.paused} />
-
                         <ForwardThirty seek={(val) => PlayerControls.seek(val)} playstate={playstate} />
 
                         <SeekBar

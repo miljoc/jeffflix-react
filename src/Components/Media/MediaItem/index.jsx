@@ -86,12 +86,10 @@ class MediaItem extends Component {
             variables: { uuid: files[selectedFile.value].uuid },
         })
             .then((res) => {
+                this.setState({ streams: res.data.createStreamingTicket.streams });
+
                 fetch(getBaseUrl() + res.data.createStreamingTicket.metadataPath)
                     .then((response) => response.json())
-                    .then((response) => {
-                        this.setState({ streams: response.streams });
-                        return response;
-                    })
                     .then((response) => getVideoSource(isIOS, res.data, response))
                     .then((response) => {
                         this.setState({

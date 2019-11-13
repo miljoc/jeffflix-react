@@ -47,10 +47,6 @@ export const castEventListeners = () => {
         if (!e.value) store.dispatch(clearCastData());
     });
 
-    remotePlayerController.addEventListener(eventType.ANY_CHANGE, function(e) {
-        console.log(e);
-    });
-
     remotePlayerController.addEventListener(eventType.IS_MEDIA_LOADED_CHANGED, function(e) {
         const context = cast.framework.CastContext.getInstance();
         const castSession = context.getCurrentSession();

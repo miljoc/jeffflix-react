@@ -1,7 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Slider } from 'react-player-controls';
-import { aFadeIn } from 'Styles/Animations';
 
 export const PlayerButton = styled.button`
     background: none;
@@ -149,7 +148,6 @@ export const SelectStyle = {
         borderRadius: '0',
         overflow: 'hidden',
         cursor: 'pointer',
-        animation: `${`.4s ${aFadeIn} alternate`}`,
         margin: '0',
         width: '100%',
         boxShadow: 'none',
