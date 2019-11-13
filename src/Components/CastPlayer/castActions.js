@@ -141,6 +141,16 @@ export const PlayerControls = {
             }),
         );
 
+        if (remotePlayer.isPaused) {
+            remotePlayerController.playOrPause();
+
+            store.dispatch(
+                setCastPlaystate({
+                    paused: false,
+                }),
+            );
+        }
+
         remotePlayer.currentTime = time;
         remotePlayerController.seek();
     },

@@ -52,10 +52,9 @@ class SeekBar extends Component {
     };
 
     seekEnd = (val) => {
-        const { playPause, isPaused, seek } = this.props;
+        const { seek } = this.props;
         const { isSeeking } = this.state;
 
-        if (isPaused) playPause();
         if (isSeeking) seek(val);
 
         this.setState({ isSeeking: false });
@@ -94,11 +93,10 @@ SeekBar.propTypes = {
     setPlaystate: PropTypes.func.isRequired,
     seek: PropTypes.func.isRequired,
     playPause: PropTypes.func.isRequired,
-    isPaused: PropTypes.bool,
+    isPaused: PropTypes.bool.isRequired,
 };
 
 SeekBar.defaultProps = {
-    isPaused: false,
     playstate: {
         playtime: 0,
         total: 0,
@@ -110,7 +108,4 @@ const mapDispatchToProps = (dispatch) => ({
     setPlaystate: (playstate) => dispatch(setCastPlaystate(playstate)),
 });
 
-export default connect(
-    null,
-    mapDispatchToProps,
-)(SeekBar);
+export default connect(null, mapDispatchToProps)(SeekBar);

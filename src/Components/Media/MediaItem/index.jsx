@@ -88,6 +88,10 @@ class MediaItem extends Component {
             .then((res) => {
                 fetch(getBaseUrl() + res.data.createStreamingTicket.metadataPath)
                     .then((response) => response.json())
+                    .then((response) => {
+                        this.setState({ streams: response.streams });
+                        return response;
+                    })
                     .then((response) => getVideoSource(isIOS, res.data, response))
                     .then((response) => {
                         this.setState({
@@ -122,7 +126,7 @@ class MediaItem extends Component {
             files,
             dispatch,
         } = this.props;
-        const { selectedFile, fileList, source, mimeType, resume, castsource } = this.state;
+        const { selectedFile, fileList, source, mimeType, resume, castsource, streams } = this.state;
         const background = posterPath || season.series.posterPath;
 
         const mediaInfo = {
@@ -183,7 +187,7 @@ class MediaItem extends Component {
                     castsource={castsource}
                     dispatch={dispatch}
                     season={season && season}
-                    streams={selectedFile.streams}
+                    streams={streams}
                     closePlayer={() => this.closePlayer()}
                 />
             </MediaFullWrap>
