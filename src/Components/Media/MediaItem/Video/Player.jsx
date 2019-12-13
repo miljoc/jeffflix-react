@@ -51,6 +51,11 @@ class Player extends Component {
             },
 
             controls: true,
+            controlBar: {
+                volumePanel: {
+                    inline: false
+                }
+            },
             html5: {
                 hls: {
                     enableLowInitialPlaylist: true,
@@ -131,7 +136,7 @@ class Player extends Component {
                         ref={(node) => {
                             this.videoNode = node;
                         }}
-                        className="video-js"
+                        className="video-js vjs-theme-olaris"
                     />
                 </div>
             </>
