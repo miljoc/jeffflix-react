@@ -1,0 +1,270 @@
+@mixin control-bar {
+    .vjs-control-bar {
+        height: 70px;
+        padding-top: 20px;
+        background: none;
+        background-image: linear-gradient(0deg, #000, transparent)
+    }
+}
+
+@mixin progress-bar {
+    .vjs-play-progress:before {
+        display: none;
+    }
+    
+    .vjs-progress-control {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 20px;
+    }
+    
+    .vjs-progress-control .vjs-progress-holder {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .vjs-play-progress {
+        background-color: color("primary");
+    }
+}
+
+@mixin button {
+    .vjs-button>.vjs-icon-placeholder:before {
+        flex: 1 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@mixin disable-remaining-time {
+    .vjs-remaining-time {
+        display: none !important;
+    }
+}
+
+@mixin time-control {
+    .vjs-spacer, .vjs-time-control {
+        display: flex;
+        flex: 1 1 auto;
+    }
+
+    .vjs-time-control {
+        padding: 0;
+        flex: 0 1 auto;
+        align-items: center;
+        width: auto;
+    }
+    
+    .vjs-time-control.vjs-time-divider {
+        width: 14px;
+    }
+    
+    .vjs-time-control.vjs-time-divider div {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .vjs-time-control.vjs-current-time {
+        margin-left: 1em;
+    }
+    
+    .vjs-time-control .vjs-current-time-display,.video-js .vjs-time-control .vjs-duration-display {
+        width: 100%;
+    }
+    
+    .vjs-time-control .vjs-current-time-display {
+        text-align: right;
+    }
+    
+    .vjs-time-control .vjs-duration-display {
+        text-align: left;
+    }
+}
+
+@mixin debug-control($order, $visible: true) {
+    .vjs-control.vjs-button[title="Debug"] {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+
+        // hide debug control on mobile
+        @include breakpoint(xs) {
+            display: none !important;
+        }
+    }
+}
+
+@mixin fullscreen-control($order, $visible: true) {
+    .vjs-fullscreen-control {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+    }
+}
+
+@mixin picture-in-picture-control($order, $visible: true) {
+    .vjs-picture-in-picture-control {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+    }
+}
+
+@mixin volume-panel-control($order, $visible: true) {
+    .vjs-volume-panel {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+    }
+
+    .vjs-volume-control.vjs-control.vjs-volume-vertical {
+        box-shadow: 0 0 25px rgba(0,0,0,0.4);
+        background-color: color("background");
+        margin-top: 10px;
+        border-radius: 0.3rem;
+        z-index: 99;
+    }
+}
+
+@mixin subtitle-panel-control($order, $visible: true) {
+    .vjs-subs-caps-button.vjs-menu-button.vjs-menu-button-popup.vjs-control {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+    }
+}
+
+@mixin audio-panel-control($order, $visible: true) {
+    .vjs-audio-button.vjs-menu-button.vjs-menu-button-popup.vjs-control {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+    }
+
+    .vjs-volume-level {
+        background-color: color("primary") !important;
+    }
+}
+
+@mixin http-source-selector-panel-control($order, $visible: true) {
+    .vjs-http-source-selector.vjs-menu-button.vjs-menu-button-popup.vjs-control {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+    }
+}
+
+@mixin menu-content-styling() {
+    .vjs-menu-content {
+        box-shadow: 0 0 25px rgba(0,0,0,0.4) !important;
+        background-color: color("background-darker") !important;
+        color: color("light");
+        border-radius: 0.3rem !important;
+        z-index: 99;
+        font-size: 1rem;
+        font-weight: 400;
+        font-family: "Open Sans", sans-serif;
+    }
+
+    .vjs-menu li.vjs-selected, .vjs-menu li.vjs-selected:focus, .vjs-menu li.vjs-selected:hover {
+        color: color("primary") !important;
+        background-color: unset !important;
+    }
+
+    .vjs-menu li.vjs-menu-item:focus, .vjs-menu li.vjs-menu-item:hover {
+        opacity: 1 !important;
+        background: rgba(0,0,0,0.1) !important;
+    }
+
+    // caption settings
+    .vjs-modal-dialog {
+        box-shadow: 0 0 25px rgba(0,0,0,0.4) !important;
+        background: color("background-darker") !important;
+        border-radius: 0.3rem !important;
+        margin: 1rem;
+        width: 90%;
+        font-family: "Open Sans", sans-serif;
+        outline: 0;
+    }
+
+    .vjs-track-settings-controls button {
+        font-size: 1.4rem;
+        color: #fff;
+        cursor: pointer;
+        line-height: 3rem;
+        opacity: 1;
+        padding: 0 2.5rem;
+        border: none;
+        border-radius: 4rem;
+        background: #191a28;
+        transition: 0.2s all;
+        font-weight: 600;
+        outline: 0;
+
+        &:hover {
+            background: #050609;
+        }
+    }
+
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        padding: 0 30px 0 10px;
+        max-width: unset !important;
+
+        border: 0px;
+        line-height: 28px;
+        height: 28px;
+        background: #141520;
+
+        margin: 0 5px 5px 0;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+        background-repeat: no-repeat;
+        background-position: center right 5px;
+        color: color("light");
+    }
+
+    .vjs-text-track-settings legend {
+        font-size: 1.2rem;
+    }
+}
+
+.vjs-theme-olaris {
+    @include menu-content-styling();
+    @include control-bar();
+    @include progress-bar();
+    @include button();
+    @include disable-remaining-time();
+
+    @include time-control();
+
+    /**
+    * All controls button mixins, these can take two args : ($order, $visible = true)
+    * ---
+    * @param {int} $order — order of the button
+    * @param {bool} $visible — true for visible, false for hidden, true is set by default.
+    */
+    @include debug-control(1);
+    @include http-source-selector-panel-control(2);
+    @include subtitle-panel-control(3);
+    @include audio-panel-control(4);
+    @include volume-panel-control(5);
+    @include picture-in-picture-control(6);
+    @include fullscreen-control(7);
+}
