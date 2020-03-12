@@ -9,17 +9,20 @@ const renderSuggestion = (suggestion) => {
     const year =
         suggestion.type === 'Movie'
             ? suggestion.year
-            : suggestion.first_air_date;
+            : suggestion.firstAirDate.split("-")[0];
     const poster =
         suggestion.posterPath
             ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${suggestion.posterPath}`
             : placeholder;
+
+    console.log(suggestion + " " + year);
+
     return (
         <Suggestion to="/movies">
             <Poster src={poster} alt={suggestion.name} />
 
             <Name>{suggestion.name}</Name>
-            {year && <Year>{suggestion.year}</Year>}
+            {year && <Year>{year}</Year>}
         </Suggestion>
     );
 };
