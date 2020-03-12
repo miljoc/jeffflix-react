@@ -15,8 +15,6 @@ const renderSuggestion = (suggestion) => {
             ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${suggestion.posterPath}`
             : placeholder;
 
-    console.log(suggestion + " " + year);
-
     return (
         <Suggestion to="/movies">
             <Poster src={poster} alt={suggestion.name} />
