@@ -17,8 +17,7 @@ class RefreshMetadata extends Component {
     }
 
     refreshMetadata = () => {
-        const { uuid, mutate } = this.props;
-        const alert = this.props.alert;
+        const { uuid, mutate, alert } = this.props;
 
         mutate({
             variables: { uuid },
@@ -28,7 +27,7 @@ class RefreshMetadata extends Component {
                     disabled: true,
                 });
 
-                alert.show('Refreshing Metadata, this may take a while');
+                alert.success('Refreshing Metadata, this may take a while');
             })
             .catch((err) => err);
     };
@@ -54,6 +53,6 @@ RefreshMetadata.propTypes = {
     mutate: PropTypes.func.isRequired,
 };
 
-const Wrapped = graphql(REFRESH_METADATA)(RefreshMetadata);
+const RefreshWrapped = graphql(REFRESH_METADATA)(RefreshMetadata);
 
-export default withAlert()(Wrapped);
+export default withAlert()(RefreshWrapped);
