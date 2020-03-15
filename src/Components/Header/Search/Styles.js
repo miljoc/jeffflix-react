@@ -152,7 +152,6 @@ export const Poster = styled.img`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
     height: 5rem;
     padding: 0.2rem;
     position: absolute;

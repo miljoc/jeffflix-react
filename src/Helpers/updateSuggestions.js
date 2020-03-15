@@ -20,11 +20,10 @@ const updateSuggestions = (arr) => {
 
     arr.forEach((sug) => {
         if (
-            sug.type === 'Movie' &&
-            updatedSuggestions[0].suggestions.length <= 2
+            sug.type === 'Movie'
         ) {
             updatedSuggestions[0].suggestions.push(sug);
-        } else if (updatedSuggestions[1].suggestions.length <= 2) {
+        } else {
             updatedSuggestions[1].suggestions.push(sug);
         }
     });
