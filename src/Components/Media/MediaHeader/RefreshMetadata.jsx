@@ -51,6 +51,7 @@ class RefreshMetadata extends Component {
 RefreshMetadata.propTypes = {
     uuid: PropTypes.string.isRequired,
     mutate: PropTypes.func.isRequired,
+    alert: PropTypes.func.isRequired,
 };
 
 const RefreshWrapped = graphql(REFRESH_METADATA)(RefreshMetadata);
