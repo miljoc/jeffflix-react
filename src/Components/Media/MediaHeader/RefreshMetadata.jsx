@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import { useAlert } from 'react-alert';
+import { withAlert } from 'react-alert';
 import PropTypes from 'prop-types';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +18,7 @@ class RefreshMetadata extends Component {
 
     refreshMetadata = () => {
         const { uuid, mutate } = this.props;
-        const alert = useAlert();
+        const alert = this.props.alert;
 
         mutate({
             variables: { uuid },
@@ -28,7 +28,7 @@ class RefreshMetadata extends Component {
                     disabled: true,
                 });
 
-                alert.success('Refreshing Metadata, this may take a while');
+                alert.show('Refreshing Metadata, this may take a while');
             })
             .catch((err) => err);
     };
@@ -54,4 +54,6 @@ RefreshMetadata.propTypes = {
     mutate: PropTypes.func.isRequired,
 };
 
-export default graphql(REFRESH_METADATA)(RefreshMetadata);
+const Wrapped = graphql(REFRESH_METADATA)(RefreshMetadata);
+
+export default withAlert()(Wrapped);
