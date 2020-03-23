@@ -18,7 +18,7 @@ import MediaOverview from './MediaOverview';
 import VideoController from './Video';
 
 import { MediaFull } from './Styles';
-import { MediaFullWrap, MediaLeftCol, MediaRightCol, MediaBackground } from '../Styles';
+import { MediaFullWrap, MediaLeftCol, MediaRightCol } from '../Styles';
 
 class MediaItem extends Component {
     constructor(props) {
