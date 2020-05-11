@@ -147,11 +147,8 @@ export const Year = styled.small`
 `;
 
 export const Poster = styled.img`
-    background-color: #191e30;
-    background-image: url(${placeholder});
-    background-repeat: no-repeat;
+    background: #191e30 url(${placeholder}) no-repeat center;
     background-size: cover;
-    background-position: center;
     height: 5rem;
     padding: 0.2rem;
     position: absolute;
