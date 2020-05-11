@@ -1,59 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { graphql } from 'react-apollo';
-import { withAlert } from 'react-alert';
-import PropTypes from 'prop-types';
+import { useAlert } from 'react-alert';
 import { faSync } from '@fortawesome/free-solid-svg-icons';
 
 import REFRESH_METADATA from 'Mutations/refreshMetadata';
 
 import { HeaderIconWrap, HeaderIcon } from './Styles';
 
-class RefreshMetadata extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            disabled: false,
-        };
-    }
-
-    refreshMetadata = () => {
-        const { uuid, mutate, alert } = this.props;
-
-        mutate({
-            variables: { uuid },
-        })
-            .then(() => {
-                this.setState({
-                    disabled: true,
-                });
-
-                alert.success('Refreshing Metadata, this may take a while');
-            })
-            .catch((err) => err);
-    };
-
-    render() {
-        const { disabled } = this.state;
-
-        return (
-            <HeaderIconWrap
-                disabled={disabled}
-                onClick={() => this.refreshMetadata()}
-                data-tip="Refresh Meta Data"
-                right
-            >
-                <HeaderIcon icon={faSync} />
-            </HeaderIconWrap>
-        );
-    }
-}
-
-RefreshMetadata.propTypes = {
-    uuid: PropTypes.string.isRequired,
-    mutate: PropTypes.func.isRequired,
-    alert: PropTypes.func.isRequired,
+type Props = {
+    uuid: string,
+    mutate: Function,
 };
 
-const RefreshWrapped = graphql(REFRESH_METADATA)(RefreshMetadata);
+const RefreshMetadata = ({ uuid, mutate }: Props) => {
+    const [disabled, setDisabled] = useState(false);
+    const alert = useAlert();
 
-export default withAlert()(RefreshWrapped);
+    const refreshMetadata = () =>
+        mutate({
+            variables: { uuid },
+        }).then(() => {
+            setDisabled(true);
+
+            alert.success('Refreshing Metadata, this may take a while');
+        });
+
+    return (
+        <HeaderIconWrap disabled={disabled} onClick={() => refreshMetadata()} data-tip="Refresh Meta Data" right>
+            <HeaderIcon icon={faSync} />
+        </HeaderIconWrap>
+    );
+};
+
+export default graphql(REFRESH_METADATA)(RefreshMetadata);
