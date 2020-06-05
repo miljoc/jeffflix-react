@@ -7,6 +7,8 @@ import { hideModal } from 'Redux/Actions/modalActions';
 import { Modal, ModalWrap, ModalBody, ModalHeader, ModalHeading } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
 
+import { Message, Button } from './Styles';
+
 type OwnProps = {
     title: string,
     message: string,
@@ -29,13 +31,13 @@ const WarningModal = ({ hModal, title, message, confirm, cancel }: Props) => (
                 </ModalHeading>
             </ModalHeader>
             <ModalBody>
-                <h2>{message}</h2>
-                <button type="button" onClick={() => cancel()}>
+                <Message>{message}</Message>
+                <Button type="button" onClick={() => cancel()}>
                     Cancel
-                </button>
-                <button type="button" onClick={() => confirm()}>
+                </Button>
+                <Button confirm type="button" onClick={() => confirm()}>
                     Confirm
-                </button>
+                </Button>
             </ModalBody>
         </ModalWrap>
     </Modal>
