@@ -9,6 +9,7 @@ const FETCH_EPISODE = gql`
             airDate
             stillPath
             uuid
+            episodeNumber
 
             season {
                 uuid

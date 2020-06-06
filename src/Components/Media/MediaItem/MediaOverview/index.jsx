@@ -7,7 +7,7 @@ import MediaSubtitles from './MediaSubtitles';
 import MediaAudio from './MediaAudio';
 
 const MediaOverview = (props) => {
-    const { mediaInfo, selectedFile, files, fileChange, release } = props;
+    const { mediaInfo, selectedFile, files, fileChange, release, episodeNumber } = props;
     const { name, playState, overview } = mediaInfo;
 
     return (
@@ -18,6 +18,7 @@ const MediaOverview = (props) => {
                 overview={overview}
                 selectedFile={selectedFile}
                 release={release}
+                episodeNumber={episodeNumber}
             />
             <MediaFiles files={files} selectedFile={selectedFile} fileChange={fileChange} />
             <MediaSubtitles selectedFile={selectedFile} />
@@ -35,10 +36,15 @@ MediaOverview.propTypes = {
             playtime: PropTypes.number,
         }).isRequired,
     }).isRequired,
+    episodeNumber: PropTypes.number,
     release: PropTypes.string.isRequired,
     files: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     selectedFile: PropTypes.shape({}).isRequired,
     fileChange: PropTypes.func.isRequired,
 };
+
+MediaOverview.defaultProps = {
+    episodeNumber: null,
+}
 
 export default MediaOverview;

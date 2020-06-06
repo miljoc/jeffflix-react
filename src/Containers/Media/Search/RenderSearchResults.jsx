@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import FETCH_SEARCH_RESULTS from 'Queries/fetchSearchResults';
 import Loading from 'Components/Loading';
 import MediaCard from 'Components/Media/Card';
+import { NoResults } from 'Containers/Styles';
 
 import * as S from '../Styles';
 
@@ -19,6 +20,10 @@ const RenderSearchResults = ({ value }: Props) => {
 
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
+
+    if(data.search.length === 0) {
+        return <NoResults alignLeft>No results were found for &quot;{value}&quot;</NoResults>
+    }
 
     return data.search.map((item) => {
         const { posterPath, type, name, playState, files, uuid } = item;

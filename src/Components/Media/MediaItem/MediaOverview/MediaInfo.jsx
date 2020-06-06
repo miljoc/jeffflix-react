@@ -10,7 +10,7 @@ import { MediaInfoWrap, MediaDetails, LibraryUnhealthy } from '../Styles';
 import { MediaName, MediaRelease } from '../../Styles';
 
 const MediaInfo = (props) => {
-    const { name, release, playState, selectedFile, overview } = props;
+    const { name, release, playState, selectedFile, overview, episodeNumber } = props;
 
     const renderPlayState = () => {
         let renderedState;
@@ -60,7 +60,7 @@ const MediaInfo = (props) => {
         <MediaInfoWrap>
             <MediaName>
                 {name}
-                <MediaRelease>{release}</MediaRelease>
+                <MediaRelease>{episodeNumber ? `Episode ${episodeNumber}` : release}</MediaRelease>
             </MediaName>
 
             <MediaDetails unwatched={playState.finished}>
@@ -68,6 +68,7 @@ const MediaInfo = (props) => {
                 <li>{renderTotalD()}</li>
                 <li>{renderPlayState()}</li>
                 <li>{renderResolution()}</li>
+                {episodeNumber && <li>{release}</li>}
             </MediaDetails>
             <MediaDescription overview={overview} />
         </MediaInfoWrap>
@@ -78,6 +79,7 @@ MediaInfo.propTypes = {
     name: PropTypes.string.isRequired,
     overview: PropTypes.string.isRequired,
     release: PropTypes.string.isRequired,
+    episodeNumber: PropTypes.number,
     playState: PropTypes.shape({
         finished: PropTypes.bool,
         playtime: PropTypes.number,
@@ -88,5 +90,10 @@ MediaInfo.propTypes = {
         streams: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     }).isRequired,
 };
+
+MediaInfo.defaultProps = {
+    episodeNumber: null,
+};
+
 
 export default MediaInfo;

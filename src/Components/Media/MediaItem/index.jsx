@@ -111,6 +111,7 @@ class MediaItem extends Component {
     render() {
         const {
             posterPath,
+            episodeNumber,
             season,
             type,
             wide,
@@ -147,6 +148,7 @@ class MediaItem extends Component {
                             posterPath={posterPath}
                             type={type}
                             uuid={uuid}
+                            showText={false}
                         />
                     </MediaLeftCol>
                     <MediaRightCol>
@@ -166,6 +168,7 @@ class MediaItem extends Component {
                             fileChange={this.fileChange}
                             isConnected={isConnected}
                             release={year || airDate}
+                            episodeNumber={episodeNumber}
                         />
                     </MediaRightCol>
                 </MediaFull>
@@ -209,6 +212,7 @@ MediaItem.propTypes = {
     dispatch: PropTypes.func.isRequired,
     mutate: PropTypes.func.isRequired,
     wide: PropTypes.bool,
+    episodeNumber: PropTypes.number,
     year: requiredPropsCheck,
     airDate: requiredPropsCheck,
     files: PropTypes.arrayOf(
@@ -244,6 +248,7 @@ MediaItem.defaultProps = {
     airDate: null,
     season: {},
     location: {},
+    episodeNumber: null,
 };
 
 const mapStateToProps = (state) => {

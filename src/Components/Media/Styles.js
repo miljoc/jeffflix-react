@@ -112,6 +112,11 @@ export const MediaNameLink = styled(NavLink)`
   `}
 `;
 
+export const MediaEpisodes = styled.h4`
+    font-size: 1.3rem;
+    margin-top: 1rem;
+`;
+
 export const SeasonNumber = styled.h3`
     font-size: 1.4rem;
     color: rgba(255, 255, 255, 0.7);

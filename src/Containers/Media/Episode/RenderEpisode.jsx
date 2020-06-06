@@ -23,7 +23,7 @@ const RenderEpisode = ({ uuid }: Props) => {
     if (error) return `Error! ${error && error.message}`;
     if (!data) return `Error fetching data for this episde.`;
 
-    const { stillPath, airDate, season, type, name, playState, files, overview } = data.episode;
+    const { stillPath, airDate, season, type, name, playState, files, overview, episodeNumber } = data.episode;
 
     return (
         <MediaItem
@@ -37,6 +37,7 @@ const RenderEpisode = ({ uuid }: Props) => {
             playState={playState}
             files={files}
             overview={overview}
+            episodeNumber={episodeNumber}
         />
     );
 };

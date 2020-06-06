@@ -3,7 +3,7 @@
         height: 70px;
         padding-top: 20px;
         background: none;
-        background-image: linear-gradient(0deg, #000, transparent)
+        background-image: linear-gradient(0deg, #000, transparent);
     }
 }
 
@@ -11,7 +11,7 @@
     .vjs-play-progress:before {
         display: none;
     }
-    
+
     .vjs-progress-control {
         position: absolute;
         top: 0;
@@ -20,7 +20,7 @@
         width: 100%;
         height: 20px;
     }
-    
+
     .vjs-progress-control .vjs-progress-holder {
         position: absolute;
         top: 20px;
@@ -29,14 +29,14 @@
         width: 100%;
         margin: 0;
     }
-    
+
     .vjs-play-progress {
         background-color: color("primary");
     }
 }
 
 @mixin button {
-    .vjs-button>.vjs-icon-placeholder:before {
+    .vjs-button > .vjs-icon-placeholder:before {
         flex: 1 1;
         display: flex;
         align-items: center;
@@ -51,7 +51,8 @@
 }
 
 @mixin time-control {
-    .vjs-spacer, .vjs-time-control {
+    .vjs-spacer,
+    .vjs-time-control {
         display: flex;
         flex: 1 1 auto;
     }
@@ -62,28 +63,29 @@
         align-items: center;
         width: auto;
     }
-    
+
     .vjs-time-control.vjs-time-divider {
         width: 14px;
     }
-    
+
     .vjs-time-control.vjs-time-divider div {
         width: 100%;
         text-align: center;
     }
-    
+
     .vjs-time-control.vjs-current-time {
         margin-left: 1em;
     }
-    
-    .vjs-time-control .vjs-current-time-display,.video-js .vjs-time-control .vjs-duration-display {
+
+    .video-js .vjs-time-control .vjs-duration-display,
+    .vjs-time-control .vjs-current-time-display {
         width: 100%;
     }
-    
+
     .vjs-time-control .vjs-current-time-display {
         text-align: right;
     }
-    
+
     .vjs-time-control .vjs-duration-display {
         text-align: left;
     }
@@ -181,12 +183,15 @@
         font-family: "Open Sans", sans-serif;
     }
 
-    .vjs-menu li.vjs-selected, .vjs-menu li.vjs-selected:focus, .vjs-menu li.vjs-selected:hover {
+    .vjs-menu li.vjs-selected,
+    .vjs-menu li.vjs-selected:focus,
+    .vjs-menu li.vjs-selected:hover {
         color: color("primary") !important;
         background-color: unset !important;
     }
 
-    .vjs-menu li.vjs-menu-item:focus, .vjs-menu li.vjs-menu-item:hover {
+    .vjs-menu li.vjs-menu-item:focus,
+    .vjs-menu li.vjs-menu-item:hover {
         opacity: 1 !important;
         background: rgba(0,0,0,0.1) !important;
     }
@@ -228,13 +233,13 @@
         padding: 0 30px 0 10px;
         max-width: unset !important;
 
-        border: 0px;
+        border: 0;
         line-height: 28px;
         height: 28px;
         background: #141520;
 
         margin: 0 5px 5px 0;
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC");
         background-repeat: no-repeat;
         background-position: center right 5px;
         color: color("light");
