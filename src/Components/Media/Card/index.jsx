@@ -52,7 +52,12 @@ class MediaCard extends Component {
         if (!hover) return false;
 
         if (showPlayStatus) {
-            if ((e.target.tagName === 'DIV' || e.target.tagName === 'H3') && !internalCard) {
+            if (
+                (e.target.tagName === 'DIV'
+                || e.target.tagName === 'H3'
+                || e.target.tagName === "SPAN")
+                && !internalCard
+            ) {
                 history.push(url);
                 return true;
             }
@@ -151,7 +156,7 @@ MediaCard.defaultProps = {
     stillPath: null,
     wide: null,
     playMedia: null,
-    showText: null,
+    showText: true,
     internalCard: null,
     playState: null,
     uuid: '',

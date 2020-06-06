@@ -26,7 +26,7 @@ const RenderContinueWatching = () => {
     const continueWatching = data.upNext.map((item) => {
         if (item.name.length === 0) return false;
 
-        const { files, name, playState, type, uuid, episodeNumber, season } = item;
+        const { files, name, playState, type, uuid, episodeNumber, season, year } = item;
         const posterPath = item.posterPath || item.season.series.posterPath;
         const seasonNumber = season && season.seasonNumber;
 
@@ -42,6 +42,7 @@ const RenderContinueWatching = () => {
                     posterPath={posterPath}
                     type={type}
                     uuid={uuid}
+                    year={year}
                 />
             </MediaCardWrap>
         );

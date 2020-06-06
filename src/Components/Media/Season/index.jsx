@@ -17,6 +17,7 @@ import {
     SeasonNumber,
     SubTitle,
     MediaBackground,
+    MediaEpisodes,
 } from '../Styles';
 import EpisodesWrap from './Styles';
 
@@ -28,7 +29,7 @@ const Season = ({ name, uuid, posterPath, airDate, overview, children, episodes,
             <Breadcrumbs name={name} series={series} type={type} />
             <MediaBackground bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`} />
             <MediaLeftCol>
-                <Media size="large" hover={false} name={name} posterPath={posterPath} type={type} />
+                <Media size="large" hover={false} name={name} showText={false} posterPath={posterPath} type={type} />
             </MediaLeftCol>
             <MediaRightCol>
                 <MediaListHeader data={episodes} type="season" uuid={uuid} />
@@ -36,7 +37,9 @@ const Season = ({ name, uuid, posterPath, airDate, overview, children, episodes,
                 <SeasonNumber>
                     {name}
                     <MediaRelease>{releaseDate}</MediaRelease>
+                    <MediaEpisodes>{episodes.length} episodes</MediaEpisodes>
                 </SeasonNumber>
+
                 {overview.length > 0 && <MediaDescription overview={overview} />}
                 <SubTitle>Episodes</SubTitle>
 
