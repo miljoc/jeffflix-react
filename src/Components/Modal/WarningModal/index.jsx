@@ -1,12 +1,9 @@
 // @flow
 import React from 'react';
 import { useDispatch } from 'react-redux';
-
 import { hideModal } from 'Redux/Actions/modalActions';
-
 import { Modal, ModalWrap, ModalBody, ModalHeader, ModalHeading } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
-
 import { Message, Button } from './Styles';
 
 type OwnProps = {
