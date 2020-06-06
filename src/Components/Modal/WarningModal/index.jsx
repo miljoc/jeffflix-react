@@ -13,7 +13,6 @@ type OwnProps = {
     title: string,
     message: string,
     confirm: Function,
-    cancel: Function,
 };
 
 type Props = {
@@ -21,27 +20,34 @@ type Props = {
     hModal: Function,
 };
 
-const WarningModal = ({ hModal, title, message, confirm, cancel }: Props) => (
-    <Modal>
-        <ModalWrap>
-            <ModalHeader>
-                <ModalHeading>
-                    {title}
-                    <ModalClose onClick={() => hModal()} />
-                </ModalHeading>
-            </ModalHeader>
-            <ModalBody>
-                <Message>{message}</Message>
-                <Button type="button" onClick={() => cancel()}>
-                    Cancel
-                </Button>
-                <Button confirm type="button" onClick={() => confirm()}>
-                    Confirm
-                </Button>
-            </ModalBody>
-        </ModalWrap>
-    </Modal>
-);
+const WarningModal = ({ hModal, title, message, confirm }: Props) => {
+    const onConfirm = () => {
+        confirm();
+        hModal();
+    };
+
+    return (
+        <Modal>
+            <ModalWrap>
+                <ModalHeader>
+                    <ModalHeading>
+                        {title}
+                        <ModalClose onClick={() => hModal()} />
+                    </ModalHeading>
+                </ModalHeader>
+                <ModalBody>
+                    <Message>{message}</Message>
+                    <Button type="button" onClick={() => hModal()}>
+                        Cancel
+                    </Button>
+                    <Button confirm type="button" onClick={() => onConfirm()}>
+                        Confirm
+                    </Button>
+                </ModalBody>
+            </ModalWrap>
+        </Modal>
+    );
+};
 
 const mapDispatchToProps = (dispatch) => ({
     hModal: () => dispatch(hideModal()),
