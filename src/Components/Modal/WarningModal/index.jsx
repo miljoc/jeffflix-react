@@ -1,48 +1,49 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 import { hideModal } from 'Redux/Actions/modalActions';
-
 import { Modal, ModalWrap, ModalBody, ModalHeader, ModalHeading } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
+import { Message, Button } from './Styles';
 
 type OwnProps = {
     title: string,
     message: string,
     confirm: Function,
-    cancel: Function,
 };
 
 type Props = {
-    ...OwnProps,
-    hModal: Function,
+    ...OwnProps
 };
 
-const WarningModal = ({ hModal, title, message, confirm, cancel }: Props) => (
-    <Modal>
-        <ModalWrap>
-            <ModalHeader>
-                <ModalHeading>
-                    {title}
-                    <ModalClose onClick={() => hModal()} />
-                </ModalHeading>
-            </ModalHeader>
-            <ModalBody>
-                <h2>{message}</h2>
-                <button type="button" onClick={() => cancel()}>
-                    Cancel
-                </button>
-                <button type="button" onClick={() => confirm()}>
-                    Confirm
-                </button>
-            </ModalBody>
-        </ModalWrap>
-    </Modal>
-);
+const WarningModal = ({ title, message, confirm }: Props) => {
+    const dispatch = useDispatch();
+    const onConfirm = () => {
+        confirm();
+        dispatch(hideModal());
+    };
 
-const mapDispatchToProps = (dispatch) => ({
-    hModal: () => dispatch(hideModal()),
-});
+    return (
+        <Modal>
+            <ModalWrap>
+                <ModalHeader>
+                    <ModalHeading>
+                        {title}
+                        <ModalClose onClick={() => dispatch(hideModal())} />
+                    </ModalHeading>
+                </ModalHeader>
+                <ModalBody>
+                    <Message>{message}</Message>
+                    <Button type="button" onClick={() => dispatch(hideModal())}>
+                        Cancel
+                    </Button>
+                    <Button confirm type="button" onClick={() => onConfirm()}>
+                        Confirm
+                    </Button>
+                </ModalBody>
+            </ModalWrap>
+        </Modal>
+    );
+};
 
-export default connect<Props, OwnProps, *, *, *, *>(null, mapDispatchToProps)(WarningModal);
+export default WarningModal;
