@@ -10,11 +10,10 @@ export default class MediaInfo extends Component {
         const { length, playState, showPlayStatus, unwatchedEpisodesCount, size, files, type } = this.props;
 
         const watchStatus = () => {
-
             if (showPlayStatus) {
                 return (
                     <>
-                        {(type !== "Season" && files.length > 1) && <UnwatchedCount>{files.length}</UnwatchedCount>};
+                        {(type !== 'Season' && files.length > 1) && <UnwatchedCount>{files.length}</UnwatchedCount>};
                         {!playState.finished && <Unwatched />}
                         {!playState.finished && playState.playtime > 0 && (
                             <PlayState percent={this.playPosition(length, playState.playtime)} />
