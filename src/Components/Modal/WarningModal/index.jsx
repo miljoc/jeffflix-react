@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { hideModal } from 'Redux/Actions/modalActions';
 
@@ -16,14 +16,14 @@ type OwnProps = {
 };
 
 type Props = {
-    ...OwnProps,
-    hModal: Function,
+    ...OwnProps
 };
 
-const WarningModal = ({ hModal, title, message, confirm }: Props) => {
+const WarningModal = ({ title, message, confirm }: Props) => {
+    const dispatch = useDispatch();
     const onConfirm = () => {
         confirm();
-        hModal();
+        dispatch(hideModal());
     };
 
     return (
@@ -32,12 +32,12 @@ const WarningModal = ({ hModal, title, message, confirm }: Props) => {
                 <ModalHeader>
                     <ModalHeading>
                         {title}
-                        <ModalClose onClick={() => hModal()} />
+                        <ModalClose onClick={() => dispatch(hideModal())} />
                     </ModalHeading>
                 </ModalHeader>
                 <ModalBody>
                     <Message>{message}</Message>
-                    <Button type="button" onClick={() => hModal()}>
+                    <Button type="button" onClick={() => dispatch(hideModal())}>
                         Cancel
                     </Button>
                     <Button confirm type="button" onClick={() => onConfirm()}>
@@ -49,8 +49,4 @@ const WarningModal = ({ hModal, title, message, confirm }: Props) => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    hModal: () => dispatch(hideModal()),
-});
-
-export default connect<Props, OwnProps, *, *, *, *>(null, mapDispatchToProps)(WarningModal);
+export default WarningModal;
