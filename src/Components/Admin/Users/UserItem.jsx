@@ -2,10 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useMutation } from '@apollo/react-hooks';
-
 import DELETE_USER from 'Mutations/deleteUser';
 import { showModal, WARNING_MODAL } from 'Redux/Actions/modalActions';
-
 import { faTrash, faCrown } from '@fortawesome/free-solid-svg-icons';
 import * as S from './Styles';
 
