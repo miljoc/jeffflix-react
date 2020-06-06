@@ -11,13 +11,13 @@ export const Button = styled.button`
     height: 5rem;
     border: none;
     padding: 0 1.5rem;
-    background: ${(props) => (props.confirm ? props.theme.alerts.error : '#0c0d16')};
+    background: ${({ theme, confirm }) => (confirm ? theme.alerts.error : '#0c0d16')};
     color: #fff;
     border-radius: 0.3rem;
     transition: 0.2s background;
 
     :hover {
-        background: ${(props) => (props.confirm ? props.theme.alerts.darken.error : '#0f1019')};
+        background: ${({ theme, confirm }) => (confirm ? theme.alerts.darken.error : '#0f1019')};
         transition: 0.2s background;
     }
 
