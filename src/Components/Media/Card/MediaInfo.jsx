@@ -13,7 +13,7 @@ export default class MediaInfo extends Component {
             if (showPlayStatus) {
                 return (
                     <>
-                        {(type !== 'Season' && files.length > 1) && <UnwatchedCount>{files.length}</UnwatchedCount>};
+                        {(type !== 'Season' && files.length > 1) && <UnwatchedCount>{files.length}</UnwatchedCount>}
                         {!playState.finished && <Unwatched />}
                         {!playState.finished && playState.playtime > 0 && (
                             <PlayState percent={this.playPosition(length, playState.playtime)} />
