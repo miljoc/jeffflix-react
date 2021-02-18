@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from 'Styles/Utils';
 
 export const ListWrap = styled.ul`
-    min-width: 100%;
+    min-width: calc(100% - 7.5rem);
     margin: 0 0 2rem;
 `;
 

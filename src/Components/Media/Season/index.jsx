@@ -6,6 +6,7 @@ import { getBaseUrl, generateMediaUrl } from 'Helpers';
 import Breadcrumbs from 'Components/Breadcrumbs';
 import Media from 'Components/Media/Card';
 import MediaDescription from 'Components/Media/MediaItem/MediaOverview/MediaDescription';
+import SeasonNavigation from './Navigation';
 import MediaListHeader from '../MediaHeader/MediaListHeader';
 
 import {
@@ -24,9 +25,12 @@ import EpisodesWrap from './Styles';
 const Season = ({ name, uuid, posterPath, airDate, overview, children, episodes, series, type }) => {
     const releaseDate = `(${airDate.split('-')[0]})`;
 
+    const { seasons } = series;
+
     return (
         <MediaFullWrap>
             <Breadcrumbs name={name} series={series} type={type} />
+            {seasons.length > 1 && <SeasonNavigation series={series} name={name} />}
             <MediaBackground bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`} />
             <MediaLeftCol>
                 <Media size="large" hover={false} name={name} showText={false} posterPath={posterPath} type={type} />
@@ -60,6 +64,12 @@ Season.propTypes = {
     series: PropTypes.shape({
         uuid: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
+        seasons: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                uuid: PropTypes.string.isRequired,
+            }),
+        ),
     }).isRequired,
     episodes: PropTypes.arrayOf(
         PropTypes.shape({
