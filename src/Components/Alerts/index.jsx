@@ -1,11 +1,18 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { transitions, positions } from 'react-alert';
 
 import AlertIcon from './AlertIcon';
 import AlertInline from './AlertInline';
+import AlertConfirm from './AlertConfirm';
 
 import * as S from './Styles';
+
+type Props = {
+    message: string,
+    options: Object,
+    close: Function,
+};
 
 const AlertOptions = {
     position: positions.BOTTOM_RIGHT,
@@ -14,7 +21,7 @@ const AlertOptions = {
     offset: '30',
 };
 
-const AlertTemplate = ({ message, options, close }) => (
+const AlertTemplate = ({ message, options, close }: Props) => (
     <S.AlertWrap>
         <S.AlertMessage>{message}</S.AlertMessage>
 
@@ -23,20 +30,4 @@ const AlertTemplate = ({ message, options, close }) => (
     </S.AlertWrap>
 );
 
-AlertTemplate.propTypes = {
-    message: PropTypes.string.isRequired,
-    options: PropTypes.shape({
-        type: PropTypes.string,
-        timeout: PropTypes.number,
-    }),
-    close: PropTypes.func.isRequired,
-};
-
-AlertTemplate.defaultProps = {
-    options: PropTypes.shape({
-        type: 'info',
-        timeout: 5000,
-    }),
-};
-
-export { AlertTemplate, AlertOptions, AlertInline };
+export { AlertTemplate, AlertOptions, AlertInline, AlertConfirm };
