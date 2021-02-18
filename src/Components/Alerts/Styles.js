@@ -17,7 +17,7 @@ export const AlertInlineWrap = styled.span`
     float: left;
     width: 100%;
     color: ${(props) => getColor(props)};
-    border: ${(props) => (props.type === 'info' ? 'none' : `1px solid ${(props) => getColor(props)}`)};
+    border: ${(props) => (props.type === 'info' ? 'none' : `1px solid ${getColor(props)}`)};
     background: ${(props) => (props.type === 'info' ? 'rgb(21, 22, 35)' : 'rgb(22, 22, 34)')};
     line-height: 2.4rem;
     font-size: 1.4rem;
@@ -26,6 +26,37 @@ export const AlertInlineWrap = styled.span`
     text-align: center;
     margin: 0 0 1rem;
     font-weight: 400;
+`;
+
+export const AlertConfirmWrap = styled.span`
+    float: left;
+    width: 100%;
+    color: ${(props) => getColor(props)};
+    border: ${(props) => (props.type === 'info' ? 'none' : `1px solid ${getColor(props)}`)};
+    background: ${(props) => (props.type === 'info' ? 'rgb(21, 22, 35)' : 'rgb(22, 22, 34)')};
+    line-height: 2.4rem;
+    font-size: 1.4rem;
+    border-radius: 0.3rem;
+    text-align: center;
+    margin: 0 0 1rem;
+    font-weight: 400;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        padding: 1rem 1.5rem;
+        display: inline-block;
+        float: left;
+    }
+
+    button {
+        float: left;
+        border-radius: 0 0.3rem 0.3rem 0;
+        border: 0;
+        padding: 0 2rem;
+        color: white;
+        background: ${(props) => getColor(props)};
+    }
 `;
 
 export const AlertWrap = styled.div`
@@ -48,7 +79,7 @@ export const AlertType = styled.strong`
 `;
 
 export const AlertMessage = styled.p`
-    color: ${(props) => props.theme.text};
+    color: ${({ theme }) => theme.text};
     font-weight: 600;
     line-height: 1.75;
     display: inline-block;
@@ -70,7 +101,7 @@ export const Close = styled.span`
     right: 1.5rem;
     font-size: 1.4rem;
     cursor: pointer;
-    color: ${(props) => props.theme.secondary};
+    color: ${({ theme }) => theme.secondary};
     transition: 0.2s all;
     opacity: 0.5;
 
