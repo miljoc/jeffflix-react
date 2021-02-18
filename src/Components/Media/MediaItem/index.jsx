@@ -15,6 +15,7 @@ import MediaCard from 'Components/Media/Card';
 import getVideoSource from './Video/getVideoSource';
 import MediaItemHeader from '../MediaHeader/MediaItemHeader';
 import MediaOverview from './MediaOverview';
+import MediaNavigation from './MediaOverview/MediaNavigation';
 import VideoController from './Video';
 
 import { MediaFull } from './Styles';
@@ -135,6 +136,9 @@ class MediaItem extends Component {
         return (
             <MediaFullWrap>
                 <Breadcrumbs type={type} name={name} season={season} />
+                {((type === 'Episode' || type === 'Season') && season.episodes.length > 1) &&
+                    <MediaNavigation episodeNumber={episodeNumber} season={season} />
+                }
                 <MediaFull>
                     <MediaLeftCol>
                         <MediaCard
@@ -222,6 +226,12 @@ MediaItem.propTypes = {
         }),
     ).isRequired,
     season: PropTypes.shape({
+        episodes: PropTypes.arrayOf(
+            PropTypes.shape({
+                episodeNumber: PropTypes.number,
+                uuid: PropTypes.string,
+            }),
+        ),
         series: PropTypes.shape({
             posterPath: PropTypes.string,
         }),

@@ -40,6 +40,13 @@ class Player extends Component {
         videojs.Hls.GOAL_BUFFER_LENGTH = 30;
         videojs.Hls.MAX_GOAL_BUFFER_LENGTH = 30;
 
+        // Subtitle extraction might take a _long_ time, 
+        // for now let's just take our time with the requests.
+        videojs.Hls.xhr.beforeRequest = (options) => ({
+            ...options,
+            timeout: 90000 
+        });
+
         const videoJsOptions = {
             sources: [videoSource],
             autoplay: true,
