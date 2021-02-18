@@ -34,7 +34,7 @@ export const ModalWrap = styled.div`
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
     animation: 0.3s ${fadeInZoom} forwards;
     border-radius: 0.3rem;
-    background: ${(props) => props.theme.background};
+    background: ${({ theme }) => theme.background};
 
     ${media.tablet`
         min-width: 50rem;
@@ -71,7 +71,7 @@ export const ModalHeader = styled.header`
     p {
         font-size: 1.2rem;
         font-weight: 600;
-        font-family: ${(props) => props.theme.fonts.opensans};
+        font-family: ${({ theme }) => theme.fonts.opensans};
         color: #fffc;
         line-height: 1.8;
         margin-top: 0.5rem;
@@ -95,6 +95,87 @@ export const ModalBody = styled.div`
     float: left;
     width: 100%;
     padding: 2rem;
-    min-height: 7.5rem;
+    max-height: 60vh;
+    overflow: scroll;
+
     position: relative;
+
+    h2 {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      color: white;
+      margin-bottom: 0.6rem;
+      font-size: 1.2rem;
+
+      strong {
+        font-weight: 700;
+        margin-right: 0.5rem;
+      }
+
+      span {
+        text-transform: capitalize;
+        font-weight: 700;
+        display: inline-block;
+        margin-right: 0.5rem;
+        color: #656565;
+
+        &:not(:first-of-type){
+          margin-left: 1rem;
+        }
+      }
+    }
+`;
+
+export const PathWrap = styled.div`
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 2rem;
+    border-radius: 0.3rem;
+    background-color: rgba(255,255,255,0.1);
+`;
+
+export const InfoTitle = styled.div`
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: white;
+    font-weight: 700;
+`;
+
+export const FileWrap = styled.div`
+    margin-bottom: 2rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+`;
+
+export const SectionWrap = styled.div`
+    margin-bottom: ${(props) => props.noMargin ? null : "2rem"};
+`;
+
+export const InfoWrap = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+
+    > p {
+      margin-right: 0.5rem;
+    }
+
+    div {
+      margin-right: 3rem;
+      width: calc(45% - 3rem);
+
+      p {
+        display: flex;
+        justify-content: space-between;
+        margin-right: 0.5rem;
+      }
+
+    }
 `;

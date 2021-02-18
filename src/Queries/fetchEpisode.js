@@ -33,6 +33,7 @@ const FETCH_EPISODE = gql`
             files {
                 fileName
                 filePath
+                fileSize
                 uuid
                 totalDuration
                 library {
@@ -41,9 +42,11 @@ const FETCH_EPISODE = gql`
                 streams {
                     streamType
                     codecMime
+                    codecName
                     resolution
                     bitRate
                     language
+                    profile
                 }
             }
         }
