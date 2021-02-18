@@ -23,6 +23,32 @@ export const CloseVideo = styled(FontAwesomeIcon)`
     }
 `;
 
+export const DisabledIcon = styled(FontAwesomeIcon)`
+    color: rgba(255,255,255,0.25);
+    pointer-events: none;
+`;
+
+export const Link = styled.button`
+    background: none;
+    border: 0;
+    color: #fff;
+    font-size: 2rem;
+    opacity: 0.8;
+
+    &:disabled {
+        pointer-events: none;
+        color: rgba(255,255,255,0.25);
+    }
+`;
+
+export const MediaNavigation = styled.div`
+    width: 4rem;
+    height: 2.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
 export const VideoWrap = styled.article`
     position: fixed;
     padding: 0;

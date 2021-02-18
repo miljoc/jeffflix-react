@@ -17,6 +17,11 @@ const FETCH_SEASON = gql`
                 name
                 overview
                 uuid
+                seasons {
+                    name
+                    uuid
+                    seasonNumber
+                }
             }
 
             episodes {

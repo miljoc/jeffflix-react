@@ -14,6 +14,10 @@ const FETCH_EPISODE = gql`
             season {
                 uuid
                 name
+                episodes {
+                  episodeNumber
+                  uuid
+                }
                 series {
                     uuid
                     name
