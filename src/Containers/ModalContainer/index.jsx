@@ -6,14 +6,22 @@ import AddLibraryModal from 'Components/Modal/AddLibraryModal';
 import ResumeMediaModal from 'Components/Modal/ResumeMediaModal';
 import WarningModal from 'Components/Modal/WarningModal';
 import FixMismatchModal from 'Components/Modal/FixMismatchModal';
+import AdvancedInfoModal from 'Components/Modal/AdvancedInfoModal';
 
-import { LIBRARY_MODAL, RESUME_MODAL, WARNING_MODAL, FIX_MISMATCH_MODAL } from 'Redux/Actions/modalActions';
+import {
+    LIBRARY_MODAL,
+    RESUME_MODAL,
+    WARNING_MODAL,
+    FIX_MISMATCH_MODAL,
+    ADVANCED_INFO_MODAL
+} from 'Redux/Actions/modalActions';
 
 const MODAL_COMPONENTS = {
     [LIBRARY_MODAL]: AddLibraryModal,
     [RESUME_MODAL]: ResumeMediaModal,
     [WARNING_MODAL]: WarningModal,
     [FIX_MISMATCH_MODAL]: FixMismatchModal,
+    [ADVANCED_INFO_MODAL]: AdvancedInfoModal,
 };
 
 type OwnProps = {

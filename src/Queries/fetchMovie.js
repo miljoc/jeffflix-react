@@ -20,6 +20,7 @@ const FETCH_MOVIE = gql`
             files {
                 fileName
                 filePath
+                fileSize
                 uuid
                 totalDuration
                 library {
@@ -27,10 +28,12 @@ const FETCH_MOVIE = gql`
                 }
                 streams {
                     codecMime
+                    codecName
                     streamType
                     resolution
                     bitRate
                     language
+                    profile
                 }
             }
         }
