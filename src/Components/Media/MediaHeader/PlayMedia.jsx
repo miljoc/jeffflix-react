@@ -26,7 +26,11 @@ const PlayMedia = ({ isConnected, type, playState, sModal, playMedia }) => {
     };
 
     return (
-        <HeaderIconWrap onClick={() => resumeModal()} data-tip={playText}>
+        <HeaderIconWrap
+            onClick={() => resumeModal()}
+            data-delay-show='1000'
+            data-tip={playText}
+        >
             <HeaderIcon icon={faPlay} />
         </HeaderIconWrap>
     );

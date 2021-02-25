@@ -18,7 +18,7 @@ const FixMismatch = ({ uuid, sModal, name, file, type }) => {
     };
 
     return (
-        <HeaderIconWrap onClick={() => toggleModal()} data-tip="Fix Mismatch">
+        <HeaderIconWrap onClick={() => toggleModal()} data-delay-show='1000' data-tip="Fix Mismatch">
             <HeaderIcon icon={faWrench} />
         </HeaderIconWrap>
     );

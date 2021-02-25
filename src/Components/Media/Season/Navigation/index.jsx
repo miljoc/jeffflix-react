@@ -22,12 +22,16 @@ const SeasonNavigation = ({ series, name }) => {
                 <S.Link
                     disabled={!seasonList[index - 1]}
                     onClick={event => handleClick(event, seasonList[index - 1].uuid)}
+                    data-delay-show='1000'
+                    data-tip="Previous Season"
                 >
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </S.Link>
                 <S.Link
                     disabled={!seasonList[index + 1]}
                     onClick={event => handleClick(event, seasonList[index + 1].uuid)}
+                    data-delay-show='1000'
+                    data-tip="Next Season"
                 >
                     <FontAwesomeIcon icon={faArrowRight} />
                 </S.Link>
