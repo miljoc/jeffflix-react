@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import ReactToolTip from 'react-tooltip';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { hideNavigation, showNavigation } from 'Redux/Actions/navigationActions';
 
@@ -37,14 +38,24 @@ class NavToggle extends Component {
 
         return (
             <>
+                <ReactToolTip effect="solid" place="left" className="tooltip" />
                 {browser.lessThan.large && !navHidden && (
-                    <ContentOverlay onClick={this.toggleNav}>
+                    <ContentOverlay
+                        data-delay-show='1000'
+                        data-tip={navHidden ? "Show Nav" : "Hide Nav"}
+                        onClick={this.toggleNav}
+                    >
                         <HideNavIcon icon={faTimes} />
                     </ContentOverlay>
                 )}
 
-                <NavButton onClick={this.toggleNav} alignLeft>
-                    <NavIcon icon={navHidden ? faBars : faTimes} />
+                <NavButton
+                    data-delay-show='1000'
+                    data-tip={navHidden ? "Show Nav" : "Hide Nav"}
+                    onClick={this.toggleNav}
+                    alignLeft
+                >
+                    <NavIcon data-place="right" icon={navHidden ? faBars : faTimes} />
                 </NavButton>
             </>
         );

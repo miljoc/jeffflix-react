@@ -29,12 +29,14 @@ const MediaNavigation = ({ season, episodeNumber }: Props) => {
         (episode.episodeNumber === episodeNumber) && (
             <S.MediaNavigation key={episode.episodeNumber}>
                 <S.Link
+                    data-tip="Previous Episode"
                     disabled={!episodeList[index - 1]}
                     onClick={event => handleClick(event, episodeList[index - 1].uuid)}
                 >
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </S.Link>
                 <S.Link
+                    data-tip="Next Episode"
                     disabled={!episodeList[index + 1]}
                     onClick={event => handleClick(event, episodeList[index + 1].uuid)}
                 >
