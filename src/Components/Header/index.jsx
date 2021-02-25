@@ -3,6 +3,7 @@ import { compose } from 'lodash/fp';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ReactToolTip from 'react-tooltip';
 
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -33,8 +34,9 @@ class Header extends Component {
         return (
             <HeaderWrap>
                 <NavToggle />
+                <ReactToolTip effect="solid" place="left" className="tooltip" />
                 {previousLocation !== null && currentLocation !== '/dashboard' && (
-                    <BackButton onClick={() => history.goBack()}>
+                    <BackButton data-delay-show='1000' data-tip="Go Back" onClick={() => history.goBack()}>
                         <BackIcon icon={faArrowLeft} />
                     </BackButton>
                 )}

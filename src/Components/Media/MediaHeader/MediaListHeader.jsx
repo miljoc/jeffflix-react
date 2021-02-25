@@ -89,6 +89,7 @@ class MediaListHeader extends Component {
                 <ReactToolTip effect="solid" place="left" className="tooltip" />
                 <S.HeaderIconWrap
                     onClick={this.playSeries}
+                    data-delay-show='1000'
                     data-tip={`Play ${type === 'series' ? 'Series' : 'Season'}`}
                 >
                     <S.HeaderIcon icon={faPlay} />
@@ -96,6 +97,7 @@ class MediaListHeader extends Component {
 
                 <S.HeaderIconWrap
                     onClick={() => this.playEpisode(randomEpisode.uuid, false)}
+                    data-delay-show='1000' 
                     data-tip="Play Random Episode"
                 >
                     <S.HeaderIcon icon={faRandom} />

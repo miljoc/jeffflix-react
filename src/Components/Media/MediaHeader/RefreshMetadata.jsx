@@ -26,7 +26,13 @@ const RefreshMetadata = ({ uuid, mutate }: Props) => {
         });
 
     return (
-        <HeaderIconWrap disabled={disabled} onClick={() => refreshMetadata()} data-tip="Refresh Meta Data" right>
+        <HeaderIconWrap
+            disabled={disabled}
+            onClick={() => refreshMetadata()}
+            data-delay-show='1000'
+            data-tip="Refresh Meta Data"
+            right
+        >
             <HeaderIcon icon={faSync} />
         </HeaderIconWrap>
     );

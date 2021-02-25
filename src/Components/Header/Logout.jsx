@@ -5,7 +5,7 @@ import { Auth } from 'Client/Auth';
 import { NavButton, NavIcon } from './Styles';
 
 const Logout = () => (
-    <NavButton onClick={() => Auth.logout()}>
+    <NavButton data-delay-show='1000' data-tip="Logout" onClick={() => Auth.logout()}>
         <NavIcon icon={faSignOutAlt} />
     </NavButton>
 );
