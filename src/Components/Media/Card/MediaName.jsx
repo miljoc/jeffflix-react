@@ -29,7 +29,7 @@ const MediaName = ({ episodes, type, year, name, title, episodeNumber, seasonNum
 
     return (
         <>
-            <CardTitle>{type === 'Movie' ? title: name}</CardTitle>
+            <CardTitle>{type === 'Movie' ? title : name}</CardTitle>
             <CardInfo>{info()}</CardInfo>
         </>
     );

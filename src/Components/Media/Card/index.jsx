@@ -113,7 +113,7 @@ class MediaCard extends Component {
                             </CardPopup>
                         )}
                     </PosterWrap>
-                    {showText && <MediaName name={name} {...this.props} />}
+                    {showText && <MediaName name={name} title={title} {...this.props} />}
                 </CardWrap>
             </>
         );
@@ -127,6 +127,7 @@ const mapDispatchToProps = (dispatch) => ({
 MediaCard.propTypes = {
     playMedia: PropTypes.func,
     name: PropTypes.string.isRequired,
+    title: PropTypes.string,
     airDate: PropTypes.string,
     posterPath: PropTypes.string,
     stillPath: PropTypes.string,
@@ -150,6 +151,7 @@ MediaCard.propTypes = {
 };
 
 MediaCard.defaultProps = {
+    title: null,
     airDate: null,
     hover: true,
     posterPath: null,
