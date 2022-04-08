@@ -117,3 +117,29 @@ export const ContentOverlay = styled.div`
         left: 0;
     `}
 `;
+
+export const SortWrap = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 100%;
+    margin: 0 1rem 2rem;
+    z-index: 5;
+
+    ${media.desktop`
+        margin: 0 1.5rem 3rem;
+    `}
+
+    > div {
+        ${media.desktop`
+            flex-basis: 15rem;
+            flex-grow: 0;
+        `}
+
+        &:first-of-type {
+            margin-right: 1.5rem;
+            ${media.desktop`
+                flex-basis: 20rem;
+            `}
+        }
+    }
+`;

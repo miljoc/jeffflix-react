@@ -1,8 +1,7 @@
 // @flow
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
-import { orderBy } from 'lodash';
 
 import FETCH_SERIES_LIST from 'Queries/fetchSeriesList';
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
@@ -12,13 +11,15 @@ import Loading from 'Components/Loading';
 import MediaCard from 'Components/Media/Card';
 
 import { NoResults } from 'Containers/Styles';
-import * as S from '../Styles';
+import { LibraryListItem } from '../Styles';
 
 type Props = {
     sModal: Function,
+    sortOrder: String,
+    sortDirection: String
 };
 
-const RenderSeriesList = ({ sModal }: Props) => {
+const RenderSeriesList = ({ sModal, sortOrder, sortDirection }: Props) => {
     const toggleModal = () => {
         sModal(LIBRARY_MODAL, {
             title: 'Add TV Series folder',
@@ -28,12 +29,25 @@ const RenderSeriesList = ({ sModal }: Props) => {
 
     const seriesLimit = (window.innerHeight > 1100) ? 100 : 50;
 
-    const { loading, error, data, fetchMore } = useQuery(FETCH_SERIES_LIST, {
+    const { loading, error, data, refetch, fetchMore } = useQuery(FETCH_SERIES_LIST, {
         variables: {
             limit: seriesLimit,
             offset: 0,
+            sort: sortOrder,
+            sortDirection
         },
     });
+
+    useEffect(() => {
+        refetch({
+            variables: {
+                limit: seriesLimit,
+                offset: 0,
+                sort: sortOrder,
+                sortDirection
+            }
+        })
+    }, [sortDirection, sortOrder]);    
 
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
@@ -65,19 +79,20 @@ const RenderSeriesList = ({ sModal }: Props) => {
                 }
             >
                 {() => {
-                    return orderBy(data.series, ['name'], ['asc']).map((s) => {
-                        const { name, posterPath, type, unwatchedEpisodesCount, uuid } = s;
+                    return data.series.map((s) => {
+                        const { name, posterPath, type, unwatchedEpisodesCount, uuid, firstAirDate } = s;
 
                         return (
-                            <S.LibraryListItem key={s.uuid}>
+                            <LibraryListItem key={s.uuid}>
                                 <MediaCard
                                     name={name}
                                     posterPath={posterPath}
                                     type={type}
                                     unwatchedEpisodesCount={unwatchedEpisodesCount}
                                     uuid={uuid}
+                                    year={firstAirDate.split("-")[0]}
                                 />
-                            </S.LibraryListItem>
+                            </LibraryListItem>
                         );
                     });
                 }}
