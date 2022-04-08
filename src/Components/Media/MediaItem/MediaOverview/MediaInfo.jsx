@@ -7,10 +7,10 @@ import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 import MediaDescription from './MediaDescription';
 import { MediaInfoWrap, MediaDetails, LibraryUnhealthy } from '../Styles';
-import { MediaName, MediaRelease } from '../../Styles';
+import { MediaName, MediaRelease, MediaOriginalTitle } from '../../Styles';
 
 const MediaInfo = (props) => {
-    const { name, release, playState, selectedFile, overview, episodeNumber } = props;
+    const { name, release, playState, selectedFile, overview, episodeNumber, title } = props;
 
     const renderPlayState = () => {
         let renderedState;
@@ -59,9 +59,13 @@ const MediaInfo = (props) => {
     return (
         <MediaInfoWrap>
             <MediaName>
-                {name}
+                {title}
                 <MediaRelease>{episodeNumber ? `Episode ${episodeNumber}` : release}</MediaRelease>
             </MediaName>
+
+            {episodeNumber === null && name !== title &&
+                <MediaOriginalTitle><span>original title</span>{name}</MediaOriginalTitle>
+            }
 
             <MediaDetails unwatched={playState.finished}>
                 {renderHealth()}
@@ -70,6 +74,7 @@ const MediaInfo = (props) => {
                 <li>{renderResolution()}</li>
                 {episodeNumber && <li>{release}</li>}
             </MediaDetails>
+            
             <MediaDescription overview={overview} />
         </MediaInfoWrap>
     );
@@ -77,6 +82,7 @@ const MediaInfo = (props) => {
 
 MediaInfo.propTypes = {
     name: PropTypes.string.isRequired,
+    title: PropTypes.string,
     overview: PropTypes.string.isRequired,
     release: PropTypes.string.isRequired,
     episodeNumber: PropTypes.number,
@@ -93,6 +99,7 @@ MediaInfo.propTypes = {
 
 MediaInfo.defaultProps = {
     episodeNumber: null,
+    title: null,
 };
 
 

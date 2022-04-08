@@ -8,12 +8,13 @@ import MediaAudio from './MediaAudio';
 
 const MediaOverview = (props) => {
     const { mediaInfo, selectedFile, files, fileChange, release, episodeNumber } = props;
-    const { name, playState, overview } = mediaInfo;
+    const { name, playState, overview, title } = mediaInfo;
 
     return (
         <>
             <MediaInfo
                 name={name}
+                title={title}
                 playState={playState}
                 overview={overview}
                 selectedFile={selectedFile}
@@ -35,6 +36,7 @@ MediaOverview.propTypes = {
             finished: PropTypes.bool,
             playtime: PropTypes.number,
         }).isRequired,
+        title: PropTypes.string,
     }).isRequired,
     episodeNumber: PropTypes.number,
     release: PropTypes.string.isRequired,

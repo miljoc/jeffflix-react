@@ -8,6 +8,7 @@ const FETCH_SERIES_LIST = gql`
             posterPath
             uuid
             unwatchedEpisodesCount
+            firstAirDate
         }
     }
 `;
