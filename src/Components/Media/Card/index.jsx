@@ -80,7 +80,7 @@ class MediaCard extends Component {
     };
 
     render() {
-        const { wide, showText, history, name, posterPath, stillPath, type, files, hover } = this.props;
+        const { wide, showText, history, name, title, posterPath, stillPath, type, files, hover } = this.props;
         const { url } = this.state;
 
         const showPlayStatus = type === 'Movie' || type === 'Episode';
