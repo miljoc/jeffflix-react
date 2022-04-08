@@ -1,8 +1,7 @@
 // @flow
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
-import { orderBy } from 'lodash';
 
 import FETCH_MOVIES from 'Queries/fetchMovieList';
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
@@ -16,9 +15,11 @@ import { LibraryListItem } from '../Styles';
 
 type Props = {
     sModal: Function,
+    sortOrder: String,
+    sortDirection: String
 };
 
-const RenderMovieList = ({ sModal }: Props) => {
+const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
     const toggleModal = () => {
         sModal(LIBRARY_MODAL, {
             title: 'Add Movies Library',
@@ -28,12 +29,25 @@ const RenderMovieList = ({ sModal }: Props) => {
 
     const moviesLimit = (window.innerHeight > 1100) ? 100 : 50;
 
-    const { loading, error, data, fetchMore } = useQuery(FETCH_MOVIES, {
+    const { loading, error, data, refetch, fetchMore } = useQuery(FETCH_MOVIES, {
         variables: {
             limit: moviesLimit,
             offset: 0,
+            sort: sortOrder,
+            sortDirection
         },
     });
+
+    useEffect(() => {
+        refetch({
+            variables: {
+                limit: moviesLimit,
+                offset: 0,
+                sort: sortOrder,
+                sortDirection
+            }
+        })
+    }, [sortDirection, sortOrder]);
 
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
@@ -65,7 +79,7 @@ const RenderMovieList = ({ sModal }: Props) => {
                 }
             >
                 {() => {
-                    return orderBy(data.movies, ['name'], ['asc']).map((m) => {
+                    return data.movies.map((m) => {
                         const { files, name, playState, posterPath, type, uuid, year } = m;
 
                         return (
