@@ -17,6 +17,9 @@ const MediaName = ({ episodes, type, year, name, episodeNumber, seasonNumber }) 
             case 'Movie':
                 infoValue = year;
                 break;
+            case 'Series':
+                infoValue = year;
+                break;
             default:
                 break;
         }
