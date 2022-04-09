@@ -6,6 +6,7 @@ const FETCH_SUGGESTIONS = gql`
             ... on Movie {
                 type: __typename
                 name
+                title
                 posterPath
                 year
                 uuid
