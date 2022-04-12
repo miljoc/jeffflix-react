@@ -71,3 +71,12 @@ export const LibraryListItemWide = styled.div`
         margin: ${(props) => props.theme.wideCard.margin};
     `}
 `;
+
+export const SortRow = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-basis: 100%;
+    justify-content: space-between;
+    margin: 0 1rem 2rem;
+`;

@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 
 import Empty from 'Components/Media/Card/Empty';
 import Sort from 'Components/Header/Sort';
+import Stats from 'Components/Header/Stats';
 import RenderSeriesList from './RenderSeriesList';
 
-import { LibraryListWrap } from '../Styles';
+import { LibraryListWrap, SortRow } from '../Styles';
 
 const SeriesList = () => {
     const [sortOrder, setSortOrder] = useState({ value: 'name', label: 'Name'});    
@@ -16,14 +17,17 @@ const SeriesList = () => {
 
     return (
         <LibraryListWrap>
-            <Sort
-                sortOrder={sortOrder}
-                sortDirection={sortDirection}
-                setSortDirection={setSortDirection}
-                setSortOrder={setSortOrder}
-                sortValues={sortValues}
-                sortDirections={sortDirections}
-            />
+            <SortRow>
+                <Stats type="series" />
+                <Sort
+                    sortOrder={sortOrder}
+                    sortDirection={sortDirection}
+                    setSortDirection={setSortDirection}
+                    setSortOrder={setSortOrder}
+                    sortValues={sortValues}
+                    sortDirections={sortDirections}
+                />
+            </SortRow>
             <RenderSeriesList sortOrder={sortOrder.value} sortDirection={sortDirection.value} />
             <Empty />
         </LibraryListWrap>
