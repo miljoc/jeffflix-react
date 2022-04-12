@@ -118,6 +118,7 @@ class MediaItem extends Component {
             wide,
             uuid,
             name,
+            title,
             overview,
             isConnected,
             playState,
@@ -133,9 +134,11 @@ class MediaItem extends Component {
             ...this.props,
         };
 
+        const renderedName = type === 'Movie' ? title : name;
+
         return (
             <MediaFullWrap>
-                <Breadcrumbs type={type} name={name} season={season} />
+                <Breadcrumbs type={type} name={renderedName} season={season} />
                 {((type === 'Episode' || type === 'Season') && season.episodes.length > 1) &&
                     <MediaNavigation episodeNumber={episodeNumber} season={season} />
                 }
@@ -148,6 +151,7 @@ class MediaItem extends Component {
                             text
                             files={files}
                             name={name}
+                            title={title}
                             playState={playState}
                             posterPath={posterPath}
                             type={type}
@@ -211,6 +215,7 @@ const requiredPropsCheck = (props, propName, componentName) => {
 
 MediaItem.propTypes = {
     name: PropTypes.string.isRequired,
+    title: PropTypes.string,
     overview: PropTypes.string.isRequired,
     isConnected: PropTypes.bool.isRequired,
     posterPath: PropTypes.string,
@@ -260,6 +265,7 @@ MediaItem.defaultProps = {
     season: {},
     location: {},
     episodeNumber: null,
+    title: null
 };
 
 const mapStateToProps = (state) => {
