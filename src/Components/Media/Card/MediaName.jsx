@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { CardTitle, CardInfo } from './Styles';
 
-const MediaName = ({ episodes, type, year, name, episodeNumber, seasonNumber }) => {
+const MediaName = ({ episodes, type, year, name, title, episodeNumber, seasonNumber }) => {
     const info = () => {
         let infoValue;
 
@@ -29,7 +29,7 @@ const MediaName = ({ episodes, type, year, name, episodeNumber, seasonNumber }) 
 
     return (
         <>
-            <CardTitle>{name}</CardTitle>
+            <CardTitle>{type === 'Movie' ? title : name}</CardTitle>
             <CardInfo>{info()}</CardInfo>
         </>
     );
@@ -37,6 +37,7 @@ const MediaName = ({ episodes, type, year, name, episodeNumber, seasonNumber }) 
 
 MediaName.propTypes = {
     name: PropTypes.string.isRequired,
+    title: PropTypes.string,
     type: PropTypes.string.isRequired,
     year: PropTypes.string,
     episodeNumber: PropTypes.number,
@@ -53,6 +54,7 @@ MediaName.defaultProps = {
     seasonNumber: null,
     episodeNumber: null,
     year: null,
+    title: null
 };
 
 export default MediaName;

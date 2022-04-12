@@ -5,6 +5,7 @@ const FETCH_MOVIE = gql`
         movies(uuid: $uuid) {
             type: __typename
             name
+            title
             year
             overview
             imdbID

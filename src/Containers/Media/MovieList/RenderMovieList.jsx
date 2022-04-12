@@ -80,13 +80,14 @@ const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
             >
                 {() => {
                     return data.movies.map((m) => {
-                        const { files, name, playState, posterPath, type, uuid, year } = m;
+                        const { files, name, title, playState, posterPath, type, uuid, year } = m;
 
                         return (
                             <LibraryListItem key={m.uuid}>
                                 <MediaCard
                                     files={files}
                                     name={name}
+                                    title={title}
                                     playState={playState}
                                     posterPath={posterPath}
                                     type={type}

@@ -209,3 +209,24 @@ export const MediaBackground = styled.span`
         display:block;
     `}
 `;
+
+export const MediaOriginalTitle = styled.div`
+    font-size: 1.9rem;
+    margin-bottom: 2rem;
+    color: #FFF;
+
+    > span {
+      text-transform: uppercase;
+      display: block;
+      color: inherit;
+      opacity: .5;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 2rem;
+      letter-spacing: 0.1rem;
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+
+    }
+`;

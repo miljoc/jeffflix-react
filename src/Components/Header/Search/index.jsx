@@ -129,6 +129,7 @@ Search.propTypes = {
     data: PropTypes.shape({
         search: PropTypes.arrayOf(
             PropTypes.shape({
+                title: PropTypes.string,
                 name: PropTypes.string,
                 poster_path: PropTypes.string,
                 uuid: PropTypes.string,
