@@ -1,73 +1,28 @@
-.react-autosuggest__container {
-    flex: 1;
-    float: left;
-    max-width: 30rem;
-    position: relative;
-    margin-left: 1rem;
-}
-
 .react-autosuggest {
     &__suggestions-container {
-        border-radius: 0.2rem;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        left: 0;
-        margin: 1rem 0;
-        overflow: hidden;
-        position: absolute;
-        top: 6rem;
         z-index: 999;
-
-        @include breakpoint(xxs) {
-            left: 2rem;
-            position: fixed;
-            top: 9rem;
-            width: 100%;
-        }
-    }
-
-    &__section-container {
-        background: #ffffff;
-        border-bottom: 0.1rem solid color(light);
-        max-width: 30rem;
-        overflow: hidden;
-        position: relative;
-        z-index: 2;
-
-        &:last-of-type {
-            border-bottom: 0;
-        }
+        left: 0;
     }
 
     &__suggestions-list {
-        float: left;
-        width: 100%;
+		float: left;
+		width: 100%;
     }
 
     &__suggestion {
-        border-bottom: 1px solid #eeeeee;
-        float: left;
-        width: 100%;
-
-        &:last-child {
-            border-bottom: 0;
-            overflow: hidden;
-        }
+		float: left;
+		width: 100%;        
     }
-
+    
     &__input {
-        background: none;
-        border: 0;
-        color: #ffffff;
         font-size: 1.6rem;
+		background: none;
+		border: 0;
+		color: #ffffff;
         font-weight: 600;
-        height: 100%;
-        left: 0;
         overflow: hidden;
-        padding: 0 5rem 0 6rem;
-        position: absolute;
-        top: 0;
-        transition: 0.2s all;
-        width: 100%;
+		transition: 0.2s all;
+		width: 100%;
 
         &::-webkit-input-placeholder {
             color: rgba(255, 255, 255, 0.2);
@@ -81,24 +36,136 @@
 
         @include breakpoint(xxs) {
             font-size: 1.4rem;
+        }        
+    }
+}
+
+.searchAutosuggest {
+    flex: 1;
+    float: left;
+    max-width: 30rem;
+    position: relative;
+    margin-left: 1rem;
+    
+    .react-autosuggest {
+        &__suggestions-container {
+            position: absolute;
+            top: 6rem;
+            border-radius: 0.2rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+            overflow: hidden;
+    
+            @include breakpoint(xxs) {
+                left: 2rem;
+                position: fixed;
+                top: 9rem;
+                width: 100%;
+            }
+        }
+    
+        &__section-container {
+            background: #ffffff;
+            border-bottom: 0.1rem solid color(light);
+            max-width: 30rem;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+    
+            &:last-of-type {
+                border-bottom: 0;
+            }
+        }
+        
+        &__suggestion {
+            border-bottom: 1px solid #eeeeee;
+    
+            &:last-child {
+                border-bottom: 0;
+                overflow: hidden;
+            }
+        }
+    
+        &__input {
+            font-size: 1.6rem;
+            height: 100%;
+            left: 0;
+            padding: 0 5rem 0 6rem;
+            position: absolute;
+            top: 0;
+        }
+    
+        &__section-container {
+            background: #ffffff;
+            border-radius: 0 0 0.2rem 0.2rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 35rem;
+            z-index: 2;
+    
+            &--first {
+                border-radius: 0.2rem 0.2rem 0 0;
+            }
+    
+            @include breakpoint(xxs) {
+                max-width: calc(100% - 4rem);
+                width: 100%;
+            }
+        }
+    }
+}
+
+.folderAutosuggest {
+    position: relative;
+
+    .react-autosuggest {
+        &__suggestions-container {
+            position: relative;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
+
+        &__suggestions-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 1rem;
+            background-color: #0e0f18 !important;
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 2rem;
+            border: none;
+            border-radius: 0.2rem;
+            max-height: 15rem;
+            overflow: scroll;
+        }
+
+        &__suggestion {
+            color: #fff;
+            cursor: pointer;
+            background-color: #0e0f18 !important;
+
+            &:hover {
+                color: #FF9B3D;
+            }
+        }
+
+        &__input {
+            font-size: 1.4rem;
+            height: 5rem;
+            background: rgba(0,0,0,0.2);
+            margin: 0 0 1rem;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            border-radius: 0.2rem;
         }
     }
 
-    &__section-container {
-        background: #ffffff;
-        border-radius: 0 0 0.2rem 0.2rem;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-        position: relative;
-        width: 35rem;
-        z-index: 2;
-
-        &--first {
-            border-radius: 0.2rem 0.2rem 0 0;
-        }
-
-        @include breakpoint(xxs) {
-            max-width: calc(100% - 4rem);
-            width: 100%;
-        }
+    > svg {
+        top: auto;
+        bottom: 2.8rem;
     }
 }

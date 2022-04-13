@@ -40,7 +40,9 @@ class Header extends Component {
                         <BackIcon icon={faArrowLeft} />
                     </BackButton>
                 )}
-                <Search value={value} updateSearch={this.updateSearch} />
+                <div className="searchAutosuggest">
+                    <Search value={value} updateSearch={this.updateSearch} />
+                </div>
 
                 <div className="right-menu">
                     <google-cast-launcher />
