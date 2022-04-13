@@ -26,7 +26,7 @@ class MediaListHeader extends Component {
         };
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         this.updateEpisodeList();
     };
 

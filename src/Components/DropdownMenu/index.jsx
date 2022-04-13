@@ -11,7 +11,7 @@ class DropdownMenu extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
         document.addEventListener('mousedown', this.closeModalIfOpen, false);
         document.addEventListener('keydown', this.closeModalIfOpen, false);
     }
