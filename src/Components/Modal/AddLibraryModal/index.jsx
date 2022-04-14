@@ -128,7 +128,7 @@ class AddLibraryModal extends Component {
                             <ModalClose onClick={() => this.closeModal()} />
                         </ModalHeading>
                     </ModalHeader>
-                    <ModalBody overflow>
+                    <ModalBody overflow="true">
                         {error && <AlertInline type="error">{errorMessage}</AlertInline>}
                         <LibraryList kind={kind} />
                         <AddLibraryAction createLibrary={(props) => this.createLibrary(props)} />

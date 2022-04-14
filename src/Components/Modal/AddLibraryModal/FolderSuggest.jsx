@@ -7,8 +7,8 @@ import debounce from 'lodash/debounce';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { LoadingIcon } from '../../Header/Search/Styles';
 
-const FolderSuggest = ({ filepath, onChange, libraryType }) => {
-    const libraryTypePrefix = parseInt(libraryType.value, 10) === 0 ? "local#" : "rclone#";
+const FolderSuggest = ({ filepath, onChange, libraryType, remote }) => {
+    const libraryTypePrefix = parseInt(libraryType.value, 10) === 0 ? "local#" : `rclone#${remote?.value}/`;
     const [suggestions, setSuggestions] = useState([]);
     const { loading, error, data, refetch } = useQuery(FETCH_FOLDERS, {
         variables: {
@@ -36,7 +36,7 @@ const FolderSuggest = ({ filepath, onChange, libraryType }) => {
         return newSuggestions;
     };
 
-    const debouncedLoadSuggestions = debounce(getSuggestions, 600);
+    const debouncedLoadSuggestions = debounce(getSuggestions, 750);
 
     const renderSuggestion = suggestion => (
         <div>{suggestion}</div>
@@ -79,6 +79,14 @@ FolderSuggest.propTypes = {
         value: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired
     }).isRequired,
+    remote: PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+    }),
+};
+
+FolderSuggest.defaultProps = {
+    remote: null,
 };
 
 export default FolderSuggest;

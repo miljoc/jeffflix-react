@@ -125,6 +125,7 @@ class AddLibraryAction extends Component {
 
                 {type && (
                     <FolderSuggest
+                        remote={remote}
                         filepath={filepath}
                         libraryType={type}
                         onChange={this.filepathChange}
