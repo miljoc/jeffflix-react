@@ -96,7 +96,7 @@ export const ModalBody = styled.div`
     width: 100%;
     padding: 2rem;
     max-height: 60vh;
-    overflow: scroll;
+    overflow: ${(props) => props.overflow ? "initial" : "scroll"};    
 
     position: relative;
 
