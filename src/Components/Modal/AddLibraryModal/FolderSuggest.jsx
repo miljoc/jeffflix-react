@@ -8,7 +8,8 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { LoadingIcon } from '../../Header/Search/Styles';
 
 const FolderSuggest = ({ filepath, onChange, libraryType, remote }) => {
-    const libraryTypePrefix = parseInt(libraryType.value, 10) === 0 ? "local#" : `rclone#${remote?.value}/`;
+    const libraryTypeInt = parseInt(libraryType.value, 10);
+    const libraryTypePrefix = libraryTypeInt === 0 ? "local#" : `rclone#${remote?.value}/`;
     const [suggestions, setSuggestions] = useState([]);
     const { loading, error, data, refetch } = useQuery(FETCH_FOLDERS, {
         variables: {
@@ -50,6 +51,10 @@ const FolderSuggest = ({ filepath, onChange, libraryType, remote }) => {
         setSuggestions([]);
     };
 
+    const getSuggestionValue = (suggestion) => {
+        return libraryTypeInt === 0 ? suggestion : suggestion.replace(remote?.value, '');
+    };
+
     const inputProps = {
         placeholder: 'Enter Filepath',
         value: filepath,
@@ -63,7 +68,7 @@ const FolderSuggest = ({ filepath, onChange, libraryType, remote }) => {
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
-                getSuggestionValue={(suggestion) => suggestion}
+                getSuggestionValue={getSuggestionValue}
                 renderSuggestion={renderSuggestion}
                 inputProps={inputProps}	
             />
