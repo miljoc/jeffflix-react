@@ -7,6 +7,7 @@ import FETCH_USERS from 'Queries/fetchUserList';
 import Loading from 'Components/Loading';
 import UserInvite from 'Components/Admin/Users/UserItem';
 
+import { ErrorWrap } from 'Components/Error/Styles';
 import * as S from './Styles';
 
 const RenderUsers = () => {
@@ -15,7 +16,7 @@ const RenderUsers = () => {
     });
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return <ErrorWrap style={{ marginLeft: '1rem' }}>{`Error! ${error.message}`}</ErrorWrap>;
 
     return (
         <S.List>

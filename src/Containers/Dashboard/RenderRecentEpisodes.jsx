@@ -10,6 +10,7 @@ import Carousel from 'Components/Carousel';
 import Loading from 'Components/Loading';
 import MediaCard from 'Components/Media/Card';
 
+import { ErrorWrap } from 'Components/Error/Styles';
 import { NoResults } from 'Containers/Styles';
 import { MediaCardWrap } from './Styles';
 
@@ -19,7 +20,7 @@ const RenderRecentEpisodes = ({ sModal }: { sModal: Function }) => {
     });
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return <ErrorWrap marginLeft>{`Error! ${error.message}`}</ErrorWrap>;
 
     const toggleModal = () =>
         sModal(LIBRARY_MODAL, {

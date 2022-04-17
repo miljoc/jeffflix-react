@@ -10,6 +10,7 @@ import InfiniteScroll from 'Components/InfiniteScroll';
 import Loading from 'Components/Loading';
 import MediaCard from 'Components/Media/Card';
 
+import { ErrorWrap } from 'Components/Error/Styles';
 import { NoResults } from 'Containers/Styles';
 import { LibraryListItem } from '../Styles';
 
@@ -50,7 +51,7 @@ const RenderSeriesList = ({ sModal, sortOrder, sortDirection }: Props) => {
     }, [sortDirection, sortOrder]);    
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return <ErrorWrap style={{ marginLeft: '1rem' }}>{`Error! ${error.message}`}</ErrorWrap>;
 
     if (data.series.length) {
         return (

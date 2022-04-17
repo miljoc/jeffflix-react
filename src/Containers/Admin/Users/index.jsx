@@ -5,6 +5,7 @@ import { useMutation, useQuery } from 'react-apollo';
 import CREATE_USER_INVITE from 'Mutations/createUserInvite';
 import FETCH_INVITES from 'Queries/fetchInvites';
 
+import { ErrorWrap } from 'Components/Error/Styles';
 import * as S from 'Containers/Styles';
 
 import Loading from 'Components/Loading';
@@ -19,7 +20,12 @@ const Users = () => {
     });
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return (
+        <S.InnerContent>
+            <S.PageHeading>User Management</S.PageHeading>
+            <ErrorWrap>{`Error! ${error.message}`}</ErrorWrap>
+        </S.InnerContent>
+    );
 
     const invites = data.invites.filter((i) => i.user === null);
 
