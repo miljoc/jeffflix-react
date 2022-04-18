@@ -19,7 +19,7 @@ const renderSuggestion = (suggestion) => {
         <Suggestion to="/movies">
             <Poster src={poster} alt={suggestion.title} />
 
-            <Name>{suggestion.title}</Name>
+            <Name>{suggestion.type === 'Movie' ? suggestion.title : suggestion.name}</Name>
             {year && <Year>{year}</Year>}
         </Suggestion>
     );
