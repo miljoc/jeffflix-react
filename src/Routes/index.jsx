@@ -11,6 +11,9 @@ import Dashboard from 'Containers/Dashboard';
 // Admin
 import Users from 'Containers/Admin/Users';
 
+// Tools
+import MatchMovies from 'Containers/Admin/Tools/MatchMovies';
+
 // Movie
 import MovieList from 'Containers/Media/MovieList';
 import Movie from 'Containers/Media/Movie';
@@ -44,6 +47,10 @@ const Routes = () => {
 
             <AdminRoute exact path="/users">
                 <Users />
+            </AdminRoute>
+
+            <AdminRoute exact path="/match-movies">
+                <MatchMovies />
             </AdminRoute>
 
             <PrivateRoute exact path="/dashboard">

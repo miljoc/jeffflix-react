@@ -5,6 +5,7 @@ export const LIBRARY_MODAL = 'LIBRARY_MODAL';
 export const RESUME_MODAL = 'RESUME_MODAL';
 export const WARNING_MODAL = 'WARNING_MODAL';
 export const FIX_MISMATCH_MODAL = 'FIX_MISMATCH_MODAL';
+export const MATCH_MODAL = 'MATCH_MODAL';
 export const ADVANCED_INFO_MODAL = 'ADVANCED_INFO_MODAL';
 
 export const showModal = (type, props) => ({

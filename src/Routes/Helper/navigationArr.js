@@ -33,6 +33,18 @@ const navigationArr = [
             },
         ],
     },
+    {
+        name: 'Tools',
+        id: 'tools',
+        admin: true,
+        links: [
+            {
+                name: 'Match Movies',
+                to: '/match-movies',
+                id: 'match-movies'
+            }
+        ]
+    }
 ];
 
 export default navigationArr;
