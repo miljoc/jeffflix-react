@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 
 import Empty from 'Components/Media/Card/Empty';
 import Sort from 'Components/Header/Sort';
+import Stats from 'Components/Header/Stats';
 import RenderMoviesList from './RenderMovieList';
 
-import { LibraryListWrap } from '../Styles';
+import { LibraryListWrap, SortRow } from '../Styles';
 
 const MovieList = () => {    
     const [sortOrder, setSortOrder] = useState({ value: 'title', label: 'Title'});    
@@ -13,17 +14,20 @@ const MovieList = () => {
 
     const [sortDirection, setSortDirection] = useState({ value: 'asc', label: 'Ascending'});
     const sortDirections = [{ value: 'asc', label: 'Ascending'}, { value: 'desc', label: 'Descending' }];
-
+    
     return (
         <LibraryListWrap>
-            <Sort
-                sortOrder={sortOrder}
-                sortDirection={sortDirection}
-                setSortDirection={setSortDirection}
-                setSortOrder={setSortOrder}
-                sortValues={sortValues}
-                sortDirections={sortDirections}
-            />
+            <SortRow>
+                <Stats type="movies" />
+                <Sort
+                    sortOrder={sortOrder}
+                    sortDirection={sortDirection}
+                    setSortDirection={setSortDirection}
+                    setSortOrder={setSortOrder}
+                    sortValues={sortValues}
+                    sortDirections={sortDirections}
+                />
+            </SortRow>
             <RenderMoviesList sortOrder={sortOrder.value} sortDirection={sortDirection.value} />
             <Empty />
         </LibraryListWrap>

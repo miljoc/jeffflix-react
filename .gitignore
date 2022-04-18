@@ -11,6 +11,9 @@ release-notes.md
 # misc
 .DS_Store
 .vscode
+*.code-workspace
+schema.graphql
+.graphqlconfig
 
 #reduntant
 /src/app.css

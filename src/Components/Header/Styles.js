@@ -121,12 +121,12 @@ export const ContentOverlay = styled.div`
 export const SortWrap = styled.div`
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
     flex-basis: 100%;
-    margin: 0 1rem 2rem;
     z-index: 5;
 
     ${media.desktop`
-        margin: 0 1.5rem 3rem;
+        flex-basis: 70%;
     `}
 
     > div {
@@ -142,4 +142,13 @@ export const SortWrap = styled.div`
             `}
         }
     }
+`;
+
+export const StatsContent = styled.p`
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05rem;
+    font-size: 1.3rem;
+    text-transform: uppercase;
 `;

@@ -1,4 +1,4 @@
-image: node:latest
+image: node:lts
 
 cache:
   untracked: true
@@ -11,7 +11,11 @@ before_script:
   - apt-get update -qq && apt-get install
 
 stages:
+  - test
   - build
+
+include:
+- template: Security/Dependency-Scanning.gitlab-ci.yml
 
 build:
   stage: build
