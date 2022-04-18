@@ -36,7 +36,9 @@ class MediaItem extends Component {
         };
     }
 
-    componentWillMount() {
+    // TODO: Move to a safe version of this, can this be merged into componentDidMount ?
+    // eslint-disable-next-line
+    UNSAFE_componentWillMount() {
         const { files, location } = this.props;
         const { state } = location;
         const fileList = generateFileList(files);
