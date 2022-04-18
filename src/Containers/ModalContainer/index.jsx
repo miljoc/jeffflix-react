@@ -7,12 +7,14 @@ import ResumeMediaModal from 'Components/Modal/ResumeMediaModal';
 import WarningModal from 'Components/Modal/WarningModal';
 import FixMismatchModal from 'Components/Modal/FixMismatchModal';
 import AdvancedInfoModal from 'Components/Modal/AdvancedInfoModal';
+import MatchModal from 'Components/Modal/MatchModal';
 
 import {
     LIBRARY_MODAL,
     RESUME_MODAL,
     WARNING_MODAL,
     FIX_MISMATCH_MODAL,
+    MATCH_MODAL,
     ADVANCED_INFO_MODAL
 } from 'Redux/Actions/modalActions';
 
@@ -21,6 +23,7 @@ const MODAL_COMPONENTS = {
     [RESUME_MODAL]: ResumeMediaModal,
     [WARNING_MODAL]: WarningModal,
     [FIX_MISMATCH_MODAL]: FixMismatchModal,
+    [MATCH_MODAL]: MatchModal,
     [ADVANCED_INFO_MODAL]: AdvancedInfoModal,
 };
 

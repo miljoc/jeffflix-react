@@ -12,13 +12,19 @@ import Loading from 'Components/Loading';
 import { AlertInline } from 'Components/Alerts';
 import { Scrollbars } from 'react-custom-scrollbars';
 
+import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
 import * as S from './Styles';
 
-const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type }) => {
-    const [fixMismatch, { data, error }] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES);
+const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOnSubmit }) => {
+    const [fixMismatch, { data, error }] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
+        refetchQueries: [
+            { query: FETCH_UNIDENTIFIED_MOVIES }
+        ]
+    });
     const alert = useAlert();
 
     if (networkStatus === 4) return <Loading />;
+    if (onlyOnSubmit && items.length === 0) return <AlertInline>No results found.</AlertInline>;
     if (items.length === 0) return <AlertInline>No results found for {searchVal}</AlertInline>;
 
     if (data) {
@@ -76,12 +82,14 @@ MediaList.propTypes = {
     type: PropTypes.string.isRequired,
     searchVal: PropTypes.string,
     networkStatus: PropTypes.number,
+    onlyOnSubmit: PropTypes.bool,
     items: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 MediaList.defaultProps = {
     searchVal: '',
     networkStatus: null,
+    onlyOnSubmit: false
 };
 
 const mapDispatchToProps = (dispatch) => ({
