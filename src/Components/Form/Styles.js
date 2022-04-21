@@ -92,7 +92,6 @@ export const SelectStyle = {
         fontWeight: '600',
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-all',
-        overflow: 'hidden',
         lineHeight: '2rem',
         border: 'none',
         textTransform: 'capitalize',

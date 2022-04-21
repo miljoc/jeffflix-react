@@ -5,9 +5,10 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import FETCH_REMOTES from 'Queries/fetchRemotes';
 
-import { SingleSelect, TextInput } from 'Components/Form';
+import { SingleSelect } from 'Components/Form';
 
 import { AddLibraryWrap, SubmitLibrary } from './Styles';
+import FolderSuggest from './FolderSuggest';
 
 class AddLibraryAction extends Component {
     constructor(props) {
@@ -31,6 +32,16 @@ class AddLibraryAction extends Component {
             [e.name]: e.value,
         });
     };
+
+    filepathChange = (event, { newValue }) => {
+        const { remote, type } = this.state;
+        const valLength = newValue.length > 3;
+
+        this.setState({
+            disabled: type.value === '0' ? !valLength : !valLength || !remote,
+            filepath: newValue
+        });
+    };    
 
     selectChange = (val, name) => {
         const { filepath } = this.state;
@@ -113,12 +124,11 @@ class AddLibraryAction extends Component {
                 )}
 
                 {type && (
-                    <TextInput
-                        value={filepath}
-                        placeholder="Enter Filepath"
-                        type="text"
-                        name="filepath"
-                        onChange={(e) => this.handleChange(e.target)}
+                    <FolderSuggest
+                        remote={remote}
+                        filepath={filepath}
+                        libraryType={type}
+                        onChange={this.filepathChange}
                     />
                 )}
 
