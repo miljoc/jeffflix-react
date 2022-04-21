@@ -10,6 +10,7 @@ import InfiniteScroll from 'Components/InfiniteScroll';
 import Loading from 'Components/Loading';
 import MediaCard from 'Components/Media/Card';
 
+import { ErrorWrap } from 'Components/Error/Styles';
 import { NoResults } from 'Containers/Styles';
 import { LibraryListItem } from '../Styles';
 
@@ -50,7 +51,7 @@ const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
     }, [sortDirection, sortOrder]);
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return <ErrorWrap style={{ marginLeft: '1rem' }}>{`Error! ${error.message}`}</ErrorWrap>;
 
     if (data.movies.length) {
         return (
@@ -80,13 +81,14 @@ const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
             >
                 {() => {
                     return data.movies.map((m) => {
-                        const { files, name, playState, posterPath, type, uuid, year } = m;
+                        const { files, name, title, playState, posterPath, type, uuid, year } = m;
 
                         return (
                             <LibraryListItem key={m.uuid}>
                                 <MediaCard
                                     files={files}
                                     name={name}
+                                    title={title}
                                     playState={playState}
                                     posterPath={posterPath}
                                     type={type}

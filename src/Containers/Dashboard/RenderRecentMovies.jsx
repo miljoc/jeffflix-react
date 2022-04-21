@@ -11,6 +11,7 @@ import Carousel from 'Components/Carousel';
 import Loading from 'Components/Loading';
 import MediaCard from 'Components/Media/Card';
 
+import { ErrorWrap } from 'Components/Error/Styles';
 import { NoResults } from 'Containers/Styles';
 import { MediaCardWrap } from './Styles';
 
@@ -20,7 +21,7 @@ const RenderRecentMovies = ({ sModal }: { sModal: Function }) => {
     });
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return <ErrorWrap marginLeft>{`Error! ${error.message}`}</ErrorWrap>;
 
     const toggleModal = () =>
         sModal(LIBRARY_MODAL, {
@@ -33,7 +34,7 @@ const RenderRecentMovies = ({ sModal }: { sModal: Function }) => {
     const RecentlyAddedMovies = movies.map((item) => {
         if (item.name.length === 0) return false;
 
-        const { files, name, playState, type, uuid, posterPath, year } = item;
+        const { files, name, title, playState, type, uuid, posterPath, year } = item;
 
         return (
             <MediaCardWrap key={uuid}>
@@ -41,6 +42,7 @@ const RenderRecentMovies = ({ sModal }: { sModal: Function }) => {
                     showText
                     files={files}
                     name={name}
+                    title={title}
                     playState={playState}
                     posterPath={posterPath}
                     type={type}

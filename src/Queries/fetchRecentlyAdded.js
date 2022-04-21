@@ -7,6 +7,7 @@ const RECENTLY_ADDED = gql`
                 type: __typename
                 uuid
                 name
+                title
                 year
                 posterPath
 

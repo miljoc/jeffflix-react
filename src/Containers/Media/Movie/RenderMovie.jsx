@@ -18,7 +18,7 @@ const RenderMovie = ({ uuid }: Props) => {
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
 
-    const { posterPath, season, type, name, playState, files, overview, year } = data.movies[0];
+    const { posterPath, season, type, name, playState, files, overview, year, title } = data.movies[0];
 
     return (
         <MediaItem
@@ -27,6 +27,7 @@ const RenderMovie = ({ uuid }: Props) => {
             season={season}
             type={type}
             name={name}
+            title={title}
             playState={playState}
             files={files}
             overview={overview}

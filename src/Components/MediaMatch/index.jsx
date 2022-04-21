@@ -13,18 +13,23 @@ import { SEARCH_MOVIES, SEARCH_SERIES } from 'Queries/tmdbSearch';
 import Loading from 'Components/Loading';
 import { TextInput } from 'Components/Form';
 import { AlertInline } from 'Components/Alerts';
-import MediaList from './MediaList';
+import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
+import MediaList from '../FixMismatch/MediaList';
 
-import * as S from './Styles';
+import * as S from '../FixMismatch/Styles';
 
-const FixMismatch = ({ hModal, uuid, type, name }) => {
+const MediaMatch = ({ hModal, uuid, type, name }) => {
     const [
         fixMismatch,
         { data: mismatchData, error: mismatchError }
-    ] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES);
+    ] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
+        refetchQueries: [
+            { query: FETCH_UNIDENTIFIED_MOVIES }
+        ]
+    });
     const alert = useAlert();
 
-    const [searchVal, setSearchVal] = useState('');
+    const [searchVal, setSearchVal] = useState(name);
     const [tmdbID, setTmdbID] = useState('');
     const { loading, error, data, refetch, networkStatus } = useQuery(
         (type === 'movie' && SEARCH_MOVIES) || SEARCH_SERIES,
@@ -51,6 +56,7 @@ const FixMismatch = ({ hModal, uuid, type, name }) => {
                 ...input,
                 movieFileUUID: uuid,
             };
+
         } else {
             input = {
                 ...input,
@@ -115,12 +121,19 @@ const FixMismatch = ({ hModal, uuid, type, name }) => {
                 </S.Button>
             </S.SearchWrap>
 
-            <MediaList uuid={uuid} searchVal={searchVal} items={items} networkStatus={networkStatus} type={type} />
+            <MediaList
+                uuid={uuid}
+                searchVal={searchVal}
+                items={items}
+                networkStatus={networkStatus}
+                type={type}
+                onlyOnSubmit
+            />
         </>
     );
 };
 
-FixMismatch.propTypes = {
+MediaMatch.propTypes = {
     hModal: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     uuid: PropTypes.string.isRequired,
@@ -134,4 +147,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     null,
     mapDispatchToProps,
-)(FixMismatch);
+)(MediaMatch);

@@ -5,6 +5,7 @@ const FETCH_MOVIES = gql`
         movies(offset: $offset, limit: $limit, sort: $sort, sortDirection: $sortDirection) {
             type: __typename
             name
+            title
             posterPath
             uuid
             year

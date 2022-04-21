@@ -145,10 +145,20 @@ export const SortWrap = styled.div`
 `;
 
 export const StatsContent = styled.p`
-    color: #fff;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    letter-spacing: 0.05rem;
-    font-size: 1.3rem;
-    text-transform: uppercase;
+    h4 {
+        display: flex;
+        align-items: center;
+        font-size: 1.8rem;
+        color: #fff;
+
+        span {
+            display: inline-block;
+            margin-left: 0.8rem;
+            background: ${(props) => props.theme.primary};
+            border-radius: 0.2rem;
+            font-family: ${(props) => props.theme.fonts.muli};
+            font-size: 1.2rem;
+            padding: 0.4rem 0.8rem 0.5rem;
+        }
+    }
 `;

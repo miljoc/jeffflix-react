@@ -6,6 +6,7 @@ const FETCH_SEARCH_RESULTS = gql`
             type: __typename
             ... on Movie {
                 name
+                title
                 posterPath
                 year
                 uuid
