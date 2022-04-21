@@ -12,22 +12,17 @@ const Stats = ({ type }) => {
     if (loading) return <Loading />;
     if (error) return <ErrorWrap>{`Error! ${error.message}`}</ErrorWrap>;
 
-    const { movieCount, seriesCount, seasonCount, episodeCount } = data.mediaStats;
-    let countString = "";
-
-    switch(type) {
-        case "movies":
-            countString = `${movieCount} Movies`;
-            break;
-        case "series":
-            countString = `${seriesCount} TV Shows, ${seasonCount} Seasons, ${episodeCount} Episodes`;
-            break;
-        default:
-            break;
-    }
+    const { movieCount, seriesCount } = data.mediaStats;
 
     return (
-        <StatsContent>{countString}</StatsContent>
+        <StatsContent>
+            <h4>
+                {type === "movies"
+                    ? <>Movies <span>{movieCount}</span></>
+                    : <>TV Shows <span>{seriesCount}</span></>
+                }
+            </h4>
+        </StatsContent>
     );
 };
 

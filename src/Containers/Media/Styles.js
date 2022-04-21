@@ -78,5 +78,5 @@ export const SortRow = styled.div`
     align-items: center;
     flex-basis: 100%;
     justify-content: space-between;
-    margin: 0 1rem 2rem;
+    margin: 0 1.4rem 2rem;
 `;
