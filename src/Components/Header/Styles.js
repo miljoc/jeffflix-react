@@ -144,13 +144,18 @@ export const SortWrap = styled.div`
     }
 `;
 
-export const StatsContent = styled.p`
+export const StatsContent = styled.div`
     h4 {
         display: flex;
         align-items: center;
         font-size: 1.8rem;
         color: #fff;
+        margin-bottom: 2rem;
 
+        ${media.desktop`
+            margin-bottom: 0;
+        `}
+        
         span {
             display: inline-block;
             margin-left: 0.8rem;
