@@ -35,7 +35,7 @@ class AddLibraryAction extends Component {
 
     filepathChange = (event, { newValue }) => {
         const { remote, type } = this.state;
-        const valLength = newValue.length > 3;
+        const valLength = newValue.length > 1;
 
         this.setState({
             disabled: type.value === '0' ? !valLength : !valLength || !remote,
