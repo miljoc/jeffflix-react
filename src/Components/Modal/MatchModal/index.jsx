@@ -16,15 +16,25 @@ const MatchModal = ({ uuid, name, file, type, hModal }) => {
             <S.ModalWrap>
                 <S.ModalHeader>
                     <S.ModalHeading>
-                        Match Movie
+                        Match {type}
                         <ModalClose onClick={() => hModal()} />
                     </S.ModalHeading>
 
-                    {file && (
-                        <p>
-                            <span>Location:</span> {splitFilepath(file)}
-                        </p>
-                    )}
+                    {!Array.isArray(file)
+                        ? (
+                            <p>
+                                <span>Location:</span> {splitFilepath(file)}
+                            </p>
+                        )
+                        : ( 
+                            <>
+                                <p>Search for a series for the episodes, or enter a series TMDB id.</p>
+                                <S.FileLocationList>
+                                    {file.map(f => <p key={f.uuid}>{f.fileName}</p>)}
+                                </S.FileLocationList>                         
+                            </>
+                        )
+                    }
                 </S.ModalHeader>
                 <S.ModalBody>
                     <MediaMatch uuid={uuid} type={type.toLowerCase()} name={name} />
@@ -38,8 +48,14 @@ MatchModal.propTypes = {
     hModal: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired,
-    file: PropTypes.string,
+    uuid: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]).isRequired,
+    file: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ])
 };
 
 MatchModal.defaultProps = {

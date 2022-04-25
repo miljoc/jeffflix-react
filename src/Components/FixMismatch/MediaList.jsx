@@ -13,12 +13,15 @@ import { AlertInline } from 'Components/Alerts';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
+import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
+
 import * as S from './Styles';
 
 const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOnSubmit }) => {
     const [fixMismatch, { data, error }] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
         refetchQueries: [
-            { query: FETCH_UNIDENTIFIED_MOVIES }
+            { query: FETCH_UNIDENTIFIED_MOVIES },
+            { query: FETCH_UNIDENTIFIED_EPISODES },
         ]
     });
     const alert = useAlert();
@@ -39,16 +42,25 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOn
             tmdbID: item.tmdbID,
         };
 
-        if (type === 'movie') {
-            input = {
-                ...input,
-                movieFileUUID: uuid,
-            };
-        } else {
-            input = {
-                ...input,
-                seriesUUID: uuid,
-            };
+        switch (type) {
+            case "movie":
+                input = {
+                    ...input,
+                    movieFileUUID: uuid,
+                };                    
+                break;
+            case "episode":
+                input = {
+                    ...input,
+                    episodeFileUUID: uuid,                    
+                }
+                break;
+            default:
+                input = {
+                    ...input,
+                    seriesUUID: uuid,
+                };
+                break;
         }
 
         fixMismatch({ variables: { input } });
@@ -78,7 +90,10 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOn
 
 MediaList.propTypes = {
     hModal: PropTypes.func.isRequired,
-    uuid: PropTypes.string.isRequired,
+    uuid: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]).isRequired,
     type: PropTypes.string.isRequired,
     searchVal: PropTypes.string,
     networkStatus: PropTypes.number,

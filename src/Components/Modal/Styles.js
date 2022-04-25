@@ -179,3 +179,15 @@ export const InfoWrap = styled.div`
 
     }
 `;
+
+export const FileLocationList = styled.div`
+  max-height: 85px;
+  padding: 1rem;
+  margin-top: 1rem;
+  overflow: scroll;
+  background-color: rgba(0,0,0,0.2);
+
+  p {
+    margin-top: 0;
+  }
+`
