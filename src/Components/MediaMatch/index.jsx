@@ -14,6 +14,7 @@ import Loading from 'Components/Loading';
 import { TextInput } from 'Components/Form';
 import { AlertInline } from 'Components/Alerts';
 import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
+import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
 import MediaList from '../FixMismatch/MediaList';
 
 import * as S from '../FixMismatch/Styles';
@@ -24,7 +25,8 @@ const MediaMatch = ({ hModal, uuid, type, name }) => {
         { data: mismatchData, error: mismatchError }
     ] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
         refetchQueries: [
-            { query: FETCH_UNIDENTIFIED_MOVIES }
+            { query: FETCH_UNIDENTIFIED_MOVIES },
+            { query: FETCH_UNIDENTIFIED_EPISODES }
         ]
     });
     const alert = useAlert();
@@ -41,7 +43,7 @@ const MediaMatch = ({ hModal, uuid, type, name }) => {
 
     if (mismatchData) {
         hModal();
-        alert.success('Successfully fixed mismatch');
+        alert.success('Successfully added match');
 
         return <Redirect to={{ pathname: `/${type === 'movie' ? 'movies' : 'series'}` }} />;
     }
@@ -51,17 +53,25 @@ const MediaMatch = ({ hModal, uuid, type, name }) => {
             tmdbID: parseInt(id, 10),
         };
 
-        if (type === 'movie') {
-            input = {
-                ...input,
-                movieFileUUID: uuid,
-            };
-
-        } else {
-            input = {
-                ...input,
-                seriesUUID: uuid,
-            };
+        switch (type) {
+            case "movie":
+                input = {
+                    ...input,
+                    movieFileUUID: uuid,
+                };                    
+                break;
+            case "episode":
+                input = {
+                    ...input,
+                    episodeFileUUID: uuid,                    
+                }
+                break;
+            default:
+                input = {
+                    ...input,
+                    seriesUUID: uuid,
+                };
+                break;
         }
 
         fixMismatch({ variables: { input } });
@@ -136,7 +146,10 @@ const MediaMatch = ({ hModal, uuid, type, name }) => {
 MediaMatch.propTypes = {
     hModal: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired,
+    uuid: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]).isRequired,
     type: PropTypes.string.isRequired,
 };
 

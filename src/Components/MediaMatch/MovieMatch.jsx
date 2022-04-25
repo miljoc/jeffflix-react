@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { showModal, MATCH_MODAL } from 'Redux/Actions/modalActions';
+import { MovieMatch as MovieMatchWrap } from './Styles';
 
-import { HeaderIconWrap } from './Styles';
-
-const MediaMatch = ({ uuid, sModal, file, type, name }) => {
+const MovieMatch = ({ uuid, sModal, file, type, name }) => {
     const toggleModal = () => {
         sModal(MATCH_MODAL, {
             uuid,
@@ -17,13 +16,13 @@ const MediaMatch = ({ uuid, sModal, file, type, name }) => {
     };
 
     return (
-        <HeaderIconWrap onClick={() => toggleModal()}>
+        <MovieMatchWrap onClick={() => toggleModal()}>
             <small>{file}</small>
-        </HeaderIconWrap>
+        </MovieMatchWrap>
     );
 };
 
-MediaMatch.propTypes = {
+MovieMatch.propTypes = {
     sModal: PropTypes.func.isRequired,
     uuid: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -31,7 +30,7 @@ MediaMatch.propTypes = {
     file: PropTypes.string,
 };
 
-MediaMatch.defaultProps = {
+MovieMatch.defaultProps = {
     file: null,
 };
 
@@ -42,4 +41,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     null,
     mapDispatchToProps,
-)(MediaMatch);
+)(MovieMatch);

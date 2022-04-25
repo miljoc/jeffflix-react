@@ -42,6 +42,11 @@ const navigationArr = [
                 name: 'Match Movies',
                 to: '/match-movies',
                 id: 'match-movies'
+            },
+            {
+                name: 'Match Series',
+                to: '/match-series',
+                id: 'match-series'
             }
         ]
     }

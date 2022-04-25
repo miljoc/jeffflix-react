@@ -6,10 +6,10 @@ import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
 
 import Loading from 'Components/Loading';
 
-import MediaMatch from 'Components/Media/MediaHeader/MediaMatch';
 import ReactTooltip from 'react-tooltip';
 import { MediaOverview } from 'Components/Media/Styles';
-import { MovieLine, MoviesWrap } from './Styles';
+import MovieMatch from 'Components/MediaMatch/MovieMatch';
+import { MatchLine, MatchContainer } from './Styles';
 
 const MatchMovies = () => {
     const { error, loading, data } = useQuery(FETCH_UNIDENTIFIED_MOVIES);
@@ -23,7 +23,7 @@ const MatchMovies = () => {
         <InnerContent>
             <ReactTooltip effect="solid" place="right" className="tooltip" />
             <PageHeading>Unidentified Movies</PageHeading>
-            <MoviesWrap>
+            <MatchContainer>
                 <MediaOverview>
                     {unidentifiedMovieFiles.length === 0
                         ? "No unmatched movies. Good for you!"
@@ -33,12 +33,12 @@ const MatchMovies = () => {
 
                 {unidentifiedMovieFiles.length > 0 && unidentifiedMovieFiles.map(movie => {                
                     return (
-                        <MovieLine key={movie.uuid}>
-                            <MediaMatch uuid={movie.uuid} type="Movie" name={movie.fileName} file={movie.filePath} />
-                        </MovieLine>
+                        <MatchLine key={movie.uuid}>
+                            <MovieMatch uuid={movie.uuid} type="Movie" name={movie.fileName} file={movie.filePath} />
+                        </MatchLine>
                     );
                 })}
-            </MoviesWrap>
+            </MatchContainer>
         </InnerContent>
     );
 }
