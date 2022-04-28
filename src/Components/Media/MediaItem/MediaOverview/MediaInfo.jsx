@@ -59,8 +59,10 @@ const MediaInfo = (props) => {
     return (
         <MediaInfoWrap>
             <MediaName>
-                {title}
-                <MediaRelease>{episodeNumber ? `Episode ${episodeNumber}` : release}</MediaRelease>
+                {title || name}
+                <MediaRelease>
+                    {episodeNumber ? `Episode ${episodeNumber}` : release}
+                </MediaRelease>
             </MediaName>
 
             {episodeNumber === null && name !== title &&

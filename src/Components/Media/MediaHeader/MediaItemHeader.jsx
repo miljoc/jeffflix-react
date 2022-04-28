@@ -41,7 +41,10 @@ MediaItemHeader.propTypes = {
         PropTypes.shape({
             fileName: PropTypes.string,
             filePath: PropTypes.string,
-            fileSize: PropTypes.number.isRequired
+            fileSize: PropTypes.oneOfType([
+                PropTypes.number,
+                PropTypes.string
+            ]).isRequired
         }),
     ).isRequired,
     playState: PropTypes.shape({
