@@ -112,7 +112,7 @@ export const MediaNameLink = styled(NavLink)`
   `}
 `;
 
-export const MediaEpisodes = styled.h4`
+export const MediaEpisodes = styled.div`
     font-size: 1.3rem;
     margin-top: 1rem;
 `;
