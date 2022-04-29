@@ -67,6 +67,11 @@ export const updatePlayStateEpisode = (mutate, uuid, playtime, finished) => {
                 variables: { uuid },
             });
 
+            // hacky fix for PlayStateResponse being returned as 'type'
+            /* eslint no-underscore-dangle: 0 */
+            data.episode.type = 'episode';
+            data.episode.season.episodes[data.episode.episodeNumber - 1].__typename = 'Episode';
+
             store.writeQuery({
                 query: FETCH_EPISODE,
                 variables: { uuid },
@@ -93,6 +98,8 @@ export const updatePlayStateMovie = (mutate, uuid, playtime, finished) => {
                 query: FETCH_MOVIE,
                 variables: { uuid },
             });
+
+            data.movies[0].type = 'Movie';
 
             store.writeQuery({
                 query: FETCH_MOVIE,
