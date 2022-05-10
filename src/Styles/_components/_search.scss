@@ -51,10 +51,11 @@
         &__suggestions-container {
             position: absolute;
             top: 6rem;
-            border-radius: 0.2rem;
+            border-radius: 0;
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            margin: 1rem 0;
-            overflow: hidden;
+            margin: 0 0 1rem;
+            max-height: calc(100vh - 15rem);
+            overflow: auto;
     
             @include breakpoint(xxs) {
                 left: 2rem;
@@ -65,8 +66,7 @@
         }
     
         &__section-container {
-            background: #ffffff;
-            border-bottom: 0.1rem solid color(light);
+            background: #1e1f2c !important;
             max-width: 30rem;
             overflow: hidden;
             position: relative;
@@ -78,7 +78,6 @@
         }
         
         &__suggestion {
-            border-bottom: 1px solid #eeeeee;
     
             &:last-child {
                 border-bottom: 0;
@@ -90,21 +89,25 @@
             font-size: 1.6rem;
             height: 100%;
             left: 0;
-            padding: 0 5rem 0 6rem;
+            padding: 0 0 0 6rem;
             position: absolute;
             top: 0;
+            width: calc(100% - 5rem);
         }
     
         &__section-container {
-            background: #ffffff;
-            border-radius: 0 0 0.2rem 0.2rem;
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             width: 35rem;
             z-index: 2;
     
             &--first {
-                border-radius: 0.2rem 0.2rem 0 0;
+                border-radius: 0.3rem 0.3rem 0 0;
+                box-shadow: none;
+                position: sticky;
+                top: 0;
+                z-index: 6;
+                border-bottom: 1px solid rgba(0,0,0,0.2);
             }
     
             @include breakpoint(xxs) {

@@ -11,20 +11,35 @@ const updateSuggestions = (arr) => {
 
     const updatedSuggestions = [
         {
+            title: null,
+            suggestions: [],
+        },
+        {
             title: 'Movies',
             suggestions: [],
         },
         {
             title: 'Series',
             suggestions: [],
-        },
+        }
     ];
+    
+    if(
+        arr.filter(sug => sug.type === 'Movie').length > numberOfResults ||
+        arr.filter(sug => sug.type === 'Series').length > numberOfResults
+    ){
+        updatedSuggestions[0].suggestions.push({
+            type: 'Link',
+            url: '/search',
+            name: 'View All Results'
+        });
+    }
 
     arr.forEach((sug) => {
-        if (sug.type === 'Movie' && updatedSuggestions[0].suggestions.length < numberOfResults) {
-            updatedSuggestions[0].suggestions.push(sug);
-        } else if (sug.type === 'Series' && updatedSuggestions[1].suggestions.length < numberOfResults) {
+        if (sug.type === 'Movie' && updatedSuggestions[1].suggestions.length < numberOfResults) {
             updatedSuggestions[1].suggestions.push(sug);
+        } else if (sug.type === 'Series' && updatedSuggestions[2].suggestions.length < numberOfResults) {
+            updatedSuggestions[2].suggestions.push(sug);
         }
     });
 

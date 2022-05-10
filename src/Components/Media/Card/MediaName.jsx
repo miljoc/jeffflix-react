@@ -27,9 +27,15 @@ const MediaName = ({ episodes, type, year, name, title, episodeNumber, seasonNum
         return infoValue;
     };
 
+    const renderName = () => {
+        return type === 'Movie' ? title : name;
+    };
+
+    const renderedName = renderName();
+
     return (
         <>
-            <CardTitle>{type === 'Movie' ? title : name}</CardTitle>
+            <CardTitle title={renderedName.length > 18 ? renderedName : null}>{renderedName}</CardTitle>
             <CardInfo>{info()}</CardInfo>
         </>
     );

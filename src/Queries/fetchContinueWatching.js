@@ -7,6 +7,7 @@ const CONTINUE_WATCHING = gql`
                 type: __typename
                 uuid
                 name
+                title
                 year
                 posterPath
 

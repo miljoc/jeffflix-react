@@ -6,6 +6,10 @@ import { Suggestion, Poster, Name, Year } from './Styles';
 import { placeholder } from '../../Media/Card/Placeholder';
 
 const renderSuggestion = (suggestion) => {
+    if(suggestion.type === 'Link'){
+        return <Suggestion type={suggestion.type}><Name>{suggestion.name}</Name></Suggestion>;
+    }
+    
     const year =
         suggestion.type === 'Movie'
             ? suggestion.year

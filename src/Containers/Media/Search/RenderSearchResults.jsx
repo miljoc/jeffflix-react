@@ -26,17 +26,20 @@ const RenderSearchResults = ({ value }: Props) => {
     }
 
     return data.search.map((item) => {
-        const { posterPath, type, title, playState, files, uuid } = item;
+        const { posterPath, type, title, name, playState, files, uuid, year, firstAirDate } = item;
 
         return (
             <S.LibraryListItem key={uuid}>
                 <MediaCard
                     files={files}
-                    name={title}
+                    name={name}
+                    title={title}
                     playState={playState}
                     posterPath={posterPath}
                     type={type}
                     uuid={uuid}
+                    year={year || firstAirDate.split("-")[0]}
+                    showText
                 />
             </S.LibraryListItem>
         );
