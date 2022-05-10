@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { withRouter } from 'react-router-dom';
 
-import { faSpinner, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { InputWrap, LoadingIcon, SearchIcon, NoResultsError } from './Styles';
+import { InputWrap, LoadingIcon, SearchIcon, NoResultsError, ClearButton } from './Styles';
 
 class SearchInput extends Component {
     constructor() {
@@ -54,32 +54,41 @@ class SearchInput extends Component {
 
     render() {
         const { hasFocus } = this.state;
-        const { loading, hasSuggestions, value, inputProps } = this.props;
+        const { loading, hasSuggestions, value, inputProps, clearInput } = this.props;
 
         const noResults = !hasSuggestions && hasFocus && !loading && value.length > 3;
 
         return (
-            <InputWrap hasFocus={hasFocus}>
-                {loading && <LoadingIcon icon={faSpinner} spin />}
-                <SearchIcon icon={faSearch} />
-                <input
-                    {...inputProps}
-                    onFocus={(e) => {
-                        this.setFocus(e, true);
-                    }}
-                    onBlur={(e) => {
-                        this.setFocus(e, false);
-                    }}
-                    onChange={(e) => {
-                        this.setSearch(e);
-                    }}
-                    onKeyPress={(e) => {
-                        this.checkKey(e);
-                    }}
-                />
-
+            <>
+                <InputWrap hasFocus={hasFocus}>
+                    {loading && <LoadingIcon icon={faSpinner} spin />}
+                    <SearchIcon icon={faSearch} />
+                    <input
+                        {...inputProps}
+                        onFocus={(e) => {
+                            this.setFocus(e, true);
+                        }}
+                        onBlur={(e) => {
+                            this.setFocus(e, false);
+                        }}
+                        onChange={(e) => {
+                            this.setSearch(e);
+                        }}
+                        onKeyPress={(e) => {
+                            this.checkKey(e);
+                        }}
+                    />
+                    {value.length > 0 && (
+                        <ClearButton
+                            onClick={() => {
+                                clearInput();
+                            }}
+                            icon={faTimes}
+                        />
+                    )}
+                </InputWrap>
                 {noResults && <NoResultsError>No Results Found</NoResultsError>}
-            </InputWrap>
+            </>
         );
     }
 }
@@ -88,6 +97,7 @@ SearchInput.propTypes = {
     history: ReactRouterPropTypes.history.isRequired,
     loading: PropTypes.bool.isRequired,
     toggleFocus: PropTypes.func.isRequired,
+    clearInput: PropTypes.func.isRequired,
     hasSuggestions: PropTypes.bool.isRequired,
     value: PropTypes.string,
     location: PropTypes.shape({

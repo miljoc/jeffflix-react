@@ -42,6 +42,10 @@ class Search extends Component {
         this.setState({ hasFocus });
     };
 
+    clearInput = () => {
+        this.setState({ value: '' });
+    };
+
     loadSuggestions = () => {
         const { data } = this.props;
         const suggest = typeof data === 'undefined' ? [] : data.search;
@@ -71,8 +75,13 @@ class Search extends Component {
 
     onSuggestionSelected = (e, { suggestion }) => {
         const { history } = this.props;
-
-        history.push(generateMediaUrl(suggestion.type, suggestion.uuid));
+        const { value } = this.state;
+        
+        if(suggestion.type === 'Link'){
+            history.push(`${suggestion.url}/${value}`);
+        }else{
+            history.push(generateMediaUrl(suggestion.type, suggestion.uuid));
+        }
     };
 
     unmountComponent = () => {
@@ -97,6 +106,7 @@ class Search extends Component {
                 inputProps={props}
                 loading={loading}
                 toggleFocus={this.toggleFocus}
+                clearInput={this.clearInput}
                 hasSuggestions={suggestions.length > 0}
                 value={value}
                 unmount={this.unmountComponent}
@@ -105,20 +115,22 @@ class Search extends Component {
         );
 
         return (
-            <Autosuggest
-                multiSection
-                suggestions={checkSuggestions}
-                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestionValue}
-                inputProps={inputProps}
-                renderInputComponent={renderInputComponent}
-                renderSectionTitle={renderSectionTitle}
-                getSectionSuggestions={getSectionSuggestions}
-                shouldRenderSuggestions={this.shouldRenderSuggestions}
-                renderSuggestion={renderSuggestion}
-                onSuggestionSelected={this.onSuggestionSelected}
-            />
+            <>
+                <Autosuggest
+                    multiSection
+                    suggestions={checkSuggestions}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={getSuggestionValue}
+                    inputProps={inputProps}
+                    renderInputComponent={renderInputComponent}
+                    renderSectionTitle={renderSectionTitle}
+                    getSectionSuggestions={getSectionSuggestions}
+                    shouldRenderSuggestions={this.shouldRenderSuggestions}
+                    renderSuggestion={renderSuggestion}
+                    onSuggestionSelected={this.onSuggestionSelected}
+                />
+            </>
         );
     }
 }

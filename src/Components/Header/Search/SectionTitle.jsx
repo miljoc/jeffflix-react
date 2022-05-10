@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Title } from './Styles';
 
-const renderSectionTitle = (section) => <Title>{section.title}</Title>;
+const renderSectionTitle = (section) => section.title !== null && <Title>{section.title}</Title>;
 
 renderSectionTitle.propTypes = {
     section: PropTypes.shape({

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { transparentize } from 'polished';
+import { rgba, transparentize } from 'polished';
 import { media } from 'Styles/Utils';
 import { placeholder } from '../../Media/Card/Placeholder';
 
@@ -34,7 +34,7 @@ export const InputWrap = styled.div`
 
     ${SearchIcon} {
         background: ${(props) =>
-            props.hasFocus ? 'rgba(0,0,0, .2)' : 'rgba(0,0,0, 0)'};
+            props.hasFocus ? 'rgba(0,0,0,0.2)' : 'rgba(0,0,0,0)'};
     }
 
     ${media.desktop`
@@ -49,10 +49,16 @@ export const LoadingIcon = styled(FontAwesomeIcon)`
     position: absolute;
     top: 50%;
     margin-top: -0.8rem;
-    right: 1.7rem;
+    right: 3.6rem;
     pointer-events: none;
     transition: 0.2s all;
     opacity: 1;
+`;
+
+export const ClearButton = styled(LoadingIcon)`
+    pointer-events: all;
+    right: 1.7rem;
+    cursor: pointer;
 `;
 
 export const ErrorAlert = styled.span`
@@ -78,27 +84,27 @@ export const ErrorAlert = styled.span`
 export const Title = styled.h4`
     padding: 1.5rem;
     font-size: 1rem;
-    letter-spacing: 0.1rem;
+    font-weight: 800;
+    letter-spacing: 0.2rem;
     text-transform: uppercase;
-    border-bottom: 1px solid #eee;
-    color: ${(props) => props.theme.dark};
+    color: ${(props) => rgba(props.theme.secondary, 0.25)};
 `;
 
 export const NoResultsError = styled.span`
+    pointer-events: none;
     display: block;
     width: 100%;
     line-height: 3rem;
-    color: ${(props) => props.theme.darken.dark};
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    color: ${(props) => rgba(props.theme.light, 0.6)};
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-weight: 800;
+    font-size: 1.4rem;
+    border-radius: 0.3rem;
     letter-spacing: 0.1rem;
-    font-size: 1rem;
-    border-radius: 0.2rem;
-    text-transform: uppercase;
-    padding: 0 1.5rem;
-    background: #fff;
+    padding: 1.5rem;
+    background: #1e1f2c;
     position: absolute;
+    z-index: 99;
     top: 6rem;
     left: 0;
 `;
@@ -106,23 +112,43 @@ export const NoResultsError = styled.span`
 export const Suggestion = styled.article`
     float: left;
     width: 100%;
-    height: 6rem;
+    height: 7rem;
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
     position: relative;
-    padding-left: 5rem;
+    padding-left: 5.5rem;
     justify-content: center;
     cursor: pointer;
     transition: 0.2s background;
 
+    ${props => props.type === 'Link' && css`
+        height: 4rem;
+        padding-left: 0;
+        padding-right: 0;
+        text-align: center;
+        background: rgba(0,0,0,0.2);
+
+        ${Name} {
+            margin: 0;
+            padding-right: 0;
+            transition: 0.2s color;
+        }
+
+        &:hover {
+            ${Name} {
+                color: #fff;
+            }
+        }
+    `}
+
     &:hover {
-        background: #fafafa;
+        background: rgba(0,0,0,0.2);
     }
 `;
 
 export const Name = styled.span`
-    color: ${(props) => props.theme.dark};
+    color: rgba(255, 255, 255, 0.5);
     float: left;
     width: 100%;
     font-size: 1.4rem;
@@ -139,17 +165,16 @@ export const Year = styled.small`
   float:left;
   width:100%;
   text-transform:uppercase;
-  font-size:1.2rem;
-  font-weight:400;
-  letter-spacing: .1rem;
-  opacity:.75;
-  color ${(props) => props.theme.text};
+  font-size:1rem;
+  margin-top: 0.3rem;
+  font-weight:600;
+  color: rgba(255, 255, 255, 0.5);
 `;
 
 export const Poster = styled.img`
     background: #191e30 url(${placeholder}) no-repeat center;
     background-size: cover;
-    height: 5rem;
+    height: 6rem;
     padding: 0.2rem;
     position: absolute;
     top: 0.5rem;
