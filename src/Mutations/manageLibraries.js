@@ -33,3 +33,9 @@ export const DELETE_LIBRARY = gql`
         }
     }
 `;
+
+export const RESCAN_LIBRARY = gql`
+    mutation rescanLibrary($id: Int, $filepath: String) {
+        rescanLibrary(id: $id, filepath: $filepath)
+    }
+`;

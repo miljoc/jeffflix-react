@@ -3,14 +3,16 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import ReactToolTip from 'react-tooltip';
 
+import { useAlert } from 'react-alert';
+
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { faExclamation, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faExclamation, faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
 
 import FETCH_LIBRARIES from 'Queries/fetchLibraries';
-import { DELETE_LIBRARY } from 'Mutations/manageLibraries';
+import { DELETE_LIBRARY , RESCAN_LIBRARY } from 'Mutations/manageLibraries';
 
 import { AlertInline, AlertConfirm } from 'Components/Alerts';
-import { LibraryItemWrap, LibraryItemFilePath, LibraryItemDelete, LibraryUnhealthy } from './Styles';
+import { LibraryItemWrap, LibraryItemFilePath, LibraryItemDelete, LibraryUnhealthy, LibraryItemRescan } from './Styles';
 
 type Props = {
     filePath: string,
@@ -25,13 +27,15 @@ const LibraryItem = ({ filePath, id, backend, healthy }: Props) => {
         variables: { id },
         refetchQueries: [{ query: FETCH_LIBRARIES }],
     });
+    const [rescanLibrary] = useMutation(RESCAN_LIBRARY);
     const [show, setShow] = useState(false);
+    const alert = useAlert();
 
     return (
         <>
             {show && <AlertConfirm type="error" message="Are you sure?" confirm={() => deleteLibrary()} />}
             <LibraryItemWrap>
-                <ReactToolTip effect="solid" place="bottom" className="tooltip" />
+                <ReactToolTip effect="solid" delayShow={1000} place="left" className="tooltip" />
 
                 {error && <AlertInline type="error">{error.message}</AlertInline>}
                 <LibraryItemFilePath>
@@ -40,15 +44,28 @@ const LibraryItem = ({ filePath, id, backend, healthy }: Props) => {
                             <LibraryUnhealthy
                                 icon={faExclamation}
                                 data-tip="This is an unhealthy library, playback may be broken."
+                                data-place="bottom"
                             />
                         )}
                         {libraryType}
                     </span>
 
-                    {filePath.length > 50 ? <p data-tip={filePath}>{filePath}</p> : filePath}
+                    {filePath.length > 50 ? <p data-tip={filePath} data-place="bottom">{filePath}</p> : filePath}
                 </LibraryItemFilePath>
+                                
+                <LibraryItemRescan
+                    icon={faSync}
+                    data-tip="Rescan Library"
+                    onClick={() => {
+                        rescanLibrary({ variables: { id } });
+                        alert.success(`Rescanning path: '${filePath}'`);
+                    }
+                    }
+                />
 
-                {!loading && <LibraryItemDelete icon={faTrashAlt} onClick={() => setShow(true)} />}
+                {!loading &&
+                    <LibraryItemDelete icon={faTrashAlt} data-tip="Delete Library" onClick={() => setShow(true)} />
+                }
                 {loading && <LibraryItemDelete icon={faSpinner} spin deleting={loading ? 1 : 0} />}
             </LibraryItemWrap>
         </>

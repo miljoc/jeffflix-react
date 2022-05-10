@@ -29,6 +29,13 @@ export const AddLibraryWrap = styled.article`
     position: relative;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     padding-top: 1rem;
+
+    h4 {
+        color: #FFF;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+    }
 `;
 
 export const LibraryItemWrap = styled.article`
@@ -92,7 +99,6 @@ export const LibraryItemDelete = styled(FontAwesomeIcon)`
     position: absolute;
     top: 0;
     right: 0;
-    float: right;
     color: ${(props) => (props.deleting ? props.theme.alerts.info : props.theme.alerts.error)};
     font-size: 2rem;
     height: 4.5rem;
@@ -105,4 +111,9 @@ export const LibraryItemDelete = styled(FontAwesomeIcon)`
     &:hover {
         opacity: 1;
     }
+`;
+
+export const LibraryItemRescan = styled(LibraryItemDelete)`
+    right: 4.5rem;
+    color: #FFF !important;
 `;

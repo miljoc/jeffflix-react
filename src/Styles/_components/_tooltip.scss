@@ -9,10 +9,20 @@
     text-transform: capitalize;
 }
 
-.__react_component_tooltip.type-dark.place-bottom:after {
-    border-bottom-color: #1f202f;
-}
+.__react_component_tooltip.type-dark {
+    &.place-bottom:after {
+        border-bottom-color: #1f202f !important;
+    }
 
-.__react_component_tooltip.type-dark.place-top:after {
-    border-top-color: #1f202f;
+    &.place-top:after {
+        border-top-color: #1f202f !important;
+    }
+
+    &.place-left:after {
+        border-left-color: #1f202f !important;
+    }
+
+    &.place-right:after {
+        border-right-color: #1f202f !important;
+    }
 }
