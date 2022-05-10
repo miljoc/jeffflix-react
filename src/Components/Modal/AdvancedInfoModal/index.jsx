@@ -82,7 +82,7 @@ const AdvancedInfoModal = ({ files, type }: Props) => {
                                     </S.SectionWrap>
                                 )}
 
-                                {subtitles && (
+                                {subtitles.length > 0 && (
                                     <S.SectionWrap noMargin>
                                         <S.InfoTitle>Subtitles</S.InfoTitle>
                                         <S.InfoWrap>

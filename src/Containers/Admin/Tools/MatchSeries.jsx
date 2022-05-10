@@ -73,18 +73,20 @@ const MatchSeries = ({ sModal }) => {
     return (
         <InnerContent>
             <PageHeading>Unidentified Episodes</PageHeading>
-            <StickyButton>
-                <UncheckButton
-                    onClick={uncheckAll}
-                    disabled={episodesChecked.length === 0}
-                >Uncheck All
-                </UncheckButton>
-                <Button
-                    onClick={openModal}
-                    disabled={episodesChecked.length === 0}
-                >Match Episodes
-                </Button>
-            </StickyButton>
+            {data.unidentifiedEpisodeFiles.length > 0 && (
+                <StickyButton>
+                    <UncheckButton
+                        onClick={uncheckAll}
+                        disabled={episodesChecked.length === 0}
+                    >Uncheck All
+                    </UncheckButton>
+                    <Button
+                        onClick={openModal}
+                        disabled={episodesChecked.length === 0}
+                    >Match Episodes
+                    </Button>
+                </StickyButton>
+            )}
             <MatchContainer>
                 <MediaOverview>
                     {data.unidentifiedEpisodeFiles.length === 0

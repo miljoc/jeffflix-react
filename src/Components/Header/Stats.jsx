@@ -18,8 +18,8 @@ const Stats = ({ type }) => {
         <StatsContent>
             <h4>
                 {type === "movies"
-                    ? <>Movies <span>{movieCount}</span></>
-                    : <>TV Shows <span>{seriesCount}</span></>
+                    ? <>Movies {movieCount > 0 && <span>{movieCount}</span>}</>
+                    : <>TV Shows {seriesCount > 0 && <span>{seriesCount}</span>}</>
                 }
             </h4>
         </StatsContent>
