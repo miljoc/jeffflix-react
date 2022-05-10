@@ -105,6 +105,7 @@ class AddLibraryAction extends Component {
 
         return (
             <AddLibraryWrap>
+                <h4>Add New Library</h4>
                 <SingleSelect
                     placeholder="Select Library Type"
                     options={libraryTypes}

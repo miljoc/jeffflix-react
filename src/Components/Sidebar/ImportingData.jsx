@@ -1,20 +1,11 @@
 // @flow
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
-import gql from 'graphql-tag';
 
 import Loading from 'Components/Loading';
 
+import { LIBRARY_STATE } from 'Queries/fetchLibraries';
 import * as S from './Styles';
-
-const LIBRARY_STATE = gql`
-    query {
-        libraries {
-            kind
-            isRefreshing
-        }
-    }
-`;
 
 type Props = {
     kind: number,
@@ -25,11 +16,7 @@ const Importing = ({ kind }: Props) => {
     const { loading, error, data, stopPolling } = useQuery(LIBRARY_STATE, { pollInterval: 5000 });
 
     useEffect(() => {
-        if (data) {
-            data.libraries.forEach((lib) => {
-                if (kind === lib.kind) setImporting(lib.isRefreshing);
-            });
-        }
+        if(data.libraries.filter(l => l.kind === kind && l.isRefreshing).length > 0) setImporting(true);
     }, [data]);
 
     if (error) return `Error! ${error}`;

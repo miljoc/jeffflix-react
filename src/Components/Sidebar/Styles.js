@@ -47,7 +47,6 @@ export const NavItemHeading = styled.h5`
 
 export const AddFolder = styled(FontAwesomeIcon)`
     position: absolute;
-    top: 0;
     right: 0;
     font-size: 1.6rem;
     color: #fff;
@@ -56,9 +55,12 @@ export const AddFolder = styled(FontAwesomeIcon)`
     height: 3rem;
     transition: 0.2s all;
     padding: 0.9rem;
-    border-radius: 3rem 0 0 3rem;
     background: ${(props) => props.theme.dark};
-    transform: translateX(-0.5rem);
+`;
+
+export const RefreshLibrary = styled(AddFolder)`
+    right: 3rem;
+    border-radius: 3rem 0 0 3rem;
 `;
 
 export const DashboardLink = styled(NavLink)`
@@ -93,7 +95,7 @@ export const NavItemLink = styled(NavLink)`
         opacity: 1;
         background: rgba(0, 0, 0, 0.1);
 
-        ${AddFolder} {
+        svg {
             opacity: 0.4;
             transform: translateX(0);
             background: rgba(0, 0, 0, 0.3);
