@@ -4,6 +4,7 @@ import { throttle } from 'lodash';
 import { graphql } from 'react-apollo';
 import videojs from 'video.js';
 import '@videojs/http-streaming';
+import 'videojs-seek-buttons';
 import './DebugOverlay';
 
 // NOTE(Leon Handreke): Ideally this should be imported from videojs-http-source-selector because
@@ -72,6 +73,7 @@ class Player extends Component {
                 },
                 nativeAudioTracks: false,
             },
+            playbackRates: [0.75, 1, 1.25, 1.5, 2, 3],            
         };
         if (transmuxed) {
             // If transmuxed, all non-transmuxed representations are manually disabled in the
@@ -86,6 +88,11 @@ class Player extends Component {
             this.debugOverlay();
             this.qualityLevels();
             this.httpSourceSelector();
+        });
+
+        this.player.seekButtons({
+            forward: 30,
+            back: 10
         });
 
         this.player.on('timeupdate', () => {

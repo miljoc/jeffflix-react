@@ -78,7 +78,8 @@
         "video.js": "git+https://gitlab.com/olaris/video.js.git#olaris",
         "videojs-contrib-quality-levels": "^2.0.9",
         "videojs-http-source-selector": "git+https://gitlab.com/olaris/videojs-http-source-selector.git",
-        "videojs-overlay": "^2.1.4"
+        "videojs-overlay": "^2.1.4",
+        "videojs-seek-buttons": "^2.2.1"
     },
     "devDependencies": {
         "babel-eslint": "10.0.3",
