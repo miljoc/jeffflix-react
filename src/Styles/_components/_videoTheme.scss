@@ -103,6 +103,11 @@
             display: none !important;
         }
     }
+
+    .vjs-overlay-background {
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 0.3rem;
+    }
 }
 
 @mixin fullscreen-control($order, $visible: true) {
@@ -211,15 +216,16 @@
         font-size: 1.4rem;
         color: #fff;
         cursor: pointer;
-        line-height: 3rem;
+        line-height: 4rem;
         opacity: 1;
         padding: 0 2.5rem;
         border: none;
-        border-radius: 4rem;
+        border-radius: 0.3rem;
         background: #191a28;
         transition: 0.2s all;
         font-weight: 600;
         outline: 0;
+        margin-bottom: 0;
 
         &:hover {
             background: #050609;
@@ -250,6 +256,16 @@
     }
 }
 
+@mixin playback-speeds {
+    .vjs-playback-rate-value {
+        flex: 1 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+    }    
+}
+
 .vjs-theme-olaris {
     @include menu-content-styling();
     @include control-bar();
@@ -272,4 +288,5 @@
     @include volume-panel-control(5);
     @include picture-in-picture-control(6);
     @include fullscreen-control(7);
+    @include playback-speeds();
 }
