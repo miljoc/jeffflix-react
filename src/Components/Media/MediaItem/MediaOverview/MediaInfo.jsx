@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { convertToMinutes } from 'Helpers';
+import { convertToMinutes, convertToMinutesSeconds } from 'Helpers';
 
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,7 +18,9 @@ const MediaInfo = (props) => {
         if (playState.finished) {
             renderedState = 'Watched';
         } else if (playState.playtime < 60 && playState.playtime > 0) {
-            renderedState = '< 1 minute watched';
+            renderedState = selectedFile.totalDuration < 60
+                ? `${convertToMinutesSeconds(playState.playtime)} watched`
+                : '< 1 minute watched';
         } else if (!playState.finished && playState.playtime > 0) {
             renderedState = `${convertToMinutes(playState.playtime)} watched`;
         } else {
@@ -40,7 +42,9 @@ const MediaInfo = (props) => {
     const renderTotalD = () => {
         if (!selectedFile.totalDuration > 0) return 'Unknown Length';
 
-        return convertToMinutes(selectedFile.totalDuration);
+        return selectedFile.totalDuration < 60 
+            ? convertToMinutesSeconds(selectedFile.totalDuration)
+            : convertToMinutes(selectedFile.totalDuration);
     };
 
     const renderHealth = () => {
