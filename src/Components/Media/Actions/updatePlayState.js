@@ -69,7 +69,7 @@ export const updatePlayStateEpisode = (mutate, uuid, playtime, finished) => {
 
             // hacky fix for PlayStateResponse being returned as 'type'
             /* eslint no-underscore-dangle: 0 */
-            data.episode.type = 'episode';
+            data.episode.type = 'Episode';
             data.episode.season.episodes[data.episode.episodeNumber - 1].__typename = 'Episode';
 
             store.writeQuery({
