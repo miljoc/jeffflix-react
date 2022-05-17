@@ -1,4 +1,0 @@
-// Get Color from mapped variables: color(
-@function color($color-name) {
-    @return map-get($colors, $color-name);
-}

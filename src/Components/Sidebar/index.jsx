@@ -24,7 +24,7 @@ const Sidebar = ({ navHidden, videoOpen, castPlaying }: Props) => (
         <Scroll id="sidebar">
             <>
                 <S.DashboardLink to="/">
-                    <LogoIcon height="30" />
+                    <LogoIcon height="35" />
                 </S.DashboardLink>
                 <Navigation />
             </>

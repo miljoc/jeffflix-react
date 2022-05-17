@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { InnerContent, PageHeading } from 'Containers/Styles';
+import { InnerContent } from 'Containers/Styles';
 import { useQuery } from 'react-apollo';
 import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
 
@@ -9,6 +9,7 @@ import Loading from 'Components/Loading';
 import ReactTooltip from 'react-tooltip';
 import { MediaOverview } from 'Components/Media/Styles';
 import MovieMatch from 'Components/MediaMatch/MovieMatch';
+import { PageHeading } from 'Styles/Base';
 import { MatchLine, MatchContainer } from './Styles';
 
 const MatchMovies = () => {

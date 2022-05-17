@@ -5,10 +5,22 @@ import { media } from 'Styles/Utils';
 import LazyLoad from 'react-lazyload';
 
 import placeholder from './placeholder.png';
+import { rgba } from 'polished';
+import { ParagraphBaseStyle, Badge } from 'Styles/Base';
 
 export const Placeholder = styled.img`
     float: left;
     width: 100%;
+
+    height: ${(props) => (props.wide ? '16rem' : props.theme.card.paddingTop)};
+
+    ${media.tablet`
+        height: ${(props) => (props.wide ? '13rem' : props.theme.card.paddingTop)};
+    `}
+
+    ${media.desktop`
+        height: ${(props) => (props.wide ? props.theme.wideCard.paddingTop : props.theme.card.paddingTop)};
+    `}
 `;
 
 export const CardWrap = styled.article`
@@ -26,10 +38,11 @@ export const PosterWrap = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 25px ${(props) => rgba(props.theme.black, 0.3)};
     float: left;
     width: 100%;
     overflow: hidden;
+    border-radius: ${(props) => props.theme.card.borderRadius};
 `;
 
 export const Lazy = styled(LazyLoad)`
@@ -60,6 +73,7 @@ export const CardPoster = styled.span`
     animation-delay: 0.3s;
     filter: grayscale(0) saturate(125%);
     pointer-events: none;
+    border-radius: ${(props) => props.theme.card.borderRadius};
 
     ${PosterWrap}:hover & {
         filter: ${(props) => (props.hover ? 'grayscale(25%) saturate(75%)' : 'grayscale(0) saturate(125%)')};
@@ -75,14 +89,13 @@ export const CardPoster = styled.span`
 `;
 
 export const CardTitle = styled.h3`
+    ${ParagraphBaseStyle}
     width: 100%;
     float: left;
     text-align: left;
     margin: 1.5rem 0 0;
-    font-size: 1.4rem;
-    color: #fff;
-    font-weight: 600;
-    font-family: ${(props) => props.theme.fonts.opensans};
+    color: ${(props) => props.theme.white};
+    font-family: ${(props) => props.theme.fonts.body};
     cursor: pointer;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -96,12 +109,12 @@ export const CardTitle = styled.h3`
 `;
 
 export const CardInfo = styled.span`
-    font-size: 1.2rem;
+    font-size: ${(props) => props.theme.typography.small};
     margin-top: 0.4rem;
     width: 100%;
     float: left;
     text-align: left;
-    color: #ffffff75;
+    color: ${(props) => rgba(props.theme.white, .46)};
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
@@ -119,29 +132,22 @@ export const Unwatched = styled.span`
     height: 7rem;
     z-index: 6;
     transform: rotate(45deg);
-    transition: 0.2s all;
-    background: ${(props) => props.theme.playbar};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
+    background: ${(props) => props.theme.primary};
     animation: 0.3s ${aFadeIn} alternate;
-    box-shadow: 0 0 15px rgba(0, 0, 0 0.8);
-
+ 
     ${PosterWrap}:hover & {
         transform: translateY(-5rem) translateX(-5rem);
     }
 `;
 
-export const UnwatchedCount = styled.span`
+export const UnwatchedCount = styled(Badge)`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    box-shadow: 0 0 25px #00000080;
+    box-shadow: 0 0 25px ${(props) => rgba(props.theme.black, 0.5)};
     background: ${(props) => props.theme.primary};
-    padding: 0.4rem 0.8rem 0.3rem;
-    border-radius: 0.2rem;
-    font-family: ${(props) => props.theme.fonts.muli};
-    color: #fff;
-    font-size: 1.2rem;
-    transition: 0.2s all;
-    font-weight: 900;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 
     ${PosterWrap}:hover & {
         transform: translateY(-5rem) translateX(5rem);
@@ -153,10 +159,10 @@ export const PlayState = styled.span`
     bottom: 0.5rem;
     left: 0.5rem;
     width: calc(100% - 1rem);
-    background: #000;
+    background: ${(props) => props.theme.black};
     height: 0.7rem;
     z-index: 6;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     overflow: hidden;
     border-radius: 0.5rem;
 
@@ -167,9 +173,9 @@ export const PlayState = styled.span`
         left: 0;
         height: 0.5rem;
         margin: 0.1rem;
-        border-radius: 0.2rem 0 0 0.2rem;
+        border-radius: ${(props) => props.theme.card.borderRadius} 0 0 ${(props) => props.theme.card.borderRadius};
         width: ${(props) => props.percent}%;
-        background: ${(props) => props.theme.playbar};
+        background: ${(props) => props.theme.primary};
     }
 
     ${PosterWrap}:hover & {
@@ -203,7 +209,7 @@ export const CardPopup = styled.div`
 
   ${PosterWrap}:hover & {
     opacity:1;
-    pointer-events:initial
+    pointer-events:initial;
     cursor:pointer;
   }
 `;
@@ -218,9 +224,9 @@ export const PopupLink = styled.span`
     width: 5rem;
     height: 5rem;
     z-index: 10;
-    transition: 0.2s all;
-    background: #00000080;
-    border: 2px solid #fff;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
+    background: ${(props) => rgba(props.theme.black, 0.5)};
+    border: 2px solid ${(props) => props.theme.white};
 
     ${PosterWrap}:hover & {
         transform: translateY(-50%) translateX(-50%) scale(1);
@@ -232,12 +238,12 @@ export const PopupLink = styled.span`
 `;
 
 export const PopupIcon = styled(FontAwesomeIcon)`
-    color: #fff;
-    font-size: 1.6rem;
-    transition: 0.2s all;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.body};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: calc(50% + 1px);
     transform: translateY(-50%) translateX(-50%);
 
     ${PopupLink}:hover & {
@@ -250,12 +256,12 @@ export const ResumeOption = styled.button`
     width: 100%;
     border: none;
     text-align: left;
-    color: #ffffff60;
+    color: ${(props) => rgba(props.theme.white, 0.38)};
     line-height: 4rem;
-    font-size: 1.6rem;
-    transition: 0.2s all;
+    font-size: ${(props) => props.theme.typography.body};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 
     &:hover {
-        color: #fff;
+        color: ${(props) => props.theme.white};
     }
 `;

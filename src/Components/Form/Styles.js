@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { aFadeIn } from 'Styles/Animations';
+import { rgba } from 'polished';
 
 const animation = (props) =>
     css`
@@ -8,30 +9,30 @@ const animation = (props) =>
     `;
 
 export const Input = styled.input`
-    padding: 0 6.5rem 0 1.5rem;
-    line-height: 5rem;
-    border-radius: 0.2rem;
-    color: #fff;
+    padding: 0 8rem 0 1.5rem;
+    line-height: 4rem;
+    border-radius: ${(props) => props.theme.button.borderRadius};
+    color: ${(props) => props.theme.white};
     display: block;
     float: left;
     width: 100%;
     border: 0;
-    transition: 0.2s;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     font-weight: 600;
-    font-size: 1.5rem;
-    background: rgba(0, 0, 0, 0.2);
+    font-size: ${(props) => props.theme.typography.base};
+    background: ${(props) => rgba(props.theme.black, 0.2)};
     margin: 0 0 1rem;
 
     &:focus {
         outline: none;
-        color: #fff;
+        color: ${(props) => props.theme.white};
         background: #0e0f18;
     }
 `;
 
 export const DropdownIcon = styled(FontAwesomeIcon)`
-    color: #fff;
-    font-size: 1.8rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.base};
     height: 5rem;
     width: 5rem;
 `;
@@ -47,19 +48,19 @@ export const SelectStyle = {
         ...base,
         cursor: 'pointer',
         backgroundColor: '#0e0f18 !important',
-        transition: '.2s all',
-        color: '#FFF',
+        transition: '0.2s all',
+        color: 'var(--olaris--white)',
         opacity: isDisabled ? 0.2 : 1,
 
         '&:hover': {
-            color: '#FF9B3D',
+            color: 'var(--olaris--primary)',
         },
     }),
     control: (base, { menuIsOpen }) => ({
         width: '100%',
         background: menuIsOpen ? '#0e0f18' : 'rgba(0,0,0,0.2)',
         cursor: 'pointer',
-        color: '#FF9B3D',
+        color: 'var(--olaris--primary)',
         position: 'relative',
         float: 'left',
         padding: '0 1.5rem',
@@ -74,7 +75,6 @@ export const SelectStyle = {
     menu: (base) => ({
         ...base,
         width: 'auto',
-        borderRadius: '0',
         overflow: 'hidden',
         cursor: 'pointer',
         animation: animation,
@@ -111,12 +111,12 @@ export const SelectStyle = {
         ...base,
         padding: 0,
         marginLeft: '1rem',
-        color: '#FF9B3D',
+        color: 'var(--olaris--primary)',
         height: '5rem',
         position: 'absolute',
         top: '0',
         right: '0',
-        width: '5rem',
+        width: '4.5rem',
         display: 'flex',
         justifyContent: 'center',
         transition: '0.2s all',
@@ -126,7 +126,7 @@ export const SelectStyle = {
     }),
     singleValue: (base) => ({
         ...base,
-        color: '#FFF',
+        color: 'var(--olaris--white)',
         margin: 0,
         overflow: 'hidden',
         height: '5rem',

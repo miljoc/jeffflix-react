@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'Styles/Utils';
+import { HeadingFour } from 'Styles/Base';
 
 export const DashboardWrap = styled.section`
     width: 100%;
@@ -34,14 +35,13 @@ export const CarouselWrap = styled.section`
     margin: 0 0 5rem;
     position: relative;
 
-    h4 {
-        font-size: 1.8rem;
-        color: #fff;
+    ${HeadingFour} {
+        color: ${(props) => props.theme.white};
         margin: 0 0 2rem 1.5rem;
     }
 
     .slick-slide {
-        transition: 0.2s all;
+        transition: ${(props) => props.theme.base.transitionSpeed} all;
     }
 
     .slick-active {

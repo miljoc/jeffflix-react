@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import ReactToolTip from 'react-tooltip';
 
-import { useAlert } from 'react-alert';
-
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faExclamation, faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
+import { useAlert } from 'react-alert';
 
 import FETCH_LIBRARIES from 'Queries/fetchLibraries';
 import { DELETE_LIBRARY , RESCAN_LIBRARY } from 'Mutations/manageLibraries';

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'Styles/Utils';
+import { ParagraphBaseStyle } from 'Styles/Base';
 
 export const AppWrap = styled.main`
     display: flex;
@@ -20,31 +21,22 @@ export const InnerContent = styled.section`
     `}
 `;
 
-export const PageHeading = styled.h1`
-    color: #fff;
-    font-weight: 700;
-    font-size: 2.4rem;
-    margin: 0 0 3rem;
-`;
-
 export const NoResults = styled.span`
+    ${ParagraphBaseStyle}
     float: left;
     width: 100%;
-    font-weight: 600;
     line-height: 4rem;
-    font-size: 1.4rem;
     text-align: ${(props) => (props.alignLeft ? 'left' : 'center')};
-    color: #fff;
+    color: ${(props) => props.theme.white};
     width: calc(100% - 3rem);
     margin: 0 1.5rem;
     opacity: 0.8;
 
     button {
+        ${ParagraphBaseStyle}
         background: none;
         border: none;
         color: ${(props) => props.theme.primary};
-        font-weight: 600;
-        font-size: 1.4rem;
 
         &:hover {
             text-decoration: underline;

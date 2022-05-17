@@ -5,7 +5,8 @@ import ReactToolTip from 'react-tooltip';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { hideNavigation, showNavigation } from 'Redux/Actions/navigationActions';
 
-import { NavButton, NavIcon, ContentOverlay, HideNavIcon } from './Styles';
+import { NavButton } from 'Styles/Button';
+import { NavIcon, ContentOverlay, HideNavIcon } from './Styles';
 
 class NavToggle extends Component {
     componentDidMount() {

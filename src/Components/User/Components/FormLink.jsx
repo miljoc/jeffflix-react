@@ -1,6 +1,5 @@
 import React from 'react';
-
-import * as S from '../Styles';
+import { FormLinkPara, Links } from '../Styles';
 
 type Props = {
     strapline: string,
@@ -9,12 +8,12 @@ type Props = {
 };
 
 const FormLink = ({ strapline, to, value }: Props) => (
-    <S.FormLinkPara>
+    <FormLinkPara>
         {strapline}
-        <S.Links to={to} title={value}>
+        <Links to={to} title={value}>
             {value}
-        </S.Links>
-    </S.FormLinkPara>
+        </Links>
+    </FormLinkPara>
 );
 
 export default FormLink;

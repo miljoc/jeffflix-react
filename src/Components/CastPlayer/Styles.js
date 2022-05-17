@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
+import { HeadingFourStyle } from 'Styles/Base';
 
 export const CastPlayerWrap = styled.div`
     position: fixed;
@@ -44,10 +45,10 @@ export const CastingInfo = styled.div`
 
     h4,
     h5 {
-        color: #fff;
-        font-family: ${(props) => props.theme.fonts.opensans};
+        color: ${(props) => props.theme.white};
+        font-family: ${(props) => props.theme.fonts.body};
         margin-left: 0.5rem;
-        font-size: 1.4rem;
+        font-size: ${(props) => props.theme.typography.base};
         line-height: 1.5;
     }
 
@@ -104,7 +105,7 @@ export const CastPopupOptions = styled.div`
     bottom: 10rem;
     right: 1rem;
     background: ${(props) => props.theme.dark};
-    border-radius: 0.3rem;
+    border-radius: ${(props) => props.theme.button.borderRadius};
     z-index: 98;
 
     ${media.tablet`
@@ -117,14 +118,14 @@ export const CastPopupOptions = styled.div`
 `;
 
 export const SubtitleToggle = styled(FontAwesomeIcon)`
-    color: #fff;
-    font-size: 1.8rem;
+    color: ${(props) => props.theme.white};
+    ${HeadingFourStyle}
     height: 3rem;
     width: 5rem;
     margin-right: 1.5rem;
     cursor: pointer;
     opacity: 0.6;
-    transition: 0.2s opacity;
+    transition: ${(props) => props.theme.base.transitionSpeed} opacity;
 
     &:hover {
         opacity: 1;

@@ -2,17 +2,18 @@ import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { rgba, transparentize } from 'polished';
 import { media } from 'Styles/Utils';
-import { placeholder } from '../../Media/Card/Placeholder';
+import { placeholder } from 'Components/Media/Card/Placeholder';
+import { ParagraphBaseStyle, HeadingFiveStyle } from 'Styles/Base';
 
 export const SearchIcon = styled(FontAwesomeIcon)`
-    font-size: 1.6rem;
-    transition: 0.2s all;
+    font-size: ${(props) => props.theme.typography.body};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     border-radius: 50%;
-    height: ${(props) => props.theme.layout.header};
-    width: ${(props) => props.theme.layout.header} !important;
+    height: 5rem;
+    width: 5rem !important;
     padding: 1.75rem;
     color: ${(props) =>
-        props.hasFocus ? 'rgba(255,255,255,.8)' : 'rgba(255,255,255,.5)'};
+        props.hasFocus ? rgba(props.theme.white,0.8) : rgba(props.theme.white,0.5)};
 `;
 
 export const InputWrap = styled.div`
@@ -20,8 +21,7 @@ export const InputWrap = styled.div`
     margin: 0;
     height: 5rem;
     width: 100%;
-    border-radius: 0.2rem;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     position: relative;
     position: relative;
     float: left;
@@ -34,7 +34,7 @@ export const InputWrap = styled.div`
 
     ${SearchIcon} {
         background: ${(props) =>
-            props.hasFocus ? 'rgba(0,0,0,0.2)' : 'rgba(0,0,0,0)'};
+            props.hasFocus ? rgba(props.theme.black,0.2) : rgba(props.theme.black,0)};
     }
 
     ${media.desktop`
@@ -43,15 +43,15 @@ export const InputWrap = styled.div`
 `;
 
 export const LoadingIcon = styled(FontAwesomeIcon)`
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 1.6rem;
-    transition: 0.2s all;
+    color: ${(props) => rgba(props.theme.white, 0.3)};
+    font-size: ${(props) => props.theme.typography.body};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     position: absolute;
     top: 50%;
     margin-top: -0.8rem;
     right: 3.6rem;
     pointer-events: none;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     opacity: 1;
 `;
 
@@ -69,24 +69,23 @@ export const ErrorAlert = styled.span`
     text-align: center;
     font-weight: 800;
     letter-spacing: 0.1rem;
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.typography.root};
     text-transform: uppercase;
     padding: 0 1.5rem;
-    border-radius: 0.2rem;
-    border: 0.3rem solid #fff;
-    background: #fff;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+    border-radius: ${(props) => props.theme.button.borderRadius};
+    border: 0.3rem solid ${(props) => props.theme.white};
+    background: ${(props) => props.theme.white};
+    box-shadow: 0 10px 15px ${(props) => rgba(props.theme.black, 0.3)};
     position: absolute;
     top: 6rem;
     left: 0;
 `;
 
 export const Title = styled.h4`
+    ${HeadingFiveStyle}
     padding: 1.5rem;
-    font-size: 1rem;
     font-weight: 800;
     letter-spacing: 0.2rem;
-    text-transform: uppercase;
     color: ${(props) => rgba(props.theme.secondary, 0.25)};
 `;
 
@@ -96,10 +95,10 @@ export const NoResultsError = styled.span`
     width: 100%;
     line-height: 3rem;
     color: ${(props) => rgba(props.theme.light, 0.6)};
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px ${(props) => rgba(props.theme.black, 0.1)};
     text-align: center;
-    font-size: 1.4rem;
-    border-radius: 0.3rem;
+    font-size: ${(props) => props.theme.typography.base};
+    border-radius: ${(props) => props.theme.button.borderRadius};
     letter-spacing: 0.1rem;
     padding: 1.5rem;
     background: #1e1f2c;
@@ -120,14 +119,14 @@ export const Suggestion = styled.article`
     padding-left: 5.5rem;
     justify-content: center;
     cursor: pointer;
-    transition: 0.2s background;
+    transition: ${(props) => props.theme.base.transitionSpeed} background;
 
     ${props => props.type === 'Link' && css`
         height: 4rem;
         padding-left: 0;
         padding-right: 0;
         text-align: center;
-        background: rgba(0,0,0,0.2);
+        background: ${(props) => rgba(props.theme.black,0.2)};
 
         ${Name} {
             margin: 0;
@@ -137,38 +136,37 @@ export const Suggestion = styled.article`
 
         &:hover {
             ${Name} {
-                color: #fff;
+                color: ${(props) => props.theme.white};
             }
         }
     `}
 
     &:hover {
-        background: rgba(0,0,0,0.2);
+        background: ${(props) => rgba(props.theme.black,0.2)};
     }
 `;
 
 export const Name = styled.span`
-    color: rgba(255, 255, 255, 0.5);
+    ${ParagraphBaseStyle}
+    color: ${(props) => rgba(props.theme.white, 0.5)};
     float: left;
     width: 100%;
-    font-size: 1.4rem;
     padding-right: 2rem;
     line-height: 1.2;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-weight: 600;
     overflow: hidden;
     margin: 0 0 0.2rem;
 `;
 
 export const Year = styled.small`
-  float:left;
-  width:100%;
-  text-transform:uppercase;
-  font-size:1rem;
-  margin-top: 0.3rem;
-  font-weight:600;
-  color: rgba(255, 255, 255, 0.5);
+    float: left;
+    width: 100%;
+    text-transform: uppercase;
+    font-size: ${(props) => props.theme.typography.root};
+    margin-top: 0.3rem;
+    font-weight: 600;
+    color: ${(props) => rgba(props.theme.white, 0.5)};
 `;
 
 export const Poster = styled.img`

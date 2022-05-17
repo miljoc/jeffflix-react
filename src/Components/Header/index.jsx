@@ -7,11 +7,12 @@ import ReactToolTip from 'react-tooltip';
 
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
+import { BackButton } from 'Styles/Button';
 import Logout from './Logout';
 import NavToggle from './NavToggle';
 import Search from './Search';
 
-import { HeaderWrap, BackButton, BackIcon } from './Styles';
+import { HeaderWrap, BackIcon } from './Styles';
 
 class Header extends Component {
     constructor(props) {

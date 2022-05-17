@@ -15,10 +15,10 @@
     }
     
     &__input {
-        font-size: 1.6rem;
+        font-size: var(--olaris--font-body);
 		background: none;
 		border: 0;
-		color: #ffffff;
+		color: var(--olaris--white);
         font-weight: 600;
         overflow: hidden;
 		transition: 0.2s all;
@@ -35,7 +35,7 @@
         }
 
         @include breakpoint(xxs) {
-            font-size: 1.4rem;
+            font-size: var(--olaris--font-base);
         }        
     }
 }
@@ -86,7 +86,7 @@
         }
     
         &__input {
-            font-size: 1.6rem;
+            font-size: var(--olaris--font-body);
             height: 100%;
             left: 0;
             padding: 0 0 0 6rem;
@@ -137,7 +137,7 @@
             padding: 1.5rem;
             background-color: #0e0f18 !important;
             margin: 0;
-            font-size: 1.4rem;
+            font-size: var(--olaris--font-base);
             font-weight: 600;
             white-space: pre-wrap;
             word-break: break-all;
@@ -149,13 +149,13 @@
         }
 
         &__suggestion {
-            color: #fff;
+            color: var(--olaris--white);
             cursor: pointer;
             background-color: #0e0f18 !important;
             padding: 1rem 0 0;
 
             &:hover {
-                color: #FF9B3D;
+                color: var(--olaris--primary);
             }
 
             &:first-of-type {
@@ -164,13 +164,17 @@
         }
 
         &__input {
-            font-size: 1.4rem;
+            font-size: var(--olaris--size-base);
             height: 5rem;
             background: rgba(0,0,0,0.2);
             margin: 0 0 1rem;
             overflow: hidden;
             padding: 0 1.5rem;
             border-radius: 0.2rem;
+
+            &::placeholder {
+                color:rgba(255, 255, 255, 0.1)
+            }
         }
     }
 
