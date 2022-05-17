@@ -1,33 +1,32 @@
+import { rgba } from 'polished';
 import styled from 'styled-components';
+import ButtonBase from 'Styles/Button';
 
 export const Message = styled.p`
     display: block;
-    margin-bottom: 2rem;
-    color: white;
-    font-weight: 500;
+    margin-bottom: 2rem !important;
+    font-size: ${(props) => props.theme.typography.base} !important;
+    color: ${(props) => rgba(props.theme.white, 0.5)} !important;
 `;
 
-export const Button = styled.button`
-    height: 5rem;
-    border: none;
-    padding: 0 1.5rem;
-    background: ${({ theme, confirm }) => (confirm ? theme.alerts.error : '#0c0d16')};
-    color: #fff;
-    border-radius: 0.3rem;
-    transition: 0.2s background;
+export const ModalActions = styled.div`
+    display: flex;
+    justify-content: ${(props) => props.align === 'right' ? 'flex-end' : 'flex-start'};
+`;
 
-    :hover {
-        background: ${({ theme, confirm }) => (confirm ? theme.alerts.darken.error : '#0f1019')};
-        transition: 0.2s background;
+export const ModalButton = styled.button`
+    ${ButtonBase}
+    background: ${({ theme, confirm }) => (confirm ? theme.alerts.error : rgba(theme.black, 0.3))};
+    color: ${(props) => props.theme.white};
+    padding: 0 2.5rem;
+
+    &:hover {
+        background: ${({ theme, confirm }) => (confirm ? theme.alerts.darken.error : theme.darken.background)};
     }
 
-    :disabled {
+    &:disabled {
         opacity: 0.8;
-        color: rgba(255, 255, 255, 0.2);
-
-        :hover {
-            background: #191a2a;
-        }
+        color: ${(props) => rgba(props.theme.white, 0.2)};
     }
 
     + button {

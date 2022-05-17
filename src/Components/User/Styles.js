@@ -2,6 +2,9 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { aHeadShake } from 'Styles/Animations';
 import { media } from 'Styles/Utils';
+import { rgba } from 'polished';
+import { ParagraphBaseStyle } from 'Styles/Base';
+import ButtonBase from 'Styles/Button';
 
 const shake = () => css`
     .5s ${aHeadShake} alternate;
@@ -9,9 +12,9 @@ const shake = () => css`
 
 export const FormWrap = styled.form`
     padding: 3rem;
-    background: #fff;
+    background: ${(props) => props.theme.white};
     margin: 1rem;
-    transition: 0.2s border;
+    transition: ${(props) => props.theme.base.transitionSpeed} border;
     border-radius: 0.2rem;
     border: 1px solid;
     border-color: ${(props) => (props.error ? props.theme.alerts.error : 'transparent')};
@@ -20,21 +23,20 @@ export const FormWrap = styled.form`
     ${media.tablet`
       padding:5rem;
       margin:3rem;
-      box-shadow: 0 10px 60px rgba(0,0,0, 0.3);
+      box-shadow: 0 10px 60px ${(props) => rgba(props.theme.black, 0.3)};
     `};
 `;
 
 // Heading
 export const Heading = styled.h1`
-    font-size: 2.8rem;
+    font-size: ${(props) => props.theme.typography.headingOne};
     line-height: 1.5;
-    font-weight: 800;
     margin: 3rem 0 0;
     color: ${(props) => props.theme.dark};
 `;
 
 export const SubHeading = styled.p`
-    font-size: 1.6rem;
+    font-size: ${(props) => props.theme.typography.body};
     font-weight: 600;
     margin: 0 0 3rem;
     color: ${(props) => props.theme.text};
@@ -48,52 +50,48 @@ export const InputWrap = styled.div`
     padding-bottom: .2rem;
     margin:0 0 2rem;
     border: 1px solid;
-    border-color: ${(props) => (!props.isValid ? '#DDD' : props.theme.alerts.error)}
+    border-bottom: 0px;
+    border-color: ${(props) => (!props.isValid ? rgba(props.theme.black, 0.2) : props.theme.alerts.error)};
 
     &:after, &:before {
         content:'';
         position:absolute;
         height: .1rem;
-        bottom:0;
-        left:0;
+        bottom:-1px;
+        left:-1px;
         z-index:3;
-        width:100%;
-        transition:.3s width;
+        width: calc(100% + 2px);
+        transition: 0.3s width;
     }
 
     &:after {
-        background: ${(props) => (props.error ? props.theme.alerts.error : props.theme.light)};
+        background: ${(props) => (props.error ? props.theme.alerts.error : rgba(props.theme.black,0.2) )};
     }
 
     &:before {
         z-index:4;
-        width:${(props) => (props.isFocused ? 100 : 0)}%;
+        width:${(props) => (props.isFocused ? 'calc(100% + 2px)' : '0%')};
         background: ${(props) => props.theme.primary};
     }
 `;
 
 export const TextInput = styled.input`
-    height: 5rem;
+    ${ParagraphBaseStyle}
+    height: 4rem;
     border: 0;
     width: 100%;
     float: left;
-    font-size: 1.8rem;
-    font-weight: 600;
     text-indent: 1.5rem;
-    background: #fff;
+    background: ${(props) => props.theme.white};
     color: ${(props) => props.theme.dark};
 
     &:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0 100px #fff inset;
+        box-shadow: 0 0 0 100px ${(props) => props.theme.white} inset;
+        -webkit-box-shadow: 0 0 0 100px ${(props) => props.theme.white} inset;
     }
 
     &:-webkit-autofill {
         -webkit-text-fill-color: ${(props) => props.theme.dark};
-    }
-
-    &::placeholder {
-        color: ${(props) => props.theme.text};
-        opacity: 0.5;
     }
 
     &:focus {
@@ -102,29 +100,18 @@ export const TextInput = styled.input`
 `;
 
 export const FormButton = styled.button`
-    height: 6rem;
-    margin: 2rem 0 0;
-    color: #fff;
+    ${ButtonBase}
+    height: 4rem;
+    color: ${(props) => props.theme.white};
     width: 100%;
-    text-align: center;
-    border: 0;
     background: ${(props) => props.theme.dark};
-    font-size: 1.4rem;
-    font-family: ${(props) => props.theme.fonts.opensans};
     font-weight: 700;
     letter-spacing: 0.1rem;
-    transition: 0.2s all;
     text-transform: uppercase;
-    border-radius: 0.2rem;
 
     &:disabled {
         filter: grayscale(100%);
         opacity: 0.2;
-        pointer-events: none;
-
-        &:hover {
-            background: ${(props) => props.theme.dark};
-        }
     }
 
     &:hover {
@@ -138,8 +125,8 @@ export const FormButton = styled.button`
 
 // Register
 export const FormLinkPara = styled.p`
-    font-size:1.6rem;
-    color: ${(props) => props.theme.text}
+    font-size: ${(props) => props.theme.typography.base};
+    color: ${(props) => props.theme.text};
     font-weight:600;
     text-align:center;
     margin: 2rem 0 0;
@@ -169,17 +156,16 @@ export const ForgotPasswordLink = styled(Link)`
 `;
 
 export const Help = styled.span`
+    ${ParagraphBaseStyle}
     padding: 1.5rem;
     background: ${(props) => props.theme.alerts.error};
-    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 60px ${(props) => rgba(props.theme.black, 0.3)};
     margin: 0 3rem;
-    transition: 0.2s border;
-    border-radius: 0.2rem;
+    transition: ${(props) => props.theme.base.transitionSpeed} border;
+    border-radius: ${(props) => props.theme.button.borderRadius};
     border: 1px solid;
     text-align: left;
-    color: #fff;
-    font-size: 1.4rem;
-    font-weight: 600;
+    color: ${(props) => props.theme.white};
     line-height: 2rem;
     border: 1px solid ${(props) => props.theme.alerts.error};
 `;

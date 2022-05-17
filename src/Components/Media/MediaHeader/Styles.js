@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { rgba } from 'polished';
 
 export const Header = styled.header`
     display: flex;
     width: 100%;
     margin: 0 0 3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid ${(props) => rgba(props.theme.white, 0.05)};
 `;
 
 export const HeaderIconWrap = styled.div`
     width: 6rem;
     height: 6rem;
     text-align: center;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid ${(props) => rgba(props.theme.white, 0.05)};
     position: relative;
     opacity: ${(props) => (props.disabled ? '0.5' : '1')};
     cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
@@ -28,7 +29,7 @@ export const HeaderIconWrap = styled.div`
     &:hover {
         svg {
             opacity: 1;
-            color: ${(props) => (props.disabled ? '#FFF' : props.theme.primary)};
+            color: ${(props) => (props.disabled ? props.theme.white : props.theme.primary)};
         }
     }
 `;
@@ -36,8 +37,8 @@ export const HeaderIconWrap = styled.div`
 export const HeaderIcon = styled(FontAwesomeIcon)`
     display: inline-block;
     opacity: 0.8;
-    color: #fff;
+    color: ${(props) => props.theme.white};
     height: 6rem;
     text-align: center;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 `;

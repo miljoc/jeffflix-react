@@ -1,3 +1,4 @@
+import { rgba } from 'polished';
 import styled from 'styled-components';
 
 const ResumeOption = styled.button`
@@ -5,13 +6,13 @@ const ResumeOption = styled.button`
     width: 100%;
     border: none;
     text-align: left;
-    color: #ffffff60;
+    color: ${(props) => rgba(props.theme.white, 0.38)};
     line-height: 4rem;
-    font-size: 1.6rem;
-    transition: 0.2s all;
+    font-size: ${(props) => props.theme.typography.body};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 
     &:hover {
-        color: #fff;
+        color: ${(props) => props.theme.white};
     }
 `;
 

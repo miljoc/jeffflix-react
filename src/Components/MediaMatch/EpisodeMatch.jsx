@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Checkbox } from 'Styles/Base';
 import { EpisodeMatch as EpisodeMatchStyle } from './Styles';
 
 const EpisodeMatch = ({ uuid, filePath, fileName, handleCheckboxChange, forwardedRef }) => {   
     return (
         <EpisodeMatchStyle>
-            <input
+            <Checkbox
                 ref={forwardedRef}
                 type="checkbox"
                 id={uuid}

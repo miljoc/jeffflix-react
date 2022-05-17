@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo, useState } from 'react';
-import { InnerContent, PageHeading } from 'Containers/Styles';
+import { InnerContent } from 'Containers/Styles';
 import { useQuery } from 'react-apollo';
 import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
 import { connect } from 'react-redux';
@@ -13,7 +13,8 @@ import Loading from 'Components/Loading';
 import InfiniteScroll from 'Components/InfiniteScroll';
 import { MediaOverview } from 'Components/Media/Styles';
 import EpisodeMatch from 'Components/MediaMatch/EpisodeMatch';
-import { Button, MatchLine, MatchContainer, StickyButton, UncheckButton } from './Styles';
+import { PageHeading } from 'Styles/Base';
+import { MatchLine, MatchContainer, StickyButton, UncheckButton, MatchButton } from './Styles';
 
 const MatchSeries = ({ sModal }) => {
     const [episodesChecked, setEpisodesChecked] = useState([]);
@@ -80,11 +81,11 @@ const MatchSeries = ({ sModal }) => {
                         disabled={episodesChecked.length === 0}
                     >Uncheck All
                     </UncheckButton>
-                    <Button
+                    <MatchButton
                         onClick={openModal}
                         disabled={episodesChecked.length === 0}
                     >Match Episodes
-                    </Button>
+                    </MatchButton>
                 </StickyButton>
             )}
             <MatchContainer>

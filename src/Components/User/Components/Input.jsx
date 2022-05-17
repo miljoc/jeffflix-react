@@ -12,6 +12,7 @@ type Props = {
     handleChange: Function,
     uniqueCode: boolean,
     autocomplete: string,
+    className: string
 };
 
 const Input = ({
@@ -23,6 +24,7 @@ const Input = ({
     value = null,
     required = false,
     uniqueCode = false,
+    className = "",
 }: Props) => {
     const [focused, setFocus] = useState(false);
 
@@ -38,6 +40,7 @@ const Input = ({
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
                 required={required}
+                className={className}
             />
         </S.InputWrap>
     );

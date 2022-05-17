@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 
+import { HeadingFour } from 'Styles/Base';
 import RenderRecentMovies from './RenderRecentMovies';
 import RenderRecentEpisodes from './RenderRecentEpisodes';
 import RenderContinueWatching from './RenderContinueWatching';
@@ -10,15 +11,15 @@ import { DashboardWrap, CarouselWrap } from './Styles';
 const Dashboard = () => (
     <DashboardWrap>
         <CarouselWrap>
-            <h4>Continue Watching</h4>
+            <HeadingFour>Continue Watching</HeadingFour>
             <RenderContinueWatching />
         </CarouselWrap>
         <CarouselWrap>
-            <h4>Recently Added Movies</h4>
+            <HeadingFour>Recently Added Movies</HeadingFour>
             <RenderRecentMovies />
         </CarouselWrap>
         <CarouselWrap>
-            <h4>Recently Added Episodes</h4>
+            <HeadingFour>Recently Added Episodes</HeadingFour>
             <RenderRecentEpisodes />
         </CarouselWrap>
     </DashboardWrap>

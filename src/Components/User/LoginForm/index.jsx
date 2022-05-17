@@ -34,6 +34,7 @@ const LoginForm = ({ error, onChange, onSubmit, username, password }: Props) => 
             autocomplete="username"
             placeholder="Enter Username"
             handleChange={onChange}
+            className="input-light"
         />
 
         <Input
@@ -43,6 +44,7 @@ const LoginForm = ({ error, onChange, onSubmit, username, password }: Props) => 
             autocomplete="password"
             placeholder="Enter Password"
             handleChange={onChange}
+            className="input-light"
         />
 
         <Button callback={onSubmit}>Login</Button>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { transparentize } from 'polished';
+import { transparentize, rgba } from 'polished';
 
 export const SidebarWrap = styled.nav`
     width: ${(props) => props.theme.layout.sidebar};
@@ -11,7 +11,7 @@ export const SidebarWrap = styled.nav`
     height: ${(props) =>
         props.castPlaying ? `calc(100vh - ${props.theme.layout.player})` : '100vh'};
     background: ${(props) => props.theme.sidebar && transparentize(0.5, props.theme.sidebar)};
-    transition: 0.2s transform;
+    transition: ${(props) => props.theme.base.transitionSpeed} transform;
     transform: translateX(${(props) => (props.navHidden ? `-${props.theme.layout.sidebar}` : '0')});
     z-index: ${(props) => (props.videoOpen ? 4 : 5)};
 `;
@@ -35,9 +35,8 @@ export const NavItemWrap = styled.section`
 `;
 
 export const NavItemHeading = styled.h5`
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.typography.root};
     letter-spacing: 0.2rem;
-    font-weight: 800;
     margin: 0 0 1.5rem;
     text-transform: uppercase;
     color: ${(props) => props.theme.secondary};
@@ -48,12 +47,12 @@ export const NavItemHeading = styled.h5`
 export const AddFolder = styled(FontAwesomeIcon)`
     position: absolute;
     right: 0;
-    font-size: 1.6rem;
-    color: #fff;
+    font-size: ${(props) => props.theme.typography.body};
+    color: ${(props) => props.theme.white};
     opacity: 0;
     width: 3rem !important;
     height: 3rem;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     padding: 0.9rem;
     background: ${(props) => props.theme.dark};
 `;
@@ -71,7 +70,7 @@ export const DashboardLink = styled(NavLink)`
 `;
 
 export const NavItemLink = styled(NavLink)`
-    font-size: 1.4rem;
+    font-size: ${(props) => props.theme.typography.base};
     letter-spacing: 0.1rem;
     line-height: 3rem;
     font-weight: 400;
@@ -80,7 +79,7 @@ export const NavItemLink = styled(NavLink)`
     opacity: 0.6;
     float: left;
     width: 100%;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     position: relative;
     overflow: hidden;
     padding-left: 3rem;
@@ -93,12 +92,12 @@ export const NavItemLink = styled(NavLink)`
 
     &:hover {
         opacity: 1;
-        background: rgba(0, 0, 0, 0.1);
+        background: ${(props) => rgba(props.theme.black, 0.1)};
 
         svg {
             opacity: 0.4;
             transform: translateX(0);
-            background: rgba(0, 0, 0, 0.3);
+            background: ${(props) => rgba(props.theme.black, 0.3)};
 
             &:hover {
                 opacity: 1;

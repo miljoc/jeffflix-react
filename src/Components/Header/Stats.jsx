@@ -4,6 +4,7 @@ import { useQuery } from 'react-apollo';
 import Loading from 'Components/Loading';
 import PropTypes from 'prop-types';
 import { ErrorWrap } from 'Components/Error/Styles';
+import { HeadingFour, Badge } from 'Styles/Base';
 import { StatsContent } from "./Styles";
 
 const Stats = ({ type }) => {
@@ -16,12 +17,12 @@ const Stats = ({ type }) => {
 
     return (
         <StatsContent>
-            <h4>
+            <HeadingFour>
                 {type === "movies"
-                    ? <>Movies {movieCount > 0 && <span>{movieCount}</span>}</>
-                    : <>TV Shows {seriesCount > 0 && <span>{seriesCount}</span>}</>
+                    ? <>Movies {movieCount > 0 && <Badge>{movieCount}</Badge>}</>
+                    : <>TV Shows {seriesCount > 0 && <Badge>{seriesCount}</Badge>}</>
                 }
-            </h4>
+            </HeadingFour>
         </StatsContent>
     );
 };

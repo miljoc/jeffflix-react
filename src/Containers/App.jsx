@@ -11,6 +11,7 @@ import ModalContainer from 'Containers/ModalContainer';
 import CastPlayer from 'Components/CastPlayer';
 
 import { AppWrap } from './Styles';
+import GlobalStyles from '../Styles/GlobalStyles';
 
 const App = () => {
     checkAuth();
@@ -31,6 +32,7 @@ const App = () => {
 
     return (
         <AppWrap authed={Auth.isAuthenticated}>
+            <GlobalStyles />
             {Auth.isAuthenticated ? (
                 <LoggedIn />
             ) : (

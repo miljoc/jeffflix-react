@@ -1,8 +1,8 @@
 .tooltip {
-    background: #1f202f !important;
+    background: var(--olaris--sidebar) !important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #ffffff !important;
-    font-size: 1.2rem;
+    color: var(--olaris--white) !important;
+    font-size: var(--olaris--font-small);
     font-weight: 600;
     opacity: 1 !important;
     padding: 1.5rem;
@@ -11,18 +11,18 @@
 
 .__react_component_tooltip.type-dark {
     &.place-bottom:after {
-        border-bottom-color: #1f202f !important;
+        border-bottom-color: var(--olaris--sidebar) !important;
     }
 
     &.place-top:after {
-        border-top-color: #1f202f !important;
+        border-top-color: var(--olaris--sidebar) !important;
     }
 
     &.place-left:after {
-        border-left-color: #1f202f !important;
+        border-left-color: var(--olaris--sidebar) !important;
     }
 
     &.place-right:after {
-        border-right-color: #1f202f !important;
+        border-right-color: var(--olaris--sidebar) !important;
     }
 }

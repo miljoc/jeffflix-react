@@ -1,3 +1,4 @@
+import { rgba } from 'polished';
 import styled from 'styled-components';
 import { media } from 'Styles/Utils';
 
@@ -8,8 +9,8 @@ export const ListWrap = styled.ul`
 
 export const ListItem = styled.li`
     display: none;
-    color: #ffffff;
-    font-size: 1.4rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.base};
     font-weight: 400;
     line-height: 1.5;
     margin: 0 1rem 1rem 0;
@@ -20,7 +21,7 @@ export const ListItem = styled.li`
 
     &:after {
         content: '-';
-        color: rgba(255, 255, 255, 0.25);
+        color: ${(props) => rgba(props.theme.white, 0.25)};
         padding-left: 1rem;
     }
 
@@ -37,11 +38,11 @@ export const ListItem = styled.li`
     }
 
     a {
-        color: rgba(255, 255, 255, 0.25);
-        transition: 0.2s all;
+        color: ${(props) => rgba(props.theme.white, 0.25)};
+        transition: ${(props) => props.theme.base.transitionSpeed} all;
 
         &:hover {
-            color: #ffffff;
+            color: ${(props) => props.theme.white};
         }
     }
 

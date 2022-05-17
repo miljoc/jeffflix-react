@@ -33,7 +33,7 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                 }}
                 error={error}
             >
-                <LogoIcon alt="Olaris" height="30" />
+                <LogoIcon alt="Olaris" height="35" />
                 <Title heading={heading} sub={title} />
 
                 {!initialSetup && (
@@ -45,6 +45,7 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                         placeholder="Enter Invite Code"
                         handleChange={onChange}
                         uniqueCode
+                        className='input-light'
                     />
                 )}
                 <Input
@@ -55,6 +56,7 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                     placeholder="Username"
                     required
                     handleChange={onChange}
+                    className='input-light'
                 />
                 <Input
                     type="password"
@@ -64,6 +66,7 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                     placeholder="Password"
                     required
                     handleChange={onChange}
+                    className='input-light'
                 />
                 <Button callback={onSubmit}>Create Account</Button>
 

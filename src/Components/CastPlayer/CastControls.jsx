@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { faClosedCaptioning } from '@fortawesome/free-solid-svg-icons';
 import Loading from 'Components/Loading';
+import { HeadingFour } from 'Styles/Base';
 import SelectSubtitles from './Controls/SelectSubtitles';
 import { PlayerControls } from './castActions';
 import { PlayPause, BackThirty, ForwardThirty, MuteUnmute, SeekBar, VolumeBar } from './Controls';
@@ -61,7 +62,7 @@ export default class CastControls extends Component {
                         )}
                     </CastPopupOptions>
                     <CastingInfo>
-                        <h4>{metadata.title}</h4>
+                        <HeadingFour>{metadata.title}</HeadingFour>
                         {metadata.subtitle && <h5>{metadata.subtitle}</h5>}
                         {metadata.images && <img src={metadata.images[0].url} alt={metadata.title} />}
                     </CastingInfo>

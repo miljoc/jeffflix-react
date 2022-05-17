@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { hideModal } from 'Redux/Actions/modalActions';
 import { Modal, ModalWrap, ModalBody, ModalHeader, ModalHeading } from 'Components/Modal/Styles';
 import ModalClose from '../ModalClose';
-import { Message, Button } from './Styles';
+import { Message, ModalActions, ModalButton } from './Styles';
 
 type OwnProps = {
     title: string,
@@ -34,12 +34,14 @@ const WarningModal = ({ title, message, confirm }: Props) => {
                 </ModalHeader>
                 <ModalBody>
                     <Message>{message}</Message>
-                    <Button type="button" onClick={() => dispatch(hideModal())}>
-                        Cancel
-                    </Button>
-                    <Button confirm type="button" onClick={() => onConfirm()}>
-                        Confirm
-                    </Button>
+                    <ModalActions align="right">
+                        <ModalButton type="button" onClick={() => dispatch(hideModal())}>
+                            Cancel
+                        </ModalButton>
+                        <ModalButton confirm type="button" onClick={() => onConfirm()}>
+                            Confirm
+                        </ModalButton>
+                    </ModalActions>
                 </ModalBody>
             </ModalWrap>
         </Modal>
