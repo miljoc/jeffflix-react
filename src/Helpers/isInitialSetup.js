@@ -1,4 +1,4 @@
-import getBaseUrl from './getBaseUrl';
+import { getBaseUrl } from './getBaseUrl';
 
 const isInitialSetup = async () => {
     const response = await fetch(`${getBaseUrl()}/olaris/m/v1/user/setup`);

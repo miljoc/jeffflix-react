@@ -1,5 +1,5 @@
 import getUrlParameter from './getUrlParameter';
-import getBaseUrl from './getBaseUrl';
+import { getBaseUrl, getFQDNUrl } from './getBaseUrl';
 import updateSuggestions from './updateSuggestions';
 import canPlayCodec from './canPlayCodec';
 import generateMediaUrl from './generateMediaUrl';
@@ -17,6 +17,7 @@ import propertiesMap from './propertiesMap';
 export {
     getUrlParameter,
     getBaseUrl,
+    getFQDNUrl,
     canPlayCodec,
     generateMediaUrl,
     updateSuggestions,
