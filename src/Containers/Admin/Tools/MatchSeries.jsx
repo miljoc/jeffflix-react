@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, useState } from 'react';
+import React, { createRef, useMemo, useRef, useState } from 'react';
 import { InnerContent } from 'Containers/Styles';
 import { useQuery } from 'react-apollo';
 import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
@@ -18,38 +18,80 @@ import { MatchLine, MatchContainer, StickyButton, UncheckButton, MatchButton } f
 
 const MatchSeries = ({ sModal }) => {
     const [episodesChecked, setEpisodesChecked] = useState([]);
+    const previousChecked = useRef();
     
     const { error, loading, data, fetchMore } = useQuery(FETCH_UNIDENTIFIED_EPISODES, {
         variables: {
             limit: 50,
             offset: 0,
         },
-    });
+    });    
 
     const refsById = useMemo(() => {
-        const refs = {}
+        const refs = [];
         if(data?.unidentifiedEpisodeFiles.length > 0){
-            data?.unidentifiedEpisodeFiles.forEach((episode) => {
-                refs[episode.uuid] = React.createRef(null)
-            })
+            data?.unidentifiedEpisodeFiles.forEach((episode, index) => {
+                refs[index] = { uuid: episode.uuid, index, ref: createRef(null) }
+            });
         }
-        return refs
+        return refs;
     }, [data]);
 
-    const handleCheckboxChange = event => {
+    // 'current' is part of useRef, confusing. map it to "previous"
+    const setEpisodesCheckedWithShift = ({ current: previous }, currentIndex) => {
+        setEpisodesChecked(oldEpisodes => {
+            let newArray = [];
+            const prev = parseInt(previous, 10);
+            const curr = parseInt(currentIndex, 10)
+
+            const toCheck = curr < prev
+                ? refsById.slice(curr, prev + 1)
+                : refsById.slice(prev, curr + 1);
+
+            toCheck.forEach(c => {
+                refsById[c.index].ref.current.checked = true
+                const fileObj = {
+                    filePath: c.ref.current.dataset.filepath,
+                    fileName: c.ref.current.dataset.filename,
+                    uuid: c.uuid,
+                    index: c.index,
+                    checked: c.ref.current.checked
+                };                    
+                newArray = [...newArray, fileObj];
+            });
+
+            const finalArray = [...oldEpisodes, ...newArray];
+
+            // make sure episodes are always unique
+            return finalArray.filter((e, i) => finalArray.findIndex(a => a.uuid === e.uuid) === i);
+        });
+    }
+
+    const handleCheckboxChange = (event) => {
+        const { nativeEvent, target: { id, checked, dataset: { filepath, filename, index } } } = event;
+
+        // check if shift key is selected
+        if(nativeEvent.shiftKey){
+            setEpisodesCheckedWithShift(previousChecked, index);
+        }else if(checked){
+            previousChecked.current = index;
+        }
+        
+        // always add the latest checked
         setEpisodesChecked(oldEpisodes => {
             const fileObj = {
-                filePath: event.target.dataset.filepath,
-                fileName: event.target.dataset.filename,
-                uuid: event.target.id,
-                checked: event.target.checked
+                filePath: filepath,
+                fileName: filename,
+                uuid: id,
+                index,
+                checked
             };
-            let newArray = [ ...oldEpisodes, fileObj ];
-            if ( oldEpisodes.some(e => e.uuid === event.target.id) ) {
-                newArray = newArray.filter(episode => episode.uuid !== fileObj.uuid);
-            }
-            return newArray;
-        });
+            const newArray = [ ...oldEpisodes, fileObj ];
+
+            // make sure episodes are always unique
+            return newArray.filter((e, i) => newArray.findIndex(a => a.uuid === e.uuid) === i);
+        });            
+
     };
 
     const openModal = () => {
@@ -63,9 +105,11 @@ const MatchSeries = ({ sModal }) => {
 
     const uncheckAll = () => {
         episodesChecked.forEach(e => {
-            refsById[e.uuid].current.checked = false;
+            refsById[e.index].ref.current.checked = false;
         });
-        setEpisodesChecked([]);
+
+        setEpisodesChecked(() => []);
+        previousChecked.current = null;
     }
     
     if (loading) return <Loading />;
@@ -123,14 +167,14 @@ const MatchSeries = ({ sModal }) => {
                     }
                 >
                     {() => {
-                        return data.unidentifiedEpisodeFiles.map(({ uuid, filePath, fileName }) => {
+                        return data.unidentifiedEpisodeFiles.map((episode, index) => {
                             return (
-                                <MatchLine key={uuid}>
+                                <MatchLine key={episode.uuid}>
                                     <EpisodeMatch
-                                        filePath={filePath}
-                                        fileName={fileName}
-                                        uuid={uuid}
-                                        forwardedRef={refsById[uuid]}
+                                        episode={episode}
+                                        index={index}
+                                        checked={episodesChecked.filter(e => e.uuid === episode.uuid).length > 0}
+                                        forwardedRef={refsById[index].ref}
                                         handleCheckboxChange={handleCheckboxChange}
                                     />
                                 </MatchLine>    

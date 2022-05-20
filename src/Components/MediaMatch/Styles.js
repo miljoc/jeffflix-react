@@ -17,6 +17,7 @@ export const Match = styled.div`
         font-size: ${(props) => props.theme.typography.small};
         align-items: center;
         cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
+        user-select: none;
         color: ${(props) => rgba(props.theme.white, 0.7)};
 
         &:hover {
