@@ -12,6 +12,7 @@ import compileEpisodes from './compileEpisodes';
 import splitFilepath from './splitFilepath';
 import convertBitrate from './convertBitrate';
 import convertFilesize from './convertFilesize';
+import propertiesMap from './propertiesMap';
 
 export {
     getUrlParameter,
@@ -31,4 +32,5 @@ export {
     splitFilepath,
     convertBitrate,
     convertFilesize,
+    propertiesMap
 };

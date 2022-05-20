@@ -1,17 +1,18 @@
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Slider } from 'react-player-controls';
+import { rgba } from 'polished';
 
 export const PlayerButton = styled.button`
     background: none;
     border: none;
-    width: 5rem;
-    height: 5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0.6;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
+    width: 5rem;
+    height: 5rem;
 
     &:hover {
         opacity: 1;
@@ -19,32 +20,24 @@ export const PlayerButton = styled.button`
     }
 `;
 
-export const PlayerIcon = styled(FontAwesomeIcon)`
-    color: #fff;
-    font-size: 1.4rem;
-    opacity: 0.8;
-`;
-
-export const PlayerButtonSmall = styled.button`
-    background: none;
-    border: none;
-    width: rem;
+export const PlayerButtonSmall = styled(PlayerButton)`
+    width: 3rem;
     height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.6;
-    transition: 0.2s all;
 
     &:hover {
-        opacity: 1;
         transform: scale(1.05);
     }
 `;
 
+export const PlayerIcon = styled(FontAwesomeIcon)`
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.base};
+    opacity: 0.8;
+`;
+
 export const PlayerIconSmall = styled(FontAwesomeIcon)`
-    color: #fff;
-    font-size: 1.4rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.base};
 `;
 
 export const SeekBarWrap = styled.div`
@@ -57,8 +50,8 @@ export const SeekBarWrap = styled.div`
     max-width: ${(props) => (props.maxWidth ? `${props.maxWidth}rem` : '100%')};
 
     span {
-        font-size: 1.2rem;
-        color: #fff;
+        font-size: ${(props) => props.theme.typography.small};
+        color: ${(props) => props.theme.white};
         font-weight: 600;
         line-height: 2rem;
         margin: 0 1rem;
@@ -73,11 +66,10 @@ export const SliderHandle = styled.div`
     left: ${(props) => props.value * 100}%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background: #ffffff;
+    background: ${(props) => props.theme.white};
     border-radius: 50%;
     opacity: 0;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-
+    box-shadow: 0 0 1rem ${(props) => rgba(props.theme.black, 0.5)}
     ${SeekBarWrap}:hover & {
         opacity: 1;
     }
@@ -93,8 +85,8 @@ export const SeekBarSlider = styled(Slider)`
     &:before {
         content: '';
         height: 0.2rem;
-        border-radius: 0.3rem;
-        background: #000;
+        border-radius: ${(props) => props.theme.button.borderRadius};
+        background: ${(props) => props.theme.black};
         width: 100%;
         position: absolute;
         top: 50%;
@@ -105,7 +97,7 @@ export const SeekBarSlider = styled(Slider)`
 
 export const SliderBar = styled.div`
     position: absolute;
-    border-radius: 0.3rem;
+    border-radius: ${(props) => props.theme.button.borderRadius};
     height: 0.2rem;
     background: ${(props) => (props.isMuted ? props.theme.sidebar : props.theme.primary)};
     top: 50%;
@@ -128,11 +120,11 @@ export const SelectStyle = {
         cursor: 'pointer',
         backgroundColor: '#212231 !important',
         transition: '.2s all',
-        color: isSelected ? '#FF9B3D' : '#FFF',
+        color: isSelected ? 'var(--olaris--primary)' : 'var(--olaris--white)',
         opacity: isDisabled ? 0.2 : 1,
 
         '&:hover': {
-            color: '#FF9B3D',
+            color: 'var(--olaris--primary)',
         },
     }),
     control: () => ({
@@ -145,7 +137,6 @@ export const SelectStyle = {
     menu: (base) => ({
         ...base,
         width: 'auto',
-        borderRadius: '0',
         overflow: 'hidden',
         cursor: 'pointer',
         margin: '0',

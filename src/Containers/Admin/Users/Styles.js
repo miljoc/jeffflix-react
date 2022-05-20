@@ -7,7 +7,7 @@ export const List = styled.ul`
     margin: 0 0 2rem;
     overflow: hidden;
     position: relative;
-    border-radius: 0.3rem;
+    border-radius: ${(props) => props.theme.button.borderRadius};
 
     ${media.desktop`
         width:55%;
@@ -25,7 +25,7 @@ export const ListHeading = styled.li`
     line-height: 5rem;
     text-transform: capitalize;
     font-weight: 600;
-    color: #fff;
-    font-size: 1.6rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.body};
     background: #1e1f2d;
 `;

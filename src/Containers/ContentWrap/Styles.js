@@ -11,7 +11,7 @@ const Content = styled.div`
     margin: 0 0 0 ${(props) => (!props.navHidden ? `${props.theme.layout.sidebar}` : '0')};
     width: 100%;
     height: 100%;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 
     ${media.tablet`
         max-height: calc(100% - ${(props) => (props.isCasting ? props.theme.layout.player : '0')});

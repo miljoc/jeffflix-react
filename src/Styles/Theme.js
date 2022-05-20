@@ -1,32 +1,26 @@
 import { darken, lighten } from 'polished';
+import { Fonts, FontSizes, ThemeColors } from './Variables';
 
 const Theme = {
-    primary: '#FF9B3D',
-    secondary: '#C9CCD1',
-    text: '#333545',
-    dark: '#262737',
-    light: '#F5F7FA',
-    background: '#191a28',
-    playbar: '#FF9B3D',
-    sidebar: '#1f202f',
+    ...ThemeColors,
 
     darken: {
-        primary: darken(0.2, '#FF9B3D'),
-        dark: darken(0.1, '#262737'),
-        background: darken(0.1, '#191a28'),
+        primary: darken(0.2, `${ThemeColors.primary}`),
+        dark: darken(0.1, `${ThemeColors.dark}`),
+        background: darken(0.1, `${ThemeColors.background}`),
     },
     lighten: {
-        dark: lighten(0.2, '#262737'),
-        background: lighten(0.1, '#191a28'),
+        dark: lighten(0.2, `${ThemeColors.dark}`),
+        background: lighten(0.1, `${ThemeColors.background}`),
     },
     alerts: {
-        success: '#81A35A',
-        error: '#E83C50',
-        info: '#FFF',
+        success: `${ThemeColors.success}`,
+        error: `${ThemeColors.error}`,
+        info: `${ThemeColors.info}`,
 
         darken: {
-            success: darken(0.1, '#81A35A'),
-            error: darken(0.1, '#E83C50'),
+            success: darken(0.1, `${ThemeColors.success}`),
+            error: darken(0.1, `${ThemeColors.error}`),
         },
     },
     layout: {
@@ -37,14 +31,17 @@ const Theme = {
         playerMobile: '18rem',
     },
     fonts: {
-        opensans: '"Open Sans", sans-serif',
-        muli: '"Muli", sans-serif',
+        ...Fonts
+    },
+    typography: {
+        ...FontSizes
     },
     card: {
         width: '14rem',
         maxWidth: '18rem',
         margin: '0 1.5rem 3rem',
         paddingTop: 'calc(513 / 342 * 100%)',
+        borderRadius: '0rem'
     },
     wideCard: {
         width: '20rem',
@@ -52,6 +49,12 @@ const Theme = {
         margin: '0 1.5rem 3rem',
         paddingTop: '12rem',
     },
+    base: {
+        transitionSpeed: '0.2s'
+    },
+    button: {
+        borderRadius: '0.3rem'
+    }
 };
 
 export default Theme;

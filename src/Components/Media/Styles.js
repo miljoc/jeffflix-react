@@ -1,10 +1,12 @@
 import styled, { keyframes } from 'styled-components';
 import { media } from 'Styles/Utils';
 import { NavLink } from 'react-router-dom';
+import { rgba } from 'polished';
+import { HeadingOneStyle, HeadingThreeStyle, HeadingFourStyle, HeadingFiveStyle, LightParagraph, ParagraphBaseStyle } from 'Styles/Base';
 
 const fadeInLow = keyframes`
-  from { opacity: 0 }
-  to { opacity: .05 }
+    from { opacity: 0 }
+    to { opacity: .05 }
 `;
 
 export const MediaFullWrap = styled.section`
@@ -30,12 +32,12 @@ export const MediaFullWrap = styled.section`
     }
 
     ${media.desktop`
-    padding:5rem 3.5rem;
-  `}
+        padding:5rem 3.5rem;
+    `}
 
     ${media.large`
-    padding:5rem;
-  `}
+        padding:5rem;
+    `}
 `;
 
 export const MediaLeftCol = styled.div`
@@ -47,8 +49,8 @@ export const MediaLeftCol = styled.div`
     display: none;
 
     ${media.tablet`
-    display:block;
-  `}
+        display:block;
+    `}
 `;
 
 export const MediaRightCol = styled.div`
@@ -57,74 +59,72 @@ export const MediaRightCol = styled.div`
     position: relative;
 
     ${media.tablet`
-    padding-left: 2.5rem;
-    display:block;
-  `}
+        padding-left: 2.5rem;
+        display:block;
+    `}
 `;
 
 export const MediaName = styled.h1`
-  font-size:1.8rem;
-  color:#FFF;
-  float:left;
-  width:100%;
-  margin:0 0 1.5rem;
-  line-height:1.4;
-  padding-right: 5rem;
-  transform: translateY(-0.5re);
+    ${HeadingFourStyle}
+    color:${(props) => props.theme.white};
+    width:100%;
+    margin:0 0 1.5rem;
+    line-height:1.4;
+    padding-right: 5rem;
+    transform: translateY(-0.5rem);
 
-  ${media.mobile`
-    margin:0 0 2rem;
-  `}
+    ${media.mobile`
+        margin:0 0 2rem;
+    `}
 
-  ${media.tablet`
-    font-size:2.2rem;
-  `}
+    ${media.tablet`
+        ${HeadingThreeStyle}
+    `}
 
-  ${media.large`
-    font-size:3rem;
-  `}
+    ${media.large`
+        ${HeadingOneStyle}
+    `}
 `;
 
 export const MediaNameLink = styled(NavLink)`
-  font-size:1.8rem;
-  color:#FFF;
-  float:left;
-  width:100%;
-  margin:0 0 1.5rem;
-  line-height:2.6rem;
-  padding-right: 6rem;
-  font-weight:600;
+    ${HeadingFourStyle}
+    color:${(props) => props.theme.white};
+    float:left;
+    width:100%;
+    margin:0 0 1.5rem;
+    line-height:2.6rem;
+    padding-right: 6rem;
+    font-weight:600;
 
-  &:hover {
-    text-decoration:underline;
-  }
+    &:hover {
+        text-decoration:underline;
+    }
 
-  ${media.mobile`
-    margin:0 0 2rem;
-  `}
+    ${media.mobile`
+        margin:0 0 2rem;
+    `}
 
-  ${media.tablet`
-    font-size:2.2rem;
-  `}
+    ${media.tablet`
+        font-size: ${(props) => props.theme.typography.headingThree};
+    `}
 
-  ${media.large`
-    font-size:3rem;
-  `}
+    ${media.large`
+        font-size: ${(props) => props.theme.typography.headingOne};
+    `}
 `;
 
 export const MediaEpisodes = styled.div`
-    font-size: 1.3rem;
+    font-size: ${(props) => props.theme.typography.base};
     margin-top: 1rem;
 `;
 
 export const SeasonNumber = styled.h3`
-    font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.7);
+    ${ParagraphBaseStyle}
+    color: ${(props) => rgba(props.theme.white, 0.7)};
     float: left;
     width: 100%;
     margin: -1rem 0 1rem;
     line-height: 2rem;
-    font-weight: 600;
 
     span {
         float: none !important;
@@ -133,27 +133,27 @@ export const SeasonNumber = styled.h3`
     }
 
     ${media.tablet`
-    margin:-1rem 0 2rem;
-  `}
+        margin:-1rem 0 2rem;
+    `}
 
     ${media.large`
-    font-size:1.6rem;
-    margin:0 0 2rem;
-  `}
+        font-size: ${(props) => props.theme.typography.body};
+        margin:0 0 2rem;
+    `}
 `;
 
 export const SubTitle = styled.h3`
-    font-size: 1.6rem;
-    color: #fff;
+    font-size: ${(props) => props.theme.typography.body};
+    color: ${(props) => props.theme.white};
     float: left;
     width: 100%;
     margin: 0 0 2rem;
     padding: 2rem 0.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid ${(props) => rgba(props.theme.white, 0.05)};
 `;
 
 export const MediaRelease = styled.span`
-    font-size: 1.2rem;
+    font-size: ${(props) => props.theme.typography.small};
     color: ${(props) => props.theme.secondary};
     opacity: 0.5;
     font-weight: 400;
@@ -162,18 +162,15 @@ export const MediaRelease = styled.span`
     margin-left: 0;
 
     ${media.tablet`
-    font-size:1.6rem;
-    float:none;
-    width:auto;
-    margin-left: 1rem;
-  `}
+        font-size: ${(props) => props.theme.typography.body};
+        float:none;
+        width:auto;
+        margin-left: 1rem;
+    `}
 `;
 
 export const MediaOverview = styled.p`
-    font-size: 1.4rem;
-    line-height: 2.6rem;
-    color: rgba(255, 255, 255, 0.5);
-    font-weight: 400;
+    ${LightParagraph}
     float: left;
     width: 100%;
     margin: 0 0 2rem;
@@ -211,22 +208,20 @@ export const MediaBackground = styled.span`
 `;
 
 export const MediaOriginalTitle = styled.div`
-    font-size: 1.9rem;
+    ${HeadingFourStyle}
     margin-bottom: 2rem;
-    color: #FFF;
+    color: ${(props) => props.theme.white};
 
     > span {
-      text-transform: uppercase;
-      display: block;
-      color: inherit;
-      opacity: .5;
-      font-size: 1.1rem;
-      font-weight: 600;
-      line-height: 2rem;
-      letter-spacing: 0.1rem;
-      width: 100%;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-
+        ${HeadingFiveStyle}
+        display: block;
+        color: inherit;
+        opacity: .5;
+        font-weight: 600;
+        line-height: 2rem;
+        letter-spacing: 0.1rem;
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
     }
 `;

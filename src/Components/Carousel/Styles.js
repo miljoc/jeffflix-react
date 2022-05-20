@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const NextArrow = styled(FontAwesomeIcon)`
-    font-size: 2rem;
-    color: #fff;
+export const Arrow = styled(FontAwesomeIcon)`
+    font-size: ${(props) => props.theme.typography.headingThree};
+    color: ${(props) => props.theme.white};
     cursor: pointer;
     position: absolute;
     top: -4rem;
-    right: 1.5rem;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 
     &.slick-disabled {
         opacity: 0.2;
@@ -16,17 +15,10 @@ export const NextArrow = styled(FontAwesomeIcon)`
     }
 `;
 
-export const PrevArrow = styled(FontAwesomeIcon)`
-    font-size: 2rem;
-    color: #fff;
-    cursor: pointer;
-    position: absolute;
-    top: -4rem;
-    right: 5rem;
-    transition: 0.2s all;
+export const NextArrow = styled(Arrow)`
+    right: 1.5rem;
+`;
 
-    &.slick-disabled {
-        opacity: 0.2;
-        cursor: initial;
-    }
+export const PrevArrow = styled(Arrow)`
+    right: 5rem;
 `;

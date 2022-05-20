@@ -17,7 +17,7 @@ export const UserFormWrap = styled.section`
     height: 100vh;
     align-self: center;
     flex-direction: column;
-    background: #fff;
+    background: ${(props) => props.theme.white};
     animation: ${(props) => (props.success ? fadeOut : fadeIn)};
 
     ${media.tablet`

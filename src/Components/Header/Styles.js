@@ -1,6 +1,8 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
+import { HeadingFour, Badge } from 'Styles/Base';
+import { rgba } from 'polished';
 
 const fadeInLeft = keyframes`
   from {
@@ -23,8 +25,11 @@ export const HeaderWrap = styled.header`
     z-index: 5;
     padding: 2rem 1rem 0;
     display: flex;
+    align-items: center;
 
     .right-menu {
+        display: flex;
+        align-items: center;
         margin-left: auto;
     }
 
@@ -49,57 +54,26 @@ export const HeaderWrap = styled.header`
 `;
 
 export const NavIcon = styled(FontAwesomeIcon)`
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 2rem;
-    transition: 0.2s all;
+    color: ${(props) => rgba(props.theme.white, 0.5)};
+    font-size: ${(props) => props.theme.typography.headingThree};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 `;
 
 export const BackIcon = styled(FontAwesomeIcon)`
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 2rem;
-    transition: 0.2s all;
+    color: ${(props) => rgba(props.theme.white, 0.5)};
+    font-size: ${(props) => props.theme.typography.headingThree};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 `;
 
 export const HideNavIcon = styled(FontAwesomeIcon)`
-    color: #fff;
-    font-size: 1.6rem;
-    transition: 0.2s all;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.body};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     width: 5rem !Important;
     height: 5rem;
     margin: 1.7rem 1rem;
     padding: 1.5rem;
     cursor: pointer;
-`;
-
-export const BackButton = styled.button`
-    float: ${(props) => (props.alignLeft ? 'left' : 'right')};
-    background: none;
-    border: none;
-    transition: 0.2s background;
-    width: ${(props) => props.theme.layout.header};
-    height: ${(props) => props.theme.layout.header};
-    margin-right: 0.5rem;
-
-    &:hover {
-        ${BackIcon} {
-            color: #fff;
-        }
-    }
-`;
-
-export const NavButton = styled.button`
-    float: ${(props) => (props.alignLeft ? 'left' : 'right')};
-    background: none;
-    border: none;
-    transition: 0.2s background;
-    width: ${(props) => props.theme.layout.header};
-    height: ${(props) => props.theme.layout.header};
-
-    &:hover {
-        ${NavIcon} {
-            color: #fff;
-        }
-    }
 `;
 
 export const ContentOverlay = styled.div`
@@ -111,7 +85,7 @@ export const ContentOverlay = styled.div`
     background: rgba(13, 14, 26, 0.8);
     z-index: 6;
     animation: 0.2s ${fadeInLeft} alternate;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
 
     ${media.desktop`
         left: 0;
@@ -145,25 +119,18 @@ export const SortWrap = styled.div`
 `;
 
 export const StatsContent = styled.div`
-    h4 {
+    ${HeadingFour} {
         display: flex;
         align-items: center;
-        font-size: 1.8rem;
-        color: #fff;
+        color: ${(props) => props.theme.white};
         margin-bottom: 2rem;
 
         ${media.desktop`
             margin-bottom: 0;
         `}
         
-        span {
-            display: inline-block;
+        ${Badge} {
             margin-left: 0.8rem;
-            background: ${(props) => props.theme.primary};
-            border-radius: 0.2rem;
-            font-family: ${(props) => props.theme.fonts.muli};
-            font-size: 1.2rem;
-            padding: 0.4rem 0.8rem 0.5rem;
         }
     }
 `;

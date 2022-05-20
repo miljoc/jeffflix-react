@@ -3,16 +3,18 @@ import DropdownMenu from 'Components/DropdownMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
 import { aFadeIn } from 'Styles/Animations';
+import { rgba } from 'polished';
+import { HeadingFiveStyle, ParagraphBaseStyle } from 'Styles/Base';
 
 export const CloseVideo = styled(FontAwesomeIcon)`
     position: absolute;
     top: 0;
     right: 0.5rem;
-    color: #fff;
-    font-size: 1.6rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.body};
     cursor: pointer;
     z-index: 11;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     opacity: 0.9;
     width: 5rem !important;
     height: 5rem;
@@ -24,20 +26,25 @@ export const CloseVideo = styled(FontAwesomeIcon)`
 `;
 
 export const DisabledIcon = styled(FontAwesomeIcon)`
-    color: rgba(255,255,255,0.25);
+    color: ${(props) => rgba(props.theme.white, 0.25)};
     pointer-events: none;
 `;
 
 export const Link = styled.button`
     background: none;
     border: 0;
-    color: #fff;
-    font-size: 2rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.headingThree};
+    transition: ${(props) => props.theme.base.transitionSpeed} color;
     opacity: 0.8;
 
     &:disabled {
         pointer-events: none;
-        color: rgba(255,255,255,0.25);
+        color: ${(props) => rgba(props.theme.white, 0.25)};
+    }
+
+    &:hover {
+        color: ${(props) => props.theme.primary};
     }
 `;
 
@@ -57,7 +64,7 @@ export const VideoWrap = styled.article`
     right: 0;
     bottom: 0;
     z-index: 999;
-    background: #00000090;
+    background: ${(props) => rgba(props.theme.black, 0.56)};
     width: 100%;
     animation: 0.4s ${aFadeIn} alternate;
 `;
@@ -88,11 +95,11 @@ export const MediaInfoList = styled.ul`
 
     li {
         display: inline-block;
-        color: #fff;
+        color: ${(props) => props.theme.white};
         font-weight: 600;
-        font-size: 1.2rem;
+        font-size: ${(props) => props.theme.typography.small};
         line-height: 2rem;
-        transform: tranzslateY(-0.05rem);
+        transform: translateY(-0.05rem);
         text-transform: uppercase;
         margin-right: 0.5rem;
         padding-right: 0.5rem;
@@ -106,35 +113,33 @@ export const MediaInfoList = styled.ul`
 `;
 
 export const MediaInfoSubhead = styled.span`
-  text-transform:uppercase;
-  color: #FFF;
-  opacity:.5;
-  font-size:1.1rem;
-  font-weight:600;
-  line-height:2rem
-  letter-spacing:.1rem;
-  float:left;
-  width:100%;
-  margin:0 0 .5rem 0;
-  min-width: 7.2rem;
+    ${HeadingFiveStyle}
+    color: ${(props) => props.theme.white};
+    opacity:.5;
+    font-weight:600;
+    line-height:2rem;
+    letter-spacing: 0.1rem;
+    float:left;
+    width:100%;
+    margin:0 0 .5rem 0;
+    min-width: 8.2rem;
 
-  ${media.mobile`
-    float:none;
-    margin:0 1.5rem 0 0;
-    width:auto;
-  `}
+    ${media.mobile`
+        float:none;
+        margin:0 1.5rem 0 0;
+        width:auto;
+    `}
 `;
 
 export const DropdownIcon = styled(FontAwesomeIcon)`
-    color: #fff;
-    font-size: 1.4rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.base};
     height: 2rem;
 `;
 
 export const FileName = styled.p`
-    color: #fff;
-    font-weight: 600;
-    font-size: 1.4rem;
+    ${ParagraphBaseStyle}
+    color: ${(props) => props.theme.white};
     line-height: 2rem;
     transform: translateY(-0.05rem);
     white-space: pre-wrap;
@@ -156,15 +161,15 @@ export const SelectStyle = {
         ...base,
         cursor: 'pointer',
         backgroundColor: '#191927 !important',
-        transition: '.2s all',
-        color: isSelected || isFocused ? '#FF9B3D' : '#FFF',
+        transition: '0.2s all',
+        color: isSelected || isFocused ? 'var(--olaris--primary)' : 'var(--olaris--white)',
         opacity: isDisabled ? 0.2 : 1,
     }),
     control: () => ({
         width: 'auto',
         background: 'none',
         cursor: 'pointer',
-        color: '#FF9B3D',
+        color: 'var(--olaris--primary)',
         position: 'relative',
         float: 'left',
     }),
@@ -201,14 +206,14 @@ export const SelectStyle = {
         ...base,
         padding: 0,
         marginLeft: '1rem',
-        color: '#FF9B3D',
+        color: 'var(--olaris--primary)',
         height: '1.6rem',
     }),
     indicatorSeparator: () => ({
         display: 'none',
     }),
     singleValue: () => ({
-        color: '#FFF',
+        color: 'var(--olaris--white)',
         margin: 0,
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-all',
@@ -230,12 +235,11 @@ export const MediaDetails = styled.ul`
     list-style-type: none;
 
     li {
-        font-size: 1.4rem;
+        ${ParagraphBaseStyle}
         display: inline-block;
         padding-right: 1rem;
         margin-right: 1rem;
-        border-right: 1px solid rgba(255, 255, 255, 0.2);
-        font-weight: 600;
+        border-right: 1px solid ${(props) => rgba(props.theme.white, 0.2)};
         color: ${(props) => props.theme.secondary};
 
         &:last-child {
@@ -267,17 +271,16 @@ export const MediaActionsWrap = styled.div`
     margin-top: 2rem;
 
     button {
+        ${ParagraphBaseStyle}
         margin: 0 1rem 1rem 0;
         width: 100%;
         border: 0;
         line-height: 4rem;
         padding: 0 1.5rem;
-        border-radius: 0.2rem;
-        font-size: 1.4rem;
-        color: #fff;
-        font-weight: 600;
+        border-radius: ${(props) => props.theme.button.borderRadius};
+        color: ${(props) => props.theme.white};
         background: ${(props) => props.theme.dark};
-        transition: 0.2s all;
+        transition: ${(props) => props.theme.base.transitionSpeed} all;
         cursor: pointer;
 
         &:hover {
@@ -293,7 +296,7 @@ export const MediaActionsWrap = styled.div`
 
 export const LibraryUnhealthy = styled(FontAwesomeIcon)`
     color: ${(props) => props.theme.alerts.error};
-    font-size: 1.1rem;
+    font-size: ${(props) => props.theme.typography.root};
     height: 1em;
     margin-right: 0.7rem;
 `;

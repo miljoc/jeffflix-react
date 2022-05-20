@@ -2,15 +2,17 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { aFadeInUp } from 'Styles/Animations';
+import { rgba } from 'polished';
+import { ParagraphBaseStyle } from 'Styles/Base';
 
 export const DropdownContents = styled.div`
     position: absolute;
     top: 4rem;
     right: 0;
-    background: #fff;
+    background: ${(props) => props.theme.white};
     width: 17.5rem;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    border-radius: ${(props) => props.theme.button.borderRadius};
+    box-shadow: 0 0 25px ${(props) => rgba(props.theme.black, 0.3)};
     padding: 0.5rem;
 
     &:after {
@@ -23,34 +25,33 @@ export const DropdownContents = styled.div`
         position: absolute;
         pointer-events: none;
         border-color: rgba(213, 213, 213, 0);
-        border-bottom-color: #fff;
+        border-bottom-color: ${(props) => props.theme.white};
         border-width: 5px;
     }
 
     span,
     button {
+        ${ParagraphBaseStyle}
         width: 100%;
         float: left;
         line-height: 4rem;
-        font-weight: 600;
         padding: 0 2rem;
         color: ${(props) => props.theme.background};
-        font-size: 1.4rem;
         text-align: right;
         cursor: pointer;
-        transition: 0.2s opacity;
+        transition: ${(props) => props.theme.base.transitionSpeed} opacity;
         opacity: 0.7;
         border: 0;
         border-bottom: 1px solid #eee;
         background: none;
 
         &:last-child {
-            border-radius: 0 0 0.3rem 0.3rem;
+            border-radius: 0 0 ${(props) => props.theme.button.borderRadius} ${(props) => props.theme.button.borderRadius};
             border-bottom: 0;
         }
 
         &:first-child {
-            border-radius: 0 0 0.3rem 0.3rem;
+            border-radius: 0 0 ${(props) => props.theme.button.borderRadius} ${(props) => props.theme.button.borderRadius};
         }
 
         &:hover {
@@ -78,10 +79,10 @@ export const DropdownToggle = styled.span`
 `;
 
 export const DropdownIcon = styled(FontAwesomeIcon)`
-    font-size: 2rem;
+    font-size: ${(props) => props.theme.typography.headingThree};
     z-index: 11;
-    transition: 0.2s all;
-    color: ${(props) => (props.isOpen ? props.theme.primary : '#FFF')};
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
+    color: ${(props) => (props.isOpen ? props.theme.primary : props.theme.white)};
 
     &:hover {
         color: ${(props) => props.theme.primary};

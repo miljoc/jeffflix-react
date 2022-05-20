@@ -7,6 +7,7 @@ import FETCH_INVITES from 'Queries/fetchInvites';
 
 import { ErrorWrap } from 'Components/Error/Styles';
 import * as S from 'Containers/Styles';
+import { PageHeading } from 'Styles/Base';
 
 import Loading from 'Components/Loading';
 import CreateInvite from 'Components/Admin/Users/CreateInvite';
@@ -22,7 +23,7 @@ const Users = () => {
     if (loading) return <Loading />;
     if (error) return (
         <S.InnerContent>
-            <S.PageHeading>User Management</S.PageHeading>
+            <PageHeading>User Management</PageHeading>
             <ErrorWrap>{`Error! ${error.message}`}</ErrorWrap>
         </S.InnerContent>
     );
@@ -31,7 +32,7 @@ const Users = () => {
 
     return (
         <S.InnerContent>
-            <S.PageHeading>User Management</S.PageHeading>
+            <PageHeading>User Management</PageHeading>
             <RenderUsers />
             {invites.length > 0 && <RenderInvites invites={invites} />}
             <CreateInvite generateInvite={() => generateInvite()} loading={loadingInvite} />

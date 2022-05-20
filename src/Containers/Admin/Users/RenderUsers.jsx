@@ -5,7 +5,7 @@ import { useQuery } from 'react-apollo';
 import FETCH_USERS from 'Queries/fetchUserList';
 
 import Loading from 'Components/Loading';
-import UserInvite from 'Components/Admin/Users/UserItem';
+import UserItem from 'Components/Admin/Users/UserItem';
 
 import { ErrorWrap } from 'Components/Error/Styles';
 import * as S from './Styles';
@@ -21,7 +21,7 @@ const RenderUsers = () => {
     return (
         <S.List>
             <S.ListHeading>Userlist</S.ListHeading>
-            {data.users.map((u) => <UserInvite key={u.id} username={u.username} id={u.id} admin={u.admin} />)}
+            {data.users.map((u) => <UserItem key={u.id} username={u.username} id={u.id} admin={u.admin} />)}
         </S.List>
     );
 };

@@ -1,6 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
+import { rgba } from 'polished';
+import { HeadingFourStyle, ParagraphBaseStyle } from 'Styles/Base';
 
 const fadeInZoom = keyframes`
   from {
@@ -19,7 +21,7 @@ export const Modal = styled.div`
     left: 0;
     width: 100%;
     height: 100vh;
-    background: #000000ab;
+    background: ${(props) => rgba(props.theme.black, 0.67)};
     z-index: 99;
     display: flex;
     justify-content: center;
@@ -31,9 +33,9 @@ export const ModalWrap = styled.div`
     opacity: 0;
     max-width: 50rem;
     width: 100%;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 25px ${(props) => rgba(props.theme.black, 0.4)};
     animation: 0.3s ${fadeInZoom} forwards;
-    border-radius: 0.3rem;
+    border-radius: ${(props) => props.theme.button.borderRadius};
     background: ${({ theme }) => theme.background};
 
     ${media.tablet`
@@ -45,18 +47,17 @@ export const ModalCloseButton = styled(FontAwesomeIcon)`
     position: absolute;
     top: 0;
     right: 0;
-    color: #fff;
-    font-size: 2rem;
+    color: ${(props) => props.theme.white};
+    font-size: ${(props) => props.theme.typography.headingThree};
     cursor: pointer;
     z-index: 11;
-    transition: 0.2s all;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     width: 5.8rem !important;
     height: 5.8rem;
     padding: 2rem;
-    transition: 0.2s all;
 
     &:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: ${(props) => rgba(props.theme.black, 0.1)};
     }
 `;
 
@@ -66,27 +67,27 @@ export const ModalHeader = styled.header`
     max-width: 60rem;
     width: 100%;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.1);
+    background: ${(props) => rgba(props.theme.black, 0.1)};
 
     p {
-        font-size: 1.2rem;
+        font-size: ${(props) => props.theme.typography.small};
         font-weight: 600;
-        font-family: ${({ theme }) => theme.fonts.opensans};
+        font-family: ${({ theme }) => theme.fonts.body};
         color: #fffc;
         line-height: 1.8;
         margin-top: 0.5rem;
         opacity: 0.6;
 
         span {
-            color: #fff;
+            color: ${(props) => props.theme.white};
             font-weight: bold;
         }
     }
 `;
 
 export const ModalHeading = styled.h3`
-    font-size: 1.8rem;
-    color: #fff;
+    ${HeadingFourStyle}
+    color: ${(props) => props.theme.white};
     text-transform: capitalize;
     font-weight: 600;
 `;
@@ -101,16 +102,15 @@ export const ModalBody = styled.div`
     position: relative;
 
     h2 {
-      color: white;
-      font-size: 1.4rem;
-      font-weight: 600;
+      ${ParagraphBaseStyle}
+      color: ${(props) => props.theme.white};
       margin-bottom: 1.5rem;
     }
 
     p {
-      color: white;
+      color: ${(props) => props.theme.white};
       margin-bottom: 0.6rem;
-      font-size: 1.2rem;
+      font-size: ${(props) => props.theme.typography.small};
 
       strong {
         font-weight: 700;
@@ -119,10 +119,9 @@ export const ModalBody = styled.div`
 
       span {
         text-transform: capitalize;
-        font-weight: 700;
         display: inline-block;
         margin-right: 0.5rem;
-        color: #656565;
+        color: ${(props) => rgba(props.theme.white, 0.5)};
 
         &:not(:first-of-type){
           margin-left: 1rem;
@@ -133,17 +132,18 @@ export const ModalBody = styled.div`
 
 export const PathWrap = styled.div`
     padding: 1rem;
-    font-size: 1.2rem;
-    color: white;
+    font-size: ${(props) => props.theme.typography.small};
+    color: ${(props) => rgba(props.theme.white, 0.5)};
     margin-bottom: 2rem;
-    border-radius: 0.3rem;
-    background-color: rgba(255,255,255,0.1);
+    border-radius: ${(props) => props.theme.button.borderRadius};
+    line-height: 1.2;
+    background-color: ${(props) => rgba(props.theme.white, 0.1)};
 `;
 
 export const InfoTitle = styled.div`
-    font-size: 1.4rem;
+    font-size: ${(props) => props.theme.typography.base};
     margin-bottom: 1rem;
-    color: white;
+    color: ${(props) => props.theme.white};
     font-weight: 700;
 `;
 
@@ -169,23 +169,25 @@ export const InfoWrap = styled.div`
 
     div {
       margin-right: 3rem;
-      width: calc(45% - 3rem);
+      width: calc(55% - 3rem);
 
       p {
         display: flex;
         justify-content: space-between;
         margin-right: 0.5rem;
+        margin-bottom: 0.8rem;
+        font-size: ${props => props.theme.typography.base};
       }
 
     }
 `;
 
 export const FileLocationList = styled.div`
-  max-height: 85px;
+  max-height: 8.5rem;
   padding: 1rem;
   margin-top: 1rem;
   overflow: scroll;
-  background-color: rgba(0,0,0,0.2);
+  background-color: ${(props) => rgba(props.theme.black, 0.2)};
 
   p {
     margin-top: 0;
