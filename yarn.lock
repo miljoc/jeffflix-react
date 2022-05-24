@@ -3060,15 +3060,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001265:
-  version "1.0.30001269"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001269.tgz#3a71bee03df627364418f9fd31adfc7aa1cc2d56"
-  integrity sha512-UOy8okEVs48MyHYgV+RdW1Oiudl1H6KolybD6ZquD0VcrPSgj25omXO1S7rDydjpqaISCwA8Pyx+jUQKZwWO5w==
-
-caniuse-lite@^1.0.30001317:
-  version "1.0.30001331"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001331.tgz#41048f2a5cf0c3c6198f40207cd323388b3d4399"
-  integrity sha512-Y1xk6paHpUXKP/P6YjQv1xqyTbgAP05ycHBcRdQjTcyXlWol868sJJPlmk5ylOekw2BrucWes5jk+LvVd7WZ5Q==
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001265, caniuse-lite@^1.0.30001317:
+  version "1.0.30001342"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001342.tgz"
+  integrity sha512-bn6sOCu7L7jcbBbyNhLg0qzXdJ/PMbybZTH/BA6Roet9wxYRm6Tr9D0s0uhLkOZ6MSG+QU6txUgdpr3MXIVqjA==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -11618,6 +11613,14 @@ videojs-overlay@^2.1.4:
   integrity sha512-BPpW8ayC/3fX+JOegxvzU9MDS1MBuF3l6DWy5DXTmhjvDen8j5p/q46UGyCkUb2H9ljnwetTIkIPMza0iP41Bw==
   dependencies:
     global "^4.3.2"
+    video.js "^6 || ^7"
+
+videojs-seek-buttons@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/videojs-seek-buttons/-/videojs-seek-buttons-2.2.1.tgz#abc512d05c4ea27311dd4340605aa9ed719d65be"
+  integrity sha512-tXInD8ElUddyc1vxkGsVNhxlFtz8JC4VagPOSyL8mj7LI7oXjLGxni2pjx2wqzsV3PaIBMMH47MBtsNWf+wbtw==
+  dependencies:
+    global "^4.4.0"
     video.js "^6 || ^7"
 
 videojs-vtt.js@^0.15.2, videojs-vtt.js@^0.15.3:

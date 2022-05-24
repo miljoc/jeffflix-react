@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo';
 import videojs from 'video.js';
 import '@videojs/http-streaming';
 import 'videojs-seek-buttons';
+import 'videojs-overlay';
 import './DebugOverlay';
 
 // NOTE(Leon Handreke): Ideally this should be imported from videojs-http-source-selector because
@@ -21,7 +22,25 @@ class Player extends Component {
     t = throttle(() => this.playStateMutation(Math.floor(this.player.currentTime())), 2000);
 
     componentDidMount() {
-        const { resume, playState, source, mimeType, transmuxed, dispatch } = this.props;
+        const {
+            resume,
+            playState,
+            source,
+            mimeType,
+            transmuxed,
+            dispatch,
+            name,
+            title,
+            release,
+            episodeNumber,
+            season,
+            type
+        } = this.props;
+
+        const titleOverlayTitle = `<h4>${title || name}</h4>`;
+        const titleOverlayContent = type === "Episode"
+            ? `${titleOverlayTitle}<span>${season.series.name} - ${season.name}, Episode ${episodeNumber}</span>`
+            : `${titleOverlayTitle}<span>${release}</span>`;
 
         const videoSource = {
             src: source,
@@ -89,6 +108,22 @@ class Player extends Component {
             this.qualityLevels();
             this.httpSourceSelector();
         });
+
+        this.player.overlay({
+            overlays: [
+                {
+                    class: 'vjs-title-overlay',
+                    start: 'useractive',
+                    end: 'userinactive',
+                    content: titleOverlayContent
+                },
+                {
+                    start: 5,
+                    content: '',
+                    class: 'vjs-debug-overlay'
+                }            
+            ]
+        });        
 
         this.player.seekButtons({
             forward: 30,
@@ -173,6 +208,23 @@ Player.propTypes = {
     mutate: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,
     mimeType: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    release: PropTypes.string.isRequired,
+    episodeNumber: PropTypes.number,
+    season: PropTypes.shape({
+        name: PropTypes.string,
+        episodes: PropTypes.arrayOf(
+            PropTypes.shape({
+                episodeNumber: PropTypes.number,
+                uuid: PropTypes.string,
+            }),
+        ),
+        series: PropTypes.shape({
+            name: PropTypes.string,
+            posterPath: PropTypes.string,
+        }),
+    }),    
     playState: PropTypes.shape({
         finished: PropTypes.bool,
         playtime: PropTypes.number,
@@ -188,6 +240,9 @@ Player.propTypes = {
 
 Player.defaultProps = {
     resume: false,
+    episodeNumber: null,
+    title: null,
+    season: {}
 };
 
 export default graphql(UPDATE_PLAYSTATE)(Player);

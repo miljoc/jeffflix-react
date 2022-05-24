@@ -75,6 +75,11 @@ class VideoController extends Component {
             type,
             mimeType,
             uuid,
+            name,
+            title,
+            release,
+            season,
+            episodeNumber,
             closePlayer,
             dispatch,
             isCasting,
@@ -91,6 +96,11 @@ class VideoController extends Component {
                     <VideoWrap>
                         <CloseVideo icon={faTimes} onClick={closePlayer} />
                         <Player
+                            season={season}
+                            episodeNumber={episodeNumber}
+                            name={name}
+                            title={title}
+                            release={release}
                             source={source}
                             mimeType={mimeType}
                             transmuxed={transmuxed}
@@ -121,20 +131,38 @@ VideoController.propTypes = {
             fileName: PropTypes.string,
         }),
     ).isRequired,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    release: PropTypes.string.isRequired,
     selectedFile: PropTypes.shape({
         totalDuration: PropTypes.number,
         value: PropTypes.number,
     }).isRequired,
+    season: PropTypes.shape({
+        episodes: PropTypes.arrayOf(
+            PropTypes.shape({
+                episodeNumber: PropTypes.number,
+                uuid: PropTypes.string,
+            }),
+        ),
+        series: PropTypes.shape({
+            posterPath: PropTypes.string,
+        }),
+    }),
     uuid: PropTypes.string.isRequired,
     auth: PropTypes.shape({}).isRequired,
     resume: PropTypes.bool,
     playState: PropTypes.shape({}).isRequired,
     type: PropTypes.string.isRequired,
     mimeType: PropTypes.string.isRequired,
+    episodeNumber: PropTypes.number,
 };
 
 VideoController.defaultProps = {
     resume: false,
+    season: {},
+    episodeNumber: null,
+    title: null
 };
 
 const mapStateToProps = (state) => {

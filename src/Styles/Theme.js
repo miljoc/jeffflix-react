@@ -50,7 +50,8 @@ const Theme = {
         paddingTop: '12rem',
     },
     base: {
-        transitionSpeed: '0.2s'
+        transitionSpeed: '0.2s',
+        borderRadius: '0.3rem'
     },
     button: {
         borderRadius: '0.3rem'

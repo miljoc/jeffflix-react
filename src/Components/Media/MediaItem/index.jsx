@@ -189,7 +189,10 @@ class MediaItem extends Component {
                     selectedFile={selectedFile}
                     resume={resume}
                     name={name}
+                    title={title}
                     overview={overview}
+                    release={year || airDate}
+                    episodeNumber={episodeNumber}
                     playState={playState}
                     type={type}
                     mimeType={mimeType}

@@ -10,6 +10,11 @@ export const SearchWrap = styled.form`
     width: 100%;
 `;
 
+export const MediaListItem = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 export const Button = styled.button`
     position: absolute;
     top: 0;
@@ -51,7 +56,7 @@ export const MediaList = styled.div`
         line-height: 3.5rem;
         width: 100%;
         cursor: pointer;
-        padding: 0 2rem 0 1rem;
+        padding: 0 1rem;
         color: ${(props) => props.theme.primary};
         background: none;
         border: none;
@@ -60,6 +65,21 @@ export const MediaList = styled.div`
             color: ${(props) => props.theme.white};
             margin-left: auto;
         }
+
+        &:hover {
+            background: ${(props) => rgba(props.theme.black, 0.15)}
+        }
+    }
+
+    a {
+        height: 3.5rem;
+        width: 3.5rem;
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        color: ${(props) => props.theme.white};
+        font-size: ${(props) => props.theme.typography.root};
 
         &:hover {
             background: ${(props) => rgba(props.theme.black, 0.15)}
