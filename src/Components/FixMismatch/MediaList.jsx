@@ -14,8 +14,9 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
 import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
-
-import * as S from './Styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { MediaList as MediaListWrap, MediaListItem, renderThumb, renderTrack } from './Styles';
 
 const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOnSubmit }) => {
     const [fixMismatch, { data, error }] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
@@ -73,16 +74,26 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOn
                 autoHide
                 autoHeight
                 autoHeightMax={300}
-                renderThumbVertical={S.renderThumb}
-                renderTrackVertical={S.renderTrack}
+                renderThumbVertical={renderThumb}
+                renderTrackVertical={renderTrack}
             >
-                <S.MediaList>
+                <MediaListWrap>
                     {items.map((item) => (
-                        <button type="button" key={item.tmdbID} onClick={() => mutationHandler(item)}>
-                            {item.name || item.title} <span>{item.releaseYear || item.firstAirYear}</span>
-                        </button>
+                        <MediaListItem key={item.tmdbID}>
+                            <button type="button" onClick={() => mutationHandler(item)}>
+                                {item.name || item.title} <span>{item.releaseYear || item.firstAirYear}</span>
+                            </button>
+                            <a
+                                href={`https://www.themoviedb.org/${type !== "movie" ? "tv" : type}/${item.tmdbID}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="View on TMDB"
+                            >
+                                <FontAwesomeIcon icon={faExternalLinkAlt} />
+                            </a>
+                        </MediaListItem>
                     ))}
-                </S.MediaList>
+                </MediaListWrap>
             </Scrollbars>
         </>
     );

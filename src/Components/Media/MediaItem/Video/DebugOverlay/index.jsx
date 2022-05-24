@@ -183,7 +183,7 @@ class ShowDebugOverlayButton extends VjsButton {
     }
 
     disposeDebugOverlay() {
-        this.player_.overlay({ overlays: [] });
+        this.player_.removeClass("show-debug-overlay");
     }
 
     showDebugOverlay() {
@@ -197,12 +197,14 @@ class ShowDebugOverlayButton extends VjsButton {
             />,
             fragment,
         );
-        this.player_.overlay({
-            content: fragment,
-        });
+
+        this.player_.addClass("show-debug-overlay");
+
+        this.player_.overlays_.filter(o => o.options_.class === 'vjs-debug-overlay').forEach(o => o.el_.replaceChildren(fragment));
+
         // NOTE: This is an ugly hack because otherwise the overlay will only show after firing
         // the next play event, i.e. after a pause-play cycle.
-        this.player_.overlays_.forEach((o) => o.show());
+        this.player_.overlays_.filter((o) => o.options_.class === 'vjs-debug-overlay').forEach((o) => o.show());
     }
 }
 videojs.registerComponent('ShowDebugOverlayButton', ShowDebugOverlayButton);

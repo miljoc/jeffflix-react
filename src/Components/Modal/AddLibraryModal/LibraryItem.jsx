@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import ReactToolTip from 'react-tooltip';
 
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { faExclamation, faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faExclamation, faSpinner, faSync, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAlert } from 'react-alert';
 
 import FETCH_LIBRARIES from 'Queries/fetchLibraries';
@@ -63,7 +62,7 @@ const LibraryItem = ({ filePath, id, backend, healthy }: Props) => {
                 />
 
                 {!loading &&
-                    <LibraryItemDelete icon={faTrashAlt} data-tip="Delete Library" onClick={() => setShow(true)} />
+                    <LibraryItemDelete icon={faTrash} data-tip="Delete Library" onClick={() => setShow(true)} />
                 }
                 {loading && <LibraryItemDelete icon={faSpinner} spin deleting={loading ? 1 : 0} />}
             </LibraryItemWrap>

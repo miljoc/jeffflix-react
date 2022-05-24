@@ -13,6 +13,7 @@ import splitFilepath from './splitFilepath';
 import convertBitrate from './convertBitrate';
 import convertFilesize from './convertFilesize';
 import propertiesMap from './propertiesMap';
+import { getLocalStorage, setLocalStorage } from './localStorage';
 
 export {
     getUrlParameter,
@@ -32,5 +33,7 @@ export {
     splitFilepath,
     convertBitrate,
     convertFilesize,
-    propertiesMap
+    propertiesMap,
+    getLocalStorage,
+    setLocalStorage
 };

@@ -30,5 +30,5 @@ export const convertToHMS = (time) => {
     const mins = ~~(remainingTime / 60);
     const secs = ~~time % 60;
 
-    return `${hours > 0 ? `${hours}:` : ''}${mins > 0 ? `${mins}:` : ''}${secs}`;
+    return `${hours > 0 ? `${hours}:` : ''}${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 };

@@ -173,8 +173,9 @@ export const PlayState = styled.span`
         left: 0;
         height: 0.5rem;
         margin: 0.1rem;
-        border-radius: ${(props) => props.theme.card.borderRadius} 0 0 ${(props) => props.theme.card.borderRadius};
+        border-radius: ${(props) => props.theme.base.borderRadius} 0 0 ${(props) => props.theme.base.borderRadius};
         width: ${(props) => props.percent}%;
+        min-width: 1%;
         background: ${(props) => props.theme.primary};
     }
 

@@ -8,7 +8,7 @@ import { HeadingFiveStyle, ParagraphBaseStyle } from 'Styles/Base';
 
 export const CloseVideo = styled(FontAwesomeIcon)`
     position: absolute;
-    top: 0;
+    top: 0.75rem;
     right: 0.5rem;
     color: ${(props) => props.theme.white};
     font-size: ${(props) => props.theme.typography.body};

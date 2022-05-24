@@ -108,6 +108,17 @@
         background-color: rgba(0,0,0,0.5);
         border-radius: 0.3rem;
     }
+
+    &.show-debug-overlay {
+        .vjs-debug-overlay {
+            display: block;
+        }
+    }
+
+    .vjs-debug-overlay {
+        display: none;
+        top: 7rem;
+    }
 }
 
 @mixin fullscreen-control($order, $visible: true) {
@@ -213,7 +224,7 @@
     }
 
     .vjs-track-settings-controls button {
-        font-size: var(--olaris--font-base);
+        font-size: var(--olaris--size-base);
         color: var(--olaris--white);
         cursor: pointer;
         line-height: 4rem;
@@ -266,6 +277,55 @@
     }    
 }
 
+@mixin title-overlay {
+    .vjs-title-overlay {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.6);
+        padding: 1.5rem;
+        height: 6.5rem;
+        transition: visibility 1s, opacity 1s;
+        opacity: 1;
+        visibility: visible;
+        text-align: left;
+
+        h4 {
+            font-size: var(--olaris--size-headingFour);
+            font-family: var(--olaris--font-heading);
+            font-weight: 800;    
+        }
+
+        span {
+            font-family: var(--olaris--font-heading);
+            display: block;
+            width: 100%;
+            font-weight: 600;
+            margin-top: 0.4rem;
+            font-size: var(--olaris--size-small);
+        }
+
+        &.vjs-hidden {
+            display: flex !important;
+        }
+    }
+
+    &.vjs-user-active, &.vjs-paused {
+        .vjs-title-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    
+    &.vjs-user-inactive.vjs-playing .vjs-title-overlay {
+        opacity: 0;
+    }    
+}
+
 .vjs-theme-olaris {
     @include menu-content-styling();
     @include control-bar();
@@ -289,4 +349,5 @@
     @include picture-in-picture-control(6);
     @include fullscreen-control(7);
     @include playback-speeds();
+    @include title-overlay();
 }

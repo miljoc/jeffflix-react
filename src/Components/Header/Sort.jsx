@@ -1,6 +1,7 @@
 import React from 'react';
 import { SingleSelect } from 'Components/Form';
 
+import { setLocalStorage } from 'Helpers';
 import { SortWrap } from './Styles';
 
 type Props = {
@@ -9,19 +10,27 @@ type Props = {
     sortOrder: String,
     sortDirection: String,
     sortValues: Array,
-    sortDirections: Array
+    sortDirections: Array,
+    type: String
 };
 
-const Sort = ({ sortOrder, sortDirection, setSortDirection, setSortOrder, sortDirections, sortValues }: Props) => {
-    
+const Sort = ({
+    sortDirection,
+    sortOrder,
+    setSortOrder,
+    setSortDirection,
+    sortDirections,
+    sortValues,
+    type
+}: Props) => {    
     return (
         <SortWrap>
             <SingleSelect
                 placeholder="Sort by"
                 options={sortValues}
                 onChange={(val) => {
-                    const newVal = val;
-                    setSortOrder(newVal);
+                    setLocalStorage(val, `${type}-sortOrder`);
+                    setSortOrder(val);
                 }}
                 value={sortOrder}
                 name="type"
@@ -30,8 +39,8 @@ const Sort = ({ sortOrder, sortDirection, setSortDirection, setSortOrder, sortDi
                 placeholder="Order"
                 options={sortDirections}
                 onChange={(val) => {
-                    const newVal = val;
-                    setSortDirection(newVal);
+                    setLocalStorage(val, `${type}-sortDirection`);
+                    setSortDirection(val);
                 }}
                 value={sortDirection}
                 name="sortDirection"
