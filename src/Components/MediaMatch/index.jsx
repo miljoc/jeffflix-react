@@ -15,6 +15,7 @@ import { TextInput } from 'Components/Form';
 import { AlertInline } from 'Components/Alerts';
 import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
 import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
+import FETCH_MEDIA_STATS from 'Queries/fetchMediaStats';
 import MediaList from '../FixMismatch/MediaList';
 
 import * as S from '../FixMismatch/Styles';
@@ -26,7 +27,8 @@ const MediaMatch = ({ hModal, uuid, type, name }) => {
     ] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
         refetchQueries: [
             { query: FETCH_UNIDENTIFIED_MOVIES },
-            { query: FETCH_UNIDENTIFIED_EPISODES }
+            { query: FETCH_UNIDENTIFIED_EPISODES },
+            { query: FETCH_MEDIA_STATS }
         ]
     });
     const alert = useAlert();
