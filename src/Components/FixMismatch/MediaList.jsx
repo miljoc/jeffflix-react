@@ -14,15 +14,18 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
 import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
+import FETCH_MEDIA_STATS from 'Queries/fetchMediaStats';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { MediaList as MediaListWrap, MediaListItem, renderThumb, renderTrack } from './Styles';
+import { LoadingWrap, MediaList as MediaListWrap, MediaListItem, renderThumb, renderTrack } from './Styles';
 
 const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOnSubmit }) => {
-    const [fixMismatch, { data, error }] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
+    const [fixMismatch, { data, error, loading }] = useMutation(type === 'movie' ? UPDATE_MOVIE : UPDATE_SERIES, {
         refetchQueries: [
             { query: FETCH_UNIDENTIFIED_MOVIES },
             { query: FETCH_UNIDENTIFIED_EPISODES },
+            { query: FETCH_MEDIA_STATS }            
         ]
     });
     const alert = useAlert();
@@ -77,6 +80,7 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOn
                 renderThumbVertical={renderThumb}
                 renderTrackVertical={renderTrack}
             >
+                {loading && <LoadingWrap><Loading /></LoadingWrap>}
                 <MediaListWrap>
                     {items.map((item) => (
                         <MediaListItem key={item.tmdbID}>

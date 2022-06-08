@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'Styles/Utils';
-import { ParagraphBaseStyle } from 'Styles/Base';
+import { ParagraphBaseStyle, LightParagraph } from 'Styles/Base';
 
 export const AppWrap = styled.main`
     display: flex;
@@ -22,15 +22,11 @@ export const InnerContent = styled.section`
 `;
 
 export const NoResults = styled.span`
-    ${ParagraphBaseStyle}
-    float: left;
-    width: 100%;
+    ${LightParagraph}
     line-height: 4rem;
     text-align: ${(props) => (props.alignLeft ? 'left' : 'center')};
-    color: ${(props) => props.theme.white};
     width: calc(100% - 3rem);
     margin: 0 1.5rem;
-    opacity: 0.8;
 
     button {
         ${ParagraphBaseStyle}

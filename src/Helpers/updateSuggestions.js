@@ -43,11 +43,9 @@ const updateSuggestions = (arr) => {
         }
     });
 
-    updatedSuggestions.forEach((type, i) => {
-        if (type.suggestions.length === 0) updatedSuggestions.splice(i, 1);
-    });
+    const newSuggestions = updatedSuggestions.filter((type) => type.suggestions.length > 0);
 
-    return updatedSuggestions;
+    return newSuggestions;
 };
 
 export default updateSuggestions;

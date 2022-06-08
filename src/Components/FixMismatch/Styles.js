@@ -12,7 +12,7 @@ export const SearchWrap = styled.form`
 
 export const MediaListItem = styled.div`
     display: flex;
-    align-items: center;
+    align-items: stretch;
 `;
 
 export const Button = styled.button`
@@ -44,6 +44,13 @@ export const Button = styled.button`
     }
 `;
 
+export const LoadingWrap = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: ${(props) => rgba(props.theme.background, 0.6)};
+`;
+
 export const MediaList = styled.div`
     background: ${(props) => rgba(props.theme.white, 0.03)};
     border-radius: ${(props) => props.theme.button.borderRadius};
@@ -53,10 +60,12 @@ export const MediaList = styled.div`
         ${ParagraphBaseStyle}
         color: ${(props) => props.theme.white};
         display: flex;
-        line-height: 3.5rem;
+        text-align: left;
+        line-height: 1.5;
         width: 100%;
         cursor: pointer;
-        padding: 0 1rem;
+        padding: 0.5rem 1rem;
+        align-items: center;
         color: ${(props) => props.theme.primary};
         background: none;
         border: none;
@@ -72,10 +81,11 @@ export const MediaList = styled.div`
     }
 
     a {
-        height: 3.5rem;
+        min-height: 3.5rem;
         width: 3.5rem;
         display: flex;
         cursor: pointer;
+        align-self: stretch;
         align-items: center;
         justify-content: center;
         color: ${(props) => props.theme.white};
@@ -83,6 +93,10 @@ export const MediaList = styled.div`
 
         &:hover {
             background: ${(props) => rgba(props.theme.black, 0.15)}
+        }
+
+        svg {
+            align-self: center;
         }
     }
 `;
