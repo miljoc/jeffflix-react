@@ -26,7 +26,9 @@ const RenderSeason = ({ uuid }: Props) => {
 
     const { name, posterPath, airDate, overview, episodes, series, type } = data.season;
 
-    const episodeList = orderBy(data.season.episodes, ['episodeNumber'], ['asc']).map((item) => {
+    const episodeList = orderBy(episodes, ['episodeNumber'], ['asc']);
+    
+    const episodeListRender = episodeList.map((item) => {
         const { stillPath, type: etype, name: ename, playState, files, uuid: euuid, episodeNumber } = item;
         return (
             <S.LibraryListItemWide key={euuid}>
@@ -50,13 +52,13 @@ const RenderSeason = ({ uuid }: Props) => {
             name={name}
             airDate={airDate}
             overview={overview}
-            episodes={episodes}
+            episodes={episodeList}
             series={series}
             uuid={uuid}
             posterPath={posterPath}
             type={type}
         >
-            {episodeList}
+            {episodeListRender}
             <Empty wide />
         </Season>
     );

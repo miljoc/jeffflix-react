@@ -79,6 +79,8 @@
         "videojs-contrib-quality-levels": "^2.0.9",
         "videojs-http-source-selector": "git+https://gitlab.com/olaris/videojs-http-source-selector.git",
         "videojs-overlay": "^2.1.4",
+        "videojs-playlist": "^5.0.0",
+        "videojs-playlist-ui": "^4.0.1",
         "videojs-seek-buttons": "^2.2.1"
     },
     "devDependencies": {

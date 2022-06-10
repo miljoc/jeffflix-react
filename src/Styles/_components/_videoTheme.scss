@@ -4,6 +4,7 @@
         padding-top: 0px;
         background: none;
         background-image: linear-gradient(0deg, var(--olaris--black), transparent);
+        z-index: 12;
     }
 }
 
@@ -98,6 +99,22 @@
 
     .vjs-time-control .vjs-duration-display {
         text-align: left;
+    }
+}
+
+@mixin playlist-control($order, $visible: true) {
+    .vjs-control.vjs-button[title="Playlist"] {
+        order: $order;
+        @if $visible == false {
+            display: none !important;
+        }
+
+        .vjs-icon-placeholder {
+            font-family: 'VideoJS';
+            &:before {
+                content: "\f10e";
+            }
+        }
     }
 }
 
@@ -280,7 +297,7 @@
     }
 
     .vjs-text-track-settings legend {
-        font-size: var(--olaris--font-small);
+        font-size: var(--olaris--size-small);
     }
 }
 
@@ -310,6 +327,7 @@
         opacity: 1;
         visibility: visible;
         text-align: left;
+        z-index: 2;
 
         h4 {
             font-size: var(--olaris--size-headingFour);
@@ -343,6 +361,297 @@
     }    
 }
 
+@mixin playlist($zIndex: 12) {
+    &.show-vjs-playlist {
+        .vjs-playlist.vjs-playlist-vertical {
+            transform: translateX(0px);
+        }
+    }
+
+    &.vjs-video-finishing {
+        .vjs-upnext-overlay {
+            opacity: 0.8;
+            visibility: visible;
+            transition: visibility 0s linear 0s, opacity 300ms;            
+        }
+    }
+
+    .vjs-up-next-text, .vjs-playlist-now-playing-text, .vjs-autoplay--play-immediately, .vjs-autoplay--cancel-autoplay {
+        font-size: var(--olaris--size-root);
+        font-weight: 700;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+    }    
+
+    &.vjs-video-ended {
+        .vjs-autoplay-overlay {
+            opacity: 1;
+            visibility: visible;
+            transition: visibility 0s linear 0s, opacity 300ms;            
+        }
+    }
+
+    .vjs-autoplay-overlay, .vjs-upnext-overlay {
+        display: flex;
+        align-items: center;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        border-radius: 0.3rem;
+
+        transition: visibility 0s linear 0.2s, opacity 0.2s;
+        
+        &, &:focus {
+            background-color: var(--olaris--background);
+        }
+
+        &.vjs-hidden {
+            display: flex !important;
+        }
+
+        h4, span {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        h4 {
+            font-size: var(--olaris--size-headingFour);
+        }
+
+        span {
+            font-size: var(--olaris--size-root);
+            font-weight: 700;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+        }
+
+    }
+
+    .vjs-autoplay-overlay {
+        opacity: 0;
+        visibility: hidden;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40rem;
+        height: 20rem;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+
+        .vjs-autoplay--text-wrap {
+            width: 100%;
+
+            > span {
+                margin-bottom: 0.9rem;
+                user-select: none;
+    
+                strong {
+                    color: var(--olaris--primary);
+                }
+            }    
+
+            .vjs-autoplay--up-next-info {
+                h4 {
+                    margin-bottom: 0.3rem;
+                }
+    
+                span {
+                    text-transform: none;
+                    letter-spacing: normal;
+                    font-size: var(--olaris--size-small);
+                    font-weight: normal;
+                }
+            }            
+        }
+
+        .vjs-autoplay--button-wrap {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .vjs-autoplay--count-down {
+            user-select: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.3rem;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        button {
+            position: relative;
+            padding: 0 2rem;
+            height: 3.6rem;
+            color: #fff;
+            border-radius: 0.3rem;
+            transition: opacity 0.2s;
+            
+            &:hover {
+                opacity: 0.7;
+            }
+
+            &.vjs-autoplay--cancel-autoplay {
+                background-color: var(--olaris--error);
+            }
+
+            &.vjs-autoplay--play-immediately {
+                // margin-right: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                background-color: rgba(255,255,255,0.1);
+                
+                .vjs-autoplay--play-icon {
+                    display: inline-block;
+                    position: relative;
+                    margin-right: 0.8rem;
+                    font-family: "VideoJS";
+                    font-size: 2rem;
+                    color: #FFF;
+                    height: 100%;
+                    width: 1.2rem;
+                    transition: all 0.3s;
+    
+                    &:before {
+                        position: absolute;
+                        left: -6px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        content: "\f101";
+                    }
+                }
+            }
+        }
+    }
+
+    &.vjs-last-playlist-item {
+        .vjs-upnext-overlay, .vjs-autoplay-overlay {
+            display: none !important;
+        }
+    }
+
+    .vjs-upnext-overlay {
+        text-align: left;
+        padding-left: 1.5rem;
+        padding-top: 1.8rem;
+        left: auto;
+        top: auto;
+        bottom: 7rem;
+        right: 0px;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        width: 40rem;
+        height: 10rem;
+        transition: visibility 0s linear 0.2s, opacity 0.2s;
+
+        > span {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+
+        div {
+            width: 100%;
+
+            span {
+                margin-top: 0.3rem;
+                text-transform: none;
+                font-weight: normal;
+                font-size: var(--olaris--size-small);
+            }
+        }
+    }
+
+    .vjs-playlist {
+        font-family: var(--olaris--font-body);
+
+        .vjs-playlist-item {
+            margin-bottom: 1rem;
+
+            &.vjs-up-next, &.vjs-selected {
+                .vjs-playlist-thumbnail {
+                    padding-top: 1.2rem;
+                }
+            }
+        }
+        
+        &.vjs-playlist-vertical {
+            position: absolute;
+            transform: translateX(40rem);
+            transition: transform 0.2s;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 40rem;
+            z-index: $zIndex;
+            padding: 1rem;
+            padding-bottom: 5rem;
+        }
+
+        .vjs-playlist-name {
+            font-family: var(--olaris--font-heading);
+            font-weight: 700;
+            font-size: var(--olaris--size-base);
+            line-height: 1;
+            padding: 0;
+        }
+
+        .vjs-playlist-thumbnail {
+            display: flex;
+            padding: 0 1.5rem;
+            flex-direction: column;
+            justify-content: center;
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        .vjs-playlist-now-playing-text {
+            position: static;
+            margin: 0;
+        }
+
+        .vjs-playlist-title-container {
+            text-shadow: none;
+            position: static;
+            padding: 0;
+        }
+
+        .vjs-playlist-description {
+            height: auto !important;
+            line-height: normal !important;
+            padding: 0.2rem 0 0;
+            font-size: var(--olaris--size-small);
+        }
+
+        .vjs-up-next-text, .vjs-playlist-now-playing-text {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.5rem;
+            padding: 0;
+        }
+    }
+}
+
 .vjs-theme-olaris {
     @include menu-content-styling();
     @include control-bar();
@@ -359,6 +668,7 @@
     * @param {bool} $visible — true for visible, false for hidden, true is set by default.
     */
     @include debug-control(1);
+    @include playlist-control(8);
     @include http-source-selector-panel-control(2);
     @include subtitle-panel-control(3);
     @include audio-panel-control(4);
@@ -367,4 +677,5 @@
     @include fullscreen-control(7);
     @include playback-speeds();
     @include title-overlay();
+    @include playlist();
 }

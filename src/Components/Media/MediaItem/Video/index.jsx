@@ -83,6 +83,7 @@ class VideoController extends Component {
             closePlayer,
             dispatch,
             isCasting,
+            playlist
         } = this.props;
 
         const videoCodec = files[selectedFile.value].streams
@@ -110,6 +111,7 @@ class VideoController extends Component {
                             length={selectedFile.totalDuration}
                             type={type}
                             dispatch={dispatch}
+                            playlist={playlist}
                         />
                     </VideoWrap>
                 </>
@@ -156,6 +158,12 @@ VideoController.propTypes = {
     type: PropTypes.string.isRequired,
     mimeType: PropTypes.string.isRequired,
     episodeNumber: PropTypes.number,
+    playlist: PropTypes.oneOfType([
+        PropTypes.arrayOf(
+            PropTypes.shape({})
+        ),
+        PropTypes.bool
+    ]).isRequired
 };
 
 VideoController.defaultProps = {

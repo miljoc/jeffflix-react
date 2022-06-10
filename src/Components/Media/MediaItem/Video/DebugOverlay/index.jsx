@@ -1,11 +1,11 @@
-/* eslint-disable */
+/* eslint-disable no-underscore-dangle */
 import videojs from 'video.js';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import BoxMaker from './box.js';
-import MediaPropertiesItem from './media-properties-item.js';
+import BoxMaker from './box';
+import MediaPropertiesItem from './media-properties-item';
 
 import 'videojs-overlay';
 
@@ -167,7 +167,7 @@ class ShowDebugOverlayButton extends VjsButton {
     }
 
     createEl() {
-        let el = super.createEl();
+        const el = super.createEl();
         el.appendChild(document.createTextNode('DEBUG'));
         return el;
     }
@@ -187,7 +187,7 @@ class ShowDebugOverlayButton extends VjsButton {
     }
 
     showDebugOverlay() {
-        let fragment = document.createDocumentFragment();
+        const fragment = document.createDocumentFragment();
         ReactDOM.render(
             <Box
                 name="Property"
@@ -200,16 +200,20 @@ class ShowDebugOverlayButton extends VjsButton {
 
         this.player_.addClass("show-debug-overlay");
 
-        this.player_.overlays_.filter(o => o.options_.class === 'vjs-debug-overlay').forEach(o => o.el_.replaceChildren(fragment));
+        this.player_.overlays_.filter(
+            o => o.options_.class === 'vjs-debug-overlay').forEach(o => o.el_.replaceChildren(fragment)
+        );
 
         // NOTE: This is an ugly hack because otherwise the overlay will only show after firing
         // the next play event, i.e. after a pause-play cycle.
-        this.player_.overlays_.filter((o) => o.options_.class === 'vjs-debug-overlay').forEach((o) => o.show());
+        this.player_.overlays_.filter(
+            (o) => o.options_.class === 'vjs-debug-overlay').forEach((o) => o.show()
+        );
     }
 }
 videojs.registerComponent('ShowDebugOverlayButton', ShowDebugOverlayButton);
 
-const debugOverlayPlugin = function(options) {
+function debugOverlayPlugin() {
     this.ready(() => {
         this.controlBar.addChild('ShowDebugOverlayButton');
     });
