@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose, isEmpty } from 'lodash/fp';
-import { graphql } from 'react-apollo';
+import { useMutation } from 'react-apollo';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { isIOS } from 'react-device-detect';
+import { useLocation } from 'react-router';
 
 import REQUEST_STREAM from 'Mutations/requestStream';
 import { generateFileList, getBaseUrl } from 'Helpers';
@@ -12,6 +12,7 @@ import { hideVideo } from 'Redux/Actions/videoActions';
 
 import Breadcrumbs from 'Components/Breadcrumbs';
 import MediaCard from 'Components/Media/Card';
+import useCreatePlaylist from 'Helpers/useCreatePlaylist';
 import getVideoSource from './Video/getVideoSource';
 import MediaItemHeader from '../MediaHeader/MediaItemHeader';
 import MediaOverview from './MediaOverview';
@@ -21,168 +22,154 @@ import VideoController from './Video';
 import { MediaFull } from './Styles';
 import { MediaFullWrap, MediaLeftCol, MediaRightCol } from '../Styles';
 
-class MediaItem extends Component {
-    constructor(props) {
-        super(props);
+const MediaItem = ({
+    posterPath,
+    episodeNumber,
+    season,
+    type,
+    wide,
+    uuid,
+    name,
+    title,
+    overview,
+    isConnected,
+    isPlaying,
+    playState,
+    airDate,
+    year,
+    files,
+    dispatch
+}) => {
+    const location = useLocation();
+    const [playlistLoading, playlist] = useCreatePlaylist(uuid, type);
+    const generatedFileList = generateFileList(files);
+    const [source, setSource] = useState('');
+    const [resume, setResume] = useState(location.state !== undefined ? location.state.resume : false);
+    const [fileList] = useState(generatedFileList);
+    const [selectedFile, setSelectedFile] = useState(fileList[0]);
+    const [mimeType, setMimeType] = useState('');
+    const [castsource, setCastsource] = useState('');
+    const [mounted, setMounted] = useState(true);
+    const [streams, setStreams] = useState(null);  
 
-        this.state = {
-            source: '',
-            resume: false,
-            autoplay: false,
-            fileList: [],
-            selectedFile: {},
-            mimeType: '',
-            castsource: '',
-        };
+    const playMediaCallback = (streamData) => {
+        setStreams(streamData.createStreamingTicket.streams);
+
+        fetch(getBaseUrl() + streamData.createStreamingTicket.metadataPath)
+            .then((response) => response.json())
+            .then((response) => getVideoSource(isIOS, streamData, response))
+            .then((response) => {
+                setMimeType(response.mimeType);
+
+                if (isConnected) {
+                    setCastsource(response.source);
+                } else {
+                    setSource(response.source);
+                }
+            })
+            .catch((err) => err);   
     }
 
-    // TODO: Move to a safe version of this, can this be merged into componentDidMount ?
-    // eslint-disable-next-line
-    UNSAFE_componentWillMount() {
-        const { files, location } = this.props;
-        const { state } = location;
-        const fileList = generateFileList(files);
-        const resume = state !== undefined ? state.resume : false;
-        const autoplay = state && state.autoplay ? state.autoplay : false;
+    const [requestStream] = useMutation(REQUEST_STREAM, {
+        onCompleted(data){
+            playMediaCallback(data);
+        }
+    });
 
-        this.setState({
-            resume,
-            autoplay,
-            fileList,
-            selectedFile: fileList[0],
+    const playMedia = (shouldResume) => {
+        setResume(shouldResume);
+
+        requestStream({
+            variables: { uuid: files[selectedFile.value].uuid }
         });
-    }
+    };
 
-    componentDidMount() {
-        const { autoplay, resume } = this.state;
+    useLayoutEffect(() => {
+        const autoplay = !!(location.state && location.state.autoplay);
+        if (autoplay) playMedia(resume);
 
-        if (autoplay) this.playMedia(resume);
+        return () => {
+            setMounted(false);
+        }
+    }, []);
+    
 
-        this.setState({
-            mounted: true,
-        });
-    }
+    const fileChange = (file) => setSelectedFile(file);
 
-    componentWillUnmount() {
-        this.setState({
-            mounted: false,
-        });
-    }
-
-    fileChange = (selectedFile) => this.setState({ selectedFile });
-
-    closePlayer = () => {
-        const { mounted } = this.state;
-        const { dispatch, isPlaying } = this.props;
-
+    const closePlayer = () => {
         if (isPlaying && mounted) {
-            this.setState({ source: '' });
+            setSource('');
             dispatch(hideVideo());
         }
     };
 
-    playMedia = (resume) => {
-        const { files, mutate, isConnected } = this.props;
-        const { selectedFile } = this.state;
-
-        mutate({
-            variables: { uuid: files[selectedFile.value].uuid },
-        })
-            .then((res) => {
-                this.setState({ streams: res.data.createStreamingTicket.streams });
-
-                fetch(getBaseUrl() + res.data.createStreamingTicket.metadataPath)
-                    .then((response) => response.json())
-                    .then((response) => getVideoSource(isIOS, res.data, response))
-                    .then((response) => {
-                        this.setState({
-                            mimeType: response.mimeType,
-                            resume,
-                        });
-
-                        if (isConnected) {
-                            this.setState({ castsource: response.source });
-                        } else {
-                            this.setState({ source: response.source });
-                        }
-                    })
-                    .catch((err) => err);
-            })
-            .catch((err) => err);
+    const background = isEmpty(season) ? posterPath : season.series.posterPath;
+    const renderedName = type === 'Movie' ? title : name;
+    const mediaInfo = {
+        posterPath,
+        episodeNumber,
+        season,
+        type,
+        wide,
+        uuid,
+        name,
+        title,
+        overview,
+        isConnected,
+        isPlaying,
+        playState,
+        airDate,
+        year,
+        files,
+        dispatch
     };
 
-    render() {
-        const {
-            posterPath,
-            episodeNumber,
-            season,
-            type,
-            wide,
-            uuid,
-            name,
-            title,
-            overview,
-            isConnected,
-            playState,
-            airDate,
-            year,
-            files,
-            dispatch,
-        } = this.props;
-        const { selectedFile, fileList, source, mimeType, resume, castsource, streams } = this.state;
-        const background = isEmpty(season) ? posterPath : season.series.posterPath;
-
-        const mediaInfo = {
-            ...this.props,
-        };
-
-        const renderedName = type === 'Movie' ? title : name;
-
-        return (
-            <MediaFullWrap>
-                <Breadcrumbs type={type} name={renderedName} season={season} />
-                {((type === 'Episode' || type === 'Season') && season.episodes.length > 1) &&
-                    <MediaNavigation episodeNumber={episodeNumber} season={season} />
-                }
-                <MediaFull>
-                    <MediaLeftCol>
-                        <MediaCard
-                            wide={wide}
-                            playMedia={this.playMedia}
-                            internalCard
-                            text
-                            files={files}
-                            name={name}
-                            title={title}
-                            playState={playState}
-                            posterPath={posterPath}
-                            type={type}
-                            uuid={uuid}
-                            showText={false}
-                        />
-                    </MediaLeftCol>
-                    <MediaRightCol>
-                        <MediaItemHeader
-                            type={type}
-                            file={selectedFile}
-                            files={files}
-                            uuid={uuid}
-                            name={name}
-                            playMedia={this.playMedia}
-                            playState={playState}
-                            isConnected={isConnected}
-                        />
-                        <MediaOverview
-                            mediaInfo={mediaInfo}
-                            selectedFile={selectedFile}
-                            files={fileList}
-                            fileChange={this.fileChange}
-                            isConnected={isConnected}
-                            release={year || airDate}
-                            episodeNumber={episodeNumber}
-                        />
-                    </MediaRightCol>
-                </MediaFull>
+    return (
+        <MediaFullWrap>
+            <Breadcrumbs type={type} name={renderedName} season={season} />
+            {((type === 'Episode' || type === 'Season') && season.episodes.length > 1) &&
+                <MediaNavigation episodeNumber={episodeNumber} season={season} />
+            }
+            <MediaFull>
+                <MediaLeftCol>
+                    <MediaCard
+                        wide={wide}
+                        playMedia={playMedia}
+                        internalCard
+                        text
+                        files={files}
+                        name={name}
+                        title={title}
+                        playState={playState}
+                        posterPath={posterPath}
+                        type={type}
+                        uuid={uuid}
+                        showText={false}
+                    />
+                </MediaLeftCol>
+                <MediaRightCol>
+                    <MediaItemHeader
+                        type={type}
+                        file={selectedFile}
+                        files={files}
+                        uuid={uuid}
+                        name={name}
+                        playMedia={playMedia}
+                        playState={playState}
+                        isConnected={isConnected}
+                    />
+                    <MediaOverview
+                        mediaInfo={mediaInfo}
+                        selectedFile={selectedFile}
+                        files={fileList}
+                        fileChange={fileChange}
+                        isConnected={isConnected}
+                        release={year || airDate}
+                        episodeNumber={episodeNumber}
+                    />
+                </MediaRightCol>
+            </MediaFull>
+            {(!playlistLoading || type === "Movie") && (
                 <VideoController
                     source={source}
                     files={files}
@@ -202,11 +189,12 @@ class MediaItem extends Component {
                     dispatch={dispatch}
                     season={season && season}
                     streams={streams}
-                    closePlayer={() => this.closePlayer()}
+                    closePlayer={() => closePlayer()}
+                    playlist={playlist}
                 />
-            </MediaFullWrap>
-        );
-    }
+            )}
+        </MediaFullWrap>
+    );
 }
 
 const requiredPropsCheck = (props, propName, componentName) => {
@@ -225,7 +213,6 @@ MediaItem.propTypes = {
     isConnected: PropTypes.bool.isRequired,
     posterPath: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
-    mutate: PropTypes.func.isRequired,
     wide: PropTypes.bool,
     episodeNumber: PropTypes.number,
     year: requiredPropsCheck,
@@ -254,14 +241,12 @@ MediaItem.propTypes = {
         }),
     }),
     uuid: PropTypes.string.isRequired,
-    resume: PropTypes.bool,
     isPlaying: PropTypes.bool,
     playState: PropTypes.shape({}).isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
 };
 
 MediaItem.defaultProps = {
-    resume: null,
     posterPath: null,
     isPlaying: null,
     wide: null,
@@ -282,4 +267,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default compose(withRouter, graphql(REQUEST_STREAM), connect(mapStateToProps))(MediaItem);
+export default compose(connect(mapStateToProps))(MediaItem);

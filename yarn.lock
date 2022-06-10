@@ -11615,6 +11615,22 @@ videojs-overlay@^2.1.4:
     global "^4.3.2"
     video.js "^6 || ^7"
 
+videojs-playlist-ui@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/videojs-playlist-ui/-/videojs-playlist-ui-4.0.1.tgz#484568879c00a9b2ceb118b52d00e4238883b25e"
+  integrity sha512-o3yD/FCmffFkbTz1qMV8BZWEICp6RtxrXakY1C6RFQsaSyIeZ+h9oCunNUrfnjgJ/yjrqt8rai+y4LCpR8Etww==
+  dependencies:
+    global "^4.4.0"
+    video.js "^6 || ^7"
+
+videojs-playlist@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/videojs-playlist/-/videojs-playlist-5.0.0.tgz#96d62b599ccb92cfd130666bf20c90d8f6ad65dc"
+  integrity sha512-TM9bytwKqkE05wdWPEKDpkwMGhS/VgMCIsEuNxmX1J1JO9zaTIl4Wm3egf5j1dhIw19oWrqGUV/nK0YNIelCpA==
+  dependencies:
+    global "^4.3.2"
+    video.js "^6 || ^7"
+
 videojs-seek-buttons@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/videojs-seek-buttons/-/videojs-seek-buttons-2.2.1.tgz#abc512d05c4ea27311dd4340605aa9ed719d65be"

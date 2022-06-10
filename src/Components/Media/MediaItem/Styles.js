@@ -300,3 +300,14 @@ export const LibraryUnhealthy = styled(FontAwesomeIcon)`
     height: 1em;
     margin-right: 0.7rem;
 `;
+
+export const InnerCountdown = styled.span.attrs(props => ({
+    style: {
+        width: `${props.width}%`
+    }
+}))`
+    height: 100%;
+    width: 100%;
+    transition: width 1s linear;
+    background-color: ${(props) => props.theme.primary};
+`;

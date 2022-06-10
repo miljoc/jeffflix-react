@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
-import { graphql } from 'react-apollo';
+import { graphql, withApollo } from 'react-apollo';
 import videojs from 'video.js';
 import '@videojs/http-streaming';
 import 'videojs-seek-buttons';
 import 'videojs-overlay';
+import 'videojs-playlist';
+import 'videojs-playlist-ui';
 import './DebugOverlay';
+import './PlaylistButton';
 
 // NOTE(Leon Handreke): Ideally this should be imported from videojs-http-source-selector because
 // the fact that it relies on this plugin is an implementation detail. However, the compilation
@@ -17,9 +20,20 @@ import 'videojs-http-source-selector';
 import UPDATE_PLAYSTATE from 'Mutations/updatePlaystate';
 import { showVideo } from 'Redux/Actions/videoActions';
 import { updatePlayStateEpisode, updatePlayStateMovie } from 'Components/Media/Actions/updatePlayState';
+import FETCH_EPISODE from 'Queries/fetchEpisode';
+
+import { InnerCountdown } from '../Styles';
 
 class Player extends Component {
-    t = throttle(() => this.playStateMutation(Math.floor(this.player.currentTime())), 2000);
+    t = throttle(() => this.playStateMutation( Math.floor( this.player.currentTime() ) ), 2000);
+
+    constructor() {
+        super();
+        this.state = {
+            seconds: 10,
+            upNextHTML: null
+        };
+    }
 
     componentDidMount() {
         const {
@@ -34,7 +48,8 @@ class Player extends Component {
             release,
             episodeNumber,
             season,
-            type
+            type,
+            client
         } = this.props;
 
         const titleOverlayTitle = `<h4>${title || name}</h4>`;
@@ -46,6 +61,10 @@ class Player extends Component {
             src: source,
             type: mimeType,
         };
+
+        // percentage watched to be considered "finished watching"
+        const finishedPercentage = 97;
+        this.finishedPercentage = finishedPercentage;
 
         dispatch(showVideo());
 
@@ -92,7 +111,8 @@ class Player extends Component {
                 },
                 nativeAudioTracks: false,
             },
-            playbackRates: [0.75, 1, 1.25, 1.5, 2, 3],            
+            playbackRates: [0.75, 1, 1.25, 1.5, 2, 3],
+            persistTextTrackSettings: true
         };
         if (transmuxed) {
             // If transmuxed, all non-transmuxed representations are manually disabled in the
@@ -105,11 +125,14 @@ class Player extends Component {
         this.player = videojs(this.videoNode, videoJsOptions, function onPlayerReady() {
             this.focus();
             this.debugOverlay();
+            if(type === "Episode"){
+                this.playlistContainer();
+            }
             this.qualityLevels();
             this.httpSourceSelector();
         });
-
-        this.player.overlay({
+        
+        const overlays = {
             overlays: [
                 {
                     class: 'vjs-title-overlay',
@@ -121,9 +144,73 @@ class Player extends Component {
                     start: 5,
                     content: '',
                     class: 'vjs-debug-overlay'
-                }            
+                }
             ]
-        });        
+        };
+
+        this.player.overlay(overlays);        
+
+        this.player.playlistUi({
+            nextOverlay: true,
+            showDescription: true
+        });
+
+        if(type === "Episode") {
+            const finalPlaylist = this.finalPlaylist();
+            this.finalPlaylist = finalPlaylist;
+            
+            if(finalPlaylist.length > 1){
+                this.setState({
+                    upNextHTML: finalPlaylist[1].html
+                });
+            }
+            
+            this.player.playlist(finalPlaylist);
+            this.player.playlist.autoadvance(10);
+
+            // update title overlay
+            // https://github.com/brightcove/videojs-playlist/blob/main/docs/api.md#playlistitem
+            this.player.on('playlistitem', () => {
+                const currentItem = this.player.playlist.currentItem();
+                const nextItem = this.player.playlist.nextIndex();
+                // in case the order changes dynamically, get the index for the title overlay based on class
+                const titleOverlayIndex = overlays.overlays.findIndex(o => o.class === "vjs-title-overlay");
+
+                // makes sure current episode and next episode are in the cache
+                client.query({
+                    query: FETCH_EPISODE,
+                    variables: {
+                        uuid: finalPlaylist[currentItem].uuid
+                    }
+                });
+
+                client.query({
+                    query: FETCH_EPISODE,
+                    variables: {
+                        uuid: finalPlaylist[nextItem].uuid
+                    }
+                });
+               
+                // change title overlay content, pulled from playlist object
+                overlays.overlays[titleOverlayIndex].content = finalPlaylist[currentItem].html;
+                this.player.overlay(overlays);
+
+                this.player.removeClass("vjs-video-ended");
+                this.player.removeClass("vjs-video-finishing");
+                this.player.removeClass("vjs-last-playlist-item");
+
+                if(currentItem !== nextItem){
+                    setTimeout(() => {               
+                        this.setState({
+                            upNextHTML: finalPlaylist[nextItem].html
+                        });
+                    }, 1000);
+                }else{
+                    this.player.addClass("vjs-last-playlist-item");
+                }
+
+            });
+        }
 
         this.player.seekButtons({
             forward: 30,
@@ -132,7 +219,33 @@ class Player extends Component {
 
         this.player.on('timeupdate', () => {
             this.t();
+            const currentTime = this.player.currentTime();
+            const currentDuration = this.player.duration();
+            const finishing = currentTime * (100 / currentDuration) > finishedPercentage;
+            
+            // when finishing, show "up next"
+            if(finishing){
+                this.player.addClass("vjs-video-finishing");
+            }else{
+                this.player.removeClass("vjs-video-finishing");
+            }
+            
+            // when ended, show "autoplaying next episode"
+            if( currentTime !== currentDuration ){
+                this.player.removeClass("vjs-video-ended");
+            }
         });
+
+        this.player.on('ended', () => {
+            this.player.removeClass('vjs-video-finishing');
+            this.player.addClass("vjs-video-ended");
+
+            // if we're not on the last item!
+            if(this.player.playlist.currentItem() !== this.player.playlist.nextIndex()){
+                this.countDown();
+                this.timer = setInterval(this.countDown, 1000);
+            }
+        });        
 
         this.player.on('loadedmetadata', this.enableQualityLevels);
 
@@ -147,18 +260,44 @@ class Player extends Component {
 
     componentWillUnmount() {
         this.t.cancel();
+        clearInterval(this.timer);
 
         if (this.player) {
             this.player.dispose();
         }
     }
 
+    finalPlaylist = () => {
+        const { name, season, episodeNumber, source, mimeType, playlist, uuid } = this.props;
+        const html = 
+        `<h4>${name}</h4><span>${season.series.name} - ${season.name}, Episode ${episodeNumber}</span>`;
+        const firstPlaylistItem = {
+            name,
+            description: `${season.series.name} - ${season.name}, Episode ${episodeNumber}`,
+            uuid,
+            html,
+            season: season.name,
+            series: season.series.name,
+            episodeNumber,
+            sources: [{
+                src: source,
+                type: mimeType,                
+            }]
+        };
+
+        const finalPlaylist = [firstPlaylistItem, ...playlist];
+
+        return finalPlaylist;
+    }
+
     playStateMutation = (playtime) => {
         const { uuid, length, mutate, type } = this.props;
-        const finished = playtime * (100 / length) > 98;
+        const finished = playtime * (100 / length) > this.finishedPercentage;
 
         if (type === 'Episode') {
-            updatePlayStateEpisode(mutate, uuid, playtime, finished);
+            const currentItem = this.player.playlist.currentItem();
+            const currentUUID = this.finalPlaylist[currentItem].uuid;
+            updatePlayStateEpisode(mutate, currentUUID, playtime, finished);
         } else {
             updatePlayStateMovie(mutate, uuid, playtime, finished);
         }
@@ -179,7 +318,36 @@ class Player extends Component {
         }
     };
 
+    countDown = () => {
+        const { seconds } = this.state;
+
+        if (seconds > 0) {
+            this.setState(() => ({
+                seconds: seconds - 1
+            }));    
+        }
+        
+        if (seconds === 0) {
+            clearInterval(this.timer);
+            setTimeout(() => {                
+                this.setState({
+                    seconds: 10
+                });
+            }, 1000);
+        }
+    };
+
+    cancelAutoplay = () => {
+        clearInterval(this.timer);
+        this.player.playlist.autoadvance();
+        this.player.removeClass("vjs-video-ended");
+        this.player.addClass("vjs-video-finishing");        
+    };
+    
     render() {
+        const { upNextHTML, seconds } = this.state;
+        const { type } = this.props;
+
         return (
             <>
                 <div data-vjs-player>
@@ -190,6 +358,59 @@ class Player extends Component {
                         }}
                         className="video-js vjs-theme-olaris"
                     />
+                    <div className="vjs-playlist" />
+                    {type === "Episode" && (
+                        <>
+                            <button
+                                type="button"
+                                className="vjs-upnext-overlay"
+                                onClick={() => {
+                                    this.player.playlist.next()
+                                }}
+                            >
+                                <span>up next</span>
+                                {/* eslint-disable-next-line react/no-danger */}
+                                <div dangerouslySetInnerHTML={{__html: upNextHTML }} />
+                            </button>
+                            <div className="vjs-autoplay-overlay">
+                                <div className="vjs-autoplay--text-wrap">
+                                    {seconds > 0
+                                        ? <span>playing in <strong>{seconds}</strong> seconds</span>
+                                        : <span>playing now...</span>
+                                    }
+                                    <div
+                                        className="vjs-autoplay--up-next-info"
+                                        /* eslint-disable-next-line react/no-danger */
+                                        dangerouslySetInnerHTML={{__html: upNextHTML }}
+                                    />
+                                </div>
+                                <div className="vjs-autoplay--button-wrap">
+                                    <button
+                                        type="button"
+                                        className="vjs-autoplay--cancel-autoplay"
+                                        onClick={this.cancelAutoplay}
+                                    >
+                                    Cancel
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="vjs-autoplay--play-immediately"
+                                        onClick={() => {
+                                            this.player.playlist.next()
+                                        }}
+                                    >
+                                        <div className="vjs-autoplay--count-down">
+                                            <InnerCountdown
+                                                width={seconds * 10}
+                                            />
+                                        </div>
+                                        <span className="vjs-autoplay--play-icon" />
+                                        Next Episode
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
             </>
         );
@@ -236,6 +457,15 @@ Player.propTypes = {
     // because videojs/http-streaming doesn't pass through any metadata.
     // To avoid forking for now, do this.
     transmuxed: PropTypes.bool.isRequired,
+    playlist: PropTypes.oneOfType([
+        PropTypes.arrayOf(
+            PropTypes.shape({})
+        ),
+        PropTypes.bool
+    ]).isRequired,
+    client: PropTypes.shape({
+        query: PropTypes.func.isRequired,
+    }).isRequired
 };
 
 Player.defaultProps = {
@@ -245,4 +475,6 @@ Player.defaultProps = {
     season: {}
 };
 
-export default graphql(UPDATE_PLAYSTATE)(Player);
+export default withApollo(
+    graphql(UPDATE_PLAYSTATE)(Player)
+);
