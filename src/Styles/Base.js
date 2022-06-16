@@ -1,5 +1,6 @@
 import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
+import { media } from 'Styles/Utils';
 import FlexCenter from 'Styles/Helpers';
 
 export const ParagraphBaseStyle = css`
@@ -90,12 +91,18 @@ export const Checkbox = styled.input`
         & + label {
             position: relative;
             cursor: pointer;
+            padding-left: 30px;
+            padding-right: 1rem;
+
+            ${media.tablet`
+                padding-left: 0;
+            `}
 
             &:after {
                 content: '';
                 position: absolute;
                 opacity: 0;
-                left: 5px;
+                left: 7px;
                 top: 50%;
                 background: ${(props) => props.theme.white};
                 width: 2px;
@@ -109,6 +116,10 @@ export const Checkbox = styled.input`
                 4px -8px 0 ${(props) => props.theme.white};
                 transform: translateY(-50%) rotate(45deg);      
                 transition: opacity ${(props) => props.theme.base.transitionSpeed} ease-in-out;
+
+                ${media.tablet`
+                    left: 5px;
+                `}
             }
         }
 
@@ -118,9 +129,18 @@ export const Checkbox = styled.input`
             margin-right: 10px;
             display: inline-block;
             vertical-align: text-top;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             background: ${(props) => rgba(props.theme.black, 0.5)};
+            position: absolute;
+            left: 5px;
+
+            ${media.tablet`
+                position: relative;
+                left: auto;
+                width: 20px;
+                height: 20px;
+            `}
         }
 
         // Box hover
@@ -160,7 +180,7 @@ export const Checkbox = styled.input`
             content: '';
             opacity: 1;
             position: absolute;
-            left: 5px;
+            left: 7px;
             top: 50%;
             background: ${(props) => props.theme.white};
             width: 2px;
@@ -173,6 +193,10 @@ export const Checkbox = styled.input`
             4px -6px 0 ${(props) => props.theme.white},
             4px -8px 0 ${(props) => props.theme.white};
             transform: translateY(-50%) rotate(45deg);
+
+            ${media.tablet`
+                left: 5px;
+            `}
         }
     }
 `;

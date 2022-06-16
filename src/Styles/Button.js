@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import { media } from 'Styles/Utils';
+import { ErrorWrap } from 'Components/Error/Styles';
 import { Badge } from 'Styles/Base';
 import FlexCenter from 'Styles/Helpers';
 import { BackIcon, NavIcon } from "../Components/Header/Styles";
@@ -54,6 +56,31 @@ export const NavButton = styled.button`
             color: ${props.theme.dark};
         }
     `}
+`;
+
+export const ButtonWrap = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+    text-align: ${(props) => props.right ? 'right' : 'left'};
+    flex-direction: column;
+    width: 100%;
+
+    ${media.tablet`
+        flex-direction: row;
+    `}
+
+    ${ErrorWrap} {
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        height: 25px;
+
+        ${media.tablet`
+            margin-bottom: 0;
+        `}
+    }
 `;
 
 export default ButtonBase;

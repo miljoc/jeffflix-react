@@ -32,7 +32,7 @@ export const Modal = styled.div`
 
 export const ModalWrap = styled.div`
     opacity: 0;
-    max-width: 50rem;
+    max-width: ${(props) => props.wide ? '75rem' : '50rem'};
     width: 100%;
     box-shadow: 0 0 25px ${(props) => rgba(props.theme.black, 0.4)};
     animation: 0.3s ${fadeInZoom} forwards;
@@ -66,8 +66,6 @@ export const ModalCloseButton = styled(FontAwesomeIcon)`
 
 export const ModalHeader = styled.header`
     float: left;
-    width: 100%;
-    max-width: 60rem;
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -193,7 +191,7 @@ export const InfoWrap = styled.div`
 `;
 
 export const FileLocationList = styled.div`
-  max-height: 8.5rem;
+  max-height: ${(props) => props.tall ? '18rem' : '8.5rem'};
   padding: 1rem;
   width: 100%;
   margin-top: 1rem;

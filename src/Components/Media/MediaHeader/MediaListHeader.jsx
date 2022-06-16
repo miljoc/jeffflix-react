@@ -10,6 +10,7 @@ import { compileEpisodes, generateMediaUrl } from 'Helpers';
 import { showModal } from 'Redux/Actions/modalActions';
 
 import { faPlay, faRandom } from '@fortawesome/free-solid-svg-icons';
+import { orderBy } from 'lodash';
 import MediaMismatch from './MediaMismatch';
 import MarkWatched from './MarkWatched';
 
@@ -80,6 +81,16 @@ class MediaListHeader extends Component {
         const { finished, randomEpisode, episodes } = this.state;
         const { type, name, uuid } = this.props;
 
+        const files = orderBy(
+            episodes.map(e => { return {
+                uuid: e.files[0].uuid,
+                filePath: e.files[0].filePath,
+                fileName: e.files[0].fileName
+            } }),
+            ['filePath'],
+            ['asc']
+        );
+
         const playState = {
             finished,
         };
@@ -105,8 +116,15 @@ class MediaListHeader extends Component {
 
                 <MarkWatched type={type} uuid={uuid} playState={playState} episodes={episodes} />
 
-                {Auth.isAdmin.admin &&
-                    (type === 'series' && <MediaMismatch uuid={uuid} name={name} type={type} />)
+                {Auth.isAdmin.admin && episodes.length > 0 &&
+                    (type === 'series' && (
+                        <MediaMismatch
+                            uuid={uuid}
+                            name={name}
+                            file={files}
+                            type="episode"
+                        />
+                    ))
                 }
             </S.Header>
         );

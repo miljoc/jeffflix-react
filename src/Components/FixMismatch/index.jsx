@@ -123,7 +123,10 @@ const FixMismatch = ({ hModal, uuid, type, name }) => {
 FixMismatch.propTypes = {
     hModal: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired,
+    uuid: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array
+    ]).isRequired,
     type: PropTypes.string.isRequired,
 };
 

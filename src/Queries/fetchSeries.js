@@ -20,6 +20,10 @@ const FETCH_SERIES = gql`
 
                 episodes {
                     uuid
+                    files {
+                      filePath
+                      uuid
+                    }
 
                     playState {
                         finished

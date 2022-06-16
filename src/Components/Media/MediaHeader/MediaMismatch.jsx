@@ -7,7 +7,7 @@ import { showModal, FIX_MISMATCH_MODAL } from 'Redux/Actions/modalActions';
 
 import { HeaderIconWrap, HeaderIcon } from './Styles';
 
-const FixMismatch = ({ uuid, sModal, name, file, type }) => {
+const MediaMismatch = ({ uuid, sModal, name, file, type }) => {
     const toggleModal = () => {
         sModal(FIX_MISMATCH_MODAL, {
             uuid,
@@ -24,15 +24,18 @@ const FixMismatch = ({ uuid, sModal, name, file, type }) => {
     );
 };
 
-FixMismatch.propTypes = {
+MediaMismatch.propTypes = {
     sModal: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     uuid: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    file: PropTypes.string,
+    file: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array,
+    ]),
 };
 
-FixMismatch.defaultProps = {
+MediaMismatch.defaultProps = {
     file: null,
 };
 
@@ -43,4 +46,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     null,
     mapDispatchToProps,
-)(FixMismatch);
+)(MediaMismatch);
