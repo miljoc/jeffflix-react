@@ -6,7 +6,7 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { hideNavigation, showNavigation } from 'Redux/Actions/navigationActions';
 
 import { NavButton } from 'Styles/Button';
-import { NavIcon, ContentOverlay, HideNavIcon } from './Styles';
+import { NavIcon, ContentOverlay, HideNavIcon, HideNavIconWrap } from './Styles';
 
 class NavToggle extends Component {
     componentDidMount() {
@@ -46,7 +46,9 @@ class NavToggle extends Component {
                         data-tip={navHidden ? "Show Nav" : "Hide Nav"}
                         onClick={this.toggleNav}
                     >
-                        <HideNavIcon icon={faTimes} />
+                        <HideNavIconWrap>
+                            <HideNavIcon icon={faTimes} />
+                        </HideNavIconWrap>
                     </ContentOverlay>
                 )}
 

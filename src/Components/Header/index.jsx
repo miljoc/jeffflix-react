@@ -8,11 +8,13 @@ import ReactToolTip from 'react-tooltip';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { BackButton } from 'Styles/Button';
+import { Auth } from 'Client/Auth';
 import Logout from './Logout';
 import NavToggle from './NavToggle';
 import Search from './Search';
 
 import { HeaderWrap, BackIcon } from './Styles';
+import Activity from './Activity';
 
 class Header extends Component {
     constructor(props) {
@@ -47,6 +49,7 @@ class Header extends Component {
 
                 <div className="right-menu">
                     <google-cast-launcher />
+                    {Auth.isAdmin.admin && (<Activity />)}
                     <Logout />
                 </div>
             </HeaderWrap>

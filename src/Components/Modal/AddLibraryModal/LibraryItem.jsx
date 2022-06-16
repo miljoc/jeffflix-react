@@ -10,6 +10,7 @@ import FETCH_LIBRARIES from 'Queries/fetchLibraries';
 import { DELETE_LIBRARY , RESCAN_LIBRARY } from 'Mutations/manageLibraries';
 
 import { AlertInline, AlertConfirm } from 'Components/Alerts';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LibraryItemWrap, LibraryItemFilePath, LibraryItemDelete, LibraryUnhealthy, LibraryItemRescan } from './Styles';
 
 type Props = {
@@ -52,18 +53,20 @@ const LibraryItem = ({ filePath, id, backend, healthy }: Props) => {
                 </LibraryItemFilePath>
                                 
                 <LibraryItemRescan
-                    icon={faSync}
                     data-tip="Rescan Library"
                     onClick={() => {
                         rescanLibrary({ variables: { id } });
                         alert.success(`Rescanning path: '${filePath}'`);
-                    }
-                    }
-                />
+                    }}
+                >
+                    <FontAwesomeIcon icon={faSync} />
+                </LibraryItemRescan>
 
-                {!loading &&
-                    <LibraryItemDelete icon={faTrash} data-tip="Delete Library" onClick={() => setShow(true)} />
-                }
+                {!loading && (
+                    <LibraryItemDelete data-tip="Delete Library" onClick={() => setShow(true)}>
+                        <FontAwesomeIcon icon={faTrash} />
+                    </LibraryItemDelete>
+                )}
                 {loading && <LibraryItemDelete icon={faSpinner} spin deleting={loading ? 1 : 0} />}
             </LibraryItemWrap>
         </>

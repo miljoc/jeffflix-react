@@ -8,6 +8,7 @@ import WarningModal from 'Components/Modal/WarningModal';
 import FixMismatchModal from 'Components/Modal/FixMismatchModal';
 import AdvancedInfoModal from 'Components/Modal/AdvancedInfoModal';
 import MatchModal from 'Components/Modal/MatchModal';
+import GenericModal from 'Components/Modal/GenericModal';
 
 import {
     LIBRARY_MODAL,
@@ -15,7 +16,8 @@ import {
     WARNING_MODAL,
     FIX_MISMATCH_MODAL,
     MATCH_MODAL,
-    ADVANCED_INFO_MODAL
+    ADVANCED_INFO_MODAL,
+    GENERIC_MODAL
 } from 'Redux/Actions/modalActions';
 
 const MODAL_COMPONENTS = {
@@ -25,6 +27,7 @@ const MODAL_COMPONENTS = {
     [FIX_MISMATCH_MODAL]: FixMismatchModal,
     [MATCH_MODAL]: MatchModal,
     [ADVANCED_INFO_MODAL]: AdvancedInfoModal,
+    [GENERIC_MODAL]: GenericModal,
 };
 
 type OwnProps = {

@@ -256,6 +256,7 @@ export const ResumeOption = styled.button`
     background: none;
     width: 100%;
     border: none;
+    padding: 0;
     text-align: left;
     color: ${(props) => rgba(props.theme.white, 0.38)};
     line-height: 4rem;

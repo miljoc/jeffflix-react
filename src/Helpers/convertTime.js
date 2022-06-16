@@ -32,3 +32,12 @@ export const convertToHMS = (time) => {
 
     return `${hours > 0 ? `${hours}:` : ''}${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 };
+
+/**
+ * Convert Float Minutes to Milliseconds
+ * @param {*} minutes 
+ * @returns {int} integer in milliseconds
+ */
+export const convertMinutesToMilliseconds = (minutes) => {
+    return minutes * 60 * 1000;
+}

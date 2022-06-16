@@ -1,5 +1,6 @@
 import { rgba } from 'polished';
 import styled, { css } from 'styled-components';
+import FlexCenter from 'Styles/Helpers';
 
 export const ParagraphBaseStyle = css`
     font-size: ${(props) => props.theme.typography.base};
@@ -70,6 +71,15 @@ export const Badge = styled.span`
     font-size: ${(props) => props.theme.typography.small};
     padding: 0.4rem 0.8rem 0.5rem;
     font-weight: 900;
+
+    ${(props) => props.circle && css`
+        border-radius: 50%;
+        line-height: 2rem;
+        width: 2rem;
+        height: 2rem;
+        font-size: ${props.theme.typography.root};
+        ${FlexCenter}
+    `}
 `;
 
 export const Checkbox = styled.input`
@@ -165,4 +175,32 @@ export const Checkbox = styled.input`
             transform: translateY(-50%) rotate(45deg);
         }
     }
-`
+`;
+
+export const ProgressBar = styled.span.attrs(props => ({
+    style: {
+        width: `${props.width}%`
+    }
+}))`
+    height: 100%;
+    width: 100%;
+    display: block;
+    transition: width 1s linear;
+    background-color: ${(props) => props.theme.primary};
+
+    ${(props) => props.text && css`
+        &:after {
+            content: '${props.text}';
+            display: block;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            opacity: 0;
+            font-size: ${props.theme.typography.root};
+            font-weight: 700;
+            color: ${props.width > 49 ? props.theme.background : props.theme.white};
+            transform: translate(-50%, -50%);
+            transition: opacity ${props.theme.base.transitionSpeed};
+        }
+    `}
+`;

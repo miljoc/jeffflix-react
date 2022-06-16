@@ -4,14 +4,17 @@ import { rgba, transparentize } from 'polished';
 import { media } from 'Styles/Utils';
 import { placeholder } from 'Components/Media/Card/Placeholder';
 import { ParagraphBaseStyle, HeadingFiveStyle } from 'Styles/Base';
+import FlexCenter from 'Styles/Helpers';
+
+export const SearchIconWrap = styled.div`
+    ${FlexCenter}
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
+`;
 
 export const SearchIcon = styled(FontAwesomeIcon)`
-    font-size: ${(props) => props.theme.typography.body};
-    transition: ${(props) => props.theme.base.transitionSpeed} all;
-    border-radius: 50%;
-    height: 5rem;
-    width: 5rem !important;
-    padding: 1.75rem;
     color: ${(props) =>
         props.hasFocus ? rgba(props.theme.white,0.8) : rgba(props.theme.white,0.5)};
 `;
@@ -32,7 +35,7 @@ export const InputWrap = styled.div`
     border-radius: 5rem;
     overflow: hidden;
 
-    ${SearchIcon} {
+    ${SearchIconWrap} {
         background: ${(props) =>
             props.hasFocus ? rgba(props.theme.black,0.2) : rgba(props.theme.black,0)};
     }

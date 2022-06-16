@@ -17,8 +17,8 @@ const FixMismatchModal = ({ uuid, name, file, type, hModal }) => {
                 <S.ModalHeader>
                     <S.ModalHeading>
                         Fix Mismatch: {name}
-                        <ModalClose onClick={() => hModal()} />
                     </S.ModalHeading>
+                    <ModalClose onClick={() => hModal()} />
 
                     {file && (
                         <p>

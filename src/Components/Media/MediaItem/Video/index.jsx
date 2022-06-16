@@ -8,7 +8,7 @@ import CastVideo from './CastVideo';
 
 import Player from './Player';
 
-import { VideoWrap, CloseVideo } from '../Styles';
+import { VideoWrap, CloseVideo, CloseVideoWrap } from '../Styles';
 
 class VideoController extends Component {
     constructor() {
@@ -95,7 +95,9 @@ class VideoController extends Component {
             return (
                 <>
                     <VideoWrap>
-                        <CloseVideo icon={faTimes} onClick={closePlayer} />
+                        <CloseVideoWrap onClick={closePlayer}>
+                            <CloseVideo icon={faTimes} />
+                        </CloseVideoWrap>
                         <Player
                             season={season}
                             episodeNumber={episodeNumber}

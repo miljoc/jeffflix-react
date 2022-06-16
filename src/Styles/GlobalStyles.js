@@ -33,6 +33,10 @@ const GlobalStyles = createGlobalStyle`
     body {
         font-family: var(--olaris--font-body);
     }
+    
+    em {
+        font-style: italic;
+    }
 
     input{
         &::placeholder {
