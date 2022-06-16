@@ -66,6 +66,9 @@ class Player extends Component {
         const finishedPercentage = 97;
         this.finishedPercentage = finishedPercentage;
 
+        const startPercentage = 5;
+        this.startPercentage = startPercentage;
+
         dispatch(showVideo());
 
         // Put videojs in scope for debugging
@@ -218,10 +221,15 @@ class Player extends Component {
         });
 
         this.player.on('timeupdate', () => {
-            this.t();
             const currentTime = this.player.currentTime();
             const currentDuration = this.player.duration();
             const finishing = currentTime * (100 / currentDuration) > finishedPercentage;
+
+            // calculate when to start reporting playstate
+            const startedDuration = ~~(currentDuration * (startPercentage / 100));
+            const startPlaystate = startedDuration >= 30 ? startedDuration : 30;
+
+            if(currentTime > startPlaystate) this.t();
             
             // when finishing, show "up next"
             if(finishing){
