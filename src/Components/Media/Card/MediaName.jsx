@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { pluralize } from 'Helpers';
 import { CardTitle, CardInfo } from './Styles';
 
 const MediaName = ({ episodes, type, year, name, title, episodeNumber, seasonNumber }) => {
@@ -9,7 +10,7 @@ const MediaName = ({ episodes, type, year, name, title, episodeNumber, seasonNum
 
         switch (type) {
             case 'Season':
-                infoValue = `${episodes.length} Episode${episodes.length > 1 ? 's' : ''}`;
+                infoValue = `${episodes.length} ${pluralize(episodes.length, 'Episode', 's')}`;
                 break;
             case 'Episode':
                 infoValue = `${seasonNumber ? `S${seasonNumber}  E${episodeNumber}` : `Episode ${episodeNumber}`}`;

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const ResumeOption = styled.button`
     background: none;
+    padding: 0;
     width: 100%;
     border: none;
     text-align: left;

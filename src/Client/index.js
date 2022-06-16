@@ -16,6 +16,10 @@ const httpLink = new HttpLink({
     uri: `${getBaseUrl()}/olaris/m/query`,
 });
 
+const streamHttpLink = new HttpLink({
+    uri: `${getBaseUrl()}/olaris/s/query`,
+});
+
 const authMiddleware = new ApolloLink((operation, forward) => {
     if (document.cookie.indexOf('jwt') >= 0) {
         const token = cookies.get('jwt');
@@ -49,6 +53,11 @@ const cache = new InMemoryCache({
 const client = new ApolloClient({
     cache,
     link: from([errorLink, authMiddleware, httpLink]),
+});
+
+export const streamingClient = new ApolloClient({
+    cache,
+    link: from([errorLink, authMiddleware, streamHttpLink])
 });
 
 export default client;

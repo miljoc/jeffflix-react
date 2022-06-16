@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 import DELETE_USER from 'Mutations/deleteUser';
 import { showModal, WARNING_MODAL } from 'Redux/Actions/modalActions';
 import { faTrash, faCrown } from '@fortawesome/free-solid-svg-icons';
-import * as S from './Styles';
+import { AdminUser, DeleteUser, DeleteUserWrap, UserListItem } from './Styles';
 
 type Props = {
     username: string,
@@ -26,10 +26,14 @@ const UserItem = ({ username, id, admin }: Props) => {
     };
 
     return (
-        <S.UserListItem success={typeof data !== 'undefined'}>
-            {data && `Successfully Deleted`} {username} {admin && <S.AdminUser icon={faCrown} />}
-            {!data && !admin && <S.DeleteUser onClick={() => toggleModal()} icon={faTrash} />}
-        </S.UserListItem>
+        <UserListItem success={typeof data !== 'undefined'}>
+            {data && `Successfully Deleted`} {username} {admin && <AdminUser icon={faCrown} />}
+            {!data && !admin && (
+                <DeleteUserWrap data-tip="Delete User" onClick={() => toggleModal()}>
+                    <DeleteUser icon={faTrash} />
+                </DeleteUserWrap>
+            )}
+        </UserListItem>
     );
 };
 

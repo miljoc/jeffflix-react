@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { rgba } from 'polished';
+import FlexCenter from 'Styles/Helpers';
 
 export const Header = styled.header`
     display: flex;
@@ -10,9 +11,9 @@ export const Header = styled.header`
 `;
 
 export const HeaderIconWrap = styled.div`
+    ${FlexCenter}
     width: 6rem;
     height: 6rem;
-    text-align: center;
     border-right: 1px solid ${(props) => rgba(props.theme.white, 0.05)};
     position: relative;
     opacity: ${(props) => (props.disabled ? '0.5' : '1')};
@@ -38,7 +39,6 @@ export const HeaderIcon = styled(FontAwesomeIcon)`
     display: inline-block;
     opacity: 0.8;
     color: ${(props) => props.theme.white};
-    height: 6rem;
     text-align: center;
     transition: ${(props) => props.theme.base.transitionSpeed} all;
 `;

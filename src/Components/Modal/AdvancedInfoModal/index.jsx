@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { convertToHMS, convertFilesize, convertBitrate } from 'Helpers';
+import { convertToHMS, convertFilesize, convertBitrate , pluralize } from 'Helpers';
 import { v4 as uuidv4 } from 'uuid';
 import { hideModal } from 'Redux/Actions/modalActions';
 import * as S from 'Components/Modal/Styles';
@@ -44,7 +44,7 @@ const AdvancedInfoModal = ({ files, type }: Props) => {
 
                                 {videos && (
                                     <S.SectionWrap>
-                                        <S.InfoTitle>Video Track{videos.length > 1 && 's'}</S.InfoTitle>
+                                        <S.InfoTitle>Video {pluralize(videos.length, 'Track', 's')}</S.InfoTitle>
                                         <S.InfoWrap>
                                             {videos.map(video => (
                                                 <div key={uuidv4()}>
@@ -61,7 +61,7 @@ const AdvancedInfoModal = ({ files, type }: Props) => {
 
                                 {audio && (
                                     <S.SectionWrap>
-                                        <S.InfoTitle>Audio Track{audio.length > 1 && 's'}</S.InfoTitle>
+                                        <S.InfoTitle>Audio {pluralize(audio.length, 'Track', 's')}</S.InfoTitle>
                                         <S.InfoWrap>
                                             {audio.map((track, index) => (
                                                 <div key={uuidv4()}>

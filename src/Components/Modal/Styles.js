@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
 import { rgba } from 'polished';
 import { HeadingFourStyle, ParagraphBaseStyle } from 'Styles/Base';
+import FlexCenter from 'Styles/Helpers';
 
 const fadeInZoom = keyframes`
   from {
@@ -43,22 +44,24 @@ export const ModalWrap = styled.div`
     `};
 `;
 
-export const ModalCloseButton = styled(FontAwesomeIcon)`
+export const ModalCloseWrap = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    color: ${(props) => props.theme.white};
-    font-size: ${(props) => props.theme.typography.headingThree};
+    ${FlexCenter}
+    height: 6rem;
+    width: 6rem;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
     cursor: pointer;
     z-index: 11;
-    transition: ${(props) => props.theme.base.transitionSpeed} all;
-    width: 5.8rem !important;
-    height: 5.8rem;
-    padding: 2rem;
 
     &:hover {
         background: ${(props) => rgba(props.theme.black, 0.1)};
     }
+`;
+
+export const ModalCloseButton = styled(FontAwesomeIcon)`
+    color: ${(props) => props.theme.white};
 `;
 
 export const ModalHeader = styled.header`
@@ -66,6 +69,10 @@ export const ModalHeader = styled.header`
     width: 100%;
     max-width: 60rem;
     width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
     padding: 2rem;
     background: ${(props) => rgba(props.theme.black, 0.1)};
 
@@ -90,6 +97,10 @@ export const ModalHeading = styled.h3`
     color: ${(props) => props.theme.white};
     text-transform: capitalize;
     font-weight: 600;
+
+    svg {
+      margin-right: 1rem;
+    }
 `;
 
 export const ModalBody = styled.div`
@@ -114,7 +125,6 @@ export const ModalBody = styled.div`
 
       strong {
         font-weight: 700;
-        margin-right: 0.5rem;
       }
 
       span {
@@ -185,6 +195,7 @@ export const InfoWrap = styled.div`
 export const FileLocationList = styled.div`
   max-height: 8.5rem;
   padding: 1rem;
+  width: 100%;
   margin-top: 1rem;
   overflow: scroll;
   background-color: ${(props) => rgba(props.theme.black, 0.2)};

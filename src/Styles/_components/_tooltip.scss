@@ -7,7 +7,14 @@
     opacity: 1 !important;
     padding: 1.5rem;
     text-transform: capitalize;
+    
+    &.tooltip-percentage {
+        padding: 0.8rem 1.2rem;
+        margin-top: -0.1rem;
+        margin-left: 0.5rem;
+    }
 }
+
 
 .__react_component_tooltip.type-dark {
     &.place-bottom:after {

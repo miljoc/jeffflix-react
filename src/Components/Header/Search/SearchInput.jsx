@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import { faSpinner, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { InputWrap, LoadingIcon, SearchIcon, NoResultsError, ClearButton } from './Styles';
+import { InputWrap, LoadingIcon, SearchIcon, NoResultsError, ClearButton, SearchIconWrap } from './Styles';
 
 class SearchInput extends Component {
     constructor() {
@@ -62,7 +62,9 @@ class SearchInput extends Component {
             <>
                 <InputWrap hasFocus={hasFocus}>
                     {loading && <LoadingIcon icon={faSpinner} spin />}
-                    <SearchIcon icon={faSearch} />
+                    <SearchIconWrap>
+                        <SearchIcon icon={faSearch} />
+                    </SearchIconWrap>
                     <input
                         {...inputProps}
                         onFocus={(e) => {

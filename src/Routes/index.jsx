@@ -10,6 +10,7 @@ import Dashboard from 'Containers/Dashboard';
 
 // Admin
 import Users from 'Containers/Admin/Users';
+import CurrentActivity from 'Containers/Admin/CurrentActivity';
 
 // Tools
 import MatchMovies from 'Containers/Admin/Tools/MatchMovies';
@@ -56,6 +57,10 @@ const Routes = () => {
 
             <AdminRoute exact path="/match-series">
                 <MatchSeries />
+            </AdminRoute>
+
+            <AdminRoute exact path="/current-activity">
+                <CurrentActivity />
             </AdminRoute>
 
             <PrivateRoute exact path="/dashboard">

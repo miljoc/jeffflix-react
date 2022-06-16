@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ButtonBase from 'Styles/Button';
 import { ParagraphBaseStyle } from 'Styles/Base';
+import FlexCenter from 'Styles/Helpers';
 
 export const UserListItem = styled.li`
     ${ParagraphBaseStyle}
@@ -24,17 +25,33 @@ export const AdminUser = styled(FontAwesomeIcon)`
     transform: translateY(-0.2rem);
 `;
 
+export const DeleteUserWrap = styled.span`
+    ${FlexCenter}
+    height: 4rem;
+    width: 4rem;
+    float: right;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: ${(props) => props.theme.base.transitionSpeed} all;
+    
+    &:hover {
+        opacity: 1;
+    }
+`;
+
 export const DeleteUser = styled(FontAwesomeIcon)`
-    font-size: ${(props) => props.theme.typography.base};
     color: ${(props) => props.theme.alerts.error};
+`;
+
+export const CopyInviteWrap = styled.span`
+    ${FlexCenter}
     cursor: pointer;
     float: right;
     transition: ${(props) => props.theme.base.transitionSpeed} all;
     height: 4rem;
-    opacity: 0.6;
-    padding: 1.4rem;
     width: 4rem !important;
-
+    opacity: 0.5;
+    
     &:hover {
         opacity: 1;
     }
@@ -43,17 +60,7 @@ export const DeleteUser = styled(FontAwesomeIcon)`
 export const CopyInvite = styled(FontAwesomeIcon)`
     font-size: ${(props) => props.theme.typography.base};
     color: #666;
-    cursor: pointer;
-    float: right;
-    transition: ${(props) => props.theme.base.transitionSpeed} all;
-    height: 4rem;
-    opacity: 0.5;
-    padding: 1.4rem;
-    width: 4rem !important;
 
-    &:hover {
-        opacity: 1;
-    }
 `;
 
 export const GenerateInvite = styled.button`

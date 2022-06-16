@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
+import FlexCenter from 'Styles/Helpers';
 import { HeadingFour, Badge } from 'Styles/Base';
 import { rgba } from 'polished';
 
@@ -65,15 +66,18 @@ export const BackIcon = styled(FontAwesomeIcon)`
     transition: ${(props) => props.theme.base.transitionSpeed} all;
 `;
 
-export const HideNavIcon = styled(FontAwesomeIcon)`
-    color: ${(props) => props.theme.white};
-    font-size: ${(props) => props.theme.typography.body};
+export const HideNavIconWrap = styled.div`
+    ${FlexCenter}
     transition: ${(props) => props.theme.base.transitionSpeed} all;
-    width: 5rem !Important;
+    width: 5rem !important;
     height: 5rem;
     margin: 1.7rem 1rem;
-    padding: 1.5rem;
     cursor: pointer;
+`;
+
+export const HideNavIcon = styled(FontAwesomeIcon)`
+    height: 2.5rem;
+    color: ${(props) => props.theme.white};
 `;
 
 export const ContentOverlay = styled.div`

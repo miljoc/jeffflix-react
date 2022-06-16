@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import { Badge } from 'Styles/Base';
+import FlexCenter from 'Styles/Helpers';
 import { BackIcon, NavIcon } from "../Components/Header/Styles";
 
 const ButtonBase = css`
@@ -39,6 +41,19 @@ export const BackButton = styled.button`
 
 export const NavButton = styled.button`
     ${HeaderButton}
+    
+    ${(props) => props.hasCount && css`
+        position: relative;
+        ${FlexCenter}
+
+        ${Badge} {
+            position: absolute;
+            top: 0.5rem;
+            padding: 0;
+            left: 0;
+            color: ${props.theme.dark};
+        }
+    `}
 `;
 
 export default ButtonBase;

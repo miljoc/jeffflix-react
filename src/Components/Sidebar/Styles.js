@@ -47,6 +47,7 @@ export const NavItemHeading = styled.h5`
 export const AddFolder = styled(FontAwesomeIcon)`
     position: absolute;
     right: 0;
+    box-sizing: border-box !important;
     font-size: ${(props) => props.theme.typography.body};
     color: ${(props) => props.theme.white};
     opacity: 0;

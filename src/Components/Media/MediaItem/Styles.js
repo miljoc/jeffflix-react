@@ -5,24 +5,27 @@ import { media } from 'Styles/Utils';
 import { aFadeIn } from 'Styles/Animations';
 import { rgba } from 'polished';
 import { HeadingFiveStyle, ParagraphBaseStyle } from 'Styles/Base';
+import FlexCenter from 'Styles/Helpers';
 
-export const CloseVideo = styled(FontAwesomeIcon)`
+export const CloseVideoWrap = styled.div`
+    ${FlexCenter}
+    width: 6.5rem;
+    height: 6.5rem;
     position: absolute;
-    top: 0.75rem;
-    right: 0.5rem;
-    color: ${(props) => props.theme.white};
-    font-size: ${(props) => props.theme.typography.body};
+    top: 0;
+    right: 0;
     cursor: pointer;
     z-index: 11;
     transition: ${(props) => props.theme.base.transitionSpeed} all;
-    opacity: 0.9;
-    width: 5rem !important;
-    height: 5rem;
-    padding: 1.5rem;
-
+    opacity: 0.7;
     &:hover {
         opacity: 1;
     }
+`;
+
+export const CloseVideo = styled(FontAwesomeIcon)`
+    color: ${(props) => props.theme.white};
+    height: 2.5rem;
 `;
 
 export const DisabledIcon = styled(FontAwesomeIcon)`
@@ -129,12 +132,6 @@ export const MediaInfoSubhead = styled.span`
         margin:0 1.5rem 0 0;
         width:auto;
     `}
-`;
-
-export const DropdownIcon = styled(FontAwesomeIcon)`
-    color: ${(props) => props.theme.white};
-    font-size: ${(props) => props.theme.typography.base};
-    height: 2rem;
 `;
 
 export const FileName = styled.p`
@@ -299,15 +296,4 @@ export const LibraryUnhealthy = styled(FontAwesomeIcon)`
     font-size: ${(props) => props.theme.typography.root};
     height: 1em;
     margin-right: 0.7rem;
-`;
-
-export const InnerCountdown = styled.span.attrs(props => ({
-    style: {
-        width: `${props.width}%`
-    }
-}))`
-    height: 100%;
-    width: 100%;
-    transition: width 1s linear;
-    background-color: ${(props) => props.theme.primary};
 `;

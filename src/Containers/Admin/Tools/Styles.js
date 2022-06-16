@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { media } from 'Styles/Utils';
-import { HeaderIcon, HeaderIconWrap } from 'Components/Media/MediaHeader/Styles';
 import { rgba } from 'polished';
 import ButtonBase from 'Styles/Button';
 

@@ -7,7 +7,7 @@ import { copyToClipboard , getFQDNUrl } from 'Helpers';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import ReactTooltip from 'react-tooltip';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
-import { UserListItem, CopyInvite } from './Styles';
+import { UserListItem, CopyInvite, CopyInviteWrap } from './Styles';
 
 type Props = {
     code: string,
@@ -30,8 +30,12 @@ const InviteItem = ({ code }: Props) => {
         <UserListItem>
             <ReactTooltip effect="solid" place="right" className="tooltip" delayShow={1000} />
             {code}
-            <CopyInvite icon={faCopy} data-tip="Copy Invite Code" onClick={() => handleClick()} />
-            <CopyInvite icon={faGlobe} data-tip="Copy Invite URL" onClick={() => handleURLClick()} />
+            <CopyInviteWrap data-tip="Copy Invite Code" onClick={() => handleClick()}>
+                <CopyInvite icon={faCopy} />
+            </CopyInviteWrap>
+            <CopyInviteWrap data-tip="Copy Invite URL" onClick={() => handleURLClick()}>
+                <CopyInvite icon={faGlobe} />
+            </CopyInviteWrap>
         </UserListItem>
     );
 };

@@ -33,8 +33,6 @@ export const Input = styled.input`
 export const DropdownIcon = styled(FontAwesomeIcon)`
     color: ${(props) => props.theme.white};
     font-size: ${(props) => props.theme.typography.base};
-    height: 5rem;
-    width: 5rem;
 `;
 
 export const SelectStyle = {
@@ -118,6 +116,7 @@ export const SelectStyle = {
         right: '0',
         width: '4.5rem',
         display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
         transition: '0.2s all',
     }),

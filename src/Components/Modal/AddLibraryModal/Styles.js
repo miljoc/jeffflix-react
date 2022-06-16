@@ -92,7 +92,7 @@ export const LibraryItemFilePath = styled.span`
     }
 `;
 
-export const LibraryItemDelete = styled(FontAwesomeIcon)`
+export const LibraryItemDelete = styled.div`
     position: absolute;
     right: 0;
     color: ${(props) => (props.deleting ? props.theme.white : props.theme.alerts.error)};
