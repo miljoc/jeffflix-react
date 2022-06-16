@@ -75,6 +75,15 @@ export const MediaList = styled.div`
             margin-left: auto;
         }
 
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+
+            &:hover {
+                background: transparent;
+            }
+        }
+
         &:hover {
             background: ${(props) => rgba(props.theme.black, 0.15)}
         }

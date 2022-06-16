@@ -51,3 +51,5 @@ export const UncheckButton = styled(MatchButton)`
     background: ${(props) => props.disabled ? props.theme.black : props.theme.alerts.error};
     margin-right: 1rem;
 `;
+
+export const CheckAllButton = styled(MatchButton)``;

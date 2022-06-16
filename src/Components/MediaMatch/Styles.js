@@ -1,5 +1,6 @@
 import { rgba } from 'polished';
 import styled from 'styled-components';
+import { media } from 'Styles/Utils';
 
 export const Match = styled.div`
     display: flex;
@@ -8,13 +9,17 @@ export const Match = styled.div`
     text-align: left;
     width: 100%;
     height: 100%;
-    padding: 0 1rem;
+    padding: 0;
+
+    ${media.tablet`
+        padding: 0 1rem;
+    `}
     
     small, label {
         display: flex;
         height: 100%;
         width: 100%;
-        font-size: ${(props) => props.theme.typography.small};
+        font-size: ${(props) => props.theme.typography.root};
         align-items: center;
         cursor: ${(props) => (props.disabled ? 'initial' : 'pointer')};
         user-select: none;
@@ -23,6 +28,10 @@ export const Match = styled.div`
         &:hover {
             color: ${(props) => (props.theme.primary)};
         }
+
+        ${media.mobile`
+            font-size: ${(props) => props.theme.typography.small};
+        `}
     }
 
 `;

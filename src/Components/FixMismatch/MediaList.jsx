@@ -84,7 +84,11 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOn
                 <MediaListWrap>
                     {items.map((item) => (
                         <MediaListItem key={item.tmdbID}>
-                            <button type="button" onClick={() => mutationHandler(item)}>
+                            <button
+                                disabled={uuid.length === 0}
+                                type="button"
+                                onClick={() => mutationHandler(item)}
+                            >
                                 {item.name || item.title} <span>{item.releaseYear || item.firstAirYear}</span>
                             </button>
                             <a
