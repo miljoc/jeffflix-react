@@ -15,6 +15,7 @@ import MediaMismatch from './MediaMismatch';
 import MarkWatched from './MarkWatched';
 
 import * as S from './Styles';
+import RefreshMetadata from './RefreshMetadata';
 
 class MediaListHeader extends Component {
     constructor(props) {
@@ -115,17 +116,21 @@ class MediaListHeader extends Component {
                 </S.HeaderIconWrap>
 
                 <MarkWatched type={type} uuid={uuid} playState={playState} episodes={episodes} />
+                
+                {Auth.isAdmin.admin && (
+                    <>
+                        <RefreshMetadata uuid={uuid} />
+                        {episodes.length > 0 && type === 'series' && (
+                            <MediaMismatch
+                                uuid={uuid}
+                                name={name}
+                                file={files}
+                                type="episode"
+                            />
+                        )}
+                    </>
+                )}
 
-                {Auth.isAdmin.admin && episodes.length > 0 &&
-                    (type === 'series' && (
-                        <MediaMismatch
-                            uuid={uuid}
-                            name={name}
-                            file={files}
-                            type="episode"
-                        />
-                    ))
-                }
             </S.Header>
         );
     }
