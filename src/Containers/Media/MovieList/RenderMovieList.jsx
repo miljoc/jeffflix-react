@@ -1,26 +1,29 @@
 // @flow
-import React, { useEffect } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useQuery } from '@apollo/client';
 
 import FETCH_MOVIES from 'Queries/fetchMovieList';
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
 
-import InfiniteScroll from 'Components/InfiniteScroll';
 import Loading from 'Components/Loading';
-import MediaCard from 'Components/Media/Card';
 
 import { ErrorWrap } from 'Components/Error/Styles';
 import { NoResults } from 'Containers/Styles';
-import { LibraryListItem } from '../Styles';
+
+import Library, { itemsPerPage } from '../Library';
 
 type Props = {
     sModal: Function,
     sortOrder: String,
-    sortDirection: String
+    sortDirection: String,
+    count: Number
 };
 
-const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
+const RenderMovieList = ({ sModal, sortOrder, sortDirection, count }: Props) => {
+    const listRef = createRef();
+    // const [columnCount, setColumnCount] = useState(null);
+
     const toggleModal = () => {
         sModal(LIBRARY_MODAL, {
             title: 'Add Movies Library',
@@ -28,11 +31,9 @@ const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
         });
     };
 
-    const moviesLimit = (window.innerHeight > 1100) ? 100 : 50;
-
     const { loading, error, data, refetch, fetchMore } = useQuery(FETCH_MOVIES, {
         variables: {
-            limit: moviesLimit,
+            limit: itemsPerPage,
             offset: 0,
             sort: sortOrder,
             sortDirection
@@ -41,63 +42,44 @@ const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
 
     useEffect(() => {
         refetch({
-            limit: moviesLimit,
+            limit: itemsPerPage,
             offset: 0,
             sort: sortOrder,
             sortDirection
-        })
+        });
+
+        // scroll to the top when you change the sort / direction
+        listRef.current?.scrollToItem({ rowIndex: 0 });
     }, [sortDirection, sortOrder]);
 
     if (loading) return <Loading />;
     if (error) return <ErrorWrap style={{ marginLeft: '1rem' }}>{`Error! ${error.message}`}</ErrorWrap>;
 
-    if (data.movies.length) {
-        return (
-            <InfiniteScroll
-                id="content"
-                threshold={500}
-                onLoadMore={() =>
-                    fetchMore({
-                        variables: {
-                            offset: data.movies.length,
-                        },
-                        updateQuery: (prev, { fetchMoreResult }) => {
-                            if (!fetchMoreResult) return prev;
+    const loadMoreItems = (startIndex, stopIndex) => {
+        const limit = stopIndex > (startIndex + itemsPerPage) ? stopIndex - startIndex : itemsPerPage;
 
-                            return {
-                                ...prev,
-                                movies: [
-                                    ...prev.movies,
-                                    ...fetchMoreResult.movies.filter(
-                                        (item) => !prev.movies.some((prevItem) => prevItem.uuid === item.uuid),
-                                    ),
-                                ],
-                            };
-                        },
-                    })
+        if( stopIndex < count){
+            return fetchMore({
+                variables: {
+                    offset: startIndex,
+                    limit
                 }
-            >
-                {() => {
-                    return data.movies.map((m) => {
-                        const { files, name, title, playState, posterPath, type, uuid, year } = m;
+            });
+        }
 
-                        return (
-                            <LibraryListItem key={m.uuid}>
-                                <MediaCard
-                                    files={files}
-                                    name={name}
-                                    title={title}
-                                    playState={playState}
-                                    posterPath={posterPath}
-                                    type={type}
-                                    uuid={uuid}
-                                    year={year}
-                                />
-                            </LibraryListItem>
-                        );
-                    });
-                }}
-            </InfiniteScroll>
+        return false;
+    };
+
+    if (data.movies) {
+        return (
+            <Library
+                count={count}
+                data={data.movies}
+                loadMoreItems={loadMoreItems}
+                debounceAmount={300}
+                listRef={listRef}
+                // setColumnCount={setColumnCount}
+            />
         );
     }
 

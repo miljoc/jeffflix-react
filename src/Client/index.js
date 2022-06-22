@@ -45,6 +45,56 @@ const errorLink = onError(({ networkError }) => {
 
 const cache = new InMemoryCache({
     possibleTypes,
+    typePolicies: {
+        Query: {
+            fields: {
+                movies: {
+                    keyArgs: ["sort", "sortDirection", "uuid"],
+                    merge(existing, incoming, params) {
+                        const { offset } = params.variables;
+                        const merged = existing ? existing.slice(0) : [];
+                        // Insert the incoming elements in the right places, according to args.
+                        const newEnd = offset + incoming.length;
+                        const oldEnd = existing?.length ?? 0;
+                        for (let i = Math.min(offset, oldEnd); i < newEnd; i += 1) {
+                            if (i >= offset) {
+                                merged[i] = incoming[i - offset];
+                            } else if (i >= oldEnd) {
+                                // add placeholder
+                                merged[i] = null;
+                            }
+                        }
+                        return merged;
+                    },
+                    read(existing) {
+                        return existing ?? [];
+                    }
+                },
+                series: {
+                    keyArgs: ["sort", "sortDirection", "uuid"],
+                    merge(existing, incoming, params) {
+                        const { offset } = params.variables;
+                        const merged = existing ? existing.slice(0) : [];
+                        // Insert the incoming elements in the right places, according to args.
+                        const newEnd = offset + incoming.length;
+                        const oldEnd = existing?.length ?? 0;
+                        for (let i = Math.min(offset, oldEnd); i < newEnd; i += 1) {
+                            if (i >= offset) {
+                                merged[i] = incoming[i - offset];
+                            } else if (i >= oldEnd) {
+                                // add placeholder
+                                merged[i] = null;
+                            }
+                        }
+                        return merged;
+                    },
+                    read(existing) {
+                        return existing ?? [];
+                    }
+                }
+            },
+        },
+    },    
     dataIdFromObject: (object) => object.uuid || null,
 });
 

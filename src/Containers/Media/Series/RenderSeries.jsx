@@ -19,6 +19,8 @@ type Props = {
 const RenderSeries = ({ uuid }: Props) => {
     const { loading, error, data } = useQuery(FETCH_SERIES, {
         variables: { uuid },
+        fetchPolicy: "no-cache",
+        nextFetchPolicy: "cache-first"
     });
 
     if (loading) return <Loading />;

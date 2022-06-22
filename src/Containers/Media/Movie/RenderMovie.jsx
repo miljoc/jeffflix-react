@@ -13,6 +13,8 @@ type Props = {
 const RenderMovie = ({ uuid }: Props) => {
     const { loading, error, data } = useQuery(FETCH_MOVIE, {
         variables: { uuid },
+        fetchPolicy: "no-cache",
+        nextFetchPolicy: "cache-first"
     });
 
     if (loading) return <Loading />;
