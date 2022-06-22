@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import FETCH_FILE_LOCATOR from 'Queries/fetchFileLocator';
 import Loading from 'Components/Loading';
 import { ErrorWrap } from 'Components/Error/Styles';

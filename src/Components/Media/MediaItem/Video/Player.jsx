@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
-import { graphql, withApollo } from 'react-apollo';
+import { withApollo , graphql } from '@apollo/client/react/hoc';
 import videojs from 'video.js';
 import '@videojs/http-streaming';
 import 'videojs-seek-buttons';

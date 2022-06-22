@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'lodash/fp';
 import { connect } from 'react-redux';
 import { withAlert } from 'react-alert';
-import { graphql } from 'react-apollo';
+import { graphql } from '@apollo/client/react/hoc';
 import PropTypes from 'prop-types';
 
 import { ADD_LIBRARY } from 'Mutations/manageLibraries';

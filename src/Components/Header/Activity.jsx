@@ -2,7 +2,7 @@ import React from 'react'
 import { NavButton } from 'Styles/Button';
 import { faChartSimple } from '@fortawesome/free-solid-svg-icons';
 import FETCH_SESSIONS from 'Queries/fetchSessions';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import { Badge } from 'Styles/Base';
 import { convertMinutesToMilliseconds, pluralize } from 'Helpers';
 import { Link } from 'react-router-dom';

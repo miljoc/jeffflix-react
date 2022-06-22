@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { orderBy } from 'lodash';
 
 import FETCH_SERIES from 'Queries/fetchSeries';

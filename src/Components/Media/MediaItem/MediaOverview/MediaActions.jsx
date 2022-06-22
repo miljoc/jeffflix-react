@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { graphql } from 'react-apollo';
+import { graphql } from 'graphql';
 
 import UPDATE_PLAYSTATE from 'Mutations/updatePlaystate';
 import {

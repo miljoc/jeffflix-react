@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { faPencilAlt, faSync } from '@fortawesome/free-solid-svg-icons';
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
 
-import { useMutation } from 'react-apollo';
+import { useMutation } from '@apollo/client';
 import { useAlert } from 'react-alert';
 import { RESCAN_LIBRARY } from 'Mutations/manageLibraries';
 import { LIBRARY_STATE } from 'Queries/fetchLibraries';

@@ -1,7 +1,7 @@
 // @flow
 import React, { createRef, useMemo, useRef, useState } from 'react';
 import { InnerContent } from 'Containers/Styles';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import FETCH_UNIDENTIFIED_EPISODES from 'Queries/fetchUnidentifiedEpisodes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

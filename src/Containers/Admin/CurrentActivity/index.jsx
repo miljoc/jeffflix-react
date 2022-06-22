@@ -2,7 +2,7 @@ import React from 'react'
 import { InnerContent } from 'Containers/Styles';
 import { PageHeading } from 'Styles/Base';
 import { MediaOverview } from 'Components/Media/Styles';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import FETCH_SESSIONS from 'Queries/fetchSessions';
 import FETCH_USERS from 'Queries/fetchUserList';
 import Loading from 'Components/Loading';

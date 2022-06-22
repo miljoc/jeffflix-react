@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import Autosuggest from 'react-autosuggest';
 import PropTypes from 'prop-types';
 import FETCH_FOLDERS from 'Queries/fetchFolders';
@@ -23,10 +23,8 @@ const FolderSuggest = ({ filepath, onChange, libraryType, remote }) => {
         const inputLength = inputValue.length;
         if(inputLength > 3){
             refetch({
-                variables: {
-                    fullPath: true,
-                    path: `${libraryTypePrefix}${inputValue}`
-                }
+                fullPath: true,
+                path: `${libraryTypePrefix}${inputValue}`
             });
         }
 

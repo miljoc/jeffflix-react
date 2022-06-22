@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import FETCH_SERIES_LIST from 'Queries/fetchSeriesList';
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
@@ -41,12 +41,10 @@ const RenderSeriesList = ({ sModal, sortOrder, sortDirection }: Props) => {
 
     useEffect(() => {
         refetch({
-            variables: {
-                limit: seriesLimit,
-                offset: 0,
-                sort: sortOrder,
-                sortDirection
-            }
+            limit: seriesLimit,
+            offset: 0,
+            sort: sortOrder,
+            sortDirection
         })
     }, [sortDirection, sortOrder]);    
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-apollo";
+import { useMutation, useQuery } from "@apollo/client";
 import FETCH_NEARBY from "Queries/fetchNearbyEpisodes";
 import REQUEST_STREAM from 'Mutations/requestStream';
 import getVideoSource from 'Components/Media/MediaItem/Video/getVideoSource';

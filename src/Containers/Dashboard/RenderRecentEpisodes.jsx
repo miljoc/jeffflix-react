@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 
 import RECENTLY_ADDED from 'Queries/fetchRecentlyAdded';
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';

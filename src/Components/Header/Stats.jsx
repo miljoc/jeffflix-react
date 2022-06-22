@@ -1,6 +1,6 @@
 import React from 'react';
 import MEDIA_STATS from 'Queries/fetchMediaStats';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import Loading from 'Components/Loading';
 import PropTypes from 'prop-types';
 import { ErrorWrap } from 'Components/Error/Styles';
