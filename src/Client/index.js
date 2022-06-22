@@ -1,11 +1,8 @@
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloLink, from } from 'apollo-link';
+import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, from } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import Cookies from 'universal-cookie';
 import { getBaseUrl } from 'Helpers';
-import fragmentMatcher from './fragmentMatcher';
+import possibleTypes from './possibleTypes';
 
 // eslint-disable-next-line
 import { Auth } from './Auth';
@@ -45,8 +42,9 @@ const errorLink = onError(({ networkError }) => {
     }
 });
 
+
 const cache = new InMemoryCache({
-    fragmentMatcher,
+    possibleTypes,
     dataIdFromObject: (object) => object.uuid || null,
 });
 

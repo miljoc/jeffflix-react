@@ -4,7 +4,7 @@ import Loading from 'Components/Loading';
 
 import navigationArr from 'Routes/Helper/navigationArr';
 import FETCH_LIBRARIES from 'Queries/fetchLibraries';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import NavItem from './NavItem';
 
 const Navigation = () => {

@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import FETCH_MOVIES from 'Queries/fetchMovieList';
 import { showModal, LIBRARY_MODAL } from 'Redux/Actions/modalActions';
@@ -41,12 +41,10 @@ const RenderMovieList = ({ sModal, sortOrder, sortDirection }: Props) => {
 
     useEffect(() => {
         refetch({
-            variables: {
-                limit: moviesLimit,
-                offset: 0,
-                sort: sortOrder,
-                sortDirection
-            }
+            limit: moviesLimit,
+            offset: 0,
+            sort: sortOrder,
+            sortDirection
         })
     }, [sortDirection, sortOrder]);
 

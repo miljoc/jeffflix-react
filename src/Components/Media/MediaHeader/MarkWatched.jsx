@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql } from '@apollo/client/react/hoc';
 import PropTypes from 'prop-types';
 
 import { faCheckCircle as faCheckCircleSolid } from '@fortawesome/free-solid-svg-icons';

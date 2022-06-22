@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import FETCH_EPISODE from 'Queries/fetchEpisode';
 import Loading from 'Components/Loading';

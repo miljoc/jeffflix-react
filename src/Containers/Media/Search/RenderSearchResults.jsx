@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import FETCH_SEARCH_RESULTS from 'Queries/fetchSearchResults';
 import Loading from 'Components/Loading';

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import DELETE_USER from 'Mutations/deleteUser';
 import { showModal, WARNING_MODAL } from 'Redux/Actions/modalActions';
 import { faTrash, faCrown } from '@fortawesome/free-solid-svg-icons';

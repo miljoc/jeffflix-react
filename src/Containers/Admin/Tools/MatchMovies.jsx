@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { InnerContent } from 'Containers/Styles';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import FETCH_UNIDENTIFIED_MOVIES from 'Queries/fetchUnidentifiedMovies';
 
 import Loading from 'Components/Loading';

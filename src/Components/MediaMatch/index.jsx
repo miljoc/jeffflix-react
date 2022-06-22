@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import { connect } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { Redirect } from 'react-router';

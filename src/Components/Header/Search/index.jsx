@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import debounce from 'lodash/debounce';
 import Autosuggest from 'react-autosuggest';
-import { graphql } from 'react-apollo';
+import { graphql } from '@apollo/client/react/hoc';
 import { withRouter } from 'react-router-dom';
 
 import FETCH_SUGGESTIONS from 'Queries/fetchSuggestions';

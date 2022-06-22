@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import FETCH_MOVIE from 'Queries/fetchMovie';
 import Loading from 'Components/Loading';

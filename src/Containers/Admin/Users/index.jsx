@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { useMutation, useQuery } from 'react-apollo';
+import { useMutation, useQuery } from '@apollo/client';
 
 import CREATE_USER_INVITE from 'Mutations/createUserInvite';
 import FETCH_INVITES from 'Queries/fetchInvites';

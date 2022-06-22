@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose, isEmpty } from 'lodash/fp';
-import { useMutation } from 'react-apollo';
+import { useMutation } from '@apollo/client';
 import { connect } from 'react-redux';
 import { isIOS } from 'react-device-detect';
 import { useLocation } from 'react-router';

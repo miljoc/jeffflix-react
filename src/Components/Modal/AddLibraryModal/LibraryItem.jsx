@@ -1,6 +1,6 @@
 // @flow
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import ReactToolTip from 'react-tooltip';
 
 import { faExclamation, faSpinner, faSync, faTrash } from '@fortawesome/free-solid-svg-icons';
