@@ -1,26 +1,15 @@
 import React from 'react';
-import MEDIA_STATS from 'Queries/fetchMediaStats';
-import { useQuery } from '@apollo/client';
-import Loading from 'Components/Loading';
 import PropTypes from 'prop-types';
-import { ErrorWrap } from 'Components/Error/Styles';
 import { HeadingFour, Badge } from 'Styles/Base';
 import { StatsContent } from "./Styles";
 
-const Stats = ({ type }) => {
-    const { loading, error, data } = useQuery(MEDIA_STATS);
-
-    if (loading) return <Loading />;
-    if (error) return <ErrorWrap>{`Error! ${error.message}`}</ErrorWrap>;
-
-    const { movieCount, seriesCount } = data.mediaStats;
-
+const Stats = ({ type, count }) => {
     return (
         <StatsContent>
             <HeadingFour>
                 {type === "movies"
-                    ? <>Movies {movieCount > 0 && <Badge>{movieCount}</Badge>}</>
-                    : <>TV Shows {seriesCount > 0 && <Badge>{seriesCount}</Badge>}</>
+                    ? <>Movies {count > 0 && <Badge>{count}</Badge>}</>
+                    : <>TV Shows {count > 0 && <Badge>{count}</Badge>}</>
                 }
             </HeadingFour>
         </StatsContent>
@@ -29,6 +18,7 @@ const Stats = ({ type }) => {
 
 Stats.propTypes = {
     type: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired
 };
 
 export default Stats;

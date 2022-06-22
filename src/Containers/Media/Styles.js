@@ -1,16 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from 'Styles/Utils';
 
 export const LibraryListWrap = styled.section`
-    width: 100%;
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
+    /* align-items: center; */
     justify-content: flex-start;
-    padding: 3rem 1rem 0rem;
+    width: 100%;
+    padding: 2rem 1rem 0rem;
+    height: calc(100vh - 9rem);
+    margin-top: 9rem;
 
     ${media.desktop`
-        padding:4rem 3rem 0;
+        padding: 4rem 3rem 0;
     `}
 
     ${media.large`
@@ -18,33 +20,48 @@ export const LibraryListWrap = styled.section`
     `}
 `;
 
-export const LibraryListItem = styled.div`
-    flex: 1 0 auto;
-    width:calc(50% - 2rem);
-    max-width:calc(50% - 2rem);
-    margin: 0 1rem 2rem;
-
-    ${media.mobile`
-        width:calc(33.3333% - 3rem);
-        max-width:calc(33.3333% - 3rem);
-        margin: ${(props) => props.theme.card.margin};
-    `}
-
-    ${media.tablet`
-        width:calc(25% - 3rem);
-        max-width:calc(25% - 3rem);
-        margin: ${(props) => props.theme.card.margin};
-    `}
+export const RenderListWrap = styled.div`
+    width: 100%;
+    height: calc(100% - 11rem);
+    padding-top: 2rem;
 
     ${media.desktop`
-        width:calc(25% - 3rem);
-        max-width:calc(25% - 3rem);;
+        height: calc(100% - 5rem);
+    `}
+`;
+
+export const LibraryListItem = styled.div`
+    ${(props) => props.hasWidth && css`
+        flex: 1 0 auto;
+        width:calc(50% - 2rem);
+        max-width:calc(50% - 2rem);
+        margin: 0 1rem 2rem;
+
+        ${media.mobile`
+            width:calc(33.3333% - 3rem);
+            max-width:calc(33.3333% - 3rem);
+            margin: ${(props) => props.theme.card.margin};
+        `}
+
+        ${media.tablet`
+            width:calc(25% - 3rem);
+            max-width:calc(25% - 3rem);
+            margin: ${(props) => props.theme.card.margin};
+        `}
+
+        ${media.desktop`
+            width:calc(25% - 3rem);
+            max-width:calc(25% - 3rem);
+            ${media.large`
+                width: ${(props) => props.theme.card.maxWidth};
+                max-width: ${(props) => props.theme.card.maxWidth};
+            `}
+        `}
     `}
 
-    ${media.large`
-        width: ${(props) => props.theme.card.width};
-        max-width: ${(props) => props.theme.card.maxWidth};
-    `}
+    width: calc(100% - 2rem);
+    margin: 0 auto;
+
 `;
 
 export const LibraryListItemWide = styled.div`
@@ -77,6 +94,7 @@ export const SortRow = styled.div`
     flex-wrap: wrap;
     align-items: center;
     flex-basis: 100%;
+    height: 5rem;
     justify-content: space-between;
-    margin: 0 1.4rem 2rem;
+    margin: 0 1rem 2rem;
 `;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { aFadeIn } from 'Styles/Animations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { media } from 'Styles/Utils';
@@ -78,6 +78,11 @@ export const CardPoster = styled.span`
     ${PosterWrap}:hover & {
         filter: ${(props) => (props.hover ? 'grayscale(25%) saturate(75%)' : 'grayscale(0) saturate(125%)')};
     }
+
+    ${props => props.immediate && css`
+        animation: none;
+        opacity: 1;
+    `}
 
     ${media.tablet`
         padding-top: ${(props) => (props.wide ? '13rem' : props.theme.card.paddingTop)};

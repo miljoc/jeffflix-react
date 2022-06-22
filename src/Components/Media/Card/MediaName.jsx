@@ -45,7 +45,7 @@ const MediaName = ({ episodes, type, year, name, title, episodeNumber, seasonNum
 MediaName.propTypes = {
     name: PropTypes.string.isRequired,
     title: PropTypes.string,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string,
     year: PropTypes.string,
     episodeNumber: PropTypes.number,
     seasonNumber: PropTypes.number,
@@ -61,7 +61,8 @@ MediaName.defaultProps = {
     seasonNumber: null,
     episodeNumber: null,
     year: null,
-    title: null
+    title: null,
+    type: ''
 };
 
 export default MediaName;
