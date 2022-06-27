@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { createRef } from 'react';
 import { useQuery } from '@apollo/client';
 
 import FETCH_SEARCH_RESULTS from 'Queries/fetchSearchResults';
@@ -12,6 +12,7 @@ type Props = {
 };
 
 const RenderSearchResults = ({ value }: Props) => {
+    const listRef = createRef();
     const { loading, error, data } = useQuery(FETCH_SEARCH_RESULTS, {
         variables: { value },
     });
@@ -26,6 +27,7 @@ const RenderSearchResults = ({ value }: Props) => {
                 data={data.search}
                 loadMoreItems={() => false}
                 debounceAmount={300}
+                listRef={listRef}
             />
         );
     }
