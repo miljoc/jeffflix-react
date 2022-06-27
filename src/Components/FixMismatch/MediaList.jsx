@@ -79,9 +79,12 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOn
                 autoHeightMax={300}
                 renderThumbVertical={renderThumb}
                 renderTrackVertical={renderTrack}
+                renderView={({ style }) => 
+                    <div style={{ ...style, overflowY: loading ? 'hidden' : 'scroll' }} />
+                }
             >
-                {loading && <LoadingWrap><Loading /></LoadingWrap>}
                 <MediaListWrap>
+                    {loading && <LoadingWrap><Loading /></LoadingWrap>}
                     {items.map((item) => (
                         <MediaListItem key={item.tmdbID}>
                             <button

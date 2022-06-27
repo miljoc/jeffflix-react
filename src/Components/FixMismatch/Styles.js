@@ -48,13 +48,22 @@ export const LoadingWrap = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: ${(props) => rgba(props.theme.background, 0.6)};
+    background-color: ${(props) => rgba(props.theme.background, 0.9)};
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 2;
+
+    svg {
+        position: sticky;
+    }
 `;
 
 export const MediaList = styled.div`
     background: ${(props) => rgba(props.theme.white, 0.03)};
     border-radius: ${(props) => props.theme.button.borderRadius};
     padding: 0.5rem;
+    position: relative;
 
     button {
         ${ParagraphBaseStyle}
