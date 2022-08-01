@@ -10,7 +10,7 @@ import { compileEpisodes, generateMediaUrl } from 'Helpers';
 import { showModal } from 'Redux/Actions/modalActions';
 
 import { faPlay, faRandom } from '@fortawesome/free-solid-svg-icons';
-import { orderBy } from 'lodash';
+import { orderBy, flatten } from 'lodash';
 import MediaMismatch from './MediaMismatch';
 import MarkWatched from './MarkWatched';
 
@@ -83,11 +83,15 @@ class MediaListHeader extends Component {
         const { type, name, uuid } = this.props;
 
         const files = orderBy(
-            episodes.map(e => { return {
-                uuid: e.files[0].uuid,
-                filePath: e.files[0].filePath,
-                fileName: e.files[0].fileName
-            } }),
+            flatten(episodes.map(e => {
+                return e.files.map(f =>{
+                    return {
+                        uuid: f.uuid,
+                        filePath: f.filePath,
+                        fileName: f.fileName
+                    }
+                })
+            })),
             ['filePath'],
             ['asc']
         );
