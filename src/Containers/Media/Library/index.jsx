@@ -11,8 +11,6 @@ import { LibraryListItem } from '../Styles';
 import MediaName from '../../../Components/Media/Card/MediaName';
 
 export const itemsPerPage = 50;
-export const columnWidth = 190;
-export const rowHeight = 340;
 
 export const scrollToIndex = (listRef, index, columnCount, align = "center") => {
     const row = Math.floor(index / columnCount);
@@ -21,14 +19,16 @@ export const scrollToIndex = (listRef, index, columnCount, align = "center") => 
 
 const Library = ({ 
     count,
+    viewType,
     loadMoreItems,
     data,
     debounceAmount,
     listRef,
-    // setColumnCount
 }) => {
     const isItemLoaded = index => !!data[index];
-
+    const columnWidth = viewType === "thumbnail" ? 320 : 190;
+    const rowHeight = viewType === "thumbnail" ? 240 : 340;
+    
     return (
         <AutoSizer>
             {({ height, width }) => {
@@ -99,7 +99,6 @@ const Library = ({
                                         ref(list); // Give InfiniteLoader a reference to the list
                                         // eslint-disable-next-line no-param-reassign
                                         listRef.current = list; // Set your own ref to it as well.
-                                        // setColumnCount(columnCount);
                                     }}
                                 >
                                     {({columnIndex, rowIndex, data: movieData, style}) => {
@@ -114,7 +113,12 @@ const Library = ({
                                                         <LibraryListItem>
                                                             <CardWrap>
                                                                 <PosterWrap title="Loading">
-                                                                    <CardPoster immediate bgimg={placeholder} />
+                                                                    <CardPoster
+                                                                        wide={viewType === "thumbnail"}
+                                                                        wideLibrary={viewType === "thumbnail"}
+                                                                        immediate
+                                                                        bgimg={placeholder}
+                                                                    />
                                                                 </PosterWrap>
                                                                 <MediaName name="Loading..." />
                                                             </CardWrap>
@@ -128,21 +132,33 @@ const Library = ({
                                                                 <MediaCard
                                                                     name={item.name}
                                                                     title={item.title}
-                                                                    posterPath={item.posterPath}
+                                                                    posterPath={
+                                                                        viewType === "thumbnail"
+                                                                            ? item.backdropPath
+                                                                            : item.posterPath
+                                                                    }
                                                                     type={item.type}
                                                                     files={item.files}
                                                                     playState={item.playState}
                                                                     uuid={item.uuid}
                                                                     year={item.year}
+                                                                    wide={viewType === "thumbnail"}
+                                                                    wideLibrary={viewType === "thumbnail"}
                                                                 />
                                                             ) : (
                                                                 <MediaCard
                                                                     name={item.name}
-                                                                    posterPath={item.posterPath}
+                                                                    posterPath={
+                                                                        viewType === "thumbnail"
+                                                                            ? item.backdropPath
+                                                                            : item.posterPath
+                                                                    }
                                                                     type={item.type}
                                                                     unwatchedEpisodesCount={item.unwatchedEpisodesCount}
                                                                     uuid={item.uuid}
                                                                     year={item.firstAirDate.split("-")[0]}
+                                                                    wide={viewType === "thumbnail"}
+                                                                    wideLibrary={viewType === "thumbnail"}
                                                                 />
                                                             )}
                                                         </LibraryListItem>
@@ -167,11 +183,11 @@ Library.propTypes = {
     loadMoreItems: PropTypes.func.isRequired,
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     debounceAmount: PropTypes.number.isRequired,
+    viewType: PropTypes.string.isRequired,
     listRef: PropTypes.oneOfType([
         PropTypes.func, 
         PropTypes.shape({ current: PropTypes.instanceOf(Element) })
     ]).isRequired,
-    // setColumnCount: PropTypes.func.isRequired
 }
 
 export default Library

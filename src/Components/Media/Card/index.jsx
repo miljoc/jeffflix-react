@@ -80,7 +80,19 @@ class MediaCard extends Component {
     };
 
     render() {
-        const { wide, showText, history, name, title, posterPath, stillPath, type, files, hover } = this.props;
+        const {
+            wide,
+            wideLibrary,
+            showText,
+            history,
+            name,
+            title,
+            posterPath,
+            stillPath,
+            type,
+            files,
+            hover
+        } = this.props;
         const { url } = this.state;
 
         const showPlayStatus = type === 'Movie' || type === 'Episode';
@@ -102,13 +114,14 @@ class MediaCard extends Component {
                     <PosterWrap title={name}>
                         <Lazy
                             wide={wide}
+                            wideLibrary={wideLibrary}
                             height={0}
                             debounce={100}
-                            placeholder={<Placeholder wide={wide} />}
+                            placeholder={<Placeholder wideLibrary={wideLibrary} wide={wide} />}
                             overflow
                             resize
                         >
-                            <CardPoster hover={hover} wide={wide} bgimg={bgImage}>
+                            <CardPoster hover={hover} wide={wide} wideLibrary={wideLibrary} bgimg={bgImage}>
                                 <MediaInfo {...this.props} length={length} showPlayStatus={showPlayStatus} />
                             </CardPoster>
                         </Lazy>
@@ -154,6 +167,7 @@ MediaCard.propTypes = {
     history: ReactRouterPropTypes.history.isRequired,
     hover: PropTypes.bool,
     wide: PropTypes.bool,
+    wideLibrary: PropTypes.bool,
     showText: PropTypes.bool,
 };
 
@@ -164,6 +178,7 @@ MediaCard.defaultProps = {
     posterPath: null,
     stillPath: null,
     wide: null,
+    wideLibrary: null,
     playMedia: null,
     showText: true,
     internalCard: null,

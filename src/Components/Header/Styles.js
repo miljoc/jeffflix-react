@@ -104,7 +104,7 @@ export const SortWrap = styled.div`
     z-index: 5;
 
     ${media.desktop`
-        flex-basis: 70%;
+        flex-basis: 80%;
     `}
 
     > div {
@@ -114,10 +114,14 @@ export const SortWrap = styled.div`
         `}
 
         &:first-of-type {
-            margin-right: 1.5rem;
             ${media.desktop`
                 flex-basis: 20rem;
             `}
+        }
+
+        &:first-of-type,
+        &:not(:last-of-type) {
+            margin-right: 1.5rem;
         }
     }
 `;

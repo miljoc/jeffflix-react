@@ -19,9 +19,11 @@ const SeriesList = () => {
 
     const sortValues = [{ value: 'name', label: 'Name'}, { value: 'firstAirDate', label: 'First Air Date' }];
     const sortDirections = [{ value: 'asc', label: 'Ascending'}, { value: 'desc', label: 'Descending' }];
+    const viewOptions = [{ value: 'poster', label: 'Poster' },{ value: 'thumbnail', label: 'Thumbnail' }];
 
     const [sortOrder, setSortOrder] = useState(getLocalStorage(type, "sortOrder") || sortValues[0]);
     const [sortDirection, setSortDirection] = useState(getLocalStorage(type, "sortDirection") || sortDirections[0]);
+    const [view, setView] = useState(getLocalStorage(type, "viewType") || viewOptions[0]);
 
     const { loading, error, data } = useQuery(MEDIA_STATS);
 
@@ -44,12 +46,16 @@ const SeriesList = () => {
                     getLocalStorage={getLocalStorage}
                     sortValues={sortValues}
                     sortDirections={sortDirections}
+                    viewOptions={viewOptions}
+                    setView={setView}
+                    view={view}
                 />
             </SortRow>
             <RenderListWrap>
                 <RenderSeriesList
                     sortOrder={sortOrder.value}
                     sortDirection={sortDirection.value}
+                    viewType={view.value}
                     count={seriesCount}
                 />
             </RenderListWrap>

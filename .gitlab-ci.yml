@@ -1,4 +1,4 @@
-image: node:lts
+image: node:16.13
 
 cache:
   untracked: true
