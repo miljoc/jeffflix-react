@@ -29,6 +29,7 @@ const RenderEpisode = ({ uuid }: Props) => {
         <MediaItem
             wide
             uuid={uuid}
+            tmdbID={season.series.tmdbID}
             airDate={airDate}
             posterPath={stillPath}
             season={season}
@@ -38,6 +39,7 @@ const RenderEpisode = ({ uuid }: Props) => {
             files={files}
             overview={overview}
             episodeNumber={episodeNumber}
+            seasonNumber={season.seasonNumber}
         />
     );
 };

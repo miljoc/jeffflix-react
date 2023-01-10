@@ -18,6 +18,7 @@ import FETCH_MEDIA_STATS from 'Queries/fetchMediaStats';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { generateTMDbUrl } from 'Helpers';
 import { LoadingWrap, MediaList as MediaListWrap, MediaListItem, renderThumb, renderTrack } from './Styles';
 
 const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOnSubmit }) => {
@@ -95,7 +96,7 @@ const MediaList = ({ hModal, uuid, searchVal, items, networkStatus, type, onlyOn
                                 {item.name || item.title} <span>{item.releaseYear || item.firstAirYear}</span>
                             </button>
                             <a
-                                href={`https://www.themoviedb.org/${type !== "movie" ? "tv" : type}/${item.tmdbID}`}
+                                href={generateTMDbUrl(type, item.tmdbID)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 title="View on TMDB"

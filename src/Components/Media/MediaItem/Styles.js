@@ -83,7 +83,8 @@ export const MediaFull = styled.article`
 export const MediaInfo = styled.div`
     float: left;
     width: 100%;
-    display: block;
+    display: flex;
+    align-items: center;
     position: relative;
     margin: 0 0 1rem;
 
@@ -113,6 +114,20 @@ export const MediaInfoList = styled.ul`
             border: 0;
         }
     }
+`;
+
+export const MediaInfoLinks = styled(MediaInfoList)`
+    li {
+        margin-right: 0.8rem;
+
+        a {
+            transition: ${(props) => props.theme.base.transitionSpeed} opacity;
+
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+    }    
 `;
 
 export const MediaInfoSubhead = styled.span`

@@ -9,6 +9,7 @@ const FETCH_SERIES = gql`
             overview
             posterPath
             firstAirDate
+            tmdbID
 
             seasons {
                 type: __typename

@@ -23,8 +23,11 @@ import { MediaFull } from './Styles';
 import { MediaFullWrap, MediaLeftCol, MediaRightCol } from '../Styles';
 
 const MediaItem = ({
+    imdbID,
+    tmdbID,
     posterPath,
     episodeNumber,
+    seasonNumber,
     season,
     type,
     wide,
@@ -106,8 +109,11 @@ const MediaItem = ({
     const background = isEmpty(season) ? posterPath : season.series.posterPath;
     const renderedName = type === 'Movie' ? title : name;
     const mediaInfo = {
+        imdbID,
+        tmdbID,
         posterPath,
         episodeNumber,
+        seasonNumber,
         season,
         type,
         wide,
@@ -166,6 +172,7 @@ const MediaItem = ({
                         isConnected={isConnected}
                         release={year || airDate}
                         episodeNumber={episodeNumber}
+                        type={type}
                     />
                 </MediaRightCol>
             </MediaFull>
@@ -211,10 +218,13 @@ MediaItem.propTypes = {
     title: PropTypes.string,
     overview: PropTypes.string.isRequired,
     isConnected: PropTypes.bool.isRequired,
+    imdbID: PropTypes.string,
+    tmdbID: PropTypes.number.isRequired,
     posterPath: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     wide: PropTypes.bool,
     episodeNumber: PropTypes.number,
+    seasonNumber: PropTypes.number,
     year: requiredPropsCheck,
     airDate: requiredPropsCheck,
     files: PropTypes.arrayOf(
@@ -255,7 +265,9 @@ MediaItem.defaultProps = {
     season: {},
     location: {},
     episodeNumber: null,
-    title: null
+    seasonNumber: null,
+    title: null,
+    imdbID: null
 };
 
 const mapStateToProps = (state) => {

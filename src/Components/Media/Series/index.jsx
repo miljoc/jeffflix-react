@@ -18,9 +18,10 @@ import {
     MediaBackground,
 } from '../Styles';
 import SeasonsWrap from './Styles';
+import MediaLinks from '../MediaItem/MediaOverview/MediaLinks';
 
 const Series = (props) => {
-    const { name, uuid, posterPath, overview, firstAirDate, seasons, children, type } = props;
+    const { name, uuid, posterPath, overview, firstAirDate, seasons, children, type, tmdbID } = props;
 
     const releaseDate = `(${firstAirDate.split('-')[0]})`;
 
@@ -38,6 +39,7 @@ const Series = (props) => {
                     <MediaRelease>{releaseDate}</MediaRelease>
                 </MediaName>
                 {overview.length > 0 && <MediaDescription overview={overview} />}
+                <MediaLinks type="series" tmdbID={tmdbID} />
                 <SubTitle>Seasons</SubTitle>
                 <SeasonsWrap>{children}</SeasonsWrap>
             </MediaRightCol>
@@ -59,6 +61,7 @@ Series.propTypes = {
             uuid: PropTypes.string.isRequired,
         }),
     ).isRequired,
+    tmdbID: PropTypes.number.isRequired
 };
 
 Series.defaultProps = {

@@ -9,6 +9,7 @@ const FETCH_MOVIE = gql`
             year
             overview
             imdbID
+            tmdbID
             backdropPath
             uuid
             posterPath

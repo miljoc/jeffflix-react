@@ -21,8 +21,21 @@ import {
     MediaEpisodes,
 } from '../Styles';
 import EpisodesWrap from './Styles';
+import MediaLinks from '../MediaItem/MediaOverview/MediaLinks';
 
-const Season = ({ name, uuid, posterPath, airDate, overview, children, episodes, series, type }) => {
+const Season = ({
+    name,
+    uuid,
+    posterPath,
+    airDate,
+    overview,
+    children,
+    episodes,
+    series,
+    type,
+    tmdbID,
+    seasonNumber
+}) => {
     const releaseDate = `(${airDate.split('-')[0]})`;
 
     const { seasons } = series;
@@ -43,8 +56,8 @@ const Season = ({ name, uuid, posterPath, airDate, overview, children, episodes,
                     <MediaRelease>{releaseDate}</MediaRelease>
                     <MediaEpisodes>{episodes.length} episodes</MediaEpisodes>
                 </SeasonNumber>
-
                 {overview.length > 0 && <MediaDescription overview={overview} />}
+                <MediaLinks type="series" tmdbID={tmdbID} seasonNumber={seasonNumber} />
                 <SubTitle>Episodes</SubTitle>
 
                 <EpisodesWrap>{children}</EpisodesWrap>
@@ -77,6 +90,8 @@ Season.propTypes = {
             uuid: PropTypes.string.isRequired,
         }),
     ).isRequired,
+    tmdbID: PropTypes.number.isRequired,
+    seasonNumber: PropTypes.number.isRequired
 };
 
 Season.defaultProps = {

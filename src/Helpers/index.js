@@ -15,6 +15,7 @@ import convertFilesize from './convertFilesize';
 import propertiesMap from './propertiesMap';
 import pluralize from './pluralize';
 import { getLocalStorage, setLocalStorage } from './localStorage';
+import { generateIMDbUrl , generateTMDbUrl } from './generateExternalUrls';
 
 export {
     getUrlParameter,
@@ -38,5 +39,7 @@ export {
     propertiesMap,
     getLocalStorage,
     setLocalStorage,
-    pluralize
+    pluralize,
+    generateIMDbUrl,
+    generateTMDbUrl
 };
