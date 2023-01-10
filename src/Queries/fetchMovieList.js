@@ -7,6 +7,7 @@ const FETCH_MOVIES = gql`
             name
             title
             posterPath
+            backdropPath
             uuid
             year
 

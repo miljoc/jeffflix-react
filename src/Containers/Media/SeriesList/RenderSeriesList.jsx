@@ -17,12 +17,12 @@ type Props = {
     sModal: Function,
     sortOrder: String,
     sortDirection: String,
+    viewType: String,
     count: Number 
 };
 
-const RenderSeriesList = ({ sModal, sortOrder, sortDirection, count }: Props) => {
+const RenderSeriesList = ({ sModal, sortOrder, sortDirection, viewType, count }: Props) => {
     const listRef = createRef();
-    // const [columnCount, setColumnCount] = useState(null);
 
     const toggleModal = () => {
         sModal(LIBRARY_MODAL, {
@@ -78,7 +78,7 @@ const RenderSeriesList = ({ sModal, sortOrder, sortDirection, count }: Props) =>
                 loadMoreItems={loadMoreItems}
                 debounceAmount={300}
                 listRef={listRef}
-                // setColumnCount={setColumnCount}
+                viewType={viewType}
             />
         );
     }

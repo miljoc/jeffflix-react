@@ -11,6 +11,9 @@ type Props = {
     sortDirection: String,
     sortValues: Array,
     sortDirections: Array,
+    viewOptions: Array,
+    setView: Function,
+    view: String,
     type: String
 };
 
@@ -21,10 +24,23 @@ const Sort = ({
     setSortDirection,
     sortDirections,
     sortValues,
+    viewOptions,
+    setView,
+    view,
     type
 }: Props) => {    
     return (
         <SortWrap>
+            <SingleSelect
+                placeholder="View"
+                options={viewOptions}
+                onChange={(val) => {
+                    setLocalStorage(val, `${type}-viewType`);
+                    setView(val);
+                }}
+                value={view}
+                name="viewType"
+            />
             <SingleSelect
                 placeholder="Sort by"
                 options={sortValues}

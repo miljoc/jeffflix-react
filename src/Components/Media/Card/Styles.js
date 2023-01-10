@@ -20,6 +20,9 @@ export const Placeholder = styled.img`
 
     ${media.desktop`
         height: ${(props) => (props.wide ? props.theme.wideCard.paddingTop : props.theme.card.paddingTop)};
+        ${(props) => props.wideLibrary && css`
+            height: ${props.theme.wideCardLibrary.paddingTop};
+        `};
     `}
 `;
 
@@ -54,13 +57,16 @@ export const Lazy = styled(LazyLoad)`
 
     ${media.desktop`
         padding-top: ${(props) => (props.wide ? props.theme.wideCard.paddingTop : props.theme.card.paddingTop)};
+        ${(props) => props.wideLibrary && css`
+            padding-top: ${props.theme.wideCardLibrary.paddingTop};
+        `};
     `}
 `;
 
 export const CardPoster = styled.span`
     width: 100%;
     float: left;
-    padding: 0.2rem;
+    padding: 0.2rem 0.2rem 0;
     background-image: url(${(props) => (props.bgimg ? props.bgimg : placeholder)});
     background-repeat: no-repeat;
     background-size: cover;
@@ -90,7 +96,11 @@ export const CardPoster = styled.span`
 
     ${media.desktop`
         padding-top: ${(props) => (props.wide ? props.theme.wideCard.paddingTop : props.theme.card.paddingTop)};
+        ${(props) => props.wideLibrary && css`
+            padding-top: ${props.theme.wideCardLibrary.paddingTop};
+        `};
     `}
+
 `;
 
 export const CardTitle = styled.h3`

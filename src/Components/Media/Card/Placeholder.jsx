@@ -4,14 +4,17 @@ import placeholder from './placeholder.png';
 
 import * as S from './Styles';
 
-const Placeholder = ({ wide }) => <S.Placeholder src={placeholder} wide={wide} alt="Loading..." />;
+const Placeholder = ({ wide, wideLibrary }) => 
+    <S.Placeholder src={placeholder} wideLibrary={wideLibrary} wide={wide} alt="Loading..." />;
 
 Placeholder.propTypes = {
-    wide: PropTypes.bool
+    wide: PropTypes.bool,
+    wideLibrary: PropTypes.bool
 };
 
 Placeholder.defaultProps = {
-    wide: false
+    wide: false,
+    wideLibrary: false
 }
 
 export { Placeholder, placeholder };

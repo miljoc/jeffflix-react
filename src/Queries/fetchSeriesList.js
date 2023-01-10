@@ -6,6 +6,7 @@ const FETCH_SERIES_LIST = gql`
             type: __typename
             name
             posterPath
+            backdropPath
             uuid
             unwatchedEpisodesCount
             firstAirDate

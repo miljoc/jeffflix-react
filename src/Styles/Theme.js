@@ -43,6 +43,9 @@ const Theme = {
         paddingTop: 'calc(513 / 342 * 100%)',
         borderRadius: '0rem'
     },
+    wideCardLibrary: {
+        paddingTop: '16rem'
+    },
     wideCard: {
         width: '20rem',
         maxWidth: '30rem',
