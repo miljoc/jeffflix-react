@@ -14,6 +14,7 @@ const FETCH_EPISODE = gql`
             season {
                 uuid
                 name
+                seasonNumber
                 episodes {
                   episodeNumber
                   uuid
@@ -22,6 +23,7 @@ const FETCH_EPISODE = gql`
                     uuid
                     name
                     posterPath
+                    tmdbID
                 }
             }
 

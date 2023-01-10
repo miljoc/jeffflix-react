@@ -26,7 +26,7 @@ const RenderSeries = ({ uuid }: Props) => {
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
 
-    const { name, posterPath, firstAirDate, overview, seasons, type } = data.series[0];
+    const { name, posterPath, firstAirDate, overview, seasons, type, tmdbID } = data.series[0];
 
     const seasonList = orderBy(seasons, ['seasonNumber'], ['asc']).map((item) => {
         const {
@@ -66,6 +66,7 @@ const RenderSeries = ({ uuid }: Props) => {
             posterPath={posterPath}
             type={type}
             seasons={seasons}
+            tmdbID={tmdbID}
         >
             {seasonList}
             <Empty wide />

@@ -17,6 +17,7 @@ const FETCH_SEASON = gql`
                 name
                 overview
                 uuid
+                tmdbID
                 seasons {
                     name
                     uuid

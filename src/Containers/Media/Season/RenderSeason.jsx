@@ -24,7 +24,7 @@ const RenderSeason = ({ uuid }: Props) => {
     if (loading) return <Loading />;
     if (error) return `Error! ${error.message}`;
 
-    const { name, posterPath, airDate, overview, episodes, series, type } = data.season;
+    const { name, posterPath, airDate, overview, episodes, series, type, seasonNumber } = data.season;
 
     const episodeList = orderBy(episodes, ['episodeNumber'], ['asc']);
     
@@ -57,6 +57,8 @@ const RenderSeason = ({ uuid }: Props) => {
             uuid={uuid}
             posterPath={posterPath}
             type={type}
+            tmdbID={series.tmdbID}
+            seasonNumber={seasonNumber}
         >
             {episodeListRender}
             <Empty wide />
