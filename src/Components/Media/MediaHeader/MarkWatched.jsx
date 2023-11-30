@@ -48,7 +48,7 @@ const MarkWatched = ({ episodes, playState, type, uuid, mutate }) => {
         <HeaderIconWrap
             onClick={() => toggleWatchedState()}
             data-delay-show='1000'
-            data-tip={watched ? `Mark ${type} Unwatched` : `Mark ${type} Watched`}
+            data-tip={watched ? `Markeer ${type} als niet gezien` : `Markeer ${type} als bekeken`}
         >
             <HeaderIcon icon={watched ? faCheckCircleSolid : faCheckCircle} />
         </HeaderIconWrap>

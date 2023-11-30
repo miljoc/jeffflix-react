@@ -16,15 +16,15 @@ const MediaInfo = (props) => {
         let renderedState;
 
         if (playState.finished) {
-            renderedState = 'Watched';
+            renderedState = 'Bekeken';
         } else if (playState.playtime < 60 && playState.playtime > 0) {
             renderedState = selectedFile.totalDuration < 60
-                ? `${convertToMinutesSeconds(playState.playtime)} watched`
-                : '< 1 minute watched';
+                ? `${convertToMinutesSeconds(playState.playtime)} bekeken`
+                : '< 1 minuut bekeken';
         } else if (!playState.finished && playState.playtime > 0) {
-            renderedState = `${convertToMinutes(playState.playtime)} watched`;
+            renderedState = `${convertToMinutes(playState.playtime)} bekeken`;
         } else {
-            renderedState = 'Unwatched';
+            renderedState = 'Nog niet gezien';
         }
 
         return renderedState;
@@ -32,7 +32,7 @@ const MediaInfo = (props) => {
 
     const renderResolution = () => {
         const stream = selectedFile.streams.find((f) => f.resolution);
-        if (!stream) return 'Unknown Resolution';
+        if (!stream) return 'Onbekende Resolutie';
 
         const { resolution } = stream;
 
@@ -40,7 +40,7 @@ const MediaInfo = (props) => {
     };
 
     const renderTotalD = () => {
-        if (!selectedFile.totalDuration > 0) return 'Unknown Length';
+        if (!selectedFile.totalDuration > 0) return 'Onbekend';
 
         return selectedFile.totalDuration < 60 
             ? convertToMinutesSeconds(selectedFile.totalDuration)
@@ -65,7 +65,7 @@ const MediaInfo = (props) => {
             <MediaName>
                 {title || name}
                 <MediaRelease>
-                    {episodeNumber ? `Episode ${episodeNumber}` : release}
+                    {episodeNumber ? `Aflevering ${episodeNumber}` : release}
                 </MediaRelease>
             </MediaName>
 

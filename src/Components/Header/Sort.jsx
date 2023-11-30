@@ -32,7 +32,7 @@ const Sort = ({
     return (
         <SortWrap>
             <SingleSelect
-                placeholder="View"
+                placeholder="Bekijk"
                 options={viewOptions}
                 onChange={(val) => {
                     setLocalStorage(val, `${type}-viewType`);
@@ -42,7 +42,7 @@ const Sort = ({
                 name="viewType"
             />
             <SingleSelect
-                placeholder="Sort by"
+                placeholder="Sorteer op"
                 options={sortValues}
                 onChange={(val) => {
                     setLocalStorage(val, `${type}-sortOrder`);
@@ -52,7 +52,7 @@ const Sort = ({
                 name="type"
             />
             <SingleSelect
-                placeholder="Order"
+                placeholder="Volgorde"
                 options={sortDirections}
                 onChange={(val) => {
                     setLocalStorage(val, `${type}-sortDirection`);

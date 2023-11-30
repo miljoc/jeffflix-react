@@ -15,7 +15,7 @@ const updateSuggestions = (arr) => {
             suggestions: [],
         },
         {
-            title: 'Movies',
+            title: 'Films',
             suggestions: [],
         },
         {

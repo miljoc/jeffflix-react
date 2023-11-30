@@ -17,8 +17,8 @@ import { LibraryListWrap, RenderListWrap, SortRow } from '../Styles';
 const MovieList = () => {
     const type = "movie";
 
-    const sortValues = [{ value: 'title', label: 'Title'}, { value: 'releaseDate', label: 'Release Date' }];
-    const sortDirections = [{ value: 'asc', label: 'Ascending'}, { value: 'desc', label: 'Descending' }];
+    const sortValues = [{ value: 'title', label: 'Titel'}, { value: 'releaseDate', label: 'Release Datum' }];
+    const sortDirections = [{ value: 'asc', label: 'Oplopend'}, { value: 'desc', label: 'Aflopend' }];
     const viewOptions = [{ value: 'poster', label: 'Poster' },{ value: 'thumbnail', label: 'Thumbnail' }];
 
     const [sortOrder, setSortOrder] = useState(getLocalStorage(type, "sortOrder") || sortValues[0]);
@@ -28,7 +28,7 @@ const MovieList = () => {
     const { loading, error, data } = useQuery(MEDIA_STATS);
 
     if (loading) return <Loading />;
-    if (error) return <ErrorWrap>{`Error! ${error.message}`}</ErrorWrap>;
+    if (error) return <ErrorWrap>{`Uhooh! ${error.message}`}</ErrorWrap>;
 
     const { movieCount } = data.mediaStats;
 

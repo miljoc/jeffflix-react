@@ -22,7 +22,7 @@ export default function Activity() {
 
     const title = data && data.sessions.length > 0
         ? `${pluralize(data.sessions.length, 'session', 's', true)}`
-        : 'No Current Activity';
+        : 'Geen activiteit';
 
     return (
         <>

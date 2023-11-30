@@ -277,10 +277,10 @@ class Player extends Component {
     finalPlaylist = () => {
         const { name, season, episodeNumber, source, mimeType, playlist, uuid } = this.props;
         const html = 
-        `<h4>${name}</h4><span>${season.series.name} - ${season.name}, Episode ${episodeNumber}</span>`;
+        `<h4>${name}</h4><span>${season.series.name} - ${season.name}, Aflevering ${episodeNumber}</span>`;
         const firstPlaylistItem = {
             name,
-            description: `${season.series.name} - ${season.name}, Episode ${episodeNumber}`,
+            description: `${season.series.name} - ${season.name}, Aflevering ${episodeNumber}`,
             uuid,
             html,
             season: season.name,

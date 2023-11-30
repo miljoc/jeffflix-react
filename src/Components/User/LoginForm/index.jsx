@@ -24,15 +24,15 @@ const LoginForm = ({ error, onChange, onSubmit, username, password }: Props) => 
         }}
         error={error}
     >
-        <LogoIcon alt="Olaris" height="35" />
-        <Title heading="Welcome Back!" sub="Login to get started" />
+        <LogoIcon alt="Jeffflix" height="75" />
+        <Title heading="Welkom terug!" sub="Login om door te gaan" />
 
         <Input
             type="text"
             name="username"
             value={username}
             autocomplete="username"
-            placeholder="Enter Username"
+            placeholder="Gebruikersnaam"
             handleChange={onChange}
             className="input-light"
         />
@@ -42,13 +42,13 @@ const LoginForm = ({ error, onChange, onSubmit, username, password }: Props) => 
             name="password"
             value={password}
             autocomplete="password"
-            placeholder="Enter Password"
+            placeholder="Wachtwoord"
             handleChange={onChange}
             className="input-light"
         />
 
         <Button callback={onSubmit}>Login</Button>
-        <FormLink to="/register" strapline="Don't Have An Account?" value="Sign Up" setup={false} />
+        <FormLink to="/register" strapline="Nieuw hier?" value="Maak een account" setup={false} />
     </S.FormWrap>
 );
 

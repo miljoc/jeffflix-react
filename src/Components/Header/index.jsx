@@ -39,7 +39,7 @@ class Header extends Component {
                 <NavToggle />
                 <ReactToolTip effect="solid" place="left" className="tooltip" />
                 {previousLocation !== null && currentLocation !== '/dashboard' && (
-                    <BackButton data-delay-show='1000' data-tip="Go Back" onClick={() => history.goBack()}>
+                    <BackButton data-delay-show='1000' data-tip="Ga Terug" onClick={() => history.goBack()}>
                         <BackIcon icon={faArrowLeft} />
                     </BackButton>
                 )}

@@ -24,9 +24,9 @@ const CurrentActivity = () => {
 
     return (
         <InnerContent>
-            <PageHeading>Current Activity</PageHeading>
+            <PageHeading>Huidige Activiteit</PageHeading>
             {data.sessions.length === 0 && (
-                <MediaOverview>All quiet! Nobody is watching anything right now.</MediaOverview>
+                <MediaOverview>Rustig! Niemand is wat aan het kijken.</MediaOverview>
             )}
             {userData.users && data.sessions.length > 0 && (
                 <SessionsList>

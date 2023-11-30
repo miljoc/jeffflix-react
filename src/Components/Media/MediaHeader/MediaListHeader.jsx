@@ -106,7 +106,7 @@ class MediaListHeader extends Component {
                 <S.HeaderIconWrap
                     onClick={this.playSeries}
                     data-delay-show='1000'
-                    data-tip={`Play ${type === 'series' ? 'Series' : 'Season'}`}
+                    data-tip={`Speel ${type === 'series' ? 'Serie' : 'Seizoen'}`}
                 >
                     <S.HeaderIcon icon={faPlay} />
                 </S.HeaderIconWrap>
@@ -114,7 +114,7 @@ class MediaListHeader extends Component {
                 <S.HeaderIconWrap
                     onClick={() => this.playEpisode(randomEpisode.uuid, false)}
                     data-delay-show='1000' 
-                    data-tip="Play Random Episode"
+                    data-tip="Speel willekeurige aflevering"
                 >
                     <S.HeaderIcon icon={faRandom} />
                 </S.HeaderIconWrap>

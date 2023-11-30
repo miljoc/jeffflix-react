@@ -39,7 +39,7 @@ class MediaDescription extends Component {
                     this.toggleOverview();
                 }}
             >
-                {visible ? 'Read Less' : 'Read More'}
+                {visible ? 'Inklappen' : 'Uitklappen'}
             </span>
         );
     };

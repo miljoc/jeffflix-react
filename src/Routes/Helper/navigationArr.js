@@ -1,21 +1,21 @@
 const navigationArr = [
     {
-        name: 'Libraries',
+        name: 'Bibliotheek',
         id: 'libraries',
         admin: false,
         links: [
             {
-                name: 'Dashboard',
+                name: 'Home',
                 to: '/dashboard',
                 id: 'dashboard',
             },
             {
-                name: 'Movies',
+                name: 'Films',
                 to: '/movies',
                 id: 'movies',
             },
             {
-                name: 'TV Shows',
+                name: 'Series',
                 to: '/series',
                 id: 'series',
             },

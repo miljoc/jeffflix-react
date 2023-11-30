@@ -8,8 +8,8 @@ const Stats = ({ type, count }) => {
         <StatsContent>
             <HeadingFour>
                 {type === "movies"
-                    ? <>Movies {count > 0 && <Badge>{count}</Badge>}</>
-                    : <>TV Shows {count > 0 && <Badge>{count}</Badge>}</>
+                    ? <>Films {count > 0 && <Badge>{count}</Badge>}</>
+                    : <>Series {count > 0 && <Badge>{count}</Badge>}</>
                 }
             </HeadingFour>
         </StatsContent>

@@ -12,6 +12,7 @@ import MarkWatched from './MarkWatched';
 import RefreshMetadata from './RefreshMetadata';
 import MediaMismatch from './MediaMismatch';
 import AdvancedInfo from './AdvancedInfo';
+// import ReportProblem from './ReportProblem';
 
 import { Header } from './Styles';
 
@@ -20,6 +21,7 @@ const MediaItemHeader = ({ name, type, uuid, playMedia, playState, file, files, 
         <ReactToolTip effect="solid" place="left" className="tooltip" />
         <PlayMedia type={type} isConnected={isConnected} playMedia={playMedia} playState={playState} />
         <MarkWatched playState={playState} type={type} uuid={uuid} />
+        
         <AdvancedInfo files={files} type={type} name={name} />
         {Auth.isAdmin.admin && (
             <>

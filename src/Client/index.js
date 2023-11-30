@@ -10,11 +10,11 @@ import { Auth } from './Auth';
 const cookies = new Cookies();
 
 const httpLink = new HttpLink({
-    uri: `${getBaseUrl()}/olaris/m/query`,
+    uri: `${getBaseUrl()}/m/query`,
 });
 
 const streamHttpLink = new HttpLink({
-    uri: `${getBaseUrl()}/olaris/s/query`,
+    uri: `${getBaseUrl()}/s/query`,
 });
 
 const authMiddleware = new ApolloLink((operation, forward) => {

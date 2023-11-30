@@ -58,7 +58,7 @@ export const checkAuth = () => {
 };
 
 export const AUTH_REQUEST = (username, password) => {
-    const url = `${getBaseUrl()}/olaris/m/v1/auth`;
+    const url = `${getBaseUrl()}/m/v1/auth`;
 
     const data = {
         username,

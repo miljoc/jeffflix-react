@@ -20,8 +20,8 @@ type Props = {
 };
 
 const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, password, inviteCode = null }: Props) => {
-    const heading = initialSetup ? 'Welcome To Olaris' : 'Olaris';
-    const title = initialSetup ? 'Setup your admin account' : 'Register Account';
+    const heading = initialSetup ? 'Welcome To Olaris' : 'Jeffflix';
+    const title = initialSetup ? 'Setup your admin account' : 'Maak Account';
     const warning = 'You are currently creating your admin account ensure you remember your details';
 
     return (
@@ -33,7 +33,7 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                 }}
                 error={error}
             >
-                <LogoIcon alt="Olaris" height="35" />
+                <LogoIcon alt="Jeffflix" height="35" />
                 <Title heading={heading} sub={title} />
 
                 {!initialSetup && (
@@ -42,7 +42,7 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                         value={inviteCode}
                         name="inviteCode"
                         autocomplete="inviteCode"
-                        placeholder="Enter Invite Code"
+                        placeholder="Uitnodigingscode"
                         handleChange={onChange}
                         uniqueCode
                         className='input-light'
@@ -53,7 +53,7 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                     name="username"
                     value={username}
                     autocomplete="new-username"
-                    placeholder="Username"
+                    placeholder="Gebruikersnaam"
                     required
                     handleChange={onChange}
                     className='input-light'
@@ -63,14 +63,15 @@ const RegisterForm = ({ error, onChange, onSubmit, initialSetup, username, passw
                     name="password"
                     value={password}
                     autocomplete="new-password"
-                    placeholder="Password"
+                    placeholder="Wachtwoord"
                     required
                     handleChange={onChange}
                     className='input-light'
                 />
-                <Button callback={onSubmit}>Create Account</Button>
+                <Button callback={onSubmit}>Maak Account</Button>
 
-                {!initialSetup && <FormLink to="/login" strapline="Have An Account?" value="Log In" setup={false} />}
+                {!initialSetup && 
+                <FormLink to="/login" strapline="Heb je al een account?" value="Inloggen" setup={false} />}
             </S.FormWrap>
         </>
     );

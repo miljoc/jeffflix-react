@@ -31,10 +31,10 @@ class MediaActions extends Component {
         }
 
         if (resume) {
-            return 'Play From Start';
+            return 'Speel vanaf begin';
         }
 
-        return 'Play';
+        return 'Speel';
     };
 
     render() {
@@ -49,12 +49,12 @@ class MediaActions extends Component {
 
                 {resume && (
                     <button type="button" onClick={() => playMedia(true)}>
-                        Resume
+                        Hervat
                     </button>
                 )}
 
                 <button type="button" onClick={() => this.toggleWatchedState()}>
-                    {playState.finished ? 'Mark As Unwatched' : 'Mark As Watched'}
+                    {playState.finished ? 'Markeer Als Onbekeken' : 'Markeer Als Bekeken'}
                 </button>
             </MediaActionsWrap>
         );

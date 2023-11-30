@@ -12,7 +12,7 @@ const MediaSubtitles = ({ selectedFile }) => {
 
     return (
         <MediaInfo>
-            <MediaInfoSubhead>Subtitles:</MediaInfoSubhead>
+            <MediaInfoSubhead>Ondertiteling:</MediaInfoSubhead>
             <MediaInfoList>{renderSubtitles}</MediaInfoList>
         </MediaInfo>
     );

@@ -5,17 +5,22 @@ import { media } from 'Styles/Utils';
 import { rgba } from 'polished';
 import { ParagraphBaseStyle } from 'Styles/Base';
 import ButtonBase from 'Styles/Button';
+import BG from 'Images/login-bg.jpg';
 
 const shake = () => css`
     .5s ${aHeadShake} alternate;
 `;
 
+export const BGLogin = styled.div`
+    background-image: url(${(BG)});
+`;
+
 export const FormWrap = styled.form`
     padding: 3rem;
-    background: ${(props) => props.theme.white};
+    background: rgb(30, 31, 45);
     margin: 1rem;
     transition: ${(props) => props.theme.base.transitionSpeed} border;
-    border-radius: 0.2rem;
+    border-radius: 0.7rem;
     border: 1px solid;
     border-color: ${(props) => (props.error ? props.theme.alerts.error : 'transparent')};
     animation: ${(props) => (props.error ? shake : 'none')};
@@ -32,14 +37,14 @@ export const Heading = styled.h1`
     font-size: ${(props) => props.theme.typography.headingOne};
     line-height: 1.5;
     margin: 3rem 0 0;
-    color: ${(props) => props.theme.dark};
+    color: #fff;
 `;
 
 export const SubHeading = styled.p`
     font-size: ${(props) => props.theme.typography.body};
     font-weight: 600;
     margin: 0 0 3rem;
-    color: ${(props) => props.theme.text};
+    color: #fff;
 `;
 
 // Form Elements
@@ -82,8 +87,8 @@ export const TextInput = styled.input`
     width: 100%;
     float: left;
     text-indent: 1.5rem;
-    background: ${(props) => props.theme.white};
-    color: ${(props) => props.theme.dark};
+    background: rgba(51, 53, 69, 0.5);
+    color: #fff;
 
     &:-webkit-autofill {
         box-shadow: 0 0 0 100px ${(props) => props.theme.white} inset;
@@ -92,6 +97,10 @@ export const TextInput = styled.input`
 
     &:-webkit-autofill {
         -webkit-text-fill-color: ${(props) => props.theme.dark};
+    }
+
+    &:placeholder {
+        color: #fff;
     }
 
     &:focus {
@@ -126,7 +135,7 @@ export const FormButton = styled.button`
 // Register
 export const FormLinkPara = styled.p`
     font-size: ${(props) => props.theme.typography.base};
-    color: ${(props) => props.theme.text};
+    color: #fff;
     font-weight:600;
     text-align:center;
     margin: 2rem 0 0;

@@ -11,16 +11,19 @@ import { DashboardWrap, CarouselWrap } from './Styles';
 const Dashboard = () => (
     <DashboardWrap>
         <CarouselWrap>
-            <HeadingFour>Continue Watching</HeadingFour>
+            <HeadingFour>Verderkijken</HeadingFour>
             <RenderContinueWatching />
         </CarouselWrap>
         <CarouselWrap>
-            <HeadingFour>Recently Added Movies</HeadingFour>
+            <HeadingFour>Recent Toegevoegde Films</HeadingFour>
             <RenderRecentMovies />
         </CarouselWrap>
         <CarouselWrap>
-            <HeadingFour>Recently Added Episodes</HeadingFour>
+            <HeadingFour>Recent Toegevoegde Afleveringen</HeadingFour>
             <RenderRecentEpisodes />
+        </CarouselWrap>
+        <CarouselWrap>
+            <HeadingFour>Omdat je &quot;GRAPHQL_RAND_WATCHED_TITLE&quot; hebt gekeken</HeadingFour>
         </CarouselWrap>
     </DashboardWrap>
 );

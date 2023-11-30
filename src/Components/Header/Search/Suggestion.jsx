@@ -16,7 +16,7 @@ const renderSuggestion = (suggestion) => {
             : suggestion.firstAirDate.split("-")[0];
     const poster =
         suggestion.posterPath
-            ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${suggestion.posterPath}`
+            ? `${getBaseUrl()}/m/images/tmdb/w342/${suggestion.posterPath}`
             : placeholder;
 
     return (

@@ -10,10 +10,10 @@ const MediaName = ({ episodes, type, year, name, title, episodeNumber, seasonNum
 
         switch (type) {
             case 'Season':
-                infoValue = `${episodes.length} ${pluralize(episodes.length, 'Episode', 's')}`;
+                infoValue = `${episodes.length} ${pluralize(episodes.length, 'Aflevering', 'en')}`;
                 break;
             case 'Episode':
-                infoValue = `${seasonNumber ? `S${seasonNumber}  E${episodeNumber}` : `Episode ${episodeNumber}`}`;
+                infoValue = `${seasonNumber ? `S${seasonNumber}  E${episodeNumber}` : `Aflevering ${episodeNumber}`}`;
                 break;
             case 'Movie':
                 infoValue = year;

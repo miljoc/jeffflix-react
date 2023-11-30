@@ -49,7 +49,7 @@ const Session = ({ session, user }) => {
 
         const bgImage =
             posterPath
-                ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`
+                ? `${getBaseUrl()}/m/images/tmdb/w342/${posterPath}`
                 : placeholder;
 
         const mediaType = type === 'MovieFile' ? 'movie' : 'episode';
@@ -122,7 +122,7 @@ const Session = ({ session, user }) => {
                     {subtitle && (
                         <Stream key={subtitle.streamID}>
                             <SessionLineHeading>
-                                Subtitles
+                                Ondertiteling
                                 <TranscodeInfo stream={subtitle} />
                             </SessionLineHeading>
                             <SessionLine>
@@ -138,7 +138,7 @@ const Session = ({ session, user }) => {
                     />
                 </ProgressBarWrap>
                 <SessionState>  
-                    <FontAwesomeIcon icon={paused ? faPause : faPlay} data-tip={paused ? 'Paused' : 'Playing'} />
+                    <FontAwesomeIcon icon={paused ? faPause : faPlay} data-tip={paused ? 'Gepauzeerd' : 'Afspelen'} />
                 </SessionState>
             </SessionWrap>
         )

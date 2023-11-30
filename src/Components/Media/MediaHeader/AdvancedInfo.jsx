@@ -24,7 +24,7 @@ const AdvancedInfo = ({ files, name, type }: Props) => {
     };
 
     return (
-        <HeaderIconWrap onClick={() => infoModal()} data-delay-show='1000' data-tip="Show Advanced Info">
+        <HeaderIconWrap onClick={() => infoModal()} data-delay-show='1000' data-tip="Meer Details">
             <HeaderIcon icon={faInfoCircle} />
         </HeaderIconWrap>
     );

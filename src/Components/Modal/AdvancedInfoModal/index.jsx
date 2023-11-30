@@ -33,11 +33,11 @@ const AdvancedInfoModal = ({ files, type }: Props) => {
                             <S.FileWrap key={file.filePath}>
                                 <S.PathWrap>{file.filePath}</S.PathWrap>
                                 <S.SectionWrap>
-                                    <S.InfoTitle>File Info</S.InfoTitle>
+                                    <S.InfoTitle>Bestandsinformatie</S.InfoTitle>
                                     <S.InfoWrap>
                                         <div>
-                                            <p><span>Duration:</span> {convertToHMS(file.totalDuration)}</p>
-                                            <p><span>Size:</span> {convertFilesize(file.fileSize, 2, true)}</p>
+                                            <p><span>Duur:</span> {convertToHMS(file.totalDuration)}</p>
+                                            <p><span>Grootte:</span> {convertFilesize(file.fileSize, 2, true)}</p>
                                         </div>
                                     </S.InfoWrap>
                                 </S.SectionWrap>
@@ -73,7 +73,7 @@ const AdvancedInfoModal = ({ files, type }: Props) => {
                                                         <span>Bitrate:</span> {convertBitrate(track.bitRate)}
                                                     </p>
                                                     <p>
-                                                        <span>Language:</span>
+                                                        <span>Taal:</span>
                                                         {track.title ? track.title : track.language}
                                                     </p>
                                                 </div>
@@ -84,7 +84,7 @@ const AdvancedInfoModal = ({ files, type }: Props) => {
 
                                 {subtitles.length > 0 && (
                                     <S.SectionWrap noMargin>
-                                        <S.InfoTitle>Subtitles</S.InfoTitle>
+                                        <S.InfoTitle>Ondertiteling</S.InfoTitle>
                                         <S.InfoWrap>
                                             {subtitles.map(subtitle => (
                                                 <p key={uuidv4()}>

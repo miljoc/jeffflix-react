@@ -12,7 +12,7 @@ Logo.propTypes = {
 };
 
 Logo.defaultProps = {
-    alt: 'Olaris',
+    alt: 'Jeffflix',
     height: '150',
 };
 

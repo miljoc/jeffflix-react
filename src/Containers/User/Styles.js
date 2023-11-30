@@ -26,3 +26,9 @@ export const UserFormWrap = styled.section`
         max-width: 50rem;
     `};
 `;
+
+export const LoginForm = styled.section`
+    color: #fff;
+    background: rgb(30, 31, 45);
+    animation: ${(props) => (props.success ? fadeOut : fadeIn)};
+`;

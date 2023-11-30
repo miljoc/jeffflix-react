@@ -89,7 +89,7 @@ class SearchInput extends Component {
                         />
                     )}
                 </InputWrap>
-                {noResults && <NoResultsError>No Results Found</NoResultsError>}
+                {noResults && <NoResultsError>Geen resultaten gevonden 🥸</NoResultsError>}
             </>
         );
     }

@@ -96,7 +96,7 @@ class Search extends Component {
         const checkSuggestions = typeof suggestions === 'undefined' ? [] : suggestions;
 
         const inputProps = {
-            placeholder: 'Search Your Media...',
+            placeholder: 'Wat wil je kijken?...',
             value,
             onChange: this.onChange,
         };

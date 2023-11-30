@@ -44,7 +44,7 @@ const Season = ({
         <MediaFullWrap>
             <Breadcrumbs name={name} series={series} type={type} />
             {seasons.length > 1 && <SeasonNavigation series={series} name={name} />}
-            <MediaBackground bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`} />
+            <MediaBackground bgimg={`${getBaseUrl()}/m/images/tmdb/w342/${posterPath}`} />
             <MediaLeftCol>
                 <Media size="large" hover={false} name={name} showText={false} posterPath={posterPath} type={type} />
             </MediaLeftCol>
@@ -54,11 +54,11 @@ const Season = ({
                 <SeasonNumber>
                     {name}
                     <MediaRelease>{releaseDate}</MediaRelease>
-                    <MediaEpisodes>{episodes.length} episodes</MediaEpisodes>
+                    <MediaEpisodes>{episodes.length} afleveringen</MediaEpisodes>
                 </SeasonNumber>
                 {overview.length > 0 && <MediaDescription overview={overview} />}
                 <MediaLinks type="series" tmdbID={tmdbID} seasonNumber={seasonNumber} />
-                <SubTitle>Episodes</SubTitle>
+                <SubTitle>Afleveringen</SubTitle>
 
                 <EpisodesWrap>{children}</EpisodesWrap>
             </MediaRightCol>

@@ -32,7 +32,7 @@ const LibraryItem = ({ filePath, id, backend, healthy }: Props) => {
 
     return (
         <>
-            {show && <AlertConfirm type="error" message="Are you sure?" confirm={() => deleteLibrary()} />}
+            {show && <AlertConfirm type="error" message="Weet je dit heel zeker?" confirm={() => deleteLibrary()} />}
             <LibraryItemWrap>
                 <ReactToolTip effect="solid" delayShow={1000} place="left" className="tooltip" />
 
@@ -63,7 +63,7 @@ const LibraryItem = ({ filePath, id, backend, healthy }: Props) => {
                 </LibraryItemRescan>
 
                 {!loading && (
-                    <LibraryItemDelete data-tip="Delete Library" onClick={() => setShow(true)}>
+                    <LibraryItemDelete data-tip="Verwijder Bibliotheek" onClick={() => setShow(true)}>
                         <FontAwesomeIcon icon={faTrash} />
                     </LibraryItemDelete>
                 )}

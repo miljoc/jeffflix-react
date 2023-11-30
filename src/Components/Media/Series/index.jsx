@@ -28,7 +28,7 @@ const Series = (props) => {
     return (
         <MediaFullWrap>
             <Breadcrumbs name={name} type={type} />
-            <MediaBackground bgimg={`${getBaseUrl()}/olaris/m/images/tmdb/w342/${posterPath}`} />
+            <MediaBackground bgimg={`${getBaseUrl()}/m/images/tmdb/w342/${posterPath}`} />
             <MediaLeftCol>
                 <Media size="large" hover={false} name={name} posterPath={posterPath} type={type} />
             </MediaLeftCol>
@@ -40,7 +40,7 @@ const Series = (props) => {
                 </MediaName>
                 {overview.length > 0 && <MediaDescription overview={overview} />}
                 <MediaLinks type="series" tmdbID={tmdbID} />
-                <SubTitle>Seasons</SubTitle>
+                <SubTitle>Seizoenen</SubTitle>
                 <SeasonsWrap>{children}</SeasonsWrap>
             </MediaRightCol>
         </MediaFullWrap>

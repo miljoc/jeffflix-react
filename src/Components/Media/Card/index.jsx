@@ -38,7 +38,7 @@ class MediaCard extends Component {
         const { loadModal, history, playMedia, playState } = this.props;
 
         loadModal(RESUME_MODAL, {
-            title: 'Resume Media',
+            title: 'Kijken Hervatten',
             url,
             history,
             playMedia,
@@ -98,7 +98,7 @@ class MediaCard extends Component {
         const showPlayStatus = type === 'Movie' || type === 'Episode';
         const bgImage =
             stillPath || posterPath
-                ? `${getBaseUrl()}/olaris/m/images/tmdb/w342/${stillPath || posterPath}`
+                ? `${getBaseUrl()}/m/images/tmdb/w342/${stillPath || posterPath}`
                 : placeholder;
 
         let length;

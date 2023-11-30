@@ -5,7 +5,7 @@ import placeholder from './placeholder.png';
 import * as S from './Styles';
 
 const Placeholder = ({ wide, wideLibrary }) => 
-    <S.Placeholder src={placeholder} wideLibrary={wideLibrary} wide={wide} alt="Loading..." />;
+    <S.Placeholder src={placeholder} wideLibrary={wideLibrary} wide={wide} alt="Laden..." />;
 
 Placeholder.propTypes = {
     wide: PropTypes.bool,

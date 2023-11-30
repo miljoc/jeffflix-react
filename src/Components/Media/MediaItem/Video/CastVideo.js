@@ -51,7 +51,7 @@ const CastVideo = ({
             mediaInfo.metadata = new chrome.cast.media.MovieMediaMetadata();
         }
 
-        const img = new chrome.cast.Image(`${getBaseUrl()}/olaris/m/images/tmdb/w342/${background}`);
+        const img = new chrome.cast.Image(`${getBaseUrl()}/m/images/tmdb/w342/${background}`);
         mediaInfo.metadata.title = name;
         mediaInfo.metadata.overview = overview;
         mediaInfo.metadata.uuid = uuid;

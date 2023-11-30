@@ -1,12 +1,23 @@
 import styled from 'styled-components';
 import { media } from 'Styles/Utils';
 import { ParagraphBaseStyle, LightParagraph } from 'Styles/Base';
+import BG from 'Images/login-bg.jpg';
 
 export const AppWrap = styled.main`
     display: flex;
     height: 100vh;
     flex-wrap: nowrap;
     flex-direction: column;
+    justify-content: ${(props) => (props.authed ? 'initial' : 'center')};
+    overflow: hidden;
+`;
+
+export const AppWrapNoLogin = styled.main`
+    display: flex;
+    height: 100vh;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    background-image: url(${(BG)});
     justify-content: ${(props) => (props.authed ? 'initial' : 'center')};
     overflow: hidden;
 `;

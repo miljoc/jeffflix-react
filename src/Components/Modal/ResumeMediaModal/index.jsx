@@ -49,10 +49,10 @@ const ResumeModal = ({ hModal, playMedia, url, history, title, playState }: Prop
                 </ModalHeader>
                 <ModalBody>
                     <ResumeOption type="submit" href="#" onClick={() => onPlay(true, true)}>
-                        {playState && `Resume video from ${convertToMinutesSeconds(playState.playtime)}`}
+                        {playState && `Hervat video vanaf ${convertToMinutesSeconds(playState.playtime)}`}
                     </ResumeOption>
                     <ResumeOption type="submit" onClick={() => onPlay(false, true)}>
-                        From Start
+                        Vanaf begin
                     </ResumeOption>
                 </ModalBody>
             </ModalWrap>
