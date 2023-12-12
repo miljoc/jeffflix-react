@@ -11,7 +11,7 @@ type Props = {
 
 const RenderInvites = ({ invites }: Props) => (
     <S.List>
-        <S.ListHeading>Invites</S.ListHeading>
+        <S.ListHeading>Uitnodigingen</S.ListHeading>
         {invites.map((i) => <InviteItem key={i.code} code={i.code} />)}
     </S.List>
 );

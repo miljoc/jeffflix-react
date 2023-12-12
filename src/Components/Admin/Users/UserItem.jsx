@@ -19,17 +19,17 @@ const UserItem = ({ username, id, admin }: Props) => {
 
     const toggleModal = () => {
         dispatch(showModal(WARNING_MODAL, {
-            title: 'Delete user',
-            message: `Are you sure you want to delete the user '${username}'?`,
+            title: 'Verwijder gebruiker',
+            message: `Weet je zeker dat je '${username}' wilt verwijderen?`,
             confirm: () => deleteUser({ variables: { id } }),
         }));
     };
 
     return (
         <UserListItem success={typeof data !== 'undefined'}>
-            {data && `Successfully Deleted`} {username} {admin && <AdminUser icon={faCrown} />}
+            {data && `Gebruiker verwijderd`} {username} {admin && <AdminUser icon={faCrown} />}
             {!data && !admin && (
-                <DeleteUserWrap data-tip="Delete User" onClick={() => toggleModal()}>
+                <DeleteUserWrap data-tip="Verwijder gebruiker" onClick={() => toggleModal()}>
                     <DeleteUser icon={faTrash} />
                 </DeleteUserWrap>
             )}

@@ -10,7 +10,7 @@ type Props = {
 
 const CreateInvite = ({ generateInvite, loading }: Props) => (
     <S.GenerateInvite onClick={() => generateInvite()} disabled={loading}>
-        Create Invite
+        Nieuwe Uitnodiging
     </S.GenerateInvite>
 );
 

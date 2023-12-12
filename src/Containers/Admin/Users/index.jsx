@@ -23,8 +23,8 @@ const Users = () => {
     if (loading) return <Loading />;
     if (error) return (
         <S.InnerContent>
-            <PageHeading>User Management</PageHeading>
-            <ErrorWrap>{`Error! ${error.message}`}</ErrorWrap>
+            <PageHeading>Gebruikersbeheer</PageHeading>
+            <ErrorWrap>{`Uhooh! ${error.message}`}</ErrorWrap>
         </S.InnerContent>
     );
 
@@ -32,7 +32,7 @@ const Users = () => {
 
     return (
         <S.InnerContent>
-            <PageHeading>User Management</PageHeading>
+            <PageHeading>Gebruikersbeheer</PageHeading>
             <RenderUsers />
             {invites.length > 0 && <RenderInvites invites={invites} />}
             <CreateInvite generateInvite={() => generateInvite()} loading={loadingInvite} />

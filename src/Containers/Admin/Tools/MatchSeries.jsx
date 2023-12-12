@@ -56,30 +56,30 @@ const MatchSeries = ({ sModal }) => {
     };
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return `Uhooh! ${error.message}`;
 
     return (
         <InnerContent>
-            <PageHeading>Unidentified Episodes</PageHeading>
+            <PageHeading>Ongeidentificeerde afleveringen</PageHeading>
             {data.unidentifiedEpisodeFiles.length > 0 && (
                 <StickyButton>
                     <UncheckButton
                         onClick={uncheckAll}
                         disabled={episodesChecked.length === 0}
-                    >Uncheck All
+                    >Uncheck Alles
                     </UncheckButton>
                     <MatchButton
                         onClick={openModal}
                         disabled={episodesChecked.length === 0}
-                    >Match Episodes
+                    >Match Afleveringen
                     </MatchButton>
                 </StickyButton>
             )}
             <MatchContainer>
                 <MediaOverview>
                     {data.unidentifiedEpisodeFiles.length === 0
-                        ? "No unmatched episodes. Good for you!"
-                        : "Select episodes below to match and add them to your library"
+                        ? "Alles is geidentificeerd, lekker bezig!"
+                        : "Selecteer de afleveringen om ze te matchen en aan de bibliotheek toe te voegen"
                     }
                 </MediaOverview>
 

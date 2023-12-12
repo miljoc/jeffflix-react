@@ -16,19 +16,19 @@ const MatchMovies = () => {
     const { error, loading, data } = useQuery(FETCH_UNIDENTIFIED_MOVIES);
 
     if (loading) return <Loading />;
-    if (error) return `Error! ${error.message}`;
+    if (error) return `Uhooh! ${error.message}`;
 	
     const { unidentifiedMovieFiles } = data;
 
     return (
         <InnerContent>
             <ReactTooltip effect="solid" place="right" className="tooltip" />
-            <PageHeading>Unidentified Movies</PageHeading>
+            <PageHeading>Ongeidentificeerde Films</PageHeading>
             <MatchContainer>
                 <MediaOverview>
                     {unidentifiedMovieFiles.length === 0
-                        ? "No unmatched movies. Good for you!"
-                        : "Click a movie below to match and add it to your library"
+                        ? "Alles is geidentificeerd, lekker bezig!"
+                        : "Selecteer een film om deze te matchen en aan de bibliotheek toe te voegen"
                     }
                 </MediaOverview>
 

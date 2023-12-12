@@ -17,8 +17,8 @@ import { LibraryListWrap, RenderListWrap, SortRow } from '../Styles';
 const SeriesList = () => {
     const type = "series";
 
-    const sortValues = [{ value: 'name', label: 'Name'}, { value: 'firstAirDate', label: 'First Air Date' }];
-    const sortDirections = [{ value: 'asc', label: 'Ascending'}, { value: 'desc', label: 'Descending' }];
+    const sortValues = [{ value: 'name', label: 'Naam'}, { value: 'firstAirDate', label: 'Releasedatum' }];
+    const sortDirections = [{ value: 'asc', label: 'Oplopend'}, { value: 'desc', label: 'Aflopend' }];
     const viewOptions = [{ value: 'poster', label: 'Poster' },{ value: 'thumbnail', label: 'Thumbnail' }];
 
     const [sortOrder, setSortOrder] = useState(getLocalStorage(type, "sortOrder") || sortValues[0]);
@@ -28,7 +28,7 @@ const SeriesList = () => {
     const { loading, error, data } = useQuery(MEDIA_STATS);
 
     if (loading) return <Loading />;
-    if (error) return <ErrorWrap>{`Error! ${error.message}`}</ErrorWrap>;
+    if (error) return <ErrorWrap>{`Uhooh! ${error.message}`}</ErrorWrap>;
 
     const { seriesCount } = data.mediaStats;
 

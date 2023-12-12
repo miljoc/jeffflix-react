@@ -21,7 +21,7 @@ const RenderContinueWatching = () => {
     if (error) return <ErrorWrap marginLeft>{`Error! ${error.message}`}</ErrorWrap>;
 
     if (data.upNext.length === 0) {
-        return <NoResults alignLeft>Nothing here? Why not start watching something?</NoResults>;
+        return <NoResults alignLeft>Je hebt nog niks gekeken, waarom start je niet wat?</NoResults>;
     }
 
     const continueWatching = data.upNext.map((item) => {

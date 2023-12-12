@@ -20,7 +20,7 @@ const RenderUsers = () => {
 
     return (
         <S.List>
-            <S.ListHeading>Userlist</S.ListHeading>
+            <S.ListHeading>Gebruikers</S.ListHeading>
             {data.users.map((u) => <UserItem key={u.id} username={u.username} id={u.id} admin={u.admin} />)}
         </S.List>
     );

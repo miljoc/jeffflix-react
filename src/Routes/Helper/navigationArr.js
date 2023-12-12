@@ -22,12 +22,12 @@ const navigationArr = [
         ],
     },
     {
-        name: 'Settings',
+        name: 'Instellingen',
         id: 'settings',
         admin: true,
         links: [
             {
-                name: 'Users',
+                name: 'Gebruikers',
                 to: '/users',
                 id: 'users',
             },
@@ -39,7 +39,7 @@ const navigationArr = [
         admin: true,
         links: [
             {
-                name: 'Match Movies',
+                name: 'Match Films',
                 to: '/match-movies',
                 id: 'match-movies'
             },
