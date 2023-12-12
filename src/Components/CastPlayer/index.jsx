@@ -10,10 +10,10 @@ class CastPlayer extends Component {
     handleScriptLoad = () => {
         const { isCasting, castPlaying } = this.props;
 
+        // receiverApplicationId: '3CCE45F7',
         const initializeCastApi = () => {
             cast.framework.CastContext.getInstance().setOptions({
-                // receiverApplicationId: '3CCE45F7',
-                recieverApplicationId: 'A31D1815',
+                receiverApplicationId: 'A31D1815',
                 autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
             });
         };
