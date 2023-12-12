@@ -11,12 +11,12 @@ const GlobalStyles = createGlobalStyle`
 
     html,
     body {
-        font-size: var(--olaris--size-root);
+        font-size: var(--jeffflix--size-root);
     }
 
     body {
-        background: var(--olaris--dark);
-        font-size: var(--olaris--size-body);
+        background: var(--jeffflix--dark);
+        font-size: var(--jeffflix--size-body);
         margin: 0;
         overflow: hidden;
     }
@@ -31,7 +31,7 @@ const GlobalStyles = createGlobalStyle`
     textarea,
     button,
     body {
-        font-family: var(--olaris--font-body);
+        font-family: var(--jeffflix--font-body);
     }
     
     em {

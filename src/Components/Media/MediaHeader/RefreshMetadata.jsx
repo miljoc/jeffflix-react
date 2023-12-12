@@ -22,7 +22,7 @@ const RefreshMetadata = ({ uuid, mutate }: Props) => {
         }).then(() => {
             setDisabled(true);
 
-            alert.success('Refreshing Metadata, this may take a while');
+            alert.success('Refreshing Metadata, dit kan even duren');
         });
 
     return (

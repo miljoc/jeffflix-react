@@ -18,7 +18,7 @@ const RenderContinueWatching = () => {
     });
 
     if (loading) return <Loading />;
-    if (error) return <ErrorWrap marginLeft>{`Error! ${error.message}`}</ErrorWrap>;
+    if (error) return <ErrorWrap marginLeft>{`Uhooh! ${error.message}`}</ErrorWrap>;
 
     if (data.upNext.length === 0) {
         return <NoResults alignLeft>Je hebt nog niks gekeken, waarom start je niet wat?</NoResults>;

@@ -400,11 +400,11 @@
     display: block;
     vertical-align: top;
     box-sizing: border-box;
-    color: var(--olaris--white);
-    background-color: var(--olaris--black);
+    color: var(--jeffflix-white);
+    background-color: var(--jeffflix--black);
     position: relative;
     padding: 0;
-    font-size: var(--olaris--size-root);
+    font-size: var(--jeffflix--size-root);
     line-height: 1;
     font-weight: 400;
     font-style: normal;
@@ -524,8 +524,8 @@ body.vjs-full-window {
 
 .vjs-no-js {
     padding: 20px;
-    color: var(--olaris--white);
-    background-color: var(--olaris--black);
+    color: var(--jeffflix-white);
+    background-color: var(--jeffflix--black);
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
@@ -552,14 +552,14 @@ body.vjs-full-window {
     padding: 0;
     cursor: pointer;
     opacity: 1;
-    border: 0.06666em solid var(--olaris--white);
+    border: 0.06666em solid var(--jeffflix-white);
     background-color: transparent !important;
     border-radius: 50%;
     transition: all 0.4s;
 
     &:hover {
-        color: var(--olaris--primary);
-        border: 0.06666em solid var(--olaris--primary);
+        color: var(--jeffflix--primary);
+        border: 0.06666em solid var(--jeffflix--primary);
     }
 
 }
@@ -573,8 +573,8 @@ body.vjs-full-window {
 
 .video-js .vjs-big-play-button:focus,
 .video-js:hover .vjs-big-play-button {
-    border-color: var(--olaris--primary);
-    color: var(--olaris--primary);
+    border-color: var(--jeffflix--primary);
+    color: var(--jeffflix--primary);
 
     transition: all 0.4s;
 }
@@ -684,7 +684,7 @@ body.vjs-full-window {
 .vjs-menu li.vjs-selected,
 .vjs-menu li.vjs-selected:focus,
 .vjs-menu li.vjs-selected:hover {
-    background-color: var(--olaris--white);
+    background-color: var(--jeffflix-white);
     color: #2b333f;
 }
 
@@ -837,7 +837,7 @@ body.vjs-full-window {
 .video-js .vjs-control:focus,
 .video-js .vjs-control:focus:before,
 .video-js .vjs-control:hover:before {
-    text-shadow: 0 0 1em var(--olaris--white);
+    text-shadow: 0 0 1em var(--jeffflix-white);
 }
 
 .video-js .vjs-control-text {
@@ -910,7 +910,7 @@ body.vjs-full-window {
 }
 
 .video-js .vjs-play-progress {
-    background-color: var(--olaris--white);
+    background-color: var(--jeffflix-white);
 }
 
 .video-js .vjs-play-progress:before {
@@ -930,10 +930,10 @@ body.vjs-full-window {
 }
 
 .video-js .vjs-time-tooltip {
-    background-color: var(--olaris--white);
+    background-color: var(--jeffflix-white);
     background-color: rgba(255, 255, 255, .8);
     border-radius: 0.3em;
-    color: var(--olaris--black);
+    color: var(--jeffflix--black);
     float: right;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
@@ -965,7 +965,7 @@ body.vjs-full-window {
     position: absolute;
     width: 1px;
     height: 100%;
-    background-color: var(--olaris--black);
+    background-color: var(--jeffflix--black);
     z-index: 1;
 }
 
@@ -988,8 +988,8 @@ body.vjs-full-window {
 }
 
 .vjs-mouse-display .vjs-time-tooltip {
-    color: var(--olaris--white);
-    background-color: var(--olaris--black);
+    color: var(--jeffflix-white);
+    background-color: var(--jeffflix--black);
     background-color: rgba(0, 0, 0, .8);
 }
 
@@ -1012,8 +1012,8 @@ body.vjs-full-window {
 }
 
 .video-js .vjs-slider:focus {
-    text-shadow: 0 0 1em var(--olaris--white);
-    box-shadow: 0 0 1em var(--olaris--white);
+    text-shadow: 0 0 1em var(--jeffflix-white);
+    box-shadow: 0 0 1em var(--jeffflix-white);
 }
 
 .video-js .vjs-mute-control {
@@ -1128,7 +1128,7 @@ body.vjs-full-window {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: var(--olaris--white);
+    background-color: var(--jeffflix-white);
 }
 
 .video-js .vjs-volume-level:before {
@@ -1184,7 +1184,7 @@ body.vjs-full-window {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
-    background-color: var(--olaris--black);
+    background-color: var(--jeffflix--black);
     cursor: pointer;
     margin: 0;
     padding: 0;
@@ -1280,7 +1280,7 @@ body.vjs-full-window {
 }
 
 .vjs-subtitles {
-    color: var(--olaris--white);
+    color: var(--jeffflix-white);
 }
 
 .vjs-captions {
@@ -1333,7 +1333,7 @@ video::-webkit-media-text-track-display {
 }
 
 .vjs-error .vjs-error-display:before {
-    color: var(--olaris--white);
+    color: var(--jeffflix-white);
     content: 'X';
     font-family: Arial, Helvetica, sans-serif;
     font-size: 4em;
@@ -1341,7 +1341,7 @@ video::-webkit-media-text-track-display {
     line-height: 1;
     margin-top: -.5em;
     position: absolute;
-    text-shadow: 0.05em 0.05em 0.1em var(--olaris--black);
+    text-shadow: 0.05em 0.05em 0.1em var(--jeffflix--black);
     text-align: center;
     top: 50%;
     vertical-align: middle;
@@ -1384,7 +1384,7 @@ video::-webkit-media-text-track-display {
     opacity: 1;
     border: inherit;
     border-color: transparent;
-    border-top-color: var(--olaris--white);
+    border-top-color: var(--jeffflix-white);
 }
 
 .vjs-seeking .vjs-loading-spinner:after,
@@ -1397,12 +1397,12 @@ video::-webkit-media-text-track-display {
 
 .vjs-seeking .vjs-loading-spinner:before,
 .vjs-waiting .vjs-loading-spinner:before {
-    border-top-color: var(--olaris--white);
+    border-top-color: var(--jeffflix-white);
 }
 
 .vjs-seeking .vjs-loading-spinner:after,
 .vjs-waiting .vjs-loading-spinner:after {
-    border-top-color: var(--olaris--white);
+    border-top-color: var(--jeffflix-white);
     -webkit-animation-delay: 0.44s;
     animation-delay: 0.44s;
 }
@@ -1442,7 +1442,7 @@ video::-webkit-media-text-track-display {
     }
 
     35% {
-        border-top-color: var(--olaris--white);
+        border-top-color: var(--jeffflix-white);
     }
 
     60% {
@@ -1464,7 +1464,7 @@ video::-webkit-media-text-track-display {
     }
 
     35% {
-        border-top-color: var(--olaris--white);
+        border-top-color: var(--jeffflix-white);
     }
 
     60% {
@@ -1569,7 +1569,7 @@ video::-webkit-media-text-track-display {
 .vjs-modal-dialog.vjs-text-track-settings {
     background-color: #2b333f;
     background-color: rgba(43, 51, 63, .75);
-    color: var(--olaris--white);
+    color: var(--jeffflix-white);
     top: 50%;
     left: 50%;
     height: 50%;
@@ -1631,7 +1631,7 @@ video::-webkit-media-text-track-display {
 }
 
 .vjs-text-track-settings legend {
-    color: var(--olaris--white);
+    color: var(--jeffflix-white);
     margin: 0 0 5px;
 }
 
@@ -1652,7 +1652,7 @@ video::-webkit-media-text-track-display {
 .vjs-track-settings-controls button:focus {
     outline-style: solid;
     outline-width: medium;
-    background-image: linear-gradient(0deg, var(--olaris--white) 88%, #73859f 100%);
+    background-image: linear-gradient(0deg, var(--jeffflix-white) 88%, #73859f 100%);
 }
 
 .vjs-track-settings-controls button:hover {
@@ -1660,8 +1660,8 @@ video::-webkit-media-text-track-display {
 }
 
 .vjs-track-settings-controls button {
-    background-color: var(--olaris--white);
-    background-image: linear-gradient(-180deg, var(--olaris--white) 88%, #73859f 100%);
+    background-color: var(--jeffflix-white);
+    background-image: linear-gradient(-180deg, var(--jeffflix-white) 88%, #73859f 100%);
     color: #2b333f;
     cursor: pointer;
     border-radius: 2px;
@@ -1705,12 +1705,12 @@ video::-webkit-media-text-track-display {
 }
 
 .vjs-text-track-display div {
-    font-family: var(--olaris--font-body);
-    font-size: var(--olaris--font-headingFour);
+    font-family: var(--jeffflix--font-body);
+    font-size: var(--jeffflix--font-headingFour);
     font-weight: 600;
-    color: var(--olaris--white);
+    color: var(--jeffflix-white);
     background: transparent !important;
-    text-shadow: 2px 2px var(--olaris--black);
+    text-shadow: 2px 2px var(--jeffflix--black);
 
     * {
         background: transparent !important;

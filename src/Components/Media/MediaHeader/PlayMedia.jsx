@@ -17,7 +17,7 @@ const PlayMedia = ({ isConnected, type, playState, sModal, playMedia }) => {
         }
 
         sModal(RESUME_MODAL, {
-            title: 'Resume media',
+            title: 'Hervat media',
             playMedia,
             playState,
         });

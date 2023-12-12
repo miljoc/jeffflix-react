@@ -4,7 +4,7 @@ const propertiesMap = (map, prefix = "") => {
     
     Object.keys(map).map((key) => {
         properties += `
-            --olaris--${newPrefix}${key}: ${map[key]};
+            --jeffflix--${newPrefix}${key}: ${map[key]};
         `;
         return key;
     });

@@ -12,7 +12,7 @@ const shake = () => css`
 `;
 
 export const BGLogin = styled.div`
-    background-image: url(${(BG)});
+    background: url(/images/login-bg.jpg);
 `;
 
 export const FormWrap = styled.form`

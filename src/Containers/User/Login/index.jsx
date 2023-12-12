@@ -24,7 +24,7 @@ const Login = () => {
     const onChange = (name, value) => dispatch({ type: 'UPDATE_FORM', payload: { name, value } });
 
     const onError = (message) => {
-        alert.error(`There was a problem with your request: ${message}`);
+        alert.error(`ER heeft zich een probleem voorgedaan: ${message}`);
 
         dispatch({ type: 'ERROR' });
     };
@@ -48,7 +48,7 @@ const Login = () => {
             .then(res => setInitialSetup(res));
 
         if (history.location.state && history.location.state.registered) {
-            alert.success('Account Successfully Created, login with your details above');
+            alert.success('Account aangemaakt, je kunt nu inloggen!');
         }
     }, []);
 

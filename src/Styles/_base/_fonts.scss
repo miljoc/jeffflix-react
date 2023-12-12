@@ -59,3 +59,14 @@
     url('Fonts/open-sans-v15-latin-700.woff') format('woff');
     /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
+
+/* Kumbh Sans */
+
+@font-face {
+    font-family: 'Kumbh Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Kumbh Sans'), local('Kumbh Sans'), url('Fonts/Kumbh-Sans.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+    url('Fonts/Kumbh-Sans.woff') format('woff');
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}

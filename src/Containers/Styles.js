@@ -9,6 +9,7 @@ export const AppWrap = styled.main`
     flex-wrap: nowrap;
     flex-direction: column;
     justify-content: ${(props) => (props.authed ? 'initial' : 'center')};
+    background: ${(props) => (props.authed ? 'image' : 'bg')};
     overflow: hidden;
 `;
 
