@@ -17,7 +17,7 @@ import Theme from 'Styles/Theme';
 import App from 'Containers/App';
 import { AlertTemplate, AlertOptions } from 'Components/Alerts';
 
-const Olaris = () => (
+const Jeffflix = () => (
     <ReduxProvider store={store}>
         <ConnectedRouter history={history}>
             <ApolloProvider client={Client}>
@@ -31,7 +31,7 @@ const Olaris = () => (
     </ReduxProvider>
 );
 
-render(<Olaris />, document.getElementById('jeffflix'));
+render(<Jeffflix />, document.getElementById('jeffflix'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

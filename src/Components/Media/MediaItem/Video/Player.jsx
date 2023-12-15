@@ -363,7 +363,7 @@ class Player extends Component {
                         ref={(node) => {
                             this.videoNode = node;
                         }}
-                        className="video-js vjs-theme-olaris"
+                        className="video-js vjs-theme-jeffflix"
                     />
                     <div className="vjs-playlist" />
                     {type === "Episode" && (
@@ -375,15 +375,15 @@ class Player extends Component {
                                     this.player.playlist.next()
                                 }}
                             >
-                                <span>up next</span>
+                                <span>VOlgende</span>
                                 {/* eslint-disable-next-line react/no-danger */}
                                 <div dangerouslySetInnerHTML={{__html: upNextHTML }} />
                             </button>
                             <div className="vjs-autoplay-overlay">
                                 <div className="vjs-autoplay--text-wrap">
                                     {seconds > 0
-                                        ? <span>playing in <strong>{seconds}</strong> seconds</span>
-                                        : <span>playing now...</span>
+                                        ? <span>Afspelen in <strong>{seconds}</strong> seconden</span>
+                                        : <span>Speelt nu...</span>
                                     }
                                     <div
                                         className="vjs-autoplay--up-next-info"
@@ -397,7 +397,7 @@ class Player extends Component {
                                         className="vjs-autoplay--cancel-autoplay"
                                         onClick={this.cancelAutoplay}
                                     >
-                                    Cancel
+                                    Annuleren
                                     </button>
                                     <button
                                         type="button"
@@ -412,7 +412,7 @@ class Player extends Component {
                                             />
                                         </div>
                                         <span className="vjs-autoplay--play-icon" />
-                                        Next Episode
+                                        Volgende Aflevering
                                     </button>
                                 </div>
                             </div>

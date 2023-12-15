@@ -259,7 +259,7 @@
 
     .vjs-track-settings-controls button {
         font-size: var(--jeffflix--size-base);
-        color: var(--jeffflix-white);
+        color: var(--jeffflix--white);
         cursor: pointer;
         line-height: 4rem;
         opacity: 1;
@@ -652,7 +652,7 @@
     }
 }
 
-.vjs-theme-olaris {
+.vjs-theme-jeffflix {
     @include menu-content-styling();
     @include control-bar();
     @include progress-bar();

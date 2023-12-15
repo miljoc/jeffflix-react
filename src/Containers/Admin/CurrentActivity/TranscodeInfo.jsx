@@ -9,11 +9,11 @@ import { TranscodeInfoLine } from './Styles';
 function TranscodeInfo({ stream, loadModal }) {
     const sessionGlossary = `
         <p><strong>Transmux</strong> means the codec is compatible with the device
-        you are playing on, however the container is not. Olaris is changing it into a proper
+        you are playing on, however the container is not. Jeffflix is changing it into a proper
         container without changing the codecs.</p>
         <p><strong>Transcode</strong> means the codec is <em>not</em> compatible
-        with the device and Olaris needs to convert it to a proper codec.</p>
-        <p><strong>Throttled</strong> means that Olaris has built enough buffer
+        with the device and jeffflix needs to convert it to a proper codec.</p>
+        <p><strong>Throttled</strong> means that jeffflix has built enough buffer
         for your client to keep watching without interruption, but it will start encoding
         again when the buffer is getting smaller.</p>
     `;
@@ -25,7 +25,7 @@ function TranscodeInfo({ stream, loadModal }) {
             {stream.throttled === true && ' - throttled'})
             <FontAwesomeIcon
                 icon={faInfoCircle}
-                data-tip="Learn More"
+                data-tip="Meer Informatie"
                 data-delay-show={1000}
                 onClick={() => {
                     loadModal(GENERIC_MODAL, {

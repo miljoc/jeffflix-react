@@ -47,7 +47,7 @@ export const SelectStyle = {
         cursor: 'pointer',
         backgroundColor: '#0e0f18 !important',
         transition: '0.2s all',
-        color: 'var(--jeffflix-white)',
+        color: 'var(--jeffflix--white)',
         opacity: isDisabled ? 0.2 : 1,
 
         '&:hover': {
@@ -125,7 +125,7 @@ export const SelectStyle = {
     }),
     singleValue: (base) => ({
         ...base,
-        color: 'var(--jeffflix-white)',
+        color: 'var(--jeffflix--white)',
         margin: 0,
         overflow: 'hidden',
         height: '5rem',

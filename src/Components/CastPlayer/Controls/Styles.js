@@ -120,7 +120,7 @@ export const SelectStyle = {
         cursor: 'pointer',
         backgroundColor: '#212231 !important',
         transition: '.2s all',
-        color: isSelected ? 'var(--jeffflix--primary)' : 'var(--jeffflix-white)',
+        color: isSelected ? 'var(--jeffflix--primary)' : 'var(--jeffflix--white)',
         opacity: isDisabled ? 0.2 : 1,
 
         '&:hover': {

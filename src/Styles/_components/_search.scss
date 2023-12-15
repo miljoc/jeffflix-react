@@ -18,7 +18,7 @@
         font-size: var(--jeffflix--font-body);
 		background: none;
 		border: 0;
-		color: var(--jeffflix-white);
+		color: var(--jeffflix--white);
         font-weight: 600;
         overflow: hidden;
 		transition: 0.2s all;
@@ -149,7 +149,7 @@
         }
 
         &__suggestion {
-            color: var(--jeffflix-white);
+            color: var(--jeffflix--white);
             cursor: pointer;
             background-color: #0e0f18 !important;
             padding: 1rem 0 0;

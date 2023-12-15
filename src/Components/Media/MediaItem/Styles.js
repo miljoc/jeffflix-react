@@ -174,7 +174,7 @@ export const SelectStyle = {
         cursor: 'pointer',
         backgroundColor: '#191927 !important',
         transition: '0.2s all',
-        color: isSelected || isFocused ? 'var(--jeffflix--primary)' : 'var(--jeffflix-white)',
+        color: isSelected || isFocused ? 'var(--jeffflix--primary)' : 'var(--jeffflix--white)',
         opacity: isDisabled ? 0.2 : 1,
     }),
     control: () => ({
@@ -225,7 +225,7 @@ export const SelectStyle = {
         display: 'none',
     }),
     singleValue: () => ({
-        color: 'var(--jeffflix-white)',
+        color: 'var(--jeffflix--white)',
         margin: 0,
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-all',
